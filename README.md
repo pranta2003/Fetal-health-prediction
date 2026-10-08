@@ -1,4 +1,4 @@
-# Multimodal Ultrasound and Clinical Data Fusion for Explainable Fetal Health Prediction
+# Growth-Bridged Integration of Ultrasound Biometry and Maternal Clinical Data for Explainable Fetal Health and Stillbirth Risk Prediction
 
 Capstone project - BUBT CSE - Six-layer, three-stream architecture for fetal health / stillbirth risk prediction.
 
