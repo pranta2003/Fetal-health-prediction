@@ -13,7 +13,9 @@ from torch.utils.data import DataLoader
 import ac_v3 as A
 
 OUT_ENS = A.OUT + "_ens"
-SEEDS = [1, 2] if A.SMOKE else [1, 2, 3, 4, 5]
+_env_seeds = os.environ.get("ENS_SEEDS")      # e.g. $env:ENS_SEEDS="1,2,3"  (default: 1..5)
+SEEDS = [int(x) for x in _env_seeds.split(",")] if _env_seeds else ([1, 2] if A.SMOKE else [1, 2, 3, 4, 5])
+SKIP_512 = os.environ.get("ENS_SKIP_512") == "1"   # $env:ENS_SKIP_512="1" skips the slow 512-px run
 RECIPE = dict(img=128 if A.SMOKE else 384, diam_w=1.0, strong_aug=True, inpaint=True)
 CFGS = [dict(name=f"s{s}", seed=s, batch=A.BATCH, **RECIPE) for s in SEEDS]
 CFG_512 = dict(name="res512", seed=1, batch=2, img=160 if A.SMOKE else 512, diam_w=1.0, strong_aug=True, inpaint=True)
@@ -132,12 +134,13 @@ def main():
     te_use = te.head(16) if A.SMOKE else te
     print(f"official test: {len(te)} images ({te.patient.nunique()} patients)")
     dirs = [train_one(c, data) for c in CFGS]
-    d512 = train_one(CFG_512, data)
+    d512 = None if SKIP_512 else train_one(CFG_512, data)
 
     res = {}
     for c, d in zip(CFGS, dirs):
         res[c["name"]] = summ(eval_models([d], c["img"], te_use, True))
-    res["res512"] = summ(eval_models([d512], CFG_512["img"], te_use, True))
+    if d512 is not None:
+        res["res512"] = summ(eval_models([d512], CFG_512["img"], te_use, True))
     r_mean = eval_models(dirs, RECIPE["img"], te_use, True, "mean")
     r_med = eval_models(dirs, RECIPE["img"], te_use, True, "median")
     res["ENS_mean"], res["ENS_median"] = summ(r_mean), summ(r_med)
