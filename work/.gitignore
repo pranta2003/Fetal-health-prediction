@@ -1,0 +1,43 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+
+# Anchored dataset, model, and log directories (never commit data or weights)
+/data/
+/models/
+/logs/
+
+# Data and log file extensions
+*.csv
+*.npy
+*.log
+
+# Weights & Binary Checkpoints (globally excluded wherever placed)
+*.pt
+*.pth
+*.onnx
+*.bin
+*.json.model
+*.zip
+*.tar.gz
+
+# Diagnostics & Reports output artifacts
+/reports/diagnostics/
+
+# Credentials, Tokens, Keys, Environment secrets
+.env
+*.token
+kaggle.json
+credentials.json
+*token*
+*secret*
+*password*
+.DS_Store
+Thumbs.db
