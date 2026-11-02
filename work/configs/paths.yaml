@@ -1,0 +1,34 @@
+# configs/paths.yaml
+# Single source of truth for all environment and pipeline paths.
+# Override root directories via FETAL_DATA_DIR and FETAL_MODEL_DIR.
+
+environment:
+  default_device: "auto"    # "cuda", "cpu", or "auto"
+  num_workers_win: 0        # 0 on Windows to prevent multiprocessing deadlocks
+  num_workers_posix: 2
+
+data:
+  root_dir: "${FETAL_DATA_DIR}"
+  fp_annotations: "${FETAL_DATA_DIR}/FP/annotations"
+  fp_images: "${FETAL_DATA_DIR}/FP/images/Abdomen"
+  ucl_annotations: "${FETAL_DATA_DIR}/UCL/annotations/px_to_mm"
+  ucl_images: "${FETAL_DATA_DIR}/UCL/images/Abdomen"
+  hc18_dir: "${FETAL_DATA_DIR}/HC18"
+  tabular_dir: "${FETAL_DATA_DIR}/cdc"
+
+models:
+  root_dir: "${FETAL_MODEL_DIR}"
+  ac_v3_dir: "${FETAL_MODEL_DIR}/ac_v3"
+  ac_v3_full: "${FETAL_MODEL_DIR}/ac_v3/v3_full/best.pt"
+  ac_v3_base: "${FETAL_MODEL_DIR}/ac_v3/base/best.pt"
+  ac_ensemble_dir: "${FETAL_MODEL_DIR}/ac_v3_ens"
+  ac_ens_s1: "${FETAL_MODEL_DIR}/ac_v3_ens/s1/best.pt"
+  ac_ens_s2: "${FETAL_MODEL_DIR}/ac_v3_ens/s2/best.pt"
+  ac_ens_s3: "${FETAL_MODEL_DIR}/ac_v3_ens/s3/best.pt"
+  ac_ens_s4: "${FETAL_MODEL_DIR}/ac_v3_ens/s4/best.pt"
+  hc18_dir: "${FETAL_MODEL_DIR}/hc18"
+  clinical_xgb: "${FETAL_MODEL_DIR}/stream3_clinical_xgb.json"
+
+outputs:
+  reports_dir: "./reports"
+  diagnostics_dir: "./reports/diagnostics"
