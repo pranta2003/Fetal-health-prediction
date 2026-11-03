@@ -1,7 +1,8 @@
 param (
     [switch]$Eval,
     [switch]$Train,
-    [switch]$Slow
+    [switch]$Slow,
+    [switch]$Clinical
 )
 
 $ErrorActionPreference = "Stop"
@@ -13,7 +14,7 @@ Set-Location $WorkDir
 Write-Host "=========================================================="
 Write-Host "run_all.ps1: Automated test and pipeline runner"
 Write-Host "Working directory: $WorkDir"
-Write-Host "Flags: Eval=$Eval | Train=$Train | Slow=$Slow"
+Write-Host "Flags: Eval=$Eval | Train=$Train | Slow=$Slow | Clinical=$Clinical"
 Write-Host "=========================================================="
 
 # Check and activate virtual environment if present
@@ -72,7 +73,22 @@ if ($Train) {
     }
 }
 
+if ($Clinical) {
+    Write-Host "`n[Step 6: -Clinical] Checking clinical dataset CSV and running 07_audit_clinical.py --smoke..."
+    $CheckCsvScript = "from fetal import config; import os; print('EXISTS' if os.path.isfile(config.CLINICAL_CSV) else 'MISSING:' + config.CLINICAL_CSV)"
+    $CsvStatus = & $VenvPy -c $CheckCsvScript
+    if ($CsvStatus -eq "EXISTS") {
+        Write-Host "Clinical dataset found. Running scripts/07_audit_clinical.py --smoke..."
+        & $VenvPy (Join-Path $ScriptDir "07_audit_clinical.py") --smoke
+        if ($LASTEXITCODE -ne 0) {
+            Write-Error "07_audit_clinical.py failed with exit code $LASTEXITCODE"
+            exit $LASTEXITCODE
+        }
+    } else {
+        Write-Host "Clinical dataset CSV not present ($CsvStatus); skipping clinical audit."
+    }
+}
+
 Write-Host "`n=========================================================="
 Write-Host "run_all.ps1: All requested steps completed successfully."
 Write-Host "=========================================================="
-
