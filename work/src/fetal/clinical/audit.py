@@ -124,3 +124,77 @@ def run_audit_rows_a_to_d5(raw, df, n_estimators=300):
     )
 
     return audit
+
+
+def run_audit_rows_e1_to_e4(df, n_estimators=300):
+    """Execute audit rows E1 through E4.
+
+    Rows:
+    - E1: >=20 wk primary features (reporting-sensitive removed) [mode='temporal', df >= 20]
+    - E2: >=37 wk term band, primary features [mode='temporal', df >= 37]
+    - E3: >=20 wk clinical-only features [mode='temporal', df >= 20]
+    - E4: >=37 wk term band, clinical-only features [mode='temporal', df >= 37]
+    """
+    audit = []
+    d20 = df[df.COMBGEST >= 20].copy()
+    d37 = d20[d20.COMBGEST >= 37].copy()
+
+    audit.append(
+        record(
+            "E1 >=20 wk primary features (reporting-sensitive removed)",
+            d20,
+            FEATURE_SETS["primary"]["num"],
+            FEATURE_SETS["primary"]["cat"],
+            mode="temporal",
+            n_estimators=n_estimators,
+        )
+    )
+    audit.append(
+        record(
+            "E2 >=37 wk term band, primary features",
+            d37,
+            FEATURE_SETS["primary"]["num"],
+            FEATURE_SETS["primary"]["cat"],
+            mode="temporal",
+            n_estimators=n_estimators,
+        )
+    )
+    audit.append(
+        record(
+            "E3 >=20 wk clinical-only features",
+            d20,
+            FEATURE_SETS["clinical_only"]["num"],
+            FEATURE_SETS["clinical_only"]["cat"],
+            mode="temporal",
+            n_estimators=n_estimators,
+        )
+    )
+    audit.append(
+        record(
+            "E4 >=37 wk term band, clinical-only features",
+            d37,
+            FEATURE_SETS["clinical_only"]["num"],
+            FEATURE_SETS["clinical_only"]["cat"],
+            mode="temporal",
+            n_estimators=n_estimators,
+        )
+    )
+
+    return audit
+
+
+def run_full_audit(raw, df, out_dir=None, n_estimators=300):
+    """Run full audit (rows A-D5 and E1-E4) and optionally export audit_table.csv."""
+    rows_a_d = run_audit_rows_a_to_d5(raw, df, n_estimators=n_estimators)
+    rows_e = run_audit_rows_e1_to_e4(df, n_estimators=n_estimators)
+    all_rows = rows_a_d + rows_e
+    audit_df = pd.DataFrame(all_rows)
+
+    if out_dir is not None:
+        os.makedirs(out_dir, exist_ok=True)
+        csv_path = os.path.join(out_dir, "audit_table.csv")
+        audit_df.to_csv(csv_path, index=False)
+        print(f"[audit] Saved audit table to {csv_path}")
+
+    return audit_df
+
