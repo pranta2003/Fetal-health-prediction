@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
+from fetal.clinical.constants import TRUE_PREVALENCE
 
 
 def bootstrap_auc_ci(y, p, n_boot=200, seed=0):
@@ -76,3 +77,35 @@ def band_aucs(te, y, p, bands=None):
                 )
             )
     return band_rows
+
+
+def prior_shift(p, pi_train, true_prevalence=TRUE_PREVALENCE):
+    """Rescale predicted probabilities from training sample prevalence to true population prevalence.
+
+    Uses odds ratio correction verbatim from notebook cell 11:
+        odds = p / (1 - p)
+        odds_corr = odds * (true_prevalence / (1 - true_prevalence)) / (pi_train / (1 - pi_train))
+        p_corr = odds_corr / (1 + odds_corr)
+
+    Parameters
+    ----------
+    p : array-like or float
+        Predicted probabilities from model trained on enriched sample.
+    pi_train : float
+        Observed prevalence (positive class share) in training sample.
+    true_prevalence : float, optional
+        Target population prevalence (default TRUE_PREVALENCE = 0.006).
+
+    Returns
+    -------
+    p_corr : np.ndarray or float
+        Recalibrated probabilities aligned with population prevalence.
+    """
+    p_arr = np.asarray(p, dtype=float)
+    odds = p_arr / np.clip(1.0 - p_arr, 1e-9, None)
+    odds_c = odds * (true_prevalence / (1.0 - true_prevalence)) / (pi_train / (1.0 - pi_train))
+    p_corr = odds_c / (1.0 + odds_c)
+    if np.ndim(p) == 0:
+        return float(p_corr)
+    return p_corr
+
