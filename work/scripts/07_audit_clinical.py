@@ -85,7 +85,7 @@ def main():
 
     audit_table = None
     if not args.no_audit:
-        print("\n[Step 2] Executing specification and leakage audit table (Rows A-D5, E1-E4)...")
+        print("\n[Step 2] Executing specification and leakage audit table (Rows A-D5, E1-E5)...")
         audit_table = run_full_audit(raw, df, out_dir=args.out_dir, n_estimators=n_est)
 
     print("\n[Step 3] Training PRIMARY model with temporal split (train <= 2021, test >= 2022)...")

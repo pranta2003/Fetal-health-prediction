@@ -6,11 +6,13 @@ against canonical baseline AUC values reported in Capstone_fetalDataset.ipynb.
 
 import os
 import pytest
+from sklearn.metrics import roc_auc_score
+
 from fetal import config
 from fetal.clinical.data import load_clean
-from fetal.clinical.constants import NUM_FEATURES, CAT_FEATURES, FEATURE_SETS
+from fetal.clinical.constants import NUM_FEATURES, CAT_FEATURES
 from fetal.clinical.model import fit_eval
-from fetal.clinical.audit import run_audit_rows_a_to_d5, run_audit_rows_e1_to_e4
+from fetal.clinical.audit import run_audit_rows_a_to_d5, run_audit_rows_e1_to_e5
 
 
 TOLERANCE = 0.003
@@ -29,6 +31,7 @@ EXPECTED_AUCS = {
     "E2": 0.7117,
     "E3": 0.7530,
     "E4": 0.7069,
+    "E5": 0.6917,
 }
 
 
@@ -40,32 +43,43 @@ def test_clinical_audit_regression_against_baseline():
 
     raw, df = load_clean(config.CLINICAL_CSV)
 
+    results = {}
+
     # 1. Audit rows A through D5
     rows_ad = run_audit_rows_a_to_d5(raw, df, n_estimators=300)
-    audit_map = {}
     for r in rows_ad:
         prefix = r["setting"].split()[0]
-        audit_map[prefix] = r["auc"]
-
-    for key in ["A", "B", "C", "D", "D2", "D3", "D4", "D5"]:
-        exp = EXPECTED_AUCS[key]
-        act = audit_map[key]
-        assert abs(act - exp) <= TOLERANCE, f"Row {key} AUC {act:.4f} differs from expected {exp:.4f} by > {TOLERANCE}"
+        results[prefix] = r["auc"]
 
     # 2. Final temporal model with ALL features (FEATS)
     d20 = df[df.COMBGEST >= 20].copy()
     _, _, te, p = fit_eval(d20, NUM_FEATURES, CAT_FEATURES, mode="temporal", n_estimators=300)
-    from sklearn.metrics import roc_auc_score
     act_temp_all = float(roc_auc_score(te.OUTCOME, p))
-    exp_temp_all = EXPECTED_AUCS["final_temporal_all"]
-    assert abs(act_temp_all - exp_temp_all) <= TOLERANCE, (
-        f"Final temporal with ALL features AUC {act_temp_all:.4f} differs from expected {exp_temp_all:.4f}"
-    )
+    results["final_temporal_all"] = act_temp_all
 
-    # 3. Audit rows E1 through E4
-    rows_e = run_audit_rows_e1_to_e4(df, n_estimators=300)
+    # 3. Audit rows E1 through E5
+    rows_e = run_audit_rows_e1_to_e5(df, n_estimators=300)
     for r in rows_e:
         prefix = r["setting"].split()[0]
-        exp = EXPECTED_AUCS[prefix]
-        act = r["auc"]
-        assert abs(act - exp) <= TOLERANCE, f"Row {prefix} AUC {act:.4f} differs from expected {exp:.4f} by > {TOLERANCE}"
+        results[prefix] = r["auc"]
+
+    # Build comparison table and collect mismatches
+    print("\n" + "=" * 65)
+    print(f"{'Row':<20} | {'Actual':<10} | {'Expected':<10} | {'Diff':<10} | {'Status'}")
+    print("-" * 65)
+
+    failures = []
+    for key, exp in EXPECTED_AUCS.items():
+        if key not in results:
+            failures.append(f"{key}: MISSING from results")
+            print(f"{key:<20} | {'MISSING':<10} | {exp:<10.4f} | {'N/A':<10} | FAIL")
+            continue
+        act = results[key]
+        diff = act - exp
+        status = "PASS" if abs(diff) <= TOLERANCE else "FAIL"
+        print(f"{key:<20} | {act:<10.4f} | {exp:<10.4f} | {diff:<+10.4f} | {status}")
+        if status == "FAIL":
+            failures.append(f"{key}: actual={act:.4f}, expected={exp:.4f}, diff={diff:+.4f} (tol={TOLERANCE})")
+
+    print("=" * 65)
+    assert not failures, f"{len(failures)} row(s) failed regression tolerance:\n" + "\n".join(failures)

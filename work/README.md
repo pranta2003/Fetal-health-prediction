@@ -6,9 +6,14 @@ This repository contains the modularized codebase for multimodal fetal health as
 - **Stream 2 (AC Landmark & Biometry):** **VERIFIED** on official test set (`v3_full` AC MAE 4.395 mm, 4-seed median ensemble 4.343 mm) via automated regression tests (`tests/test_ac_v3_regression.py` and `tests/test_ac_ensemble_regression.py`). Baseline reproduction script confirms exact reproduction within 0.002 mm.
 - **Layer 3 (Hadlock EFW & Growth):** **VERIFIED** against canonical notebook test vectors (1403.0 g).
 - **Stream 1 (HC18 Biometry Segmentation):** **NOT yet extracted / NOT verified**. Remains in exploration notebook; results in preliminary experiments were provisional (ungrouped KFold).
-- **Stream 3 (Clinical Tabular Risk XGBoost):** **EXTRACTED and UNIT-TESTED**. Regression on the real CSV is pending (requires Google Drive / Colab environment where the CDC dataset resides).
+- **Stream 3 (Clinical Tabular Risk XGBoost):** **EXTRACTED and UNIT-TESTED**.
   - *Audit History & Leakage Correction:* The original notebook's reported AUC of **0.9684** was artificially inflated due to target leakage from gestational age at delivery (`COMBGEST`) and the inclusion of early pregnancy losses under 20 weeks. These settings are documented strictly for audit history (Rows A-D).
-  - *Primary Specification:* The validated production model uses the `"primary"` feature set (with reporting-sensitive and socioeconomic fields `WIC`, `MEDUC`, `MBSTATE_REC`, and `MRACE6` removed) evaluated under a temporal split (training on births $\le 2021$, testing on births $\ge 2022$), achieving an AUC of approximately **0.74** (to be confirmed by the regression run).
+  - *Reproduction Status (Colab Run):* Audit rows A through D5, the final temporal all-feature model (0.7865), and rows E1 (0.7381) and E2 (0.7117) were successfully reproduced from the real CDC CSV in Google Colab. Rows E3–E5 are pending the re-run.
+  - *Model Performance Metrics:*
+    - **Primary model (E1, >=20 wk, temporal):** AUC **0.738** (reporting-sensitive fields `WIC`, `MEDUC`, `MBSTATE_REC`, and `MRACE6` removed).
+    - **Clinical-only model (E4, >=20 wk, temporal):** AUC **0.707** (strictly maternal clinical history & risk factors).
+    - **Clinical-only term band (E5, >=37 wk, temporal):** AUC **0.692** (provisional value from one Colab run, not yet independently confirmed).
+    - **All-features temporal model (0.787):** Serves as an upper bound / reference (audit only).
   - *Prevalence Calibration:* `TRUE_PREVALENCE = 0.006` is currently a placeholder representing approximate population-level stillbirth prevalence for $\ge 20$ weeks (to be verified against CDC/NVSS prior to publication). Precision, recall, and PR-AUC calculated on this case-control sampled cohort are sample metrics and do not reflect real-world clinical screening performance without prior-shift correction.
 
 ## Repository Layout

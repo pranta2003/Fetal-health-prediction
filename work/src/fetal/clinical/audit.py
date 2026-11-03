@@ -126,14 +126,15 @@ def run_audit_rows_a_to_d5(raw, df, n_estimators=300):
     return audit
 
 
-def run_audit_rows_e1_to_e4(df, n_estimators=300):
-    """Execute audit rows E1 through E4.
+def run_audit_rows_e1_to_e5(df, n_estimators=300):
+    """Execute audit rows E1 through E5.
 
     Rows:
-    - E1: >=20 wk primary features (reporting-sensitive removed) [mode='temporal', df >= 20]
-    - E2: >=37 wk term band, primary features [mode='temporal', df >= 37]
-    - E3: >=20 wk clinical-only features [mode='temporal', df >= 20]
-    - E4: >=37 wk term band, clinical-only features [mode='temporal', df >= 37]
+    - E1: >=20 wk primary features (temporal) [0.7381]
+    - E2: >=37 wk primary features (temporal) [0.7117]
+    - E3: >=37 wk ALL features, reference (temporal) [0.7530]
+    - E4: >=20 wk clinical-only features (temporal) [0.7069]
+    - E5: >=37 wk clinical-only features (temporal) [0.6917]
     """
     audit = []
     d20 = df[df.COMBGEST >= 20].copy()
@@ -141,7 +142,7 @@ def run_audit_rows_e1_to_e4(df, n_estimators=300):
 
     audit.append(
         record(
-            "E1 >=20 wk primary features (reporting-sensitive removed)",
+            "E1 >=20 wk primary features (temporal)",
             d20,
             FEATURE_SETS["primary"]["num"],
             FEATURE_SETS["primary"]["cat"],
@@ -151,7 +152,7 @@ def run_audit_rows_e1_to_e4(df, n_estimators=300):
     )
     audit.append(
         record(
-            "E2 >=37 wk term band, primary features",
+            "E2 >=37 wk primary features (temporal)",
             d37,
             FEATURE_SETS["primary"]["num"],
             FEATURE_SETS["primary"]["cat"],
@@ -161,7 +162,17 @@ def run_audit_rows_e1_to_e4(df, n_estimators=300):
     )
     audit.append(
         record(
-            "E3 >=20 wk clinical-only features",
+            "E3 >=37 wk ALL features, reference (temporal)",
+            d37,
+            FEATURE_SETS["full"]["num"],
+            FEATURE_SETS["full"]["cat"],
+            mode="temporal",
+            n_estimators=n_estimators,
+        )
+    )
+    audit.append(
+        record(
+            "E4 >=20 wk clinical-only features (temporal)",
             d20,
             FEATURE_SETS["clinical_only"]["num"],
             FEATURE_SETS["clinical_only"]["cat"],
@@ -171,7 +182,7 @@ def run_audit_rows_e1_to_e4(df, n_estimators=300):
     )
     audit.append(
         record(
-            "E4 >=37 wk term band, clinical-only features",
+            "E5 >=37 wk clinical-only features (temporal)",
             d37,
             FEATURE_SETS["clinical_only"]["num"],
             FEATURE_SETS["clinical_only"]["cat"],
@@ -183,10 +194,13 @@ def run_audit_rows_e1_to_e4(df, n_estimators=300):
     return audit
 
 
+run_audit_rows_e1_to_e4 = run_audit_rows_e1_to_e5  # backward-compatibility alias
+
+
 def run_full_audit(raw, df, out_dir=None, n_estimators=300):
-    """Run full audit (rows A-D5 and E1-E4) and optionally export audit_table.csv."""
+    """Run full audit (rows A-D5 and E1-E5) and optionally export audit_table.csv."""
     rows_a_d = run_audit_rows_a_to_d5(raw, df, n_estimators=n_estimators)
-    rows_e = run_audit_rows_e1_to_e4(df, n_estimators=n_estimators)
+    rows_e = run_audit_rows_e1_to_e5(df, n_estimators=n_estimators)
     all_rows = rows_a_d + rows_e
     audit_df = pd.DataFrame(all_rows)
 
@@ -197,4 +211,3 @@ def run_full_audit(raw, df, out_dir=None, n_estimators=300):
         print(f"[audit] Saved audit table to {csv_path}")
 
     return audit_df
-
