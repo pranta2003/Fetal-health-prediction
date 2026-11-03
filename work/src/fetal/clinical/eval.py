@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
+import xgboost as xgb
 from fetal.clinical.constants import TRUE_PREVALENCE
 
 
@@ -108,4 +109,48 @@ def prior_shift(p, pi_train, true_prevalence=TRUE_PREVALENCE):
     if np.ndim(p) == 0:
         return float(p_corr)
     return p_corr
+
+
+def contrib_by_feature(pipe, te, features, n_sub=5000):
+    """Compute mean |contribution| (SHAP / TreeSHAP) per original input feature verbatim from notebook cell 13.
+
+    Groups one-hot encoded indicator columns back to their original parent categorical features.
+
+    Parameters
+    ----------
+    pipe : sklearn.pipeline.Pipeline
+        Fitted pipeline with 'pre' (ColumnTransformer) and 'm' (XGBClassifier) steps.
+    te : pd.DataFrame
+        Test dataset containing the feature columns.
+    features : list of str
+        List of original feature names (numerical and categorical).
+    n_sub : int, optional
+        Maximum number of samples to evaluate for speed (default 5000).
+
+    Returns
+    -------
+    pd.Series
+        Mean absolute feature contribution values indexed by original feature name.
+    """
+    pre = pipe.named_steps["pre"]
+    booster = pipe.named_steps["m"].get_booster()
+    n_sub = min(n_sub, len(te))
+    Xs = pre.transform(te[features].iloc[:n_sub])
+    contrib = booster.predict(xgb.DMatrix(Xs), pred_contribs=True)[:, :-1]
+    names = [n.split("__", 1)[1] for n in pre.get_feature_names_out()]
+
+    def group_of(n):
+        for c in sorted(features, key=len, reverse=True):
+            if n == c or n.startswith(c + "_"):
+                return c
+        return n
+
+    groups = (
+        pd.Series(np.abs(contrib).mean(0), index=[group_of(n) for n in names])
+        .groupby(level=0)
+        .sum()
+        .sort_values(ascending=False)
+    )
+    return groups
+
 
