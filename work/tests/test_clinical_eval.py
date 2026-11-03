@@ -3,8 +3,9 @@ import pandas as pd
 import pytest
 from sklearn.metrics import roc_auc_score
 
-from fetal.clinical.eval import bootstrap_auc_ci, band_aucs, prior_shift
+from fetal.clinical.eval import bootstrap_auc_ci, band_aucs, prior_shift, contrib_by_feature
 from fetal.clinical.constants import TRUE_PREVALENCE
+from fetal.clinical.model import make_pipe
 
 
 def test_bootstrap_auc_ci_bounds():
@@ -67,4 +68,34 @@ def test_prior_shift_calibration_and_monotonicity():
 
     assert np.all(np.diff(p_corr) > 0), "prior_shift must be strictly monotonically increasing"
     assert np.all((p_corr >= 0.0) & (p_corr <= 1.0))
+
+
+def test_contrib_by_feature_groups_one_hot():
+    """Verify contrib_by_feature collapses one-hot categories back to exactly one value per original feature."""
+    rng = np.random.RandomState(42)
+    n = 100
+    df = pd.DataFrame(
+        {
+            "MAGER": rng.randint(20, 40, size=n),
+            "BMI": rng.uniform(20.0, 35.0, size=n),
+            "RF_GDIAB": rng.choice(["Y", "N", "U"], size=n),
+            "SEX": rng.choice(["M", "F"], size=n),
+            "OUTCOME": rng.binomial(1, 0.3, size=n),
+        }
+    )
+    num = ["MAGER", "BMI"]
+    cat = ["RF_GDIAB", "SEX"]
+    features = num + cat
+
+    pipe = make_pipe(num, cat, n_estimators=10, random_state=42)
+    pipe.fit(df[features], df.OUTCOME)
+
+    contrib = contrib_by_feature(pipe, df, features, n_sub=50)
+
+    # Must return exactly one aggregated importance value per original feature
+    assert isinstance(contrib, pd.Series)
+    assert len(contrib) == len(features)
+    assert set(contrib.index) == set(features)
+    assert (contrib >= 0.0).all()
+
 
