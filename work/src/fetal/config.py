@@ -71,6 +71,7 @@ UCL_ANNOTATIONS = _data_cfg.get("ucl_annotations", f"{DATA_DIR}/UCL/annotations/
 UCL_IMAGES = _data_cfg.get("ucl_images", f"{DATA_DIR}/UCL/images/Abdomen")
 HC18_DIR = _data_cfg.get("hc18_dir", f"{DATA_DIR}/HC18")
 TABULAR_DIR = _data_cfg.get("tabular_dir", f"{DATA_DIR}/cdc")
+CLINICAL_CSV = _data_cfg.get("clinical_csv", f"{DATA_DIR}/cdc/clinical_training_data.csv")
 
 # Model paths (single source of truth from configs/paths.yaml)
 _models_cfg = _PATHS_CFG.get("models", {})
@@ -87,6 +88,7 @@ AC_ENS_CKPTS = [
 ]
 HC18_MODELS_DIR = _models_cfg.get("hc18_dir", f"{MODEL_DIR}/hc18")
 CLINICAL_XGB_CKPT = _models_cfg.get("clinical_xgb", f"{MODEL_DIR}/stream3_clinical_xgb.json")
+CLINICAL_OUT_DIR = _models_cfg.get("clinical_out_dir", f"{MODEL_DIR}/stream3_v2")
 
 # Runtime environment settings
 _env_cfg = _PATHS_CFG.get("environment", {})

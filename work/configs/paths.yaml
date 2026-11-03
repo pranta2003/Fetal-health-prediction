@@ -15,6 +15,7 @@ data:
   ucl_images: "${FETAL_DATA_DIR}/UCL/images/Abdomen"
   hc18_dir: "${FETAL_DATA_DIR}/HC18"
   tabular_dir: "${FETAL_DATA_DIR}/cdc"
+  clinical_csv: "${FETAL_DATA_DIR}/cdc/clinical_training_data.csv"
 
 models:
   root_dir: "${FETAL_MODEL_DIR}"
@@ -28,6 +29,7 @@ models:
   ac_ens_s4: "${FETAL_MODEL_DIR}/ac_v3_ens/s4/best.pt"
   hc18_dir: "${FETAL_MODEL_DIR}/hc18"
   clinical_xgb: "${FETAL_MODEL_DIR}/stream3_clinical_xgb.json"
+  clinical_out_dir: "${FETAL_MODEL_DIR}/stream3_v2"
 
 outputs:
   reports_dir: "./reports"
