@@ -6,12 +6,16 @@ This repository contains the modularized codebase for multimodal fetal health as
 - **Stream 2 (AC Landmark & Biometry):** **VERIFIED** on official test set (`v3_full` AC MAE 4.395 mm, 4-seed median ensemble 4.343 mm) via automated regression tests (`tests/test_ac_v3_regression.py` and `tests/test_ac_ensemble_regression.py`). Baseline reproduction script confirms exact reproduction within 0.002 mm.
 - **Layer 3 (Hadlock EFW & Growth):** **VERIFIED** against canonical notebook test vectors (1403.0 g).
 - **Stream 1 (HC18 Biometry Segmentation):** **NOT yet extracted / NOT verified**. Remains in exploration notebook; results in preliminary experiments were provisional (ungrouped KFold).
-- **Stream 3 (Clinical Tabular Risk XGBoost):** **NOT yet extracted / NOT verified**. Remains in exploration notebook.
+- **Stream 3 (Clinical Tabular Risk XGBoost):** **EXTRACTED and UNIT-TESTED**. Regression on the real CSV is pending (requires Google Drive / Colab environment where the CDC dataset resides).
+  - *Audit History & Leakage Correction:* The original notebook's reported AUC of **0.9684** was artificially inflated due to target leakage from gestational age at delivery (`COMBGEST`) and the inclusion of early pregnancy losses under 20 weeks. These settings are documented strictly for audit history (Rows A-D).
+  - *Primary Specification:* The validated production model uses the `"primary"` feature set (with reporting-sensitive and socioeconomic fields `WIC`, `MEDUC`, `MBSTATE_REC`, and `MRACE6` removed) evaluated under a temporal split (training on births $\le 2021$, testing on births $\ge 2022$), achieving an AUC of approximately **0.74** (to be confirmed by the regression run).
+  - *Prevalence Calibration:* `TRUE_PREVALENCE = 0.006` is currently a placeholder representing approximate population-level stillbirth prevalence for $\ge 20$ weeks (to be verified against CDC/NVSS prior to publication). Precision, recall, and PR-AUC calculated on this case-control sampled cohort are sample metrics and do not reflect real-world clinical screening performance without prior-shift correction.
 
 ## Repository Layout
 - `configs/`: YAML configuration files (paths, model hyperparameters).
 - `src/fetal/`: Modular Python package containing data loaders, model architectures, geometry utilities, evaluators, and clinical calculations.
-- `scripts/`: Numbered CLI runner scripts for pipeline execution (`04_train_ac.py`, `05_train_ensemble.py`, `06_eval_ac.py`, and `run_all.ps1`).
+  - `src/fetal/clinical/`: CDC clinical risk model modules (`constants.py`, `data.py`, `model.py`, `eval.py`, `audit.py`).
+- `scripts/`: Numbered CLI runner scripts for pipeline execution (`04_train_ac.py`, `05_train_ensemble.py`, `06_eval_ac.py`, `07_audit_clinical.py`, and `run_all.ps1`).
 - `tests/`: Automated unit, equality, equivalence, and regression test suites.
 - `reports/`: Metric summaries and evaluation artifacts.
 
@@ -42,6 +46,9 @@ From PowerShell inside `work/`:
 
 # Run fast suite and execute full training pipeline:
 .\scripts\run_all.ps1 -Train
+
+# Run fast suite and execute Stream 3 clinical audit in smoke mode (if CSV present):
+.\scripts\run_all.ps1 -Clinical
 ```
 
 ### Manual Commands
@@ -57,7 +64,7 @@ Requires checkpoints in `FETAL_MODEL_DIR` and data in `FETAL_DATA_DIR`:
 pytest -m slow -v -s
 ```
 
-#### 3. Evaluating Checkpoints
+#### 3. Evaluating AC Checkpoints
 ```bash
 python scripts/06_eval_ac.py
 ```
@@ -71,4 +78,13 @@ python scripts/05_train_ensemble.py --smoke --skip-512
 # Full training run:
 python scripts/04_train_ac.py
 python scripts/05_train_ensemble.py
+```
+
+#### 5. Stream 3 Clinical Risk Model
+```bash
+# Run specification audit and train primary temporal model:
+python scripts/07_audit_clinical.py
+
+# Run in smoke mode (10 estimators, 10 bootstrap iterations):
+python scripts/07_audit_clinical.py --smoke
 ```
