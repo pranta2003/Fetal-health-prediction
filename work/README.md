@@ -54,6 +54,9 @@ From PowerShell inside `work/`:
 
 # Run fast suite and execute Stream 3 clinical audit in smoke mode (if CSV present):
 .\scripts\run_all.ps1 -Clinical
+
+# Run fast suite and verify model weights manifest:
+.\scripts\run_all.ps1 -Manifest
 ```
 
 ### Manual Commands
