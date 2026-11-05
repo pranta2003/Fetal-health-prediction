@@ -3,7 +3,9 @@ param (
     [switch]$Train,
     [switch]$Slow,
     [switch]$Clinical,
-    [switch]$Manifest
+    [switch]$Manifest,
+    [switch]$HC18,
+    [switch]$Smoke
 )
 
 $ErrorActionPreference = "Stop"
@@ -15,7 +17,7 @@ Set-Location $WorkDir
 Write-Host "=========================================================="
 Write-Host "run_all.ps1: Automated test and pipeline runner"
 Write-Host "Working directory: $WorkDir"
-Write-Host "Flags: Eval=$Eval | Train=$Train | Slow=$Slow | Clinical=$Clinical | Manifest=$Manifest"
+Write-Host "Flags: Eval=$Eval | Train=$Train | Slow=$Slow | Clinical=$Clinical | Manifest=$Manifest | HC18=$HC18 | Smoke=$Smoke"
 Write-Host "=========================================================="
 
 # Check and activate virtual environment if present
@@ -95,6 +97,19 @@ if ($Manifest) {
     & $VenvPy (Join-Path $ScriptDir "08_make_manifest.py") --verify
     if ($LASTEXITCODE -ne 0) {
         Write-Error "08_make_manifest.py --verify failed with exit code $LASTEXITCODE"
+        exit $LASTEXITCODE
+    }
+}
+
+if ($HC18) {
+    Write-Host "`n[Step 8: -HC18] Running 10_train_hc18.py..."
+    $Hc18Args = @((Join-Path $ScriptDir "10_train_hc18.py"))
+    if ($Smoke) {
+        $Hc18Args += "--smoke"
+    }
+    & $VenvPy @Hc18Args
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "10_train_hc18.py failed with exit code $LASTEXITCODE"
         exit $LASTEXITCODE
     }
 }
