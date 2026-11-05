@@ -95,7 +95,7 @@ def prior_shift(p, pi_train, true_prevalence=TRUE_PREVALENCE):
     pi_train : float
         Observed prevalence (positive class share) in training sample.
     true_prevalence : float, optional
-        Target population prevalence (default TRUE_PREVALENCE = 0.006).
+        Target population prevalence (default TRUE_PREVALENCE = 0.0055).
 
     Returns
     -------

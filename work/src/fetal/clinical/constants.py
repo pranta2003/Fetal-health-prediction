@@ -26,8 +26,8 @@ UNKNOWN_CODES = ["U", "9", "99", "Unknown"]
 # Variables only known at/after delivery -> must NEVER be used as model inputs during pregnancy
 OUTCOME_TIME_VARS = ["COMBGEST", "OEGest_Comb", "OBGEST_FLG", "DBWT", "BWTR4"]
 
-# PLACEHOLDER: approximate real-world stillbirth prevalence (20+ weeks). VERIFY against CDC/NVSS before the paper.
-TRUE_PREVALENCE = 0.006
+# about 5.5 fetal deaths per 1,000 live births + fetal deaths at 20+ weeks (NCHS data brief 530, US 2022-23); older years slightly higher
+TRUE_PREVALENCE = 0.0055
 
 # Defined feature sets for audit and production
 FEATURE_SETS = {

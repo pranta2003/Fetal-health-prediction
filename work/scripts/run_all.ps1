@@ -2,7 +2,8 @@ param (
     [switch]$Eval,
     [switch]$Train,
     [switch]$Slow,
-    [switch]$Clinical
+    [switch]$Clinical,
+    [switch]$Manifest
 )
 
 $ErrorActionPreference = "Stop"
@@ -14,7 +15,7 @@ Set-Location $WorkDir
 Write-Host "=========================================================="
 Write-Host "run_all.ps1: Automated test and pipeline runner"
 Write-Host "Working directory: $WorkDir"
-Write-Host "Flags: Eval=$Eval | Train=$Train | Slow=$Slow | Clinical=$Clinical"
+Write-Host "Flags: Eval=$Eval | Train=$Train | Slow=$Slow | Clinical=$Clinical | Manifest=$Manifest"
 Write-Host "=========================================================="
 
 # Check and activate virtual environment if present
@@ -86,6 +87,15 @@ if ($Clinical) {
         }
     } else {
         Write-Host "Clinical dataset CSV not present ($CsvStatus); skipping clinical audit."
+    }
+}
+
+if ($Manifest) {
+    Write-Host "`n[Step 7: -Manifest] Verifying model weights manifest (08_make_manifest.py --verify)..."
+    & $VenvPy (Join-Path $ScriptDir "08_make_manifest.py") --verify
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "08_make_manifest.py --verify failed with exit code $LASTEXITCODE"
+        exit $LASTEXITCODE
     }
 }
 
