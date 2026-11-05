@@ -214,8 +214,6 @@ def run_hc18_training(
         n_samples = min(16, len(val_dataset))
         val_dataset.data = val_dataset.data.iloc[:n_samples].reset_index(drop=True)
         train_dataset.data = train_dataset.data.iloc[:n_samples].reset_index(drop=True)
-        val_dataset.names = val_dataset.names[:n_samples]
-        train_dataset.names = train_dataset.names[:n_samples]
 
     names = val_dataset.names
     folds = make_grouped_folds(names, n_splits=n_folds, seed=seed)

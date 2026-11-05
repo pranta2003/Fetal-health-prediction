@@ -46,7 +46,8 @@ class HC18SegDataset(Dataset):
         csv_path: Union[str, Path, pd.DataFrame],
         image_dir: Union[str, Path],
         augment: bool = False,
-        mask_size: int = IMG_SIZE,
+        img_size: int = IMG_SIZE,
+        mask_size: int | None = None,
     ):
         if isinstance(csv_path, pd.DataFrame):
             self.data = csv_path.reset_index(drop=True)
@@ -54,11 +55,16 @@ class HC18SegDataset(Dataset):
             self.data = pd.read_csv(csv_path)
         self.image_dir = Path(image_dir)
         self.augment = augment
-        self.letterbox = LetterboxResize(mask_size)
+        target_size = mask_size if mask_size is not None else img_size
+        self.letterbox = LetterboxResize(target_size)
         self.normalize = transforms.Normalize(
             mean=[0.485, 0.456, 0.406],
             std=[0.229, 0.224, 0.225],
         )
+
+    @property
+    def names(self) -> list[str]:
+        return self.data["filename"].tolist()
 
     def __len__(self) -> int:
         return len(self.data)
