@@ -56,7 +56,7 @@ def test_band_aucs_filtering():
 def test_prior_shift_calibration_and_monotonicity():
     """Verify prior_shift maps training prevalence to TRUE_PREVALENCE and is strictly monotonic."""
     pi_train = 0.25
-    true_prev = TRUE_PREVALENCE  # 0.006
+    true_prev = TRUE_PREVALENCE  # 0.0055
 
     # 1. Exact mapping of sample prevalence to population prevalence
     p_at_sample_rate = prior_shift(pi_train, pi_train, true_prev)
