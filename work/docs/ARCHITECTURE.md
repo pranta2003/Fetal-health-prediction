@@ -19,7 +19,7 @@ The repository is modularized into distinct, decoupled components with single re
 | `src/fetal/config.py` + `configs/` | **Single source of truth for paths**: Resolves dataset folders (`C:\fetal-data`) and model checkpoint directories (`C:\fetal-models`) without hardcoding them in pipeline scripts. | `configs/paths.yaml`, `src/fetal/config.py` |
 | `archive/` | **Legacy & exploratory archives**: Preserves older experimental scripts and superseded code strictly for historical provenance. | Reference scripts |
 | `scripts/` | **Numbered buttons (CLI runners)**: Simple, push-button scripts for end-to-end execution: <br> • `04_train_ac.py`: Train single AC landmark models <br> • `05_train_ensemble.py`: Train 4-seed ensemble <br> • `06_eval_ac.py`: Evaluate checkpoints on official test set <br> • `07_audit_clinical.py`: Run clinical risk audit & temporal training <br> • `run_all.ps1`: Automated test & evaluation orchestrator | `04_*.py`, `05_*.py`, `06_*.py`, `07_*.py`, `run_all.ps1` |
-| `tests/` | **Proof that moved code reproduces original numbers**: Unit tests, equality assertions against backup scripts, and automated regression suites against published baselines. | `test_ac_regression.py`, `test_clinical_regression.py`, etc. |
+| `tests/` | **Proof that moved code reproduces original numbers**: Unit tests, equality assertions against backup scripts, and automated regression suites against published baselines. | `test_ac_v3_regression.py`, `test_ac_ensemble_regression.py`, `test_ac_infer.py`, `test_manifest.py`, `test_clinical_regression.py` |
 | `notebooks/` | **Exploratory & audit notebooks**: Standalone Jupyter notebooks (e.g., CDC data leakage audit). | `S3_clinical_audit.ipynb` |
 
 ---
