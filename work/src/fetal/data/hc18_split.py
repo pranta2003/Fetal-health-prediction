@@ -70,3 +70,48 @@ def make_grouped_folds(
             tr_idx = indices[~val_mask]
             folds.append((tr_idx, val_idx))
         return folds
+
+
+def split_patient_inner_holdout(
+    train_indices: Sequence[int] | np.ndarray,
+    names: Sequence[str],
+    holdout_fraction: float = 0.0,
+    seed: int = 42,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Split train indices into inner-train and inner-holdout by patient ID.
+
+    Ensures zero patient leakage between inner-train and inner-holdout sets.
+
+    Args:
+        train_indices: Sequence or array of integer indices belonging to the outer train set.
+        names: Full sequence of filenames/paths corresponding to dataset indices.
+        holdout_fraction: Fraction of unique training patients to allocate to inner holdout (0.0 to 1.0).
+        seed: Random seed for deterministic patient shuffling.
+
+    Returns:
+        Tuple of (inner_train_idx, inner_holdout_idx) as numpy integer arrays.
+    """
+    train_idx_arr = np.asarray(train_indices, dtype=int)
+    if holdout_fraction <= 0.0 or len(train_idx_arr) == 0:
+        return train_idx_arr, np.array([], dtype=int)
+
+    train_names = [names[i] for i in train_idx_arr]
+    patient_ids = np.array([patient_id_from_name(n) for n in train_names])
+    unique_patients = np.unique(patient_ids)
+
+    n_unique = len(unique_patients)
+    n_holdout = max(1, int(round(n_unique * holdout_fraction)))
+    if n_holdout >= n_unique:
+        n_holdout = max(1, n_unique - 1)
+
+    rng = np.random.default_rng(seed)
+    shuffled_patients = unique_patients.copy()
+    rng.shuffle(shuffled_patients)
+
+    holdout_patients = set(shuffled_patients[:n_holdout])
+    inner_holdout_mask = np.isin(patient_ids, list(holdout_patients))
+
+    inner_holdout_idx = train_idx_arr[inner_holdout_mask]
+    inner_train_idx = train_idx_arr[~inner_holdout_mask]
+
+    return inner_train_idx, inner_holdout_idx

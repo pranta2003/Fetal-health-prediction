@@ -18,7 +18,7 @@ import torch
 from torch.utils.data import DataLoader, Subset
 
 from fetal.data.hc18_dataset import HC18SegDataset
-from fetal.data.hc18_split import make_grouped_folds
+from fetal.data.hc18_split import make_grouped_folds, split_patient_inner_holdout
 from fetal.eval.hc18_eval import (
     compute_metrics,
     evaluate_solo_with_tta,
@@ -161,6 +161,7 @@ def run_hc18_training(
     device: str | None = None,
     resume: bool = False,
     smoke: bool = False,
+    inner_holdout: float = 0.0,
 ) -> dict[str, float]:
     """Execute patient-grouped cross-validation training on HC18 dataset.
 
@@ -179,6 +180,7 @@ def run_hc18_training(
         device: Computation device ('cuda' or 'cpu').
         resume: If True, reuse existing fold checkpoints when found.
         smoke: If True or HC18_SMOKE=1, run 2 epochs on 16 images on CPU.
+        inner_holdout: Fraction of train patients to hold out for early stopping (default: 0.0).
 
     Returns:
         Summary metrics dictionary.
@@ -250,8 +252,23 @@ def run_hc18_training(
             print(f"Loading existing checkpoint for fold {fold_num} from {ckpt_file}")
             model.load_state_dict(torch.load(str(ckpt_file), map_location=dev))
         else:
-            train_subset = Subset(train_dataset, train_idx)
-            val_subset = Subset(val_dataset, val_idx)
+            if inner_holdout > 0.0:
+                inner_train_idx, inner_holdout_idx = split_patient_inner_holdout(
+                    train_indices=train_idx,
+                    names=names,
+                    holdout_fraction=inner_holdout,
+                    seed=seed + fold_num,
+                )
+                print(
+                    f"Fold {fold_num}: inner holdout enabled ({inner_holdout * 100:.1f}%) -> "
+                    f"train images={len(inner_train_idx)}, inner val images={len(inner_holdout_idx)}, "
+                    f"outer val images={len(val_idx)}"
+                )
+                train_subset = Subset(train_dataset, inner_train_idx)
+                val_subset = Subset(val_dataset, inner_holdout_idx)
+            else:
+                train_subset = Subset(train_dataset, train_idx)
+                val_subset = Subset(val_dataset, val_idx)
 
             train_loader = DataLoader(
                 train_subset, batch_size=batch_size, shuffle=True, num_workers=num_workers
@@ -273,7 +290,7 @@ def run_hc18_training(
             torch.save(model.state_dict(), str(ckpt_file))
             print(f"Saved fold {fold_num} checkpoint to {ckpt_file}")
 
-        # Solo fold TTA evaluation
+        # Solo fold TTA evaluation on outer held-out fold
         hc_err, bpd_err = evaluate_solo_with_tta(model, val_dataset, val_idx, device=dev)
         fold_metrics = compute_metrics(hc_err, bpd_err)
         per_fold_metrics[f"fold_{fold_num}"] = fold_metrics
@@ -308,7 +325,7 @@ def run_hc18_training(
     with open(summary_file, "w", encoding="utf-8") as f:
         json.dump(pooled_metrics, f, indent=2)
 
-    print("\n===== HC18 Training Summary =====")
+    print("\n===== HC18 Training Summary =====\n")
     print(f"Pooled HC MAE: {pooled_metrics['hc_mae']:.2f}mm, RMSE: {pooled_metrics['hc_rmse']:.2f}mm")
     print(f"Pooled BPD MAE: {pooled_metrics['bpd_mae']:.2f}mm, RMSE: {pooled_metrics['bpd_rmse']:.2f}mm")
     print(f"Saved summary metrics to {summary_file}")

@@ -92,6 +92,12 @@ def parse_args():
         default=None,
         help="Device to train on ('cuda' or 'cpu')",
     )
+    parser.add_argument(
+        "--inner-holdout",
+        type=float,
+        default=0.0,
+        help="Fraction of train patients to hold out for early stopping/checkpoint selection (default: 0.0)",
+    )
     return parser.parse_args()
 
 
@@ -99,11 +105,12 @@ def main():
     args = parse_args()
     print("=" * 60)
     print("10_train_hc18: HC18 5-Fold Segmentation Pipeline")
-    print(f"Data Dir:   {args.data_dir}")
-    print(f"Model Dir:  {args.model_dir}")
-    print(f"Fold:       {args.fold if args.fold else 'All (1..5)'}")
-    print(f"Smoke:      {args.smoke}")
-    print(f"Resume:     {args.resume}")
+    print(f"Data Dir:      {args.data_dir}")
+    print(f"Model Dir:     {args.model_dir}")
+    print(f"Fold:          {args.fold if args.fold else 'All (1..5)'}")
+    print(f"Smoke:         {args.smoke}")
+    print(f"Resume:        {args.resume}")
+    print(f"Inner Holdout: {args.inner_holdout}")
     print("=" * 60)
 
     summary = run_hc18_training(
@@ -118,6 +125,7 @@ def main():
         device=args.device,
         resume=args.resume,
         smoke=args.smoke,
+        inner_holdout=args.inner_holdout,
     )
 
     print("\n[10_train_hc18] Complete!")
