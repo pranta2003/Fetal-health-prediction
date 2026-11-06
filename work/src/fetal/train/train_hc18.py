@@ -34,6 +34,8 @@ IMG_SIZE = 384
 BATCH_SIZE = 8
 LR = 1e-4
 WEIGHT_DECAY = 0.01
+SCHEDULER_FACTOR = 0.5
+SCHEDULER_PATIENCE = 4
 MAX_EPOCHS = 100
 PATIENCE = 8
 SEED = 42
@@ -79,7 +81,7 @@ def train_one_fold(
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=WEIGHT_DECAY)
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-        optimizer, mode="min", factor=0.5, patience=4
+        optimizer, mode="min", factor=SCHEDULER_FACTOR, patience=SCHEDULER_PATIENCE
     )
     if loss_fn is None:
         loss_fn = HC18Loss(mode="binary")
