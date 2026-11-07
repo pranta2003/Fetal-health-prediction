@@ -70,7 +70,7 @@ Not built yet. When they arrive, they follow the same pattern: `femur_dataset.py
 |---|---|
 | `src/fetal/config.py` + `configs/paths.yaml` | Where the data and weights live (one place) |
 | `src/fetal/train/checkpoint.py` | Saves and loads model weights |
-| `scripts/08_make_manifest.py`, `scripts/14_hash_results.py` | Make and check file fingerprints, so nothing changes silently |
+| `scripts/08_make_manifest.py`, `scripts/14_hash_results.py`, `scripts/16_extract_notebook_results.py` | Make and check file fingerprints, and extract historical metrics from notebooks |
 | `scripts/run_all.ps1` | One command to run groups of the buttons above |
 
 ## How the whole system fits (the flow)
