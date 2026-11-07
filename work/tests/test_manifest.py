@@ -12,6 +12,11 @@ manifest_module = __import__("08_make_manifest")
 generate_manifest = manifest_module.generate_manifest
 verify_manifest = manifest_module.verify_manifest
 
+hash_results_module = __import__("14_hash_results")
+generate_sums = hash_results_module.generate_sums
+verify_sums = hash_results_module.verify_sums
+
+
 
 def test_manifest_generate_and_detect_modification(tmp_path):
     # Setup dummy model directory structure
@@ -49,3 +54,23 @@ def test_manifest_generate_and_detect_modification(tmp_path):
     assert all_ok is False
     res_map = {r["rel_path"]: r["status"] for r in results}
     assert res_map["model_b/best.pt"] == "MISSING"
+
+
+def test_hash_results_generate_and_verify(tmp_path):
+    f1 = tmp_path / "metrics.json"
+    f1.write_text('{"hc_mae": 2.30}', encoding="utf-8")
+    f2 = tmp_path / "oof_predictions.csv"
+    f2.write_text("image,patient_id,pred_HC_mm\n001.png,1,140.0\n", encoding="utf-8")
+
+    sums_path = generate_sums(tmp_path)
+    assert sums_path.is_file()
+    assert verify_sums(tmp_path) is True
+
+    # Tamper
+    f1.write_text('{"hc_mae": 9.99}', encoding="utf-8")
+    assert verify_sums(tmp_path) is False
+
+    # Remove
+    f1.unlink()
+    assert verify_sums(tmp_path) is False
+
