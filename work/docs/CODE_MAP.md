@@ -47,8 +47,15 @@ File names tell you the part. The prefix is the part:
 | Use | `src/fetal/infer/ac_infer.py` | One function: give an image, get the AC in mm |
 | Proof | `tests/test_ac_*.py`, `test_geometry.py`, `test_recipes_equality.py`, `test_split_equality.py`, `test_train_equivalence.py`, `tests/reference/ac_*.py` | Tests that the moved code equals the original |
 
-## FEMUR and FASSD
-Not built yet. When they arrive, they follow the same pattern: `femur_dataset.py`, `femur_model.py`, `train_femur.py`, `femur_eval.py`, and the same for `fassd_...`.
+## FEMUR (FL)
+| Step | File | What it does |
+|---|---|---|
+| 1 Prepare data | `src/fetal/data/femur_dataset.py` | Reads FP and UCL femur images and landmark annotations, computes FL in mm |
+| 5 Report | `scripts/15_femur_data_report.py` | Data check, landmark validation, patient leakage check, and FL distribution |
+| Proof | `tests/test_femur_*.py` | Fast tests for coordinate parsing, endpoint math, and synthetic loaders |
+
+## FASSD
+Not built yet. When it arrives, it follows the same pattern: `fassd_dataset.py`, `fassd_model.py`, `train_fassd.py`, `fassd_eval.py`.
 
 ## MATERNAL RISK (Stream 3): all files
 | File | What it does |
