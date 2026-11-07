@@ -17,6 +17,11 @@ import os
 from pathlib import Path
 import sys
 
+# Ensure src/ is on sys.path
+src_dir = Path(__file__).resolve().parent.parent / "src"
+if str(src_dir) not in sys.path:
+    sys.path.insert(0, str(src_dir))
+
 import numpy as np
 import pandas as pd
 from PIL import Image
