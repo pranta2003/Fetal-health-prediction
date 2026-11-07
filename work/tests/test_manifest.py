@@ -74,3 +74,43 @@ def test_hash_results_generate_and_verify(tmp_path):
     f1.unlink()
     assert verify_sums(tmp_path) is False
 
+
+def test_results_integrity_all_files_have_sha256sums_and_verify():
+    """Verify that every file under docs/results/**/ has a SHA256SUMS entry and verifies."""
+    work_dir = Path(__file__).resolve().parent.parent
+    results_dir = work_dir / "docs" / "results"
+    assert results_dir.is_dir(), f"Missing results dir at {results_dir}"
+
+    subdirs = [d for d in results_dir.iterdir() if d.is_dir()]
+    assert len(subdirs) >= 3, f"Expected at least hc18, ac, history in {results_dir}"
+
+    for sdir in sorted(subdirs):
+        sums_path = sdir / "SHA256SUMS"
+        assert sums_path.is_file(), f"Missing SHA256SUMS in {sdir}"
+
+        # Parse SHA256SUMS entries
+        with open(sums_path, "r", encoding="utf-8") as f:
+            lines = [l.strip() for l in f if l.strip() and not l.startswith("#")]
+        
+        sum_files = set()
+        for line in lines:
+            parts = line.split(maxsplit=1)
+            assert len(parts) == 2, f"Invalid format in {sums_path}: {line}"
+            sum_files.add(parts[1].lstrip("*"))
+
+        # Check every file on disk under sdir (excluding SHA256SUMS) is in sum_files
+        disk_files = set()
+        for item in sdir.rglob("*"):
+            if item.is_file() and item.name != "SHA256SUMS":
+                rel = item.relative_to(sdir).as_posix()
+                disk_files.add(rel)
+
+        assert disk_files == sum_files, (
+            f"Mismatch between disk files and SHA256SUMS in {sdir}: "
+            f"missing from sums: {disk_files - sum_files}, extra in sums: {sum_files - disk_files}"
+        )
+
+        # Verify integrity of each file
+        assert verify_sums(sdir) is True, f"Verification failed for {sdir}"
+
+
