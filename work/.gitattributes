@@ -1,0 +1,2 @@
+# Ensure results files maintain exact LF line endings across platforms for SHA256 integrity
+docs/results/** text eol=lf

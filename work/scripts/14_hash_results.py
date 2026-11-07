@@ -32,7 +32,7 @@ def compute_sha256(filepath: str | Path, chunk_size: int = 1024 * 1024) -> str:
 
 
 def generate_sums(target_dir: str | Path) -> Path:
-    """Compute sha256 for all files in target_dir and write SHA256SUMS."""
+    """Compute sha256 for all files in target_dir (recursively) and write SHA256SUMS."""
     target_dir = Path(target_dir).resolve()
     if not target_dir.exists():
         raise FileNotFoundError(f"Target directory does not exist: {target_dir}")
@@ -40,12 +40,13 @@ def generate_sums(target_dir: str | Path) -> Path:
     sums_path = target_dir / SUMS_FILENAME
     entries: list[tuple[str, str]] = []
 
-    for item in sorted(target_dir.iterdir()):
+    for item in sorted(target_dir.rglob("*")):
         if item.is_file() and item.name != SUMS_FILENAME:
             sha = compute_sha256(item)
-            entries.append((sha, item.name))
+            rel_name = item.relative_to(target_dir).as_posix()
+            entries.append((sha, rel_name))
 
-    with open(sums_path, "w", encoding="utf-8") as f:
+    with open(sums_path, "w", encoding="utf-8", newline="\n") as f:
         for sha, fname in entries:
             f.write(f"{sha}  {fname}\n")
 
