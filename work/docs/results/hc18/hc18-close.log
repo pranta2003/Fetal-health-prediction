@@ -1,0 +1,206 @@
+[{"stream_name":"stdout","time":0.884034363,"data":"==================================================\n"}
+,{"stream_name":"stdout","time":0.884065802,"data":"=== HC18 Kaggle Close Runner (OOF + Test Set) ===\n"}
+,{"stream_name":"stdout","time":0.884069953,"data":"==================================================\n"}
+,{"stream_name":"stdout","time":0.885035012,"data":"\n"}
+,{"stream_name":"stdout","time":0.885046247,"data":"[Step 1/5] Installing segmentation-models-pytorch==0.5.0...\n"}
+,{"stream_name":"stdout","time":0.885048687,"data":"\n"}
+,{"stream_name":"stdout","time":0.885050852,"data":"\u003e\u003e\u003e Running: /usr/bin/python3 -m pip install --no-warn-script-location segmentation-models-pytorch==0.5.0\n"}
+,{"stream_name":"stdout","time":2.309302344,"data":"Collecting segmentation-models-pytorch==0.5.0\n"}
+,{"stream_name":"stdout","time":2.432736345,"data":"  Downloading segmentation_models_pytorch-0.5.0-py3-none-any.whl.metadata (17 kB)\n"}
+,{"stream_name":"stdout","time":2.461758313,"data":"Requirement already satisfied: huggingface-hub\u003e=0.24 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (1.33.0)\n"}
+,{"stream_name":"stdout","time":2.46247265,"data":"Requirement already satisfied: numpy\u003e=1.19.3 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (2.1.3)\n"}
+,{"stream_name":"stdout","time":2.4632370740000002,"data":"Requirement already satisfied: pillow\u003e=8 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (13.0.0)\n"}
+,{"stream_name":"stdout","time":2.463869684,"data":"Requirement already satisfied: safetensors\u003e=0.3.1 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (0.8.0)\n"}
+,{"stream_name":"stdout","time":2.464504476,"data":"Requirement already satisfied: timm\u003e=0.9 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (1.0.30)\n"}
+,{"stream_name":"stdout","time":2.46525405,"data":"Requirement already satisfied: torch\u003e=1.8 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (2.11.0+cu130)\n"}
+,{"stream_name":"stdout","time":2.465925262,"data":"Requirement already satisfied: torchvision\u003e=0.9 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (0.26.0+cu130)\n"}
+,{"stream_name":"stdout","time":2.466556539,"data":"Requirement already satisfied: tqdm\u003e=4.42.1 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (4.67.3)\n"}
+,{"stream_name":"stdout","time":2.472974821,"data":"Requirement already satisfied: click\u003c9.0.0,\u003e=8.4.2 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (8.5.0)\n"}
+,{"stream_name":"stdout","time":2.473664816,"data":"Requirement already satisfied: filelock\u003e=3.10.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.2.4)\n"}
+,{"stream_name":"stdout","time":2.474451872,"data":"Requirement already satisfied: fsspec\u003e=2023.5.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (2025.12.0)\n"}
+,{"stream_name":"stdout","time":2.476052603,"data":"Requirement already satisfied: hf-xet\u003c2.0.0,\u003e=1.6.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (1.7.0)\n"}
+,{"stream_name":"stdout","time":2.476800891,"data":"Requirement already satisfied: httpx\u003c1,\u003e=0.23.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (0.28.1)\n"}
+,{"stream_name":"stdout","time":2.477485202,"data":"Requirement already satisfied: packaging\u003e=20.9 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (26.3)\n"}
+,{"stream_name":"stdout","time":2.478282756,"data":"Requirement already satisfied: pyyaml\u003e=5.1 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (6.0.3)\n"}
+,{"stream_name":"stdout","time":2.479264791,"data":"Requirement already satisfied: typing-extensions\u003e=4.1.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.16.0)\n"}
+,{"stream_name":"stdout","time":2.497786101,"data":"Requirement already satisfied: anyio in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.15.1)\n"}
+,{"stream_name":"stdout","time":2.498414673,"data":"Requirement already satisfied: certifi in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (2026.10.23)\n"}
+,{"stream_name":"stdout","time":2.499117266,"data":"Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (1.0.9)\n"}
+,{"stream_name":"stdout","time":2.499720972,"data":"Requirement already satisfied: idna in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (3.20)\n"}
+,{"stream_name":"stdout","time":2.504645594,"data":"Requirement already satisfied: h11\u003e=0.16 in /usr/local/lib/python3.13/dist-packages (from httpcore==1.*-\u003ehttpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (0.16.0)\n"}
+,{"stream_name":"stdout","time":2.569112832,"data":"Requirement already satisfied: setuptools\u003c82 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (81.0.0)\n"}
+,{"stream_name":"stdout","time":2.57014388,"data":"Requirement already satisfied: sympy\u003e=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.14.0)\n"}
+,{"stream_name":"stdout","time":2.570874923,"data":"Requirement already satisfied: networkx\u003e=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.7)\n"}
+,{"stream_name":"stdout","time":2.571480641,"data":"Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.1.6)\n"}
+,{"stream_name":"stdout","time":2.572858263,"data":"Requirement already satisfied: cuda-toolkit==13.0.2 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.2)\n"}
+,{"stream_name":"stdout","time":2.5738817689999998,"data":"Requirement already satisfied: cuda-bindings\u003c14,\u003e=13.0.3 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.3)\n"}
+,{"stream_name":"stdout","time":2.574733186,"data":"Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (9.19.0.56)\n"}
+,{"stream_name":"stdout","time":2.575574139,"data":"Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (0.8.0)\n"}
+,{"stream_name":"stdout","time":2.576414882,"data":"Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (2.28.9)\n"}
+,{"stream_name":"stdout","time":2.577271348,"data":"Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.4.5)\n"}
+,{"stream_name":"stdout","time":2.578109748,"data":"Requirement already satisfied: triton==3.6.0 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.6.0)\n"}
+,{"stream_name":"stdout","time":2.591460499,"data":"Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.1.0.3)\n"}
+,{"stream_name":"stdout","time":2.592510301,"data":"Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.96)\n"}
+,{"stream_name":"stdout","time":2.593542752,"data":"Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.0.0.61)\n"}
+,{"stream_name":"stdout","time":2.594560736,"data":"Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.15.1.6)\n"}
+,{"stream_name":"stdout","time":2.5957246449999998,"data":"Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.85)\n"}
+,{"stream_name":"stdout","time":2.596849244,"data":"Requirement already satisfied: nvidia-curand==10.4.0.35.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (10.4.0.35)\n"}
+,{"stream_name":"stdout","time":2.597793224,"data":"Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.0.4.66)\n"}
+,{"stream_name":"stdout","time":2.5988817109999998,"data":"Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.6.3.3)\n"}
+,{"stream_name":"stdout","time":2.6002791690000002,"data":"Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.88)\n"}
+,{"stream_name":"stdout","time":2.60163184,"data":"Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.88)\n"}
+,{"stream_name":"stdout","time":2.602826609,"data":"Requirement already satisfied: nvidia-nvtx==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.85)\n"}
+,{"stream_name":"stdout","time":2.620087287,"data":"Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings\u003c14,\u003e=13.0.3-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.8.4)\n"}
+,{"stream_name":"stdout","time":2.6699799,"data":"Requirement already satisfied: mpmath\u003c1.4,\u003e=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy\u003e=1.13.3-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.3.0)\n"}
+,{"stream_name":"stdout","time":2.706614173,"data":"Requirement already satisfied: MarkupSafe\u003e=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.0.4)\n"}
+,{"stream_name":"stdout","time":2.730328207,"data":"Downloading segmentation_models_pytorch-0.5.0-py3-none-any.whl (154 kB)\n"}
+,{"stream_name":"stdout","time":5.498052969,"data":"Installing collected packages: segmentation-models-pytorch\n"}
+,{"stream_name":"stdout","time":5.712084395,"data":"Successfully installed segmentation-models-pytorch-0.5.0\n"}
+,{"stream_name":"stdout","time":5.836156273,"data":"\n"}
+,{"stream_name":"stdout","time":5.836189977,"data":"[Step 2/5] Cloning repository from master to /kaggle/working/repo...\n"}
+,{"stream_name":"stdout","time":5.836198131,"data":"\n"}
+,{"stream_name":"stdout","time":5.836200588,"data":"\u003e\u003e\u003e Running: git clone --depth 1 https://github.com/pranta2003/Fetal-health-prediction.git /kaggle/working/repo\n"}
+,{"stream_name":"stderr","time":5.8599977,"data":"Cloning into '/kaggle/working/repo'...\n"}
+,{"stream_name":"stdout","time":6.830749705,"data":"\n"}
+,{"stream_name":"stdout","time":6.830778008,"data":"[Step 3/5] Locating input datasets and setting up links...\n"}
+,{"stream_name":"stdout","time":6.830783046,"data":"Scanning /kaggle/input...\n"}
+,{"stream_name":"stdout","time":6.83078681,"data":"  Input mount: datasets\n"}
+,{"stream_name":"stdout","time":7.034268232,"data":"Found HC18 dataset at: /kaggle/input/datasets/prantakumerpandit390/hc18-ultrasound\n"}
+,{"stream_name":"stdout","time":7.034530157,"data":"Created symlink: /kaggle/working/fd/HC18 -\u003e /kaggle/input/datasets/prantakumerpandit390/hc18-ultrasound\n"}
+,{"stream_name":"stdout","time":7.034996666,"data":"Found model weights at: /kaggle/input/datasets/prantakumerpandit390/hc18-fmb\n"}
+,{"stream_name":"stdout","time":7.035324064,"data":"  Verified fold 1: hc18_seg_fold1_eff_b4_384.pt (81703371 bytes)\n"}
+,{"stream_name":"stdout","time":7.035637973,"data":"  Verified fold 2: hc18_seg_fold2_eff_b4_384.pt (81703371 bytes)\n"}
+,{"stream_name":"stdout","time":7.035891282,"data":"  Verified fold 3: hc18_seg_fold3_eff_b4_384.pt (81703371 bytes)\n"}
+,{"stream_name":"stdout","time":7.036273109,"data":"  Verified fold 4: hc18_seg_fold4_eff_b4_384.pt (81703371 bytes)\n"}
+,{"stream_name":"stdout","time":7.036540382,"data":"  Verified fold 5: hc18_seg_fold5_eff_b4_384.pt (81703371 bytes)\n"}
+,{"stream_name":"stdout","time":7.090389932,"data":"HC18 training CSV: /kaggle/input/datasets/prantakumerpandit390/hc18-ultrasound/training_set_pixel_size_and_HC.csv\n"}
+,{"stream_name":"stdout","time":7.090411755,"data":"HC18 test dir:     /kaggle/working/fd/HC18/test_set/test_set\n"}
+,{"stream_name":"stdout","time":7.090417308,"data":"HC18 test CSV:     /kaggle/working/fd/HC18/test_set_pixel_size.csv\n"}
+,{"stream_name":"stdout","time":7.090421854,"data":"\n"}
+,{"stream_name":"stdout","time":7.090443937,"data":"[Step 4/5] Running scripts/11_hc18_oof_report.py...\n"}
+,{"stream_name":"stdout","time":7.090447629,"data":"\n"}
+,{"stream_name":"stdout","time":7.0904510179999996,"data":"\u003e\u003e\u003e Running: /usr/bin/python3 /kaggle/working/repo/work/scripts/11_hc18_oof_report.py --data-dir /kaggle/working/fd/HC18 --model-dir /kaggle/input/datasets/prantakumerpandit390/hc18-fmb --out-dir /kaggle/working/out --device cuda --tolerance 0.02\n"}
+,{"stream_name":"stderr","time":30.075595724,"data":"/kaggle/working/repo/work/src/fetal/eval/hc18_eval.py:99: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.\n"}
+,{"stream_name":"stderr","time":30.07563415,"data":"  with torch.cuda.amp.autocast(enabled=(device.type == \"cuda\")):\n"}
+,{"stream_name":"stdout","time":205.287283542,"data":"Running out-of-fold inference across 5 folds...\n"}
+,{"stream_name":"stdout","time":205.287313128,"data":"Using device: cuda\n"}
+,{"stream_name":"stdout","time":205.287319415,"data":"\n"}
+,{"stream_name":"stdout","time":205.287323877,"data":"--- Loading Fold 1/5 Checkpoint: hc18_seg_fold1_eff_b4_384.pt ---\n"}
+,{"stream_name":"stdout","time":205.287328556,"data":"Evaluating fold 1 on 206 outer val images...\n"}
+,{"stream_name":"stdout","time":205.287333384,"data":"  [50/206] processed\n"}
+,{"stream_name":"stdout","time":205.287338162,"data":"  [100/206] processed\n"}
+,{"stream_name":"stdout","time":205.287342605,"data":"  [150/206] processed\n"}
+,{"stream_name":"stdout","time":205.287347006,"data":"  [200/206] processed\n"}
+,{"stream_name":"stdout","time":205.287352346,"data":"  [206/206] processed\n"}
+,{"stream_name":"stdout","time":205.287357081,"data":"\n"}
+,{"stream_name":"stdout","time":205.287361745,"data":"--- Loading Fold 2/5 Checkpoint: hc18_seg_fold2_eff_b4_384.pt ---\n"}
+,{"stream_name":"stdout","time":205.287367032,"data":"Evaluating fold 2 on 199 outer val images...\n"}
+,{"stream_name":"stdout","time":205.287371779,"data":"  [50/199] processed\n"}
+,{"stream_name":"stdout","time":205.287377092,"data":"  [100/199] processed\n"}
+,{"stream_name":"stdout","time":205.287381624,"data":"  [150/199] processed\n"}
+,{"stream_name":"stdout","time":205.287386835,"data":"  [199/199] processed\n"}
+,{"stream_name":"stdout","time":205.28739236,"data":"\n"}
+,{"stream_name":"stdout","time":205.287397112,"data":"--- Loading Fold 3/5 Checkpoint: hc18_seg_fold3_eff_b4_384.pt ---\n"}
+,{"stream_name":"stdout","time":205.287402435,"data":"Evaluating fold 3 on 208 outer val images...\n"}
+,{"stream_name":"stdout","time":205.287408135,"data":"  [50/208] processed\n"}
+,{"stream_name":"stdout","time":205.287413874,"data":"  [100/208] processed\n"}
+,{"stream_name":"stdout","time":205.287419064,"data":"  [150/208] processed\n"}
+,{"stream_name":"stdout","time":205.287424202,"data":"  [200/208] processed\n"}
+,{"stream_name":"stdout","time":205.287429217,"data":"  [208/208] processed\n"}
+,{"stream_name":"stdout","time":205.287434026,"data":"\n"}
+,{"stream_name":"stdout","time":205.287448961,"data":"--- Loading Fold 4/5 Checkpoint: hc18_seg_fold4_eff_b4_384.pt ---\n"}
+,{"stream_name":"stdout","time":205.287453603,"data":"Evaluating fold 4 on 194 outer val images...\n"}
+,{"stream_name":"stdout","time":205.287457763,"data":"  [50/194] processed\n"}
+,{"stream_name":"stdout","time":205.287461706,"data":"  [100/194] processed\n"}
+,{"stream_name":"stdout","time":205.287465568,"data":"  [150/194] processed\n"}
+,{"stream_name":"stdout","time":205.287469144,"data":"  [194/194] processed\n"}
+,{"stream_name":"stdout","time":205.287472725,"data":"\n"}
+,{"stream_name":"stdout","time":205.287476055,"data":"--- Loading Fold 5/5 Checkpoint: hc18_seg_fold5_eff_b4_384.pt ---\n"}
+,{"stream_name":"stdout","time":205.287479974,"data":"Evaluating fold 5 on 192 outer val images...\n"}
+,{"stream_name":"stdout","time":205.28748331,"data":"  [50/192] processed\n"}
+,{"stream_name":"stdout","time":205.287486835,"data":"  [100/192] processed\n"}
+,{"stream_name":"stdout","time":205.287490161,"data":"  [150/192] processed\n"}
+,{"stream_name":"stdout","time":205.287493922,"data":"  [192/192] processed\n"}
+,{"stream_name":"stdout","time":205.287497133,"data":"Saved OOF predictions to /kaggle/working/out/oof_predictions.csv\n"}
+,{"stream_name":"stdout","time":205.287500912,"data":"Fold 1: HC MAE=2.48mm, BPD MAE=0.70mm (n=206)\n"}
+,{"stream_name":"stdout","time":205.287504379,"data":"Fold 2: HC MAE=2.29mm, BPD MAE=0.81mm (n=199)\n"}
+,{"stream_name":"stdout","time":205.287508393,"data":"Fold 3: HC MAE=2.16mm, BPD MAE=0.66mm (n=208)\n"}
+,{"stream_name":"stdout","time":205.287511753,"data":"Fold 4: HC MAE=2.24mm, BPD MAE=0.77mm (n=194)\n"}
+,{"stream_name":"stdout","time":205.287514997,"data":"Fold 5: HC MAE=2.33mm, BPD MAE=0.84mm (n=192)\n"}
+,{"stream_name":"stdout","time":205.287518531,"data":"\n"}
+,{"stream_name":"stdout","time":205.287522187,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":205.287526018,"data":"===== HC18 POOLED OUT-OF-FOLD METRICS =====\n"}
+,{"stream_name":"stdout","time":205.287529188,"data":"Total Evaluated: 999 images\n"}
+,{"stream_name":"stdout","time":205.287532714,"data":"Pooled HC  MAE:  2.30 mm (RMSE: 3.58 mm)\n"}
+,{"stream_name":"stdout","time":205.287536033,"data":"Pooled BPD MAE:  0.75 mm (RMSE: 1.09 mm)\n"}
+,{"stream_name":"stdout","time":205.287539382,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":205.287543081,"data":"\n"}
+,{"stream_name":"stdout","time":205.287546962,"data":"Tolerance Check (target vs actual, tolerance ±0.02):\n"}
+,{"stream_name":"stdout","time":205.287552352,"data":"  hc_mae    : target=2.30, actual=2.30, diff=0.0019 -\u003e [PASS]\n"}
+,{"stream_name":"stdout","time":205.287556646,"data":"  hc_rmse   : target=3.58, actual=3.58, diff=0.0003 -\u003e [PASS]\n"}
+,{"stream_name":"stdout","time":205.287560455,"data":"  bpd_mae   : target=0.75, actual=0.75, diff=0.0035 -\u003e [PASS]\n"}
+,{"stream_name":"stdout","time":205.287564016,"data":"  bpd_rmse  : target=1.09, actual=1.09, diff=0.0038 -\u003e [PASS]\n"}
+,{"stream_name":"stdout","time":205.287567963,"data":"\n"}
+,{"stream_name":"stdout","time":205.287573912,"data":"--- Error Analysis by True-HC Terciles ('head-size proxy for gestational age') ---\n"}
+,{"stream_name":"stdout","time":205.287577973,"data":"       tercile  n_samples  min_true_hc_mm  max_true_hc_mm   hc_mae  hc_rmse  bpd_mae  bpd_rmse\n"}
+,{"stream_name":"stdout","time":205.287581448,"data":"  Small (\u003c T1)        333         45.0632        167.2050 1.916776 4.089963 0.654736  1.131007\n"}
+,{"stream_name":"stdout","time":205.287584997,"data":"Medium (T1-T2)        333        167.4944        182.9535 2.022679 2.579320 0.657741  0.855673\n"}
+,{"stream_name":"stdout","time":205.287593311,"data":"  Large (\u003e T2)        333        182.9912        349.2581 2.966359 3.881001 0.948086  1.256008\n"}
+,{"stream_name":"stdout","time":205.287597678,"data":"Wrote tercile analysis table to /kaggle/working/out/tercile_analysis.md\n"}
+,{"stream_name":"stdout","time":205.287601488,"data":"\n"}
+,{"stream_name":"stdout","time":205.28760537,"data":"Computing patient-level bootstrap 95% CI (1000 resamples, seed=42)...\n"}
+,{"stream_name":"stdout","time":205.287608883,"data":"Pooled HC MAE 95% CI: [2.133, 2.479] mm\n"}
+,{"stream_name":"stdout","time":205.287612395,"data":"Saved summary metrics to /kaggle/working/out/metrics.json\n"}
+,{"stream_name":"stdout","time":211.230183644,"data":"\n"}
+,{"stream_name":"stdout","time":211.230209327,"data":"[Step 5/5] Running scripts/12_hc18_test_inference.py...\n"}
+,{"stream_name":"stdout","time":211.230302416,"data":"\n"}
+,{"stream_name":"stdout","time":211.230312451,"data":"\u003e\u003e\u003e Running: /usr/bin/python3 /kaggle/working/repo/work/scripts/12_hc18_test_inference.py --test-dir /kaggle/working/fd/HC18/test_set/test_set --test-csv /kaggle/working/fd/HC18/test_set_pixel_size.csv --model-dir /kaggle/input/datasets/prantakumerpandit390/hc18-fmb --out-dir /kaggle/working/out --device cuda\n"}
+,{"stream_name":"stderr","time":218.145408169,"data":"/kaggle/working/repo/work/src/fetal/eval/hc18_eval.py:138: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.\n"}
+,{"stream_name":"stderr","time":218.145461259,"data":"  with torch.cuda.amp.autocast(enabled=(device.type == \"cuda\")):\n"}
+,{"stream_name":"stdout","time":343.08632132,"data":"Using device: cuda\n"}
+,{"stream_name":"stdout","time":343.086374384,"data":"Loading 5 fold checkpoints from /kaggle/input/datasets/prantakumerpandit390/hc18-fmb...\n"}
+,{"stream_name":"stdout","time":343.086382197,"data":"  Loaded checkpoint: hc18_seg_fold1_eff_b4_384.pt\n"}
+,{"stream_name":"stdout","time":343.0863875,"data":"  Loaded checkpoint: hc18_seg_fold2_eff_b4_384.pt\n"}
+,{"stream_name":"stdout","time":343.086392546,"data":"  Loaded checkpoint: hc18_seg_fold3_eff_b4_384.pt\n"}
+,{"stream_name":"stdout","time":343.086396964,"data":"  Loaded checkpoint: hc18_seg_fold4_eff_b4_384.pt\n"}
+,{"stream_name":"stdout","time":343.086401333,"data":"  Loaded checkpoint: hc18_seg_fold5_eff_b4_384.pt\n"}
+,{"stream_name":"stdout","time":343.086405728,"data":"\n"}
+,{"stream_name":"stdout","time":343.08641006,"data":"Processing 335 test images...\n"}
+,{"stream_name":"stdout","time":343.086414794,"data":"  Processed [25/335] images\n"}
+,{"stream_name":"stdout","time":343.086425737,"data":"  Processed [50/335] images\n"}
+,{"stream_name":"stdout","time":343.086428971,"data":"  Processed [75/335] images\n"}
+,{"stream_name":"stdout","time":343.08643182,"data":"  Processed [100/335] images\n"}
+,{"stream_name":"stdout","time":343.086434699,"data":"  Processed [125/335] images\n"}
+,{"stream_name":"stdout","time":343.086437524,"data":"  Processed [150/335] images\n"}
+,{"stream_name":"stdout","time":343.086440466,"data":"  Processed [175/335] images\n"}
+,{"stream_name":"stdout","time":343.086443421,"data":"  Processed [200/335] images\n"}
+,{"stream_name":"stdout","time":343.086446313,"data":"  Processed [225/335] images\n"}
+,{"stream_name":"stdout","time":343.086450388,"data":"  Processed [250/335] images\n"}
+,{"stream_name":"stdout","time":343.086476393,"data":"  Processed [275/335] images\n"}
+,{"stream_name":"stdout","time":343.086481918,"data":"  Processed [300/335] images\n"}
+,{"stream_name":"stdout","time":343.086496245,"data":"  Processed [325/335] images\n"}
+,{"stream_name":"stdout","time":343.086500134,"data":"  Processed [335/335] images\n"}
+,{"stream_name":"stdout","time":343.086503545,"data":"\n"}
+,{"stream_name":"stdout","time":343.086506857,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":343.086510428,"data":"===== HC18 TEST SET INFERENCE COMPLETE =====\n"}
+,{"stream_name":"stdout","time":343.086513971,"data":"Single-model submission: /kaggle/working/out/submission_single_fold1.csv (335 rows)\n"}
+,{"stream_name":"stdout","time":343.086517612,"data":"5-model ensemble:        /kaggle/working/out/submission_ensemble_5fold.csv (335 rows)\n"}
+,{"stream_name":"stdout","time":343.086521142,"data":"============================================================\n"}
+,{"stream_name":"stdout","time":343.086524916,"data":"CONFIRMATION: No submission files were uploaded.\n"}
+,{"stream_name":"stdout","time":344.365883175,"data":"\n"}
+,{"stream_name":"stdout","time":344.365919066,"data":"==================================================\n"}
+,{"stream_name":"stdout","time":344.365923738,"data":"=== RUN COMPLETED SUCCESSFULLY ===\n"}
+,{"stream_name":"stdout","time":344.365926233,"data":"==================================================\n"}
+,{"stream_name":"stdout","time":344.365928796,"data":"Artifacts in /kaggle/working/out:\n"}
+,{"stream_name":"stdout","time":344.366127738,"data":"  metrics.json (1027 bytes)\n"}
+,{"stream_name":"stdout","time":344.366578215,"data":"  oof_predictions.csv (64192 bytes)\n"}
+,{"stream_name":"stdout","time":344.366886305,"data":"  submission_ensemble_5fold.csv (34653 bytes)\n"}
+,{"stream_name":"stdout","time":344.367165625,"data":"  submission_single_fold1.csv (34676 bytes)\n"}
+,{"stream_name":"stdout","time":344.367429229,"data":"  tercile_analysis.md (483 bytes)\n"}
+,{"stream_name":"stderr","time":346.431002257,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":346.431029204,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":346.692036382,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":346.692063134,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":347.465182847,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":348.496908022,"data":"[NbConvertApp] Writing 296783 bytes to __results__.html\n"}
+]
