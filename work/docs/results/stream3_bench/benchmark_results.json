@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T04:07:51Z",
+  "generated_at": "2026-11-08T04:42:14Z",
   "protocol": "CDC Natality + Stillbirths, temporal split (train <= 2021, test >= 2022)",
   "smoke": false,
   "n_boot": 200,
@@ -14,8 +14,8 @@
       "test_auc": 0.6659,
       "ci_95_low": 0.6629,
       "ci_95_high": 0.6691,
-      "fit_time_sec": 8.46,
-      "total_time_sec": 18.14
+      "fit_time_sec": 9.46,
+      "total_time_sec": 27.86
     },
     {
       "setting": "E1 (Primary, >=20 wk)",
@@ -24,11 +24,11 @@
       "test_rows": 130110,
       "train_pos": 132604,
       "test_pos": 40221,
-      "test_auc": 0.7288,
-      "ci_95_low": 0.7263,
-      "ci_95_high": 0.7324,
-      "fit_time_sec": 36.22,
-      "total_time_sec": 46.04
+      "test_auc": 0.7322,
+      "ci_95_low": 0.7297,
+      "ci_95_high": 0.7354,
+      "fit_time_sec": 66.91,
+      "total_time_sec": 91.13
     },
     {
       "setting": "E1 (Primary, >=20 wk)",
@@ -40,8 +40,8 @@
       "test_auc": 0.738,
       "ci_95_low": 0.7357,
       "ci_95_high": 0.7413,
-      "fit_time_sec": 9.27,
-      "total_time_sec": 18.67
+      "fit_time_sec": 15.88,
+      "total_time_sec": 31.54
     },
     {
       "setting": "E1 (Primary, >=20 wk)",
@@ -53,8 +53,8 @@
       "test_auc": 0.7381,
       "ci_95_low": 0.7358,
       "ci_95_high": 0.7413,
-      "fit_time_sec": 17.48,
-      "total_time_sec": 28.31
+      "fit_time_sec": 21.01,
+      "total_time_sec": 30.28
     },
     {
       "setting": "E4 (Clinical-Only, >=20 wk)",
@@ -66,8 +66,8 @@
       "test_auc": 0.6585,
       "ci_95_low": 0.6557,
       "ci_95_high": 0.6617,
-      "fit_time_sec": 4.72,
-      "total_time_sec": 18.05
+      "fit_time_sec": 4.71,
+      "total_time_sec": 28.66
     },
     {
       "setting": "E4 (Clinical-Only, >=20 wk)",
@@ -76,11 +76,11 @@
       "test_rows": 130110,
       "train_pos": 132604,
       "test_pos": 40221,
-      "test_auc": 0.7034,
-      "ci_95_low": 0.7004,
-      "ci_95_high": 0.7068,
-      "fit_time_sec": 30.93,
-      "total_time_sec": 40.38
+      "test_auc": 0.7043,
+      "ci_95_low": 0.7013,
+      "ci_95_high": 0.7075,
+      "fit_time_sec": 61.66,
+      "total_time_sec": 77.54
     },
     {
       "setting": "E4 (Clinical-Only, >=20 wk)",
@@ -92,8 +92,8 @@
       "test_auc": 0.707,
       "ci_95_low": 0.7041,
       "ci_95_high": 0.7101,
-      "fit_time_sec": 9.36,
-      "total_time_sec": 19.98
+      "fit_time_sec": 12.26,
+      "total_time_sec": 21.5
     },
     {
       "setting": "E4 (Clinical-Only, >=20 wk)",
@@ -105,8 +105,8 @@
       "test_auc": 0.707,
       "ci_95_low": 0.704,
       "ci_95_high": 0.7101,
-      "fit_time_sec": 16.62,
-      "total_time_sec": 26.06
+      "fit_time_sec": 20.25,
+      "total_time_sec": 30.8
     }
   ]
 }

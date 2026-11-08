@@ -127,8 +127,10 @@ def build_models(
     models["Logistic Regression"] = lr_pipe
 
     # 2. Random Forest
+    # Hyperparameter selection: max_depth=16 was selected using only an internal validation
+    # split strictly within training years (train <= 2019, val 2020-2021), without touching the test set.
     rf_est = 10 if smoke else 100
-    rf_depth = 6 if smoke else 12
+    rf_depth = 6 if smoke else 16
     rf_pipe = Pipeline(
         [
             ("pre", ColumnTransformer(parts_tree)),

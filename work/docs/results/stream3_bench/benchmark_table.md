@@ -4,11 +4,11 @@ Comparison of model families under the exact same protocol: CDC natality/stillbi
 
 | Setting | Model | Train Rows | Test Rows | Test AUC | 95% Bootstrap CI | Fit Time (s) |
 |:---|:---|---:|---:|---:|:---:|---:|
-| E1 (Primary, >=20 wk) | Logistic Regression | 402,282 | 130,110 | **0.6659** | [0.6629, 0.6691] | 8.5 |
-| E1 (Primary, >=20 wk) | Random Forest | 402,282 | 130,110 | **0.7288** | [0.7263, 0.7324] | 36.2 |
-| E1 (Primary, >=20 wk) | LightGBM | 402,282 | 130,110 | **0.7380** | [0.7357, 0.7413] | 9.3 |
-| E1 (Primary, >=20 wk) | Our XGBoost | 402,282 | 130,110 | **0.7381** | [0.7358, 0.7413] | 17.5 |
+| E1 (Primary, >=20 wk) | Logistic Regression | 402,282 | 130,110 | **0.6659** | [0.6629, 0.6691] | 9.5 |
+| E1 (Primary, >=20 wk) | Random Forest | 402,282 | 130,110 | **0.7322** | [0.7297, 0.7354] | 66.9 |
+| E1 (Primary, >=20 wk) | LightGBM | 402,282 | 130,110 | **0.7380** | [0.7357, 0.7413] | 15.9 |
+| E1 (Primary, >=20 wk) | Our XGBoost | 402,282 | 130,110 | **0.7381** | [0.7358, 0.7413] | 21.0 |
 | E4 (Clinical-Only, >=20 wk) | Logistic Regression | 402,282 | 130,110 | **0.6585** | [0.6557, 0.6617] | 4.7 |
-| E4 (Clinical-Only, >=20 wk) | Random Forest | 402,282 | 130,110 | **0.7034** | [0.7004, 0.7068] | 30.9 |
-| E4 (Clinical-Only, >=20 wk) | LightGBM | 402,282 | 130,110 | **0.7070** | [0.7041, 0.7101] | 9.4 |
-| E4 (Clinical-Only, >=20 wk) | Our XGBoost | 402,282 | 130,110 | **0.7070** | [0.7040, 0.7101] | 16.6 |
+| E4 (Clinical-Only, >=20 wk) | Random Forest | 402,282 | 130,110 | **0.7043** | [0.7013, 0.7075] | 61.7 |
+| E4 (Clinical-Only, >=20 wk) | LightGBM | 402,282 | 130,110 | **0.7070** | [0.7041, 0.7101] | 12.3 |
+| E4 (Clinical-Only, >=20 wk) | Our XGBoost | 402,282 | 130,110 | **0.7070** | [0.7040, 0.7101] | 20.2 |
