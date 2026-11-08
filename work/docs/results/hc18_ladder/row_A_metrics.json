@@ -1,0 +1,13 @@
+{
+  "model_name": "Row A: Direct Regression (Cell 22)",
+  "approach": "Direct continuous scalar regression",
+  "backbone": "ConvNeXt-Tiny",
+  "input_res": "224x224 (direct)",
+  "hc_mae": 10.6728,
+  "hc_rmse": 15.9672,
+  "bpd_mae": 3.2616,
+  "bpd_rmse": 4.7343,
+  "epochs_trained": 25,
+  "train_time_sec": 695.39,
+  "model_hash": "9542a5d5a57299a0"
+}

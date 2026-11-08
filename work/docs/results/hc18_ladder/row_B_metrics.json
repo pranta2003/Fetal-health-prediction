@@ -1,0 +1,13 @@
+{
+  "model_name": "Row B: Geometry Approach v3 (Cell 27)",
+  "approach": "Ellipse parameter regression (Huber loss)",
+  "backbone": "ConvNeXt-Tiny",
+  "input_res": "224x224 (letterbox)",
+  "hc_mae": 11.5964,
+  "hc_rmse": 16.1775,
+  "bpd_mae": 3.2198,
+  "bpd_rmse": 4.5392,
+  "epochs_trained": 20,
+  "train_time_sec": 307.4,
+  "model_hash": "c78124afc8661474"
+}

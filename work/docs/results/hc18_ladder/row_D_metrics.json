@@ -1,0 +1,13 @@
+{
+  "model_name": "Row D: ResNet-34 U-Net (Cell 31 recipe)",
+  "approach": "Segmentation mask + robust native ellipse fit",
+  "backbone": "ResNet-34",
+  "input_res": "224x224 (letterbox)",
+  "hc_mae": 1.9246,
+  "hc_rmse": 2.4351,
+  "bpd_mae": 0.6003,
+  "bpd_rmse": 0.8316,
+  "epochs_trained": 48,
+  "train_time_sec": 495.63,
+  "model_hash": "15627fce6283e167"
+}
