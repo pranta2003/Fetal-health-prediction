@@ -366,7 +366,7 @@ def main():
     json_path = out_dir / "benchmark_results.json"
     md_path = out_dir / "benchmark_table.md"
 
-    with open(json_path, "w", encoding="utf-8") as f:
+    with open(json_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(
             {
                 "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -380,7 +380,7 @@ def main():
         )
 
     md_content = build_markdown_table(all_results)
-    with open(md_path, "w", encoding="utf-8") as f:
+    with open(md_path, "w", encoding="utf-8", newline="\n") as f:
         f.write(md_content)
 
     print(f"\nSaved benchmark JSON: {json_path}")
