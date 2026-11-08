@@ -1,0 +1,16 @@
+{
+  "model_name": "Row D: ResNet-34 U-Net (+TTA)",
+  "approach": "Segmentation mask + robust native ellipse fit (+TTA)",
+  "backbone": "ResNet-34",
+  "input_res": "224x224 (letterbox)",
+  "fold": 4,
+  "tta": true,
+  "n_samples": 194,
+  "hc_mae": 2.3258,
+  "hc_rmse": 3.1136,
+  "bpd_mae": 0.8319,
+  "bpd_rmse": 1.1114,
+  "epochs_trained": 47,
+  "train_time_sec": 477.71,
+  "model_hash": "33e09c87f98f9050"
+}

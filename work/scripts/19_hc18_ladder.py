@@ -719,6 +719,11 @@ def compute_patient_bootstrap_paired_diff(
     seed: int = 42,
     exclude_image: str | None = None,
 ) -> dict:
+    df_d = df_d.copy()
+    df_e = df_e.copy()
+    df_d["patient_id"] = df_d["patient_id"].astype(str)
+    df_e["patient_id"] = df_e["patient_id"].astype(str)
+
     if exclude_image:
         df_d = df_d[df_d["image"] != exclude_image].copy()
         df_e = df_e[df_e["image"] != exclude_image].copy()
@@ -840,39 +845,43 @@ def main():
     parser.add_argument("--smoke", action="store_true", help="Run tiny smoke test (2 epochs)")
     parser.add_argument("--rows", type=str, default="A,B,C,D", help="Comma-separated rows to train (e.g. 'A,B,C,D' or 'D')")
     parser.add_argument("--folds", type=str, default="1", help="Comma-separated folds to evaluate (e.g. '1' or '1,2,3,4,5')")
+    parser.add_argument("--from-predictions", action="store_true", help="Compute metrics and tables from existing fold prediction files without training")
     args = parser.parse_args()
 
     set_seed(42)
     dev = torch.device(args.device if args.device else ("cuda" if torch.cuda.is_available() else "cpu"))
     print(f"Using device: {dev}")
 
-    data_dir = Path(args.data_dir).resolve()
-    csv_path = data_dir / "training_set_pixel_size_and_HC.csv"
-    if not csv_path.exists():
-        for p in data_dir.rglob("training_set_pixel_size_and_HC.csv"):
-            csv_path = p
-            break
-    if not csv_path.exists():
-        raise FileNotFoundError(f"Cannot find training_set_pixel_size_and_HC.csv in {data_dir}")
-
-    image_dir = csv_path.parent / "training_set"
-    if not image_dir.exists():
-        image_dir = csv_path.parent
-    print(f"HC18 CSV: {csv_path}")
-    print(f"HC18 Image Dir: {image_dir}")
-
-    df = pd.read_csv(csv_path)
-    names = df["filename"].tolist()
     out_dir = Path(args.out_dir).resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
-
-    # Reconstruct patient-grouped folds (seed 42)
-    folds = make_grouped_folds(names, n_splits=5, seed=42)
 
     req_rows = [r.strip().upper() for r in args.rows.split(",") if r.strip()]
     req_folds = [int(f.strip()) for f in args.folds.split(",") if f.strip()]
 
     print(f"Requested rows: {req_rows}")
+    print(f"Requested folds: {req_folds}")
+
+    if not args.from_predictions:
+        data_dir = Path(args.data_dir).resolve()
+        csv_path = data_dir / "training_set_pixel_size_and_HC.csv"
+        if not csv_path.exists():
+            for p in data_dir.rglob("training_set_pixel_size_and_HC.csv"):
+                csv_path = p
+                break
+        if not csv_path.exists():
+            raise FileNotFoundError(f"Cannot find training_set_pixel_size_and_HC.csv in {data_dir}")
+
+        image_dir = csv_path.parent / "training_set"
+        if not image_dir.exists():
+            image_dir = csv_path.parent
+        print(f"HC18 CSV: {csv_path}")
+        print(f"HC18 Image Dir: {image_dir}")
+
+        df = pd.read_csv(csv_path)
+        names = df["filename"].tolist()
+
+        # Reconstruct patient-grouped folds (seed 42)
+        folds = make_grouped_folds(names, n_splits=5, seed=42)
     print(f"Requested folds: {req_folds}")
 
     # Case 1: Standard fold 1 ladder run (Rows A, B, C, D on fold 1 + Row E)
@@ -960,19 +969,32 @@ def main():
         oof_df = pd.read_csv(oof_csv_path)
 
         for fold_num in req_folds:
-            outer_tr_idx, outer_val_idx = folds[fold_num - 1]
-            inner_tr_idx, inner_val_idx = split_patient_inner_holdout(outer_tr_idx, names, holdout_fraction=0.10, seed=42)
+            if args.from_predictions:
+                pred_no_tta_path = out_dir / f"row_D_fold{fold_num}_predictions.csv"
+                pred_tta_path = out_dir / f"row_D_tta_fold{fold_num}_predictions.csv"
+                met_no_tta_path = out_dir / f"row_D_fold{fold_num}_metrics.json"
+                met_tta_path = out_dir / f"row_D_tta_fold{fold_num}_metrics.json"
 
-            df_d_no_tta, met_d_no_tta, df_d_tta, met_d_tta = train_and_eval_row_d(
-                df, str(image_dir), inner_tr_idx, inner_val_idx, outer_val_idx, dev, max_epochs=args.epochs, smoke=args.smoke, fold_num=fold_num
-            )
-            df_d_no_tta.to_csv(out_dir / f"row_D_fold{fold_num}_predictions.csv", index=False)
-            with open(out_dir / f"row_D_fold{fold_num}_metrics.json", "w", encoding="utf-8") as f:
-                json.dump(met_d_no_tta, f, indent=2)
+                df_d_no_tta = pd.read_csv(pred_no_tta_path)
+                df_d_tta = pd.read_csv(pred_tta_path)
+                with open(met_no_tta_path, "r", encoding="utf-8") as f:
+                    met_d_no_tta = json.load(f)
+                with open(met_tta_path, "r", encoding="utf-8") as f:
+                    met_d_tta = json.load(f)
+            else:
+                outer_tr_idx, outer_val_idx = folds[fold_num - 1]
+                inner_tr_idx, inner_val_idx = split_patient_inner_holdout(outer_tr_idx, names, holdout_fraction=0.10, seed=42)
 
-            df_d_tta.to_csv(out_dir / f"row_D_tta_fold{fold_num}_predictions.csv", index=False)
-            with open(out_dir / f"row_D_tta_fold{fold_num}_metrics.json", "w", encoding="utf-8") as f:
-                json.dump(met_d_tta, f, indent=2)
+                df_d_no_tta, met_d_no_tta, df_d_tta, met_d_tta = train_and_eval_row_d(
+                    df, str(image_dir), inner_tr_idx, inner_val_idx, outer_val_idx, dev, max_epochs=args.epochs, smoke=args.smoke, fold_num=fold_num
+                )
+                df_d_no_tta.to_csv(out_dir / f"row_D_fold{fold_num}_predictions.csv", index=False)
+                with open(out_dir / f"row_D_fold{fold_num}_metrics.json", "w", encoding="utf-8") as f:
+                    json.dump(met_d_no_tta, f, indent=2)
+
+                df_d_tta.to_csv(out_dir / f"row_D_tta_fold{fold_num}_predictions.csv", index=False)
+                with open(out_dir / f"row_D_tta_fold{fold_num}_metrics.json", "w", encoding="utf-8") as f:
+                    json.dump(met_d_tta, f, indent=2)
 
             d_no_tta_dfs.append(df_d_no_tta)
             d_tta_dfs.append(df_d_tta)
