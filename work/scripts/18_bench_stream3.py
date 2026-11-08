@@ -271,7 +271,7 @@ def parse_args():
     parser.add_argument(
         "--out-dir",
         type=str,
-        default=str(Path(config.REPO_ROOT) / "work" / "docs" / "results" / "stream3_bench"),
+        default=str(Path(config.REPO_ROOT) / "docs" / "results" / "stream3_bench"),
         help="Directory where results will be written",
     )
     parser.add_argument(
@@ -284,7 +284,7 @@ def parse_args():
         "--n-boot",
         type=int,
         default=200,
-        help="Number of bootstrap iterations for 95% CI (default: 200)",
+        help="Number of bootstrap iterations for 95%% CI (default: 200)",
     )
     return parser.parse_args()
 

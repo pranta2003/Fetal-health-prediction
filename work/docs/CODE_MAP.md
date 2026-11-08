@@ -49,6 +49,7 @@ File names tell you the part. The prefix is the part:
 | 4 Measure | `src/fetal/eval/ac_evaluator.py`, `ensemble_evaluator.py` | Scores on the official test images |
 | 5 Report | `scripts/06_eval_ac.py` | The button that reproduces 4.395 mm and 4.343 mm |
 | Use | `src/fetal/infer/ac_infer.py` | One function: give an image, get the AC in mm |
+| Proof | `notebooks/benchmarks/ac_results.ipynb` | Executed notebook reproducing official test set results for AC v3_full and seed ensemble |
 | Proof | `tests/test_ac_*.py`, `test_geometry.py`, `test_recipes_equality.py`, `test_split_equality.py`, `test_train_equivalence.py`, `tests/reference/ac_*.py` | Tests that the moved code equals the original |
 
 ## FEMUR (FL)
@@ -72,6 +73,7 @@ Not built yet. When it arrives, it follows the same pattern: `fassd_dataset.py`,
 | `scripts/07_audit_clinical.py` | The button that runs the audit |
 | `scripts/18_bench_stream3.py` | Benchmarks XGBoost against Logistic Regression, Random Forest, and LightGBM |
 | `notebooks/S3_clinical_audit.ipynb` | The same audit as a notebook |
+| `notebooks/benchmarks/stream3_bench.ipynb` | Executed notebook comparing Stream 3 tabular risk models and reproducing XGBoost |
 | `tests/test_clinical_*.py`, `tests/test_stream3_*.py` | Tests, including the guard against forbidden features and row consistency |
 | Results | `docs/results/stream3_bench/` | Stream 3 benchmark comparison metrics and markdown table |
 
@@ -83,7 +85,7 @@ Not built yet. When it arrives, it follows the same pattern: `fassd_dataset.py`,
 |---|---|
 | `src/fetal/config.py` + `configs/paths.yaml` | Where the data and weights live (one place) |
 | `src/fetal/train/checkpoint.py` | Saves and loads model weights |
-| `scripts/08_make_manifest.py`, `scripts/14_hash_results.py`, `scripts/16_extract_notebook_results.py` | Make and check file fingerprints, and extract historical metrics from notebooks |
+| `scripts/08_make_manifest.py`, `scripts/14_hash_results.py`, `scripts/16_extract_notebook_results.py`, `scripts/make_bench_notebooks.py` | Make and check file fingerprints, extract historical metrics from notebooks, and construct benchmark notebooks |
 | `scripts/run_all.ps1` | One command to run groups of the buttons above |
 
 ## How the whole system fits (the flow)
