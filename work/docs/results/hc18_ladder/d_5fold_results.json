@@ -1,0 +1,332 @@
+{
+  "generated_at": "2026-11-08T07:28:55Z",
+  "n_folds": 5,
+  "seed": 42,
+  "pooled": {
+    "n_images": 999,
+    "d_no_tta": {
+      "hc_mae": 2.2688,
+      "hc_rmse": 3.9175,
+      "bpd_mae": 0.756,
+      "bpd_rmse": 1.1999
+    },
+    "d_tta": {
+      "hc_mae": 2.2323,
+      "hc_rmse": 3.97,
+      "bpd_mae": 0.756,
+      "bpd_rmse": 1.4066
+    },
+    "e": {
+      "hc_mae": 2.3019,
+      "hc_rmse": 3.5797,
+      "bpd_mae": 0.7535,
+      "bpd_rmse": 1.0938
+    }
+  },
+  "per_fold": [
+    {
+      "fold": 1,
+      "n_images": 206,
+      "d_no_tta": {
+        "model_name": "Row D: ResNet-34 U-Net (Cell 31 recipe)",
+        "approach": "Segmentation mask + robust native ellipse fit (no TTA)",
+        "backbone": "ResNet-34",
+        "input_res": "224x224 (letterbox)",
+        "fold": 1,
+        "tta": false,
+        "n_samples": 206,
+        "hc_mae": 2.1662,
+        "hc_rmse": 4.9876,
+        "bpd_mae": 0.6874,
+        "bpd_rmse": 0.9441,
+        "epochs_trained": 59,
+        "train_time_sec": 630.96,
+        "model_hash": "ad083a874d9f43a0"
+      },
+      "d_tta": {
+        "model_name": "Row D: ResNet-34 U-Net (+TTA)",
+        "approach": "Segmentation mask + robust native ellipse fit (+TTA)",
+        "backbone": "ResNet-34",
+        "input_res": "224x224 (letterbox)",
+        "fold": 1,
+        "tta": true,
+        "n_samples": 206,
+        "hc_mae": 2.1578,
+        "hc_rmse": 5.1317,
+        "bpd_mae": 0.6821,
+        "bpd_rmse": 0.9581,
+        "epochs_trained": 59,
+        "train_time_sec": 630.96,
+        "model_hash": "ad083a874d9f43a0"
+      },
+      "e": {
+        "model_name": "Row E: EfficientNet-B4 U-Net 384 (Stream 1 Final)",
+        "approach": "High-res segmentation + TTA + fitEllipseAMS",
+        "backbone": "EfficientNet-B4",
+        "input_res": "384x384 (letterbox)",
+        "fold": 1,
+        "hc_mae": 2.4817,
+        "hc_rmse": 5.0996,
+        "bpd_mae": 0.6982,
+        "bpd_rmse": 0.92,
+        "epochs_trained": null,
+        "train_time_sec": null,
+        "model_hash": "repo_checkpoint"
+      }
+    },
+    {
+      "fold": 2,
+      "n_images": 199,
+      "d_no_tta": {
+        "model_name": "Row D: ResNet-34 U-Net (Cell 31 recipe)",
+        "approach": "Segmentation mask + robust native ellipse fit (no TTA)",
+        "backbone": "ResNet-34",
+        "input_res": "224x224 (letterbox)",
+        "fold": 2,
+        "tta": false,
+        "n_samples": 199,
+        "hc_mae": 2.2055,
+        "hc_rmse": 3.4778,
+        "bpd_mae": 0.7359,
+        "bpd_rmse": 1.2178,
+        "epochs_trained": 47,
+        "train_time_sec": 482.33,
+        "model_hash": "1c25a2dae6fd0e86"
+      },
+      "d_tta": {
+        "model_name": "Row D: ResNet-34 U-Net (+TTA)",
+        "approach": "Segmentation mask + robust native ellipse fit (+TTA)",
+        "backbone": "ResNet-34",
+        "input_res": "224x224 (letterbox)",
+        "fold": 2,
+        "tta": true,
+        "n_samples": 199,
+        "hc_mae": 2.3016,
+        "hc_rmse": 4.6272,
+        "bpd_mae": 0.803,
+        "bpd_rmse": 2.1173,
+        "epochs_trained": 47,
+        "train_time_sec": 482.33,
+        "model_hash": "1c25a2dae6fd0e86"
+      },
+      "e": {
+        "model_name": "Row E: EfficientNet-B4 U-Net 384 (Stream 1 Final)",
+        "approach": "High-res segmentation + TTA + fitEllipseAMS",
+        "backbone": "EfficientNet-B4",
+        "input_res": "384x384 (letterbox)",
+        "fold": 2,
+        "hc_mae": 2.2939,
+        "hc_rmse": 2.8895,
+        "bpd_mae": 0.8052,
+        "bpd_rmse": 1.0257,
+        "epochs_trained": null,
+        "train_time_sec": null,
+        "model_hash": "repo_checkpoint"
+      }
+    },
+    {
+      "fold": 3,
+      "n_images": 208,
+      "d_no_tta": {
+        "model_name": "Row D: ResNet-34 U-Net (Cell 31 recipe)",
+        "approach": "Segmentation mask + robust native ellipse fit (no TTA)",
+        "backbone": "ResNet-34",
+        "input_res": "224x224 (letterbox)",
+        "fold": 3,
+        "tta": false,
+        "n_samples": 208,
+        "hc_mae": 2.3151,
+        "hc_rmse": 3.5469,
+        "bpd_mae": 0.7246,
+        "bpd_rmse": 1.2248,
+        "epochs_trained": 47,
+        "train_time_sec": 472.38,
+        "model_hash": "80724ff4f96a51c5"
+      },
+      "d_tta": {
+        "model_name": "Row D: ResNet-34 U-Net (+TTA)",
+        "approach": "Segmentation mask + robust native ellipse fit (+TTA)",
+        "backbone": "ResNet-34",
+        "input_res": "224x224 (letterbox)",
+        "fold": 3,
+        "tta": true,
+        "n_samples": 208,
+        "hc_mae": 2.2983,
+        "hc_rmse": 3.4787,
+        "bpd_mae": 0.7174,
+        "bpd_rmse": 1.2096,
+        "epochs_trained": 47,
+        "train_time_sec": 472.38,
+        "model_hash": "80724ff4f96a51c5"
+      },
+      "e": {
+        "model_name": "Row E: EfficientNet-B4 U-Net 384 (Stream 1 Final)",
+        "approach": "High-res segmentation + TTA + fitEllipseAMS",
+        "backbone": "EfficientNet-B4",
+        "input_res": "384x384 (letterbox)",
+        "fold": 3,
+        "hc_mae": 2.1582,
+        "hc_rmse": 3.0738,
+        "bpd_mae": 0.6586,
+        "bpd_rmse": 0.961,
+        "epochs_trained": null,
+        "train_time_sec": null,
+        "model_hash": "repo_checkpoint"
+      }
+    },
+    {
+      "fold": 4,
+      "n_images": 194,
+      "d_no_tta": {
+        "model_name": "Row D: ResNet-34 U-Net (Cell 31 recipe)",
+        "approach": "Segmentation mask + robust native ellipse fit (no TTA)",
+        "backbone": "ResNet-34",
+        "input_res": "224x224 (letterbox)",
+        "fold": 4,
+        "tta": false,
+        "n_samples": 194,
+        "hc_mae": 2.3044,
+        "hc_rmse": 3.0962,
+        "bpd_mae": 0.8484,
+        "bpd_rmse": 1.1261,
+        "epochs_trained": 47,
+        "train_time_sec": 477.71,
+        "model_hash": "33e09c87f98f9050"
+      },
+      "d_tta": {
+        "model_name": "Row D: ResNet-34 U-Net (+TTA)",
+        "approach": "Segmentation mask + robust native ellipse fit (+TTA)",
+        "backbone": "ResNet-34",
+        "input_res": "224x224 (letterbox)",
+        "fold": 4,
+        "tta": true,
+        "n_samples": 194,
+        "hc_mae": 2.3258,
+        "hc_rmse": 3.1136,
+        "bpd_mae": 0.8319,
+        "bpd_rmse": 1.1114,
+        "epochs_trained": 47,
+        "train_time_sec": 477.71,
+        "model_hash": "33e09c87f98f9050"
+      },
+      "e": {
+        "model_name": "Row E: EfficientNet-B4 U-Net 384 (Stream 1 Final)",
+        "approach": "High-res segmentation + TTA + fitEllipseAMS",
+        "backbone": "EfficientNet-B4",
+        "input_res": "384x384 (letterbox)",
+        "fold": 4,
+        "hc_mae": 2.2446,
+        "hc_rmse": 2.9484,
+        "bpd_mae": 0.7726,
+        "bpd_rmse": 1.028,
+        "epochs_trained": null,
+        "train_time_sec": null,
+        "model_hash": "repo_checkpoint"
+      }
+    },
+    {
+      "fold": 5,
+      "n_images": 192,
+      "d_no_tta": {
+        "model_name": "Row D: ResNet-34 U-Net (Cell 31 recipe)",
+        "approach": "Segmentation mask + robust native ellipse fit (no TTA)",
+        "backbone": "ResNet-34",
+        "input_res": "224x224 (letterbox)",
+        "fold": 5,
+        "tta": false,
+        "n_samples": 192,
+        "hc_mae": 2.3582,
+        "hc_rmse": 4.1607,
+        "bpd_mae": 0.7913,
+        "bpd_rmse": 1.4461,
+        "epochs_trained": 47,
+        "train_time_sec": 478.57,
+        "model_hash": "e76ca0c5e2c4c962"
+      },
+      "d_tta": {
+        "model_name": "Row D: ResNet-34 U-Net (+TTA)",
+        "approach": "Segmentation mask + robust native ellipse fit (+TTA)",
+        "backbone": "ResNet-34",
+        "input_res": "224x224 (letterbox)",
+        "fold": 5,
+        "tta": true,
+        "n_samples": 192,
+        "hc_mae": 2.0746,
+        "hc_rmse": 2.9417,
+        "bpd_mae": 0.7517,
+        "bpd_rmse": 1.3529,
+        "epochs_trained": 47,
+        "train_time_sec": 478.57,
+        "model_hash": "e76ca0c5e2c4c962"
+      },
+      "e": {
+        "model_name": "Row E: EfficientNet-B4 U-Net 384 (Stream 1 Final)",
+        "approach": "High-res segmentation + TTA + fitEllipseAMS",
+        "backbone": "EfficientNet-B4",
+        "input_res": "384x384 (letterbox)",
+        "fold": 5,
+        "hc_mae": 2.3311,
+        "hc_rmse": 3.3316,
+        "bpd_mae": 0.843,
+        "bpd_rmse": 1.4689,
+        "epochs_trained": null,
+        "train_time_sec": null,
+        "model_hash": "repo_checkpoint"
+      }
+    }
+  ],
+  "paired_differences": {
+    "d_no_tta_vs_e": {
+      "all_images": {
+        "diff_point": -0.0332,
+        "ci_95": [
+          -0.1922,
+          0.1272
+        ],
+        "d_mae": 2.2688,
+        "e_mae": 2.3019,
+        "n_images": 999,
+        "n_patients": 806,
+        "excluded_image": null
+      },
+      "without_065_HC": {
+        "diff_point": -0.0347,
+        "ci_95": [
+          -0.192,
+          0.1306
+        ],
+        "d_mae": 2.2085,
+        "e_mae": 2.2432,
+        "n_images": 998,
+        "n_patients": 805,
+        "excluded_image": "065_HC.png"
+      }
+    },
+    "d_tta_vs_e": {
+      "all_images": {
+        "diff_point": -0.0696,
+        "ci_95": [
+          -0.2299,
+          0.1045
+        ],
+        "d_mae": 2.2323,
+        "e_mae": 2.3019,
+        "n_images": 999,
+        "n_patients": 806,
+        "excluded_image": null
+      },
+      "without_065_HC": {
+        "diff_point": -0.0735,
+        "ci_95": [
+          -0.2374,
+          0.089
+        ],
+        "d_mae": 2.1697,
+        "e_mae": 2.2432,
+        "n_images": 998,
+        "n_patients": 805,
+        "excluded_image": "065_HC.png"
+      }
+    }
+  }
+}

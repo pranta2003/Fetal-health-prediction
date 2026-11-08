@@ -97,3 +97,84 @@ def test_ellipse_to_hc_bpd():
     hc, bpd = hc_bpd_from_ellipse_params(50.0, 50.0)
     assert np.isclose(hc, 2 * np.pi * 50.0, atol=0.01)
     assert np.isclose(bpd, 100.0, atol=0.01)
+
+
+def test_five_folds_cover_all_999_zero_patient_leakage():
+    """Assert that 5 grouped folds cover all 999 images exactly once with zero patient leakage."""
+    work_dir = Path(__file__).resolve().parent.parent
+    oof_csv = work_dir / "docs" / "results" / "hc18" / "oof_predictions.csv"
+    assert oof_csv.exists(), f"Missing oof_predictions.csv at {oof_csv}"
+
+    oof_df = pd.read_csv(oof_csv)
+    names = oof_df["image"].tolist()
+    assert len(names) == 999, f"Expected 999 images, got {len(names)}"
+
+    folds = make_grouped_folds(names, n_splits=5, seed=42)
+    assert len(folds) == 5, f"Expected 5 folds, got {len(folds)}"
+
+    all_val_indices = []
+    patient_to_val_fold = {}
+
+    for k, (tr_idx, val_idx) in enumerate(folds, 1):
+        tr_names = [names[i] for i in tr_idx]
+        val_names = [names[i] for i in val_idx]
+
+        tr_pts = set(patient_id_from_name(n) for n in tr_names)
+        val_pts = set(patient_id_from_name(n) for n in val_names)
+
+        # Zero train-val leakage within each fold
+        assert len(tr_pts & val_pts) == 0, f"Patient leakage between train and val in fold {k}!"
+
+        # Zero patient leakage across validation folds (disjoint)
+        for p in val_pts:
+            assert p not in patient_to_val_fold, (
+                f"Patient {p} appears in multiple validation folds: {patient_to_val_fold[p]} and {k}!"
+            )
+            patient_to_val_fold[p] = k
+
+        all_val_indices.extend(val_idx)
+
+    # Check total coverage
+    assert len(all_val_indices) == 999, f"Expected 999 validation images, got {len(all_val_indices)}"
+    assert len(set(all_val_indices)) == 999, "Duplicate image index found across folds!"
+    assert set(all_val_indices) == set(range(999)), "Validation indices do not cover range(999) exactly!"
+
+
+def test_hc18_ladder_notebook_structure_and_outputs():
+    """Verify hc18_ladder.ipynb exists, has markdown and code cells, and outputs match JSONs if executed."""
+    import json
+    import nbformat
+
+    work_dir = Path(__file__).resolve().parent.parent
+    nb_path = work_dir / "notebooks" / "benchmarks" / "hc18_ladder.ipynb"
+    assert nb_path.exists(), f"Missing notebook at {nb_path}"
+
+    nb = nbformat.read(nb_path, as_version=4)
+    assert len(nb.cells) >= 3, f"Expected at least 3 cells, got {len(nb.cells)}"
+    assert nb.cells[0].cell_type == "markdown", "First cell must be markdown documentation"
+    assert "Historical Approach Ladder" in nb.cells[0].source
+
+    code_cells = [c for c in nb.cells if c.cell_type == "code"]
+    assert len(code_cells) >= 2, f"Expected at least 2 code cells, got {len(code_cells)}"
+
+    # If the notebook is executed, verify outputs match json files
+    has_outputs = any(len(c.get("outputs", [])) > 0 for c in code_cells)
+    if has_outputs:
+        all_text = ""
+        for c in code_cells:
+            for out in c.get("outputs", []):
+                if "text" in out:
+                    all_text += out["text"]
+                elif "data" in out and "text/plain" in out["data"]:
+                    all_text += out["data"]["text/plain"]
+
+        # If d_5fold_results.json exists, verify values are present in notebook output
+        d5_path = work_dir / "docs" / "results" / "hc18_ladder" / "d_5fold_results.json"
+        if d5_path.exists():
+            with open(d5_path, "r", encoding="utf-8") as f:
+                d5_data = json.load(f)
+            d_pooled_hc = f"{d5_data['pooled']['d_no_tta']['hc_mae']:.4f}"
+            e_pooled_hc = f"{d5_data['pooled']['e']['hc_mae']:.4f}"
+            assert d_pooled_hc in all_text, f"Notebook output missing D pooled HC MAE: {d_pooled_hc}"
+            assert e_pooled_hc in all_text, f"Notebook output missing E pooled HC MAE: {e_pooled_hc}"
+

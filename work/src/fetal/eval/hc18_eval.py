@@ -109,8 +109,9 @@ def predict_native_prob(
     image_pil: Image.Image,
     target_size: int = IMG_SIZE,
     device: torch.device | str | None = None,
+    tta: bool = True,
 ) -> np.ndarray:
-    """Run TTA prediction and project back to original image coordinates."""
+    """Run prediction (optionally with horizontal-flip TTA) and project back to original image coordinates."""
     from torchvision import transforms
 
     if device is None:
@@ -131,18 +132,20 @@ def predict_native_prob(
 
     norm = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     img_tensor = norm(transforms.ToTensor()(canvas)).unsqueeze(0).to(device)
-    flipped_tensor = torch.flip(img_tensor, dims=[3])
 
     model.eval()
     with torch.no_grad():
-        with torch.cuda.amp.autocast(enabled=(device.type == "cuda")):
+        with torch.amp.autocast("cuda", enabled=(device.type == "cuda")):
             prob_orig = torch.sigmoid(model(img_tensor)).float().cpu().numpy()[0, 0]
-            prob_flip = torch.sigmoid(model(flipped_tensor)).float().cpu().numpy()[0, 0]
+            if tta:
+                flipped_tensor = torch.flip(img_tensor, dims=[3])
+                prob_flip = torch.sigmoid(model(flipped_tensor)).float().cpu().numpy()[0, 0]
+                prob_flip_back = np.flip(prob_flip, axis=1)
+                prob_out = (prob_orig + prob_flip_back) / 2.0
+            else:
+                prob_out = prob_orig
 
-    prob_flip_back = np.flip(prob_flip, axis=1)
-    prob_avg = (prob_orig + prob_flip_back) / 2.0
-
-    cropped = prob_avg[pad_y : pad_y + new_h, pad_x : pad_x + new_w]
+    cropped = prob_out[pad_y : pad_y + new_h, pad_x : pad_x + new_w]
     native_prob = cv2.resize(cropped, (orig_w, orig_h), interpolation=cv2.INTER_LINEAR)
     return native_prob
 
