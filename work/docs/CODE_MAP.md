@@ -66,8 +66,10 @@ Not built yet. When it arrives, it follows the same pattern: `fassd_dataset.py`,
 | `src/fetal/clinical/eval.py` | AUC, confidence interval, prevalence correction, feature importance |
 | `src/fetal/clinical/audit.py` | The 14 audit rows that prove where the old 0.97 came from |
 | `scripts/07_audit_clinical.py` | The button that runs the audit |
+| `scripts/18_bench_stream3.py` | Benchmarks XGBoost against Logistic Regression, Random Forest, and LightGBM |
 | `notebooks/S3_clinical_audit.ipynb` | The same audit as a notebook |
-| `tests/test_clinical_*.py` | Tests, including the guard against forbidden features |
+| `tests/test_clinical_*.py`, `tests/test_stream3_*.py` | Tests, including the guard against forbidden features and row consistency |
+| Results | `docs/results/stream3_bench/` | Stream 3 benchmark comparison metrics and markdown table |
 
 ## WEIGHT FORMULA (Hadlock)
 `src/fetal/explain/hadlock.py` turns HC, AC and FL into an estimated weight and a growth percentile. Tests: `tests/test_hadlock.py`.
