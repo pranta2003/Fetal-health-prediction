@@ -1,0 +1,13 @@
+{
+  "model_name": "Row C: Multi-Task U-Net (Cell 25)",
+  "approach": "Segmentation + shared-encoder ellipse regression",
+  "backbone": "ResNet-34",
+  "input_res": "224x224 (direct)",
+  "hc_mae": 10.5104,
+  "hc_rmse": 15.5098,
+  "bpd_mae": 2.9474,
+  "bpd_rmse": 4.3227,
+  "epochs_trained": 52,
+  "train_time_sec": 548.1,
+  "model_hash": "bc3f68aac6defa91"
+}

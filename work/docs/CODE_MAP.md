@@ -21,6 +21,7 @@ File names tell you the part. The prefix is the part:
 | 1 Prepare data | `src/fetal/data/hc18_dataset.py` | Loads head images and masks, resizes without distortion, flips for training |
 | 1 Prepare data | `src/fetal/data/hc18_split.py` | Splits patients into 5 folds so no patient is in both train and test |
 | 2 Model | `src/fetal/models/hc18_unet.py` | The neural network (U-Net, EfficientNet-B4) and its loss |
+| 2 Model | `src/fetal/models/hc18_old_approaches.py` | Historical baseline models (Rows A, B, C, D) |
 | 3 Train | `src/fetal/train/train_hc18.py` | The training loop, 5 folds, early stopping |
 | 3 Train | `scripts/10_train_hc18.py` | The button that starts training |
 | 4 Measure | `src/fetal/eval/hc18_eval.py` | Turns the mask into an ellipse, then HC and BPD in mm |
@@ -28,9 +29,11 @@ File names tell you the part. The prefix is the part:
 | 5 Report | `scripts/11_hc18_oof_report.py` | Computes the honest score on held-out images |
 | 5 Report | `scripts/12_hc18_test_inference.py` | Makes the challenge submission files |
 | 5 Report | `scripts/09_hc18_leakage_report.py` | Shows how much the old method leaked |
+| 5 Report | `scripts/19_hc18_ladder.py` | Trains the historical approach ladder on grouped fold 1 |
 | 5 Report | `scripts/kaggle/run_hc18_close.py` | Runs steps 11 and 12 on a Kaggle GPU |
-| Proof | `tests/test_hc18_*.py`, `tests/reference/hc18_original.py` | Tests that the moved code equals the original notebook |
-| Results | `docs/results/hc18/` | The real numbers and the submission files |
+| 5 Report | `scripts/kaggle/run_hc18_ladder.py` | Runs the historical approach ladder on a Kaggle GPU |
+| Proof | `tests/test_hc18_*.py`, `tests/test_hc18_ladder.py`, `tests/reference/hc18_original.py` | Tests that the moved code equals the original notebook and tests fold-1 integrity |
+| Results | `docs/results/hc18/`, `docs/results/hc18_ladder/` | The real numbers and the submission files |
 
 ## ABDOMEN (AC): all files
 | Step | File | What it does |

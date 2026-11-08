@@ -1,0 +1,13 @@
+{
+  "model_name": "Row E: EfficientNet-B4 U-Net 384 (Stream 1 Final)",
+  "approach": "High-res segmentation + TTA + fitEllipseAMS",
+  "backbone": "EfficientNet-B4",
+  "input_res": "384x384 (letterbox)",
+  "hc_mae": 2.4817,
+  "hc_rmse": 5.0996,
+  "bpd_mae": 0.6982,
+  "bpd_rmse": 0.92,
+  "epochs_trained": 100,
+  "train_time_sec": null,
+  "model_hash": "repo_checkpoint"
+}

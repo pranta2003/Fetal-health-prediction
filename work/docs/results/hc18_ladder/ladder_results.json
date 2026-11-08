@@ -1,0 +1,72 @@
+{
+  "generated_at": "2026-11-08T06:02:16Z",
+  "held_out_fold": 1,
+  "seed": 42,
+  "metrics": [
+    {
+      "model_name": "Row A: Direct Regression (Cell 22)",
+      "approach": "Direct continuous scalar regression",
+      "backbone": "ConvNeXt-Tiny",
+      "input_res": "224x224 (direct)",
+      "hc_mae": 10.6728,
+      "hc_rmse": 15.9672,
+      "bpd_mae": 3.2616,
+      "bpd_rmse": 4.7343,
+      "epochs_trained": 25,
+      "train_time_sec": 695.39,
+      "model_hash": "9542a5d5a57299a0"
+    },
+    {
+      "model_name": "Row B: Geometry Approach v3 (Cell 27)",
+      "approach": "Ellipse parameter regression (Huber loss)",
+      "backbone": "ConvNeXt-Tiny",
+      "input_res": "224x224 (letterbox)",
+      "hc_mae": 11.5964,
+      "hc_rmse": 16.1775,
+      "bpd_mae": 3.2198,
+      "bpd_rmse": 4.5392,
+      "epochs_trained": 20,
+      "train_time_sec": 307.4,
+      "model_hash": "c78124afc8661474"
+    },
+    {
+      "model_name": "Row C: Multi-Task U-Net (Cell 25)",
+      "approach": "Segmentation + shared-encoder ellipse regression",
+      "backbone": "ResNet-34",
+      "input_res": "224x224 (direct)",
+      "hc_mae": 10.5104,
+      "hc_rmse": 15.5098,
+      "bpd_mae": 2.9474,
+      "bpd_rmse": 4.3227,
+      "epochs_trained": 52,
+      "train_time_sec": 548.1,
+      "model_hash": "bc3f68aac6defa91"
+    },
+    {
+      "model_name": "Row D: ResNet-34 U-Net (Cell 31 recipe)",
+      "approach": "Segmentation mask + robust native ellipse fit",
+      "backbone": "ResNet-34",
+      "input_res": "224x224 (letterbox)",
+      "hc_mae": 1.9246,
+      "hc_rmse": 2.4351,
+      "bpd_mae": 0.6003,
+      "bpd_rmse": 0.8316,
+      "epochs_trained": 48,
+      "train_time_sec": 495.63,
+      "model_hash": "15627fce6283e167"
+    },
+    {
+      "model_name": "Row E: EfficientNet-B4 U-Net 384 (Stream 1 Final)",
+      "approach": "High-res segmentation + TTA + fitEllipseAMS",
+      "backbone": "EfficientNet-B4",
+      "input_res": "384x384 (letterbox)",
+      "hc_mae": 2.4817,
+      "hc_rmse": 5.0996,
+      "bpd_mae": 0.6982,
+      "bpd_rmse": 0.92,
+      "epochs_trained": 100,
+      "train_time_sec": null,
+      "model_hash": "repo_checkpoint"
+    }
+  ]
+}
