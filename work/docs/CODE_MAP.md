@@ -32,6 +32,7 @@ File names tell you the part. The prefix is the part:
 | 5 Report | `scripts/19_hc18_ladder.py` | Trains the historical approach ladder on grouped fold 1 |
 | 5 Report | `scripts/kaggle/run_hc18_close.py` | Runs steps 11 and 12 on a Kaggle GPU |
 | 5 Report | `scripts/kaggle/run_hc18_ladder.py` | Runs the historical approach ladder on a Kaggle GPU |
+| Proof | `notebooks/benchmarks/hc18_ladder.ipynb` | Executed notebook comparing historical ladder and 5-fold Row D vs E |
 | Proof | `tests/test_hc18_*.py`, `tests/test_hc18_ladder.py`, `tests/reference/hc18_original.py` | Tests that the moved code equals the original notebook and tests fold-1 integrity |
 | Results | `docs/results/hc18/`, `docs/results/hc18_ladder/` | The real numbers and the submission files |
 

@@ -39,7 +39,7 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # 1. Pip install dependencies
-    print("\n[Step 1/4] Installing dependencies: segmentation-models-pytorch, timm...")
+    print("\n[Step 1/5] Installing dependencies: segmentation-models-pytorch, timm, nbconvert...")
     run_cmd([
         sys.executable,
         "-m",
@@ -48,20 +48,21 @@ def main():
         "--no-warn-script-location",
         "segmentation-models-pytorch==0.5.0",
         "timm>=1.0.0",
+        "nbconvert",
     ])
 
-    # 2. Clone repository from branch bench-hc18-ladder
+    # 2. Clone repository from branch bench-hc18-d5fold
     repo_dir = working_dir / "repo"
     if repo_dir.exists():
         shutil.rmtree(repo_dir)
-    print(f"\n[Step 2/4] Cloning repository branch bench-hc18-ladder to {repo_dir}...")
+    print(f"\n[Step 2/5] Cloning repository branch bench-hc18-d5fold to {repo_dir}...")
     run_cmd([
         "git",
         "clone",
         "--depth",
         "1",
         "--branch",
-        "bench-hc18-ladder",
+        "bench-hc18-d5fold",
         "https://github.com/pranta2003/Fetal-health-prediction.git",
         str(repo_dir),
     ])
@@ -71,7 +72,7 @@ def main():
         raise FileNotFoundError(f"Expected work directory at {work_dir}")
 
     # 3. Locate HC18 dataset
-    print("\n[Step 3/4] Locating HC18 dataset in /kaggle/input...")
+    print("\n[Step 3/5] Locating HC18 dataset in /kaggle/input...")
     for item in input_dir.iterdir():
         print(f"  Input mount: {item.name}")
 
@@ -83,8 +84,8 @@ def main():
     if not oof_csv.exists():
         raise FileNotFoundError(f"Missing oof_predictions.csv at {oof_csv}")
 
-    # 4. Run scripts/19_hc18_ladder.py
-    print("\n[Step 4/4] Executing scripts/19_hc18_ladder.py on CUDA...")
+    # 4. Run scripts/19_hc18_ladder.py for Row D across all 5 folds
+    print("\n[Step 4/5] Executing scripts/19_hc18_ladder.py on CUDA (Row D, 5 folds)...")
     ladder_script = work_dir / "scripts" / "19_hc18_ladder.py"
     ladder_cmd = [
         sys.executable,
@@ -94,11 +95,32 @@ def main():
         "--out-dir", str(out_dir),
         "--device", "cuda",
         "--epochs", "100",
+        "--rows", "D",
+        "--folds", "1,2,3,4,5",
     ]
     run_cmd(ladder_cmd, cwd=work_dir)
 
+    # 5. Execute notebook proof
+    print("\n[Step 5/5] Executing notebook proof (hc18_ladder.ipynb)...")
+    target_results_dir = work_dir / "docs" / "results" / "hc18_ladder"
+    target_results_dir.mkdir(parents=True, exist_ok=True)
+    for f in out_dir.iterdir():
+        if f.is_file():
+            shutil.copy2(f, target_results_dir / f.name)
+
+    nb_input = work_dir / "notebooks" / "benchmarks" / "hc18_ladder.ipynb"
+    nb_executed = out_dir / "hc18_ladder.ipynb"
+    run_cmd([
+        "jupyter",
+        "nbconvert",
+        "--to", "notebook",
+        "--execute",
+        str(nb_input),
+        "--output", str(nb_executed),
+    ], cwd=nb_input.parent)
+
     print("\n==================================================")
-    print("=== LADDER RUN COMPLETED SUCCESSFULLY ===")
+    print("=== LADDER RUN & NOTEBOOK EXECUTION COMPLETED SUCCESSFULLY ===")
     print("==================================================")
     print(f"Artifacts in {out_dir}:")
     for f in sorted(out_dir.iterdir()):

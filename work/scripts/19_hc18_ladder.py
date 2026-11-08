@@ -502,9 +502,10 @@ def train_and_eval_row_d(
     max_epochs: int = 100,
     patience: int = 10,
     smoke: bool = False,
-) -> tuple[pd.DataFrame, dict]:
+    fold_num: int = 1,
+) -> tuple[pd.DataFrame, dict, pd.DataFrame, dict]:
     print("\n" + "=" * 60)
-    print("=== ROW D: ResNet-34 U-Net (Cell 31 recipe) ===")
+    print(f"=== ROW D: ResNet-34 U-Net (Cell 31 recipe) [Fold {fold_num}] ===")
     print("=" * 60)
     start_time = time.time()
 
@@ -571,94 +572,193 @@ def train_and_eval_row_d(
     m_hash = compute_model_hash(best_state)
 
     # Evaluate on OUTER VAL using repo's robust native-resolution measurement (predict_native_prob at 224)
+    # Both with and without horizontal-flip TTA
     outer_df = df.iloc[list(outer_val_idx)].reset_index(drop=True)
-    preds_rows: list[dict] = []
+    preds_rows_no_tta: list[dict] = []
+    preds_rows_tta: list[dict] = []
 
     for i in range(len(outer_df)):
         row = outer_df.iloc[i]
         img_path = os.path.join(image_dir, row["filename"])
         image_pil = Image.open(img_path).convert("RGB")
         pixel_size = float(row["pixel size(mm)"])
-
-        native_prob = predict_native_prob(model, image_pil, target_size=224, device=device)
-        binary = (native_prob > 0.5).astype(np.uint8) * 255
-        contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-        if not contours:
-            continue
-        largest = max(contours, key=cv2.contourArea)
-        if len(largest) < 5:
-            continue
-
-        (cx, cy), (axis1_px, axis2_px), _ = fit_ellipse_robust(largest)
-        major_px = max(axis1_px, axis2_px)
-        minor_px = min(axis1_px, axis2_px)
-        pred_hc, pred_bpd = hc_bpd_from_ellipse_params((major_px / 2.0) * pixel_size, (minor_px / 2.0) * pixel_size)
-
         true_hc = float(row["head circumference (mm)"])
+
+        # Ground truth BPD from annotation mask
         raw_mask = load_raw_filled_mask(row, image_dir)
         true_contours, _ = cv2.findContours(raw_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-        if not true_contours:
-            continue
-        true_largest = max(true_contours, key=cv2.contourArea)
-        if len(true_largest) < 5:
-            continue
-        (_, _), (t_axis1, t_axis2), _ = fit_ellipse_robust(true_largest)
-        t_major = max(t_axis1, t_axis2)
-        t_minor = min(t_axis1, t_axis2)
-        _, true_bpd = hc_bpd_from_ellipse_params((t_major / 2.0) * pixel_size, (t_minor / 2.0) * pixel_size)
+        if true_contours and len(max(true_contours, key=cv2.contourArea)) >= 5:
+            (_, _), (t_axis1, t_axis2), _ = fit_ellipse_robust(max(true_contours, key=cv2.contourArea))
+            t_major = max(t_axis1, t_axis2)
+            t_minor = min(t_axis1, t_axis2)
+            _, true_bpd = hc_bpd_from_ellipse_params((t_major / 2.0) * pixel_size, (t_minor / 2.0) * pixel_size)
+        else:
+            true_bpd = float("nan")
 
-        preds_rows.append({
+        # 1. Without TTA
+        prob_no_tta = predict_native_prob(model, image_pil, target_size=224, device=device, tta=False)
+        bin_no_tta = (prob_no_tta > 0.5).astype(np.uint8) * 255
+        cnts_no_tta, _ = cv2.findContours(bin_no_tta, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        if cnts_no_tta and len(max(cnts_no_tta, key=cv2.contourArea)) >= 5:
+            (_, _), (axis1_px, axis2_px), _ = fit_ellipse_robust(max(cnts_no_tta, key=cv2.contourArea))
+            major_px = max(axis1_px, axis2_px)
+            minor_px = min(axis1_px, axis2_px)
+            pred_hc_no_tta, pred_bpd_no_tta = hc_bpd_from_ellipse_params((major_px / 2.0) * pixel_size, (minor_px / 2.0) * pixel_size)
+        else:
+            pred_hc_no_tta, pred_bpd_no_tta = float("nan"), float("nan")
+
+        # 2. With TTA
+        prob_tta = predict_native_prob(model, image_pil, target_size=224, device=device, tta=True)
+        bin_tta = (prob_tta > 0.5).astype(np.uint8) * 255
+        cnts_tta, _ = cv2.findContours(bin_tta, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        if cnts_tta and len(max(cnts_tta, key=cv2.contourArea)) >= 5:
+            (_, _), (axis1_px, axis2_px), _ = fit_ellipse_robust(max(cnts_tta, key=cv2.contourArea))
+            major_px = max(axis1_px, axis2_px)
+            minor_px = min(axis1_px, axis2_px)
+            pred_hc_tta, pred_bpd_tta = hc_bpd_from_ellipse_params((major_px / 2.0) * pixel_size, (minor_px / 2.0) * pixel_size)
+        else:
+            pred_hc_tta, pred_bpd_tta = float("nan"), float("nan")
+
+        p_id = patient_id_from_name(row["filename"])
+        preds_rows_no_tta.append({
             "image": row["filename"],
-            "patient_id": patient_id_from_name(row["filename"]),
+            "patient_id": p_id,
+            "fold": fold_num,
             "true_HC_mm": round(true_hc, 4),
-            "pred_HC_mm": round(pred_hc, 4),
-            "abs_err_HC": round(abs(pred_hc - true_hc), 4),
+            "pred_HC_mm": round(pred_hc_no_tta, 4),
+            "abs_err_HC": round(abs(pred_hc_no_tta - true_hc), 4),
             "true_BPD": round(true_bpd, 4),
-            "pred_BPD": round(pred_bpd, 4),
-            "abs_err_BPD": round(abs(pred_bpd - true_bpd), 4),
+            "pred_BPD": round(pred_bpd_no_tta, 4),
+            "abs_err_BPD": round(abs(pred_bpd_no_tta - true_bpd), 4),
+        })
+        preds_rows_tta.append({
+            "image": row["filename"],
+            "patient_id": p_id,
+            "fold": fold_num,
+            "true_HC_mm": round(true_hc, 4),
+            "pred_HC_mm": round(pred_hc_tta, 4),
+            "abs_err_HC": round(abs(pred_hc_tta - true_hc), 4),
+            "true_BPD": round(true_bpd, 4),
+            "pred_BPD": round(pred_bpd_tta, 4),
+            "abs_err_BPD": round(abs(pred_bpd_tta - true_bpd), 4),
         })
 
-    pred_df = pd.DataFrame(preds_rows)
-    metrics = {
+    pred_df_no_tta = pd.DataFrame(preds_rows_no_tta)
+    pred_df_tta = pd.DataFrame(preds_rows_tta)
+
+    metrics_no_tta = {
         "model_name": "Row D: ResNet-34 U-Net (Cell 31 recipe)",
-        "approach": "Segmentation mask + robust native ellipse fit",
+        "approach": "Segmentation mask + robust native ellipse fit (no TTA)",
         "backbone": "ResNet-34",
         "input_res": "224x224 (letterbox)",
-        "hc_mae": round(float(pred_df["abs_err_HC"].mean()), 4),
-        "hc_rmse": round(float(np.sqrt(np.mean(pred_df["abs_err_HC"] ** 2))), 4),
-        "bpd_mae": round(float(pred_df["abs_err_BPD"].mean()), 4),
-        "bpd_rmse": round(float(np.sqrt(np.mean(pred_df["abs_err_BPD"] ** 2))), 4),
+        "fold": fold_num,
+        "tta": False,
+        "n_samples": len(pred_df_no_tta),
+        "hc_mae": round(float(pred_df_no_tta["abs_err_HC"].mean()), 4),
+        "hc_rmse": round(float(np.sqrt(np.mean(pred_df_no_tta["abs_err_HC"] ** 2))), 4),
+        "bpd_mae": round(float(pred_df_no_tta["abs_err_BPD"].mean()), 4),
+        "bpd_rmse": round(float(np.sqrt(np.mean(pred_df_no_tta["abs_err_BPD"] ** 2))), 4),
         "epochs_trained": epochs_trained,
         "train_time_sec": train_time,
         "model_hash": m_hash,
     }
-    print(f"Row D -> Fold 1 HC MAE: {metrics['hc_mae']} mm, BPD MAE: {metrics['bpd_mae']} mm in {train_time}s")
-    return pred_df, metrics
+    metrics_tta = {
+        "model_name": "Row D: ResNet-34 U-Net (+TTA)",
+        "approach": "Segmentation mask + robust native ellipse fit (+TTA)",
+        "backbone": "ResNet-34",
+        "input_res": "224x224 (letterbox)",
+        "fold": fold_num,
+        "tta": True,
+        "n_samples": len(pred_df_tta),
+        "hc_mae": round(float(pred_df_tta["abs_err_HC"].mean()), 4),
+        "hc_rmse": round(float(np.sqrt(np.mean(pred_df_tta["abs_err_HC"] ** 2))), 4),
+        "bpd_mae": round(float(pred_df_tta["abs_err_BPD"].mean()), 4),
+        "bpd_rmse": round(float(np.sqrt(np.mean(pred_df_tta["abs_err_BPD"] ** 2))), 4),
+        "epochs_trained": epochs_trained,
+        "train_time_sec": train_time,
+        "model_hash": m_hash,
+    }
+    print(f"Row D Fold {fold_num} (no TTA) -> HC MAE: {metrics_no_tta['hc_mae']} mm, BPD MAE: {metrics_no_tta['bpd_mae']} mm")
+    print(f"Row D Fold {fold_num} (+TTA)    -> HC MAE: {metrics_tta['hc_mae']} mm, BPD MAE: {metrics_tta['bpd_mae']} mm in {train_time}s")
+    return pred_df_no_tta, metrics_no_tta, pred_df_tta, metrics_tta
 
 
 # ---------------------------------------------------------------------------
 # Load Row E from oof_predictions.csv
 # ---------------------------------------------------------------------------
-def load_row_e_metrics(oof_csv_path: str | Path) -> tuple[pd.DataFrame, dict]:
+def load_row_e_metrics(oof_csv_path: str | Path, fold_num: int = 1) -> tuple[pd.DataFrame, dict]:
     oof_df = pd.read_csv(oof_csv_path)
-    f1_df = oof_df[oof_df["fold"] == 1].copy()
-    hc_err = f1_df["abs_err_HC"].to_numpy(dtype=float)
-    bpd_err = f1_df["abs_err_BPD"].to_numpy(dtype=float)
+    f_df = oof_df[oof_df["fold"] == fold_num].copy()
+    hc_err = f_df["abs_err_HC"].to_numpy(dtype=float)
+    bpd_err = f_df["abs_err_BPD"].to_numpy(dtype=float)
 
     metrics = {
         "model_name": "Row E: EfficientNet-B4 U-Net 384 (Stream 1 Final)",
         "approach": "High-res segmentation + TTA + fitEllipseAMS",
         "backbone": "EfficientNet-B4",
         "input_res": "384x384 (letterbox)",
+        "fold": fold_num,
         "hc_mae": round(float(np.mean(hc_err)), 4),
         "hc_rmse": round(float(np.sqrt(np.mean(hc_err ** 2))), 4),
         "bpd_mae": round(float(np.mean(bpd_err)), 4),
         "bpd_rmse": round(float(np.sqrt(np.mean(bpd_err ** 2))), 4),
-        "epochs_trained": 100,
+        "epochs_trained": None,
         "train_time_sec": None,
         "model_hash": "repo_checkpoint",
     }
-    return f1_df, metrics
+    return f_df, metrics
+
+
+# ---------------------------------------------------------------------------
+# Patient-level Bootstrap Paired Difference
+# ---------------------------------------------------------------------------
+def compute_patient_bootstrap_paired_diff(
+    df_d: pd.DataFrame,
+    df_e: pd.DataFrame,
+    n_bootstraps: int = 1000,
+    seed: int = 42,
+    exclude_image: str | None = None,
+) -> dict:
+    if exclude_image:
+        df_d = df_d[df_d["image"] != exclude_image].copy()
+        df_e = df_e[df_e["image"] != exclude_image].copy()
+
+    merged = pd.merge(
+        df_d[["image", "patient_id", "abs_err_HC"]].rename(columns={"abs_err_HC": "err_D"}),
+        df_e[["image", "patient_id", "abs_err_HC"]].rename(columns={"abs_err_HC": "err_E"}),
+        on=["image", "patient_id"],
+    )
+
+    diff_point = float(merged["err_D"].mean() - merged["err_E"].mean())
+    patients = np.array(sorted(merged["patient_id"].unique()))
+    n_patients = len(patients)
+
+    patient_groups = {
+        p: (g["err_D"].to_numpy(dtype=float), g["err_E"].to_numpy(dtype=float))
+        for p, g in merged.groupby("patient_id")
+    }
+
+    rng = np.random.default_rng(seed)
+    diffs = np.zeros(n_bootstraps, dtype=float)
+
+    for b in range(n_bootstraps):
+        sampled_p = rng.choice(patients, size=n_patients, replace=True)
+        d_chunks = [patient_groups[p][0] for p in sampled_p]
+        e_chunks = [patient_groups[p][1] for p in sampled_p]
+        diffs[b] = np.mean(np.concatenate(d_chunks)) - np.mean(np.concatenate(e_chunks))
+
+    ci_lower = float(np.percentile(diffs, 2.5))
+    ci_upper = float(np.percentile(diffs, 97.5))
+
+    return {
+        "diff_point": round(diff_point, 4),
+        "ci_95": [round(ci_lower, 4), round(ci_upper, 4)],
+        "d_mae": round(float(merged["err_D"].mean()), 4),
+        "e_mae": round(float(merged["err_E"].mean()), 4),
+        "n_images": len(merged),
+        "n_patients": n_patients,
+        "excluded_image": exclude_image,
+    }
 
 
 def generate_ladder_table(all_metrics: list[dict]) -> str:
@@ -672,21 +772,74 @@ def generate_ladder_table(all_metrics: list[dict]) -> str:
     ]
     for row_label, m in zip(["A", "B", "C", "D", "E"], all_metrics):
         ttime = f"{m['train_time_sec']:.1f}" if m.get("train_time_sec") is not None else "-"
+        ep_str = str(m["epochs_trained"]) if m.get("epochs_trained") is not None else "-"
         md_lines.append(
-            f"| {row_label} | {m['approach']} | {m['backbone']} | {m['input_res']} | {m['model_name'].split('(')[0].strip()} | **{m['hc_mae']:.4f}** | {m['hc_rmse']:.4f} | **{m['bpd_mae']:.4f}** | {m['bpd_rmse']:.4f} | {m['epochs_trained']} | {ttime} |"
+            f"| {row_label} | {m['approach']} | {m['backbone']} | {m['input_res']} | {m['model_name'].split('(')[0].strip()} | **{m['hc_mae']:.4f}** | {m['hc_rmse']:.4f} | **{m['bpd_mae']:.4f}** | {m['bpd_rmse']:.4f} | {ep_str} | {ttime} |"
         )
     md_lines.append("")
     return "\n".join(md_lines)
 
 
+def generate_d_5fold_table(summary_data: dict) -> str:
+    md_lines = [
+        "# HC18 Row D (ResNet-34 U-Net 224) 5-Fold Benchmark vs Row E",
+        "",
+        "Evaluated on all 999 images across all 5 grouped folds (`make_grouped_folds`, seed 42) with inner 10% patient-isolation validation.",
+        "",
+        "## Per-Fold Performance",
+        "",
+        "| Fold | N Images | D HC MAE (mm) | D+TTA HC MAE (mm) | E HC MAE (mm) | D BPD MAE (mm) | D+TTA BPD MAE (mm) | E BPD MAE (mm) |",
+        "|:---:|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for row in summary_data["per_fold"]:
+        md_lines.append(
+            f"| {row['fold']} | {row['n_images']} | {row['d_no_tta']['hc_mae']:.4f} | {row['d_tta']['hc_mae']:.4f} | {row['e']['hc_mae']:.4f} | {row['d_no_tta']['bpd_mae']:.4f} | {row['d_tta']['bpd_mae']:.4f} | {row['e']['bpd_mae']:.4f} |"
+        )
+    pooled = summary_data["pooled"]
+    md_lines.append(
+        f"| **Pooled** | **{pooled['n_images']}** | **{pooled['d_no_tta']['hc_mae']:.4f}** | **{pooled['d_tta']['hc_mae']:.4f}** | **{pooled['e']['hc_mae']:.4f}** | **{pooled['d_no_tta']['bpd_mae']:.4f}** | **{pooled['d_tta']['bpd_mae']:.4f}** | **{pooled['e']['bpd_mae']:.4f}** |"
+    )
+
+    md_lines.extend([
+        "",
+        "## Pooled Metrics Summary",
+        "",
+        "| Model / Approach | Input Res | TTA | Pooled HC MAE (mm) | Pooled HC RMSE (mm) | Pooled BPD MAE (mm) | Pooled BPD RMSE (mm) |",
+        "|:---|:---:|:---:|---:|---:|---:|---:|",
+        f"| Row D: ResNet-34 U-Net | 224x224 | No | **{pooled['d_no_tta']['hc_mae']:.4f}** | {pooled['d_no_tta']['hc_rmse']:.4f} | **{pooled['d_no_tta']['bpd_mae']:.4f}** | {pooled['d_no_tta']['bpd_rmse']:.4f} |",
+        f"| Row D: ResNet-34 U-Net (+TTA) | 224x224 | Yes | **{pooled['d_tta']['hc_mae']:.4f}** | {pooled['d_tta']['hc_rmse']:.4f} | **{pooled['d_tta']['bpd_mae']:.4f}** | {pooled['d_tta']['bpd_rmse']:.4f} |",
+        f"| Row E: EfficientNet-B4 U-Net 384 | 384x384 | Yes | **{pooled['e']['hc_mae']:.4f}** | {pooled['e']['hc_rmse']:.4f} | **{pooled['e']['bpd_mae']:.4f}** | {pooled['e']['bpd_rmse']:.4f} |",
+        "",
+        "## Paired Error Differences (D minus E) with Patient-Level Bootstrap 95% CI",
+        "",
+        "| Comparison | Sample | $\\Delta$ HC MAE (mm) | 95% Bootstrap CI (mm) |",
+        "|:---|:---|---:|:---:|",
+    ])
+    pdiffs = summary_data["paired_differences"]
+    for key, label in [("d_no_tta_vs_e", "Row D (no TTA) vs Row E"), ("d_tta_vs_e", "Row D (+TTA) vs Row E")]:
+        diff_all = pdiffs[key]["all_images"]
+        diff_no_o = pdiffs[key]["without_065_HC"]
+        md_lines.append(
+            f"| {label} | All 999 images | {diff_all['diff_point']:+.4f} | [{diff_all['ci_95'][0]:.4f}, {diff_all['ci_95'][1]:.4f}] |"
+        )
+        md_lines.append(
+            f"| {label} | Excl. 065_HC.png ({diff_no_o['n_images']} images) | {diff_no_o['diff_point']:+.4f} | [{diff_no_o['ci_95'][0]:.4f}, {diff_no_o['ci_95'][1]:.4f}] |"
+        )
+
+    md_lines.append("")
+    return "\n".join(md_lines)
+
+
 def main():
-    parser = argparse.ArgumentParser(description="Train HC18 old approach ladder on grouped fold 1.")
+    parser = argparse.ArgumentParser(description="Train HC18 old approach ladder on grouped folds.")
     parser.add_argument("--data-dir", type=str, default="data/raw/HC-18", help="Path to HC18 dataset dir")
     parser.add_argument("--oof-csv", type=str, default="docs/results/hc18/oof_predictions.csv", help="Path to oof_predictions.csv")
     parser.add_argument("--out-dir", type=str, default="docs/results/hc18_ladder", help="Path to save ladder results")
     parser.add_argument("--device", type=str, default=None, help="Device to train on (cuda/cpu)")
     parser.add_argument("--epochs", type=int, default=100, help="Max epochs per model (default: 100)")
     parser.add_argument("--smoke", action="store_true", help="Run tiny smoke test (2 epochs)")
+    parser.add_argument("--rows", type=str, default="A,B,C,D", help="Comma-separated rows to train (e.g. 'A,B,C,D' or 'D')")
+    parser.add_argument("--folds", type=str, default="1", help="Comma-separated folds to evaluate (e.g. '1' or '1,2,3,4,5')")
     args = parser.parse_args()
 
     set_seed(42)
@@ -696,7 +849,6 @@ def main():
     data_dir = Path(args.data_dir).resolve()
     csv_path = data_dir / "training_set_pixel_size_and_HC.csv"
     if not csv_path.exists():
-        # Fallback search if nested
         for p in data_dir.rglob("training_set_pixel_size_and_HC.csv"):
             csv_path = p
             break
@@ -711,81 +863,205 @@ def main():
 
     df = pd.read_csv(csv_path)
     names = df["filename"].tolist()
-
-    # Reconstruct patient-grouped folds (seed 42)
-    folds = make_grouped_folds(names, n_splits=5, seed=42)
-    outer_tr_idx, outer_val_idx = folds[0]
-    print(f"Fold 1 outer train: {len(outer_tr_idx)}, outer val: {len(outer_val_idx)}")
-
-    # Split outer_tr_idx into inner train and inner val (10% patient holdout)
-    inner_tr_idx, inner_val_idx = split_patient_inner_holdout(outer_tr_idx, names, holdout_fraction=0.10, seed=42)
-    print(f"Inner train: {len(inner_tr_idx)}, inner val: {len(inner_val_idx)}")
-
     out_dir = Path(args.out_dir).resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    all_metrics: list[dict] = []
+    # Reconstruct patient-grouped folds (seed 42)
+    folds = make_grouped_folds(names, n_splits=5, seed=42)
 
-    # 1. Row A
-    df_pred_a, met_a = train_and_eval_row_a(
-        df, str(image_dir), inner_tr_idx, inner_val_idx, outer_val_idx, dev, max_epochs=args.epochs, smoke=args.smoke
-    )
-    df_pred_a.to_csv(out_dir / "row_A_predictions.csv", index=False)
-    with open(out_dir / "row_A_metrics.json", "w", encoding="utf-8") as f:
-        json.dump(met_a, f, indent=2)
-    all_metrics.append(met_a)
+    req_rows = [r.strip().upper() for r in args.rows.split(",") if r.strip()]
+    req_folds = [int(f.strip()) for f in args.folds.split(",") if f.strip()]
 
-    # 2. Row B
-    df_pred_b, met_b = train_and_eval_row_b(
-        df, str(image_dir), inner_tr_idx, inner_val_idx, outer_val_idx, dev, max_epochs=args.epochs, smoke=args.smoke
-    )
-    df_pred_b.to_csv(out_dir / "row_B_predictions.csv", index=False)
-    with open(out_dir / "row_B_metrics.json", "w", encoding="utf-8") as f:
-        json.dump(met_b, f, indent=2)
-    all_metrics.append(met_b)
+    print(f"Requested rows: {req_rows}")
+    print(f"Requested folds: {req_folds}")
 
-    # 3. Row C
-    df_pred_c, met_c = train_and_eval_row_c(
-        df, str(image_dir), inner_tr_idx, inner_val_idx, outer_val_idx, dev, max_epochs=args.epochs, smoke=args.smoke
-    )
-    df_pred_c.to_csv(out_dir / "row_C_predictions.csv", index=False)
-    with open(out_dir / "row_C_metrics.json", "w", encoding="utf-8") as f:
-        json.dump(met_c, f, indent=2)
-    all_metrics.append(met_c)
+    # Case 1: Standard fold 1 ladder run (Rows A, B, C, D on fold 1 + Row E)
+    if req_folds == [1] and set(req_rows) == {"A", "B", "C", "D"}:
+        outer_tr_idx, outer_val_idx = folds[0]
+        inner_tr_idx, inner_val_idx = split_patient_inner_holdout(outer_tr_idx, names, holdout_fraction=0.10, seed=42)
 
-    # 4. Row D
-    df_pred_d, met_d = train_and_eval_row_d(
-        df, str(image_dir), inner_tr_idx, inner_val_idx, outer_val_idx, dev, max_epochs=args.epochs, smoke=args.smoke
-    )
-    df_pred_d.to_csv(out_dir / "row_D_predictions.csv", index=False)
-    with open(out_dir / "row_D_metrics.json", "w", encoding="utf-8") as f:
-        json.dump(met_d, f, indent=2)
-    all_metrics.append(met_d)
+        all_metrics: list[dict] = []
 
-    # 5. Row E (from oof_predictions.csv)
-    oof_csv_path = Path(args.oof_csv).resolve()
-    df_pred_e, met_e = load_row_e_metrics(oof_csv_path)
-    with open(out_dir / "row_E_metrics.json", "w", encoding="utf-8") as f:
-        json.dump(met_e, f, indent=2)
-    all_metrics.append(met_e)
+        # 1. Row A
+        df_pred_a, met_a = train_and_eval_row_a(
+            df, str(image_dir), inner_tr_idx, inner_val_idx, outer_val_idx, dev, max_epochs=args.epochs, smoke=args.smoke
+        )
+        df_pred_a.to_csv(out_dir / "row_A_predictions.csv", index=False)
+        with open(out_dir / "row_A_metrics.json", "w", encoding="utf-8") as f:
+            json.dump(met_a, f, indent=2)
+        all_metrics.append(met_a)
 
-    # Summary table and JSON
-    table_md = generate_ladder_table(all_metrics)
-    with open(out_dir / "ladder_table.md", "w", encoding="utf-8", newline="\n") as f:
-        f.write(table_md)
+        # 2. Row B
+        df_pred_b, met_b = train_and_eval_row_b(
+            df, str(image_dir), inner_tr_idx, inner_val_idx, outer_val_idx, dev, max_epochs=args.epochs, smoke=args.smoke
+        )
+        df_pred_b.to_csv(out_dir / "row_B_predictions.csv", index=False)
+        with open(out_dir / "row_B_metrics.json", "w", encoding="utf-8") as f:
+            json.dump(met_b, f, indent=2)
+        all_metrics.append(met_b)
 
-    with open(out_dir / "ladder_results.json", "w", encoding="utf-8", newline="\n") as f:
-        json.dump({
-            "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-            "held_out_fold": 1,
-            "seed": 42,
-            "metrics": all_metrics,
-        }, f, indent=2)
+        # 3. Row C
+        df_pred_c, met_c = train_and_eval_row_c(
+            df, str(image_dir), inner_tr_idx, inner_val_idx, outer_val_idx, dev, max_epochs=args.epochs, smoke=args.smoke
+        )
+        df_pred_c.to_csv(out_dir / "row_C_predictions.csv", index=False)
+        with open(out_dir / "row_C_metrics.json", "w", encoding="utf-8") as f:
+            json.dump(met_c, f, indent=2)
+        all_metrics.append(met_c)
 
-    print("\n" + "=" * 60)
-    print("=== HC18 LADDER BENCHMARK SUMMARY ===")
-    print("=" * 60)
-    print(table_md)
+        # 4. Row D
+        df_d_no_tta, met_d_no_tta, df_d_tta, met_d_tta = train_and_eval_row_d(
+            df, str(image_dir), inner_tr_idx, inner_val_idx, outer_val_idx, dev, max_epochs=args.epochs, smoke=args.smoke, fold_num=1
+        )
+        # Save both fold1-specific and canonical fold1 files
+        df_d_tta.to_csv(out_dir / "row_D_predictions.csv", index=False)
+        with open(out_dir / "row_D_metrics.json", "w", encoding="utf-8") as f:
+            json.dump(met_d_tta, f, indent=2)
+
+        df_d_no_tta.to_csv(out_dir / "row_D_fold1_predictions.csv", index=False)
+        with open(out_dir / "row_D_fold1_metrics.json", "w", encoding="utf-8") as f:
+            json.dump(met_d_no_tta, f, indent=2)
+        df_d_tta.to_csv(out_dir / "row_D_tta_fold1_predictions.csv", index=False)
+        with open(out_dir / "row_D_tta_fold1_metrics.json", "w", encoding="utf-8") as f:
+            json.dump(met_d_tta, f, indent=2)
+        all_metrics.append(met_d_tta)
+
+        # 5. Row E
+        oof_csv_path = Path(args.oof_csv).resolve()
+        df_pred_e, met_e = load_row_e_metrics(oof_csv_path, fold_num=1)
+        with open(out_dir / "row_E_metrics.json", "w", encoding="utf-8") as f:
+            json.dump(met_e, f, indent=2)
+        all_metrics.append(met_e)
+
+        table_md = generate_ladder_table(all_metrics)
+        with open(out_dir / "ladder_table.md", "w", encoding="utf-8", newline="\n") as f:
+            f.write(table_md)
+
+        with open(out_dir / "ladder_results.json", "w", encoding="utf-8", newline="\n") as f:
+            json.dump({
+                "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                "held_out_fold": 1,
+                "seed": 42,
+                "metrics": all_metrics,
+            }, f, indent=2)
+
+        print("\n" + "=" * 60)
+        print("=== HC18 LADDER BENCHMARK SUMMARY ===")
+        print("=" * 60)
+        print(table_md)
+
+    # Case 2: Multi-fold Row D evaluation (e.g. folds 1, 2, 3, 4, 5)
+    if "D" in req_rows and (len(req_folds) > 1 or req_rows == ["D"]):
+        d_no_tta_dfs: list[pd.DataFrame] = []
+        d_tta_dfs: list[pd.DataFrame] = []
+        per_fold_records: list[dict] = []
+
+        oof_csv_path = Path(args.oof_csv).resolve()
+        oof_df = pd.read_csv(oof_csv_path)
+
+        for fold_num in req_folds:
+            outer_tr_idx, outer_val_idx = folds[fold_num - 1]
+            inner_tr_idx, inner_val_idx = split_patient_inner_holdout(outer_tr_idx, names, holdout_fraction=0.10, seed=42)
+
+            df_d_no_tta, met_d_no_tta, df_d_tta, met_d_tta = train_and_eval_row_d(
+                df, str(image_dir), inner_tr_idx, inner_val_idx, outer_val_idx, dev, max_epochs=args.epochs, smoke=args.smoke, fold_num=fold_num
+            )
+            df_d_no_tta.to_csv(out_dir / f"row_D_fold{fold_num}_predictions.csv", index=False)
+            with open(out_dir / f"row_D_fold{fold_num}_metrics.json", "w", encoding="utf-8") as f:
+                json.dump(met_d_no_tta, f, indent=2)
+
+            df_d_tta.to_csv(out_dir / f"row_D_tta_fold{fold_num}_predictions.csv", index=False)
+            with open(out_dir / f"row_D_tta_fold{fold_num}_metrics.json", "w", encoding="utf-8") as f:
+                json.dump(met_d_tta, f, indent=2)
+
+            d_no_tta_dfs.append(df_d_no_tta)
+            d_tta_dfs.append(df_d_tta)
+
+            # Row E for this fold
+            _, met_e_fold = load_row_e_metrics(oof_csv_path, fold_num=fold_num)
+
+            per_fold_records.append({
+                "fold": fold_num,
+                "n_images": len(df_d_tta),
+                "d_no_tta": met_d_no_tta,
+                "d_tta": met_d_tta,
+                "e": met_e_fold,
+            })
+
+        if set(req_folds) == {1, 2, 3, 4, 5}:
+            full_d_no_tta = pd.concat(d_no_tta_dfs, ignore_index=True)
+            full_d_tta = pd.concat(d_tta_dfs, ignore_index=True)
+
+            full_d_no_tta.to_csv(out_dir / "row_D_5fold_predictions.csv", index=False)
+            full_d_tta.to_csv(out_dir / "row_D_tta_5fold_predictions.csv", index=False)
+
+            # Verification of Row E pooled metrics
+            assert len(oof_df) == 999, f"Expected 999 rows in oof_predictions.csv, got {len(oof_df)}"
+            e_hc_mae = round(float(oof_df["abs_err_HC"].mean()), 4)
+            e_bpd_mae = round(float(oof_df["abs_err_BPD"].mean()), 4)
+            e_hc_rmse = round(float(np.sqrt(np.mean(oof_df["abs_err_HC"] ** 2))), 4)
+            e_bpd_rmse = round(float(np.sqrt(np.mean(oof_df["abs_err_BPD"] ** 2))), 4)
+            assert e_hc_mae == 2.3019, f"Row E pooled HC MAE mismatch: {e_hc_mae} != 2.3019"
+            assert e_bpd_mae == 0.7535, f"Row E pooled BPD MAE mismatch: {e_bpd_mae} != 0.7535"
+
+            # Pooled metrics for Row D
+            pooled_summary = {
+                "n_images": 999,
+                "d_no_tta": {
+                    "hc_mae": round(float(full_d_no_tta["abs_err_HC"].mean()), 4),
+                    "hc_rmse": round(float(np.sqrt(np.mean(full_d_no_tta["abs_err_HC"] ** 2))), 4),
+                    "bpd_mae": round(float(full_d_no_tta["abs_err_BPD"].mean()), 4),
+                    "bpd_rmse": round(float(np.sqrt(np.mean(full_d_no_tta["abs_err_BPD"] ** 2))), 4),
+                },
+                "d_tta": {
+                    "hc_mae": round(float(full_d_tta["abs_err_HC"].mean()), 4),
+                    "hc_rmse": round(float(np.sqrt(np.mean(full_d_tta["abs_err_HC"] ** 2))), 4),
+                    "bpd_mae": round(float(full_d_tta["abs_err_BPD"].mean()), 4),
+                    "bpd_rmse": round(float(np.sqrt(np.mean(full_d_tta["abs_err_BPD"] ** 2))), 4),
+                },
+                "e": {
+                    "hc_mae": e_hc_mae,
+                    "hc_rmse": e_hc_rmse,
+                    "bpd_mae": e_bpd_mae,
+                    "bpd_rmse": e_bpd_rmse,
+                },
+            }
+
+            # Paired difference with patient bootstrap 95% CI
+            pdiff_d_all = compute_patient_bootstrap_paired_diff(full_d_no_tta, oof_df, n_bootstraps=1000, seed=42)
+            pdiff_d_no_o = compute_patient_bootstrap_paired_diff(full_d_no_tta, oof_df, n_bootstraps=1000, seed=42, exclude_image="065_HC.png")
+            pdiff_tta_all = compute_patient_bootstrap_paired_diff(full_d_tta, oof_df, n_bootstraps=1000, seed=42)
+            pdiff_tta_no_o = compute_patient_bootstrap_paired_diff(full_d_tta, oof_df, n_bootstraps=1000, seed=42, exclude_image="065_HC.png")
+
+            d_5fold_results = {
+                "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                "n_folds": 5,
+                "seed": 42,
+                "pooled": pooled_summary,
+                "per_fold": per_fold_records,
+                "paired_differences": {
+                    "d_no_tta_vs_e": {
+                        "all_images": pdiff_d_all,
+                        "without_065_HC": pdiff_d_no_o,
+                    },
+                    "d_tta_vs_e": {
+                        "all_images": pdiff_tta_all,
+                        "without_065_HC": pdiff_tta_no_o,
+                    },
+                },
+            }
+
+            with open(out_dir / "d_5fold_results.json", "w", encoding="utf-8", newline="\n") as f:
+                json.dump(d_5fold_results, f, indent=2)
+
+            d_5fold_md = generate_d_5fold_table(d_5fold_results)
+            with open(out_dir / "d_5fold_table.md", "w", encoding="utf-8", newline="\n") as f:
+                f.write(d_5fold_md)
+
+            print("\n" + "=" * 60)
+            print("=== ROW D 5-FOLD BENCHMARK SUMMARY ===")
+            print("=" * 60)
+            print(d_5fold_md)
 
 
 if __name__ == "__main__":
