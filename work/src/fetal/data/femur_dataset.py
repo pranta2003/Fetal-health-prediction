@@ -15,6 +15,7 @@ import pandas as pd
 from fetal import config
 
 LM_COLS = ["fl_1_x", "fl_1_y", "fl_2_x", "fl_2_y"]
+DEV_FRACTION: float = 0.12
 
 
 def patient_id_from_name(name: str, src: str) -> str:
@@ -105,8 +106,18 @@ def load_femur_source(src: str, ann_dir: str | Path, img_dir: str | Path) -> pd.
     return df[cols]
 
 
-def build_femur_data(base: str | Path | None = None) -> pd.DataFrame:
-    """Load and concatenate FP and UCL femur annotations from data root."""
+def build_femur_data(
+    base: str | Path | None = None, drop_missing_rate: bool = True
+) -> pd.DataFrame:
+    """Load and concatenate FP and UCL femur annotations from data root.
+
+    Parameters
+    ----------
+    base : str | Path | None
+        Root data directory. Defaults to fetal.config.DATA_DIR.
+    drop_missing_rate : bool
+        If True (default), drop images with missing px_to_mm_rate (e.g. 3 uncalibrated FP images).
+    """
     if base is None:
         base = config.DATA_DIR
     base = Path(base)
@@ -118,4 +129,30 @@ def build_femur_data(base: str | Path | None = None) -> pd.DataFrame:
         base / "UCL" / "images" / "Femur",
     )
     data = pd.concat([fp, ucl], ignore_index=True)
+    if drop_missing_rate:
+        data = data[data["px_to_mm_rate"].notna()].reset_index(drop=True)
     return data
+
+
+def split_femur_data(
+    data: pd.DataFrame, dev_fraction: float = DEV_FRACTION, seed: int = 0
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """Split femur data into train, dev (validation), and test sets by patient.
+
+    Mirrors the AC split protocol: test set is fixed to the official test images;
+    train set is split into train and dev by patient ID using a fixed random seed.
+    Guarantees 0 patient overlap across all three splits.
+    """
+    train_all = data[data["official_split"] == "train"]
+    pats = np.array(sorted(train_all["patient"].unique()))
+    rng = np.random.RandomState(seed)
+    dev_count = max(1, int(round(dev_fraction * len(pats))))
+    dev_p = set(rng.permutation(pats)[:dev_count])
+    tr = train_all[~train_all["patient"].isin(dev_p)].reset_index(drop=True)
+    dv = train_all[train_all["patient"].isin(dev_p)].reset_index(drop=True)
+    te = data[data["official_split"] == "test"].reset_index(drop=True)
+    assert not (set(tr["patient"]) & set(dv["patient"])), "train/dev patient overlap!"
+    assert not (set(tr["patient"]) & set(te["patient"])), "train/test patient overlap!"
+    assert not (set(dv["patient"]) & set(te["patient"])), "dev/test patient overlap!"
+    return tr, dv, te
+

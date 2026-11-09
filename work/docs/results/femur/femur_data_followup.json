@@ -1,0 +1,386 @@
+{
+  "outliers": [
+    {
+      "category": "long (> 85 mm)",
+      "filename": "Patient00975_Plane5_2_of_2.png",
+      "patient_id": "FP_Patient00975",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 138.2,
+      "px_to_mm_rate": 0.2941,
+      "endpoint_1": [
+        105.0,
+        90.0
+      ],
+      "endpoint_2": [
+        574.0,
+        119.0
+      ],
+      "pixel_distance": 469.9,
+      "overlay_file": "outliers/overlay_Patient00975_Plane5_2_of_2.png",
+      "cause": "wrong endpoints",
+      "explanation": "Annotation spans 469.9 px (73.4% of image width) across dark background, not diaphysis."
+    },
+    {
+      "category": "long (> 85 mm)",
+      "filename": "Patient01785_Plane5_1_of_1.png",
+      "patient_id": "FP_Patient01785",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 123.43,
+      "px_to_mm_rate": 0.3333,
+      "endpoint_1": [
+        390.0,
+        451.0
+      ],
+      "endpoint_2": [
+        741.0,
+        569.0
+      ],
+      "pixel_distance": 370.3,
+      "overlay_file": "outliers/overlay_Patient01785_Plane5_1_of_1.png",
+      "cause": "wrong px_to_mm_rate",
+      "explanation": "Anomalously high pixel-to-mm rate (0.3333 mm/px vs typical ~0.10) combined with over-marked shadow."
+    },
+    {
+      "category": "long (> 85 mm)",
+      "filename": "Patient01246_Plane5_2_of_2.png",
+      "patient_id": "FP_Patient01246",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 102.99,
+      "px_to_mm_rate": 0.2632,
+      "endpoint_1": [
+        142.0,
+        137.0
+      ],
+      "endpoint_2": [
+        531.0,
+        180.0
+      ],
+      "pixel_distance": 391.4,
+      "overlay_file": "outliers/overlay_Patient01246_Plane5_2_of_2.png",
+      "cause": "both wrong px_to_mm_rate and wrong endpoints",
+      "explanation": "Pixel rate jumped ~3x (0.2632 vs 0.0893 on Plane5_1) and pixel span (391.4 px) is overextended."
+    },
+    {
+      "category": "long (> 85 mm)",
+      "filename": "Patient00855_Plane5_1_of_3.png",
+      "patient_id": "FP_Patient00855",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 102.67,
+      "px_to_mm_rate": 0.25,
+      "endpoint_1": [
+        97.0,
+        177.0
+      ],
+      "endpoint_2": [
+        497.0,
+        84.0
+      ],
+      "pixel_distance": 410.7,
+      "overlay_file": "outliers/overlay_Patient00855_Plane5_1_of_3.png",
+      "cause": "both wrong px_to_mm_rate and wrong endpoints",
+      "explanation": "Pixel rate jumped ~3x (0.2500 vs 0.0862 on Plane5_3) and pixel span (410.7 px) is overextended."
+    },
+    {
+      "category": "long (> 85 mm)",
+      "filename": "Patient00855_Plane5_2_of_3.png",
+      "patient_id": "FP_Patient00855",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 101.99,
+      "px_to_mm_rate": 0.25,
+      "endpoint_1": [
+        105.0,
+        168.0
+      ],
+      "endpoint_2": [
+        506.0,
+        93.0
+      ],
+      "pixel_distance": 408.0,
+      "overlay_file": "outliers/overlay_Patient00855_Plane5_2_of_3.png",
+      "cause": "both wrong px_to_mm_rate and wrong endpoints",
+      "explanation": "Pixel rate jumped ~3x (0.2500 vs 0.0862 on Plane5_3) and pixel span (408.0 px) is overextended."
+    },
+    {
+      "category": "shortest 10",
+      "filename": "Patient00954_Plane5_2_of_3.png",
+      "patient_id": "FP_Patient00954",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 13.07,
+      "px_to_mm_rate": 0.1,
+      "endpoint_1": [
+        183.0,
+        173.0
+      ],
+      "endpoint_2": [
+        297.0,
+        237.0
+      ],
+      "pixel_distance": 130.7,
+      "overlay_file": "outliers/overlay_Patient00954_Plane5_2_of_3.png",
+      "cause": "wrong endpoints",
+      "explanation": "Oblique ultrasound section or foreshortened annotation capturing only a partial diaphysis segment (px_dist=130.7 px)."
+    },
+    {
+      "category": "shortest 10",
+      "filename": "Patient01347_Plane5_2_of_2.png",
+      "patient_id": "FP_Patient01347",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 13.63,
+      "px_to_mm_rate": 0.0893,
+      "endpoint_1": [
+        257.0,
+        191.0
+      ],
+      "endpoint_2": [
+        390.0,
+        116.0
+      ],
+      "pixel_distance": 152.7,
+      "overlay_file": "outliers/overlay_Patient01347_Plane5_2_of_2.png",
+      "cause": "valid anatomical measurement",
+      "explanation": "Valid early 2nd-trimester fetus (~13-14 weeks); patient AC is ~75 mm and landmarking correctly traces diaphysis."
+    },
+    {
+      "category": "shortest 10",
+      "filename": "Patient00954_Plane5_3_of_3.png",
+      "patient_id": "FP_Patient00954",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 13.87,
+      "px_to_mm_rate": 0.1,
+      "endpoint_1": [
+        200.0,
+        140.0
+      ],
+      "endpoint_2": [
+        325.0,
+        200.0
+      ],
+      "pixel_distance": 138.7,
+      "overlay_file": "outliers/overlay_Patient00954_Plane5_3_of_3.png",
+      "cause": "wrong endpoints",
+      "explanation": "Oblique ultrasound section or foreshortened annotation capturing only a partial diaphysis segment (px_dist=138.7 px)."
+    },
+    {
+      "category": "shortest 10",
+      "filename": "Patient01606_Plane5_2_of_2.png",
+      "patient_id": "FP_Patient01606",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 14.0,
+      "px_to_mm_rate": 0.125,
+      "endpoint_1": [
+        268.0,
+        238.0
+      ],
+      "endpoint_2": [
+        378.0,
+        217.0
+      ],
+      "pixel_distance": 112.0,
+      "overlay_file": "outliers/overlay_Patient01606_Plane5_2_of_2.png",
+      "cause": "wrong endpoints",
+      "explanation": "Oblique ultrasound section or foreshortened annotation capturing only a partial diaphysis segment (px_dist=112.0 px)."
+    },
+    {
+      "category": "shortest 10",
+      "filename": "Patient01080_Plane5_1_of_2.png",
+      "patient_id": "FP_Patient01080",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 14.66,
+      "px_to_mm_rate": 0.1136,
+      "endpoint_1": [
+        305.0,
+        159.0
+      ],
+      "endpoint_2": [
+        433.0,
+        143.0
+      ],
+      "pixel_distance": 129.0,
+      "overlay_file": "outliers/overlay_Patient01080_Plane5_1_of_2.png",
+      "cause": "wrong endpoints",
+      "explanation": "Oblique ultrasound section or foreshortened annotation capturing only a partial diaphysis segment (px_dist=129.0 px)."
+    },
+    {
+      "category": "shortest 10",
+      "filename": "Patient00855_Plane5_3_of_3.png",
+      "patient_id": "FP_Patient00855",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 14.68,
+      "px_to_mm_rate": 0.0862,
+      "endpoint_1": [
+        419.0,
+        154.0
+      ],
+      "endpoint_2": [
+        578.0,
+        215.0
+      ],
+      "pixel_distance": 170.3,
+      "overlay_file": "outliers/overlay_Patient00855_Plane5_3_of_3.png",
+      "cause": "wrong endpoints",
+      "explanation": "Oblique ultrasound section or foreshortened annotation capturing only a partial diaphysis segment (px_dist=170.3 px)."
+    },
+    {
+      "category": "shortest 10",
+      "filename": "Patient00907_Plane5_2_of_2.png",
+      "patient_id": "FP_Patient00907",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 15.04,
+      "px_to_mm_rate": 0.1,
+      "endpoint_1": [
+        435.0,
+        67.0
+      ],
+      "endpoint_2": [
+        575.0,
+        122.0
+      ],
+      "pixel_distance": 150.4,
+      "overlay_file": "outliers/overlay_Patient00907_Plane5_2_of_2.png",
+      "cause": "valid anatomical measurement",
+      "explanation": "Valid early 2nd-trimester fetus (~13-14 weeks); patient AC is ~75 mm and landmarking correctly traces diaphysis."
+    },
+    {
+      "category": "shortest 10",
+      "filename": "Patient00890_Plane5_2_of_2.png",
+      "patient_id": "FP_Patient00890",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 15.05,
+      "px_to_mm_rate": 0.1136,
+      "endpoint_1": [
+        167.0,
+        279.0
+      ],
+      "endpoint_2": [
+        280.0,
+        210.0
+      ],
+      "pixel_distance": 132.4,
+      "overlay_file": "outliers/overlay_Patient00890_Plane5_2_of_2.png",
+      "cause": "wrong endpoints",
+      "explanation": "Oblique ultrasound section or foreshortened annotation capturing only a partial diaphysis segment (px_dist=132.4 px)."
+    },
+    {
+      "category": "shortest 10",
+      "filename": "Patient00937_Plane5_1_of_2.png",
+      "patient_id": "FP_Patient00937",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 15.18,
+      "px_to_mm_rate": 0.0893,
+      "endpoint_1": [
+        375.0,
+        90.0
+      ],
+      "endpoint_2": [
+        545.0,
+        89.0
+      ],
+      "pixel_distance": 170.0,
+      "overlay_file": "outliers/overlay_Patient00937_Plane5_1_of_2.png",
+      "cause": "wrong endpoints",
+      "explanation": "Oblique ultrasound section or foreshortened annotation capturing only a partial diaphysis segment (px_dist=170.0 px)."
+    },
+    {
+      "category": "shortest 10",
+      "filename": "Patient00789_Plane5_2_of_2.png",
+      "patient_id": "FP_Patient00789",
+      "dataset": "FP",
+      "split": "train",
+      "fl_mm": 15.38,
+      "px_to_mm_rate": 0.125,
+      "endpoint_1": [
+        335.0,
+        219.0
+      ],
+      "endpoint_2": [
+        447.0,
+        270.0
+      ],
+      "pixel_distance": 123.1,
+      "overlay_file": "outliers/overlay_Patient00789_Plane5_2_of_2.png",
+      "cause": "wrong endpoints",
+      "explanation": "Oblique ultrasound section or foreshortened annotation capturing only a partial diaphysis segment (px_dist=123.1 px)."
+    }
+  ],
+  "missing_rate_audit": {
+    "missing_rate_images": [
+      "Patient00888_Plane5_1_of_1.png",
+      "Patient01319_Plane5_1_of_1.png",
+      "Patient01423_Plane5_1_of_1.png"
+    ],
+    "missing_rate_patients": [
+      "FP_Patient00888",
+      "FP_Patient01319",
+      "FP_Patient01423"
+    ],
+    "count": 3,
+    "same_patient_other_femur_images_with_rate": 0,
+    "same_patient_ac_images": 0,
+    "patients_have_other_data": false,
+    "code_exclusion_rule": "build_femur_data(drop_missing_rate=True) filters df[px_to_mm_rate.notna()] by default",
+    "verified_in_tests": "tests/test_femur_data.py::test_build_femur_data_drop_missing_rate"
+  },
+  "ucl_excludes_125_rule": {
+    "rule": "df = df[~df['image_name'].str.startswith('125_')]",
+    "origin": "In the UCL Abdomen dataset, patient 125 had corrupted pixel calibration rates (~0.0165-0.0212 mm/px vs normal ~0.20 mm/px), producing invalid metric measurements.",
+    "ucl_raw_annotations_count_matching_125": 1,
+    "ucl_calibrated_px_to_mm_count_matching_125": 0,
+    "images_removed_from_calibrated_pipeline": 0,
+    "note": "In UCL Femur, patient 125 (125_FL.jpeg) was already omitted from the calibrated px_to_mm directory during curation. The code filter removes 0 images from calibrated Femur data and acts as a defensive guardrail against uncalibrated inputs."
+  },
+  "hadlock_3plane_check": {
+    "fp_patients_with_femur": 629,
+    "fp_patients_with_ac": 586,
+    "fp_patients_with_femur_and_ac": 407,
+    "fp_has_head_plane_annotations": false,
+    "fp_has_head_plane_images": false,
+    "count_patients_with_head_abdomen_femur_together": 0,
+    "conclusion": "FP does not contain head-plane data (no Head annotations or Head ultrasound images). Head circumference (HC) was investigated via HC18 (Radboud University Medical Center), while AC and Femur were sourced from the Fetal Planes (FP) and UCL cohorts. Consequently, patient-linked 3-plane Hadlock EFW formulas (Head + Abdomen + Femur) cannot be computed on common patients within the FP dataset alone."
+  },
+  "split_counts_after_exclusions": {
+    "total_images_before_exclusions": 867,
+    "excluded_uncalibrated_images": 3,
+    "total_images_after_exclusions": 864,
+    "total_patients_after_exclusions": 658,
+    "splits": {
+      "train": {
+        "images": 451,
+        "patients": 345,
+        "fp_images": 382,
+        "ucl_images": 69
+      },
+      "validation": {
+        "images": 65,
+        "patients": 47,
+        "fp_images": 52,
+        "ucl_images": 13
+      },
+      "test": {
+        "images": 348,
+        "patients": 266,
+        "fp_images": 323,
+        "ucl_images": 25
+      }
+    },
+    "patient_overlap_check": {
+      "train_val_overlap": 0,
+      "train_test_overlap": 0,
+      "val_test_overlap": 0,
+      "zero_patient_overlap_confirmed": true
+    }
+  }
+}

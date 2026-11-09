@@ -336,10 +336,146 @@ display(Markdown(text))
     print(f"Saved {dest_path}")
 
 
+def build_femur_data_notebook(dest_path: Path):
+    nb = new_notebook()
+    nb.metadata["language_info"] = {"name": "python"}
+
+    md_text = """# Femur (FL) Dataset Inspection and Follow-Up Analysis
+
+## 1. Purpose & Protocol
+This benchmark notebook inspects and documents the Fetal Femur Length (FL) dataset across both FP (Fetal Planes) and UCL biometry cohorts:
+1. **Outliers Analysis**: Identification and clinical/technical root cause classification for all images with FL > 85 mm (long outliers) and the 10 shortest FL measurements (short outliers), complete with visual endpoint overlays.
+2. **Missing Rate Exclusions**: Audit of the 3 FP images with missing pixel-to-mm calibration rates (`px_to_mm_rate.isna()`), patient cross-plane checks, and verified programmatic exclusion from training and evaluation.
+3. **UCL Patient 125 Rule**: Rationale and empirical effect of the `~image_name.str.startswith("125_")` exclusion rule.
+4. **Hadlock 3-Plane Feasibility**: Cross-reference check of whether FP patients with Femur and Abdomen images also possess head-plane data for 3-plane Hadlock EFW estimation.
+5. **Split Integrity**: Clean verification of patient-isolated Train, Validation, and Test splits guaranteeing strictly 0 patient overlap.
+
+All figures and tables are dynamically generated and verified from local datasets and result artifacts.
+"""
+
+    code_run = """import sys
+from pathlib import Path
+import subprocess
+
+# Locate work root
+work_dir = Path.cwd()
+while work_dir.name != "work" and work_dir.parent != work_dir:
+    work_dir = work_dir.parent
+if str(work_dir / "src") not in sys.path:
+    sys.path.insert(0, str(work_dir / "src"))
+
+print(f"Work directory: {work_dir}")
+script_path = work_dir / "scripts" / "21_femur_data_followup.py"
+print(f"Executing {script_path.name}...")
+
+proc = subprocess.run(
+    [sys.executable, str(script_path)],
+    cwd=str(work_dir),
+    capture_output=True,
+    text=True,
+    check=True,
+)
+print(proc.stdout)
+"""
+
+    code_tables = """import json
+from pathlib import Path
+import pandas as pd
+from IPython.display import display, Markdown
+
+results_file = work_dir / "docs" / "results" / "femur" / "femur_data_followup.json"
+assert results_file.is_file(), f"Missing results at {results_file}"
+
+with open(results_file, "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+print("=== 1. OUTLIERS (FL > 85 mm and 10 Shortest FL) ===")
+outliers_df = pd.DataFrame(data["outliers"])
+display(outliers_df[["category", "filename", "patient_id", "dataset", "split", "fl_mm", "px_to_mm_rate", "cause"]])
+
+print("\\n=== 2. MISSING CALIBRATION RATE (FP) ===")
+missing = data["missing_rate_audit"]
+print(f"Excluded images: {missing['missing_rate_images']}")
+print(f"Patients have other femur data: {missing['same_patient_other_femur_images_with_rate']}")
+print(f"Patients have other AC data: {missing['same_patient_ac_images']}")
+print(f"Exclusion rule: {missing['code_exclusion_rule']}")
+
+print("\\n=== 3. UCL EXCLUDES 125 RULE ===")
+ucl_rule = data["ucl_excludes_125_rule"]
+print(f"Rule: {ucl_rule['rule']}")
+print(f"Raw UCL 125 rows: {ucl_rule['ucl_raw_annotations_count_matching_125']}")
+print(f"Calibrated UCL 125 rows: {ucl_rule['ucl_calibrated_px_to_mm_count_matching_125']}")
+print(f"Images removed from calibrated pipeline: {ucl_rule['images_removed_from_calibrated_pipeline']}")
+
+print("\\n=== 4. HADLOCK 3-PLANE PATIENT CHECK ===")
+hadlock = data["hadlock_3plane_check"]
+print(f"FP Femur patients: {hadlock['fp_patients_with_femur']}")
+print(f"FP AC patients: {hadlock['fp_patients_with_ac']}")
+print(f"FP patients with Femur + AC: {hadlock['fp_patients_with_femur_and_ac']}")
+print(f"FP has head annotations: {hadlock['fp_has_head_plane_annotations']}")
+print(f"FP has head images: {hadlock['fp_has_head_plane_images']}")
+print(f"Patients with Head + Abdomen + Femur: {hadlock['count_patients_with_head_abdomen_femur_together']}")
+
+print("\\n=== 5. SPLIT COUNTS AFTER EXCLUSIONS ===")
+splits = data["split_counts_after_exclusions"]
+split_rows = []
+for sname, info in splits["splits"].items():
+    split_rows.append({
+        "Split": sname.capitalize(),
+        "Images": info["images"],
+        "FP Images": info["fp_images"],
+        "UCL Images": info["ucl_images"],
+        "Patients": info["patients"],
+    })
+display(pd.DataFrame(split_rows))
+print(f"Total images: {splits['total_images_after_exclusions']}, Total patients: {splits['total_patients_after_exclusions']}")
+p_chk = splits["patient_overlap_check"]
+print(f"Zero patient overlap confirmed: {p_chk['zero_patient_overlap_confirmed']}")
+"""
+
+    code_asserts = """# Automated verification assertions
+assert splits["total_images_before_exclusions"] == 867
+assert splits["excluded_uncalibrated_images"] == 3
+assert splits["total_images_after_exclusions"] == 864
+assert splits["total_patients_after_exclusions"] == 658
+assert splits["splits"]["train"]["images"] == 451
+assert splits["splits"]["validation"]["images"] == 65
+assert splits["splits"]["test"]["images"] == 348
+assert p_chk["zero_patient_overlap_confirmed"] is True
+assert hadlock["count_patients_with_head_abdomen_femur_together"] == 0
+assert len(data["outliers"]) == 15
+print("All benchmark assertions passed cleanly!")
+"""
+
+    nb.cells = [
+        new_markdown_cell(md_text),
+        new_code_cell(code_run),
+        new_code_cell(code_tables),
+        new_code_cell(code_asserts),
+    ]
+
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(dest_path, "w", encoding="utf-8") as f:
+        nbformat.write(nb, f)
+    print(f"Saved {dest_path}")
+
+
 def main():
+    import sys
+
     root = Path(__file__).resolve().parent.parent
     nb_dir = root / "notebooks" / "benchmarks"
-    build_summary_notebook(nb_dir / "benchmark_summary.ipynb")
+    target = sys.argv[1] if len(sys.argv) > 1 else "femur"
+
+    if target == "summary":
+        build_summary_notebook(nb_dir / "benchmark_summary.ipynb")
+    elif target == "femur":
+        build_femur_data_notebook(nb_dir / "femur_data.ipynb")
+    elif target == "all":
+        build_summary_notebook(nb_dir / "benchmark_summary.ipynb")
+        build_femur_data_notebook(nb_dir / "femur_data.ipynb")
+    else:
+        print(f"Unknown target: {target}")
 
 
 if __name__ == "__main__":
