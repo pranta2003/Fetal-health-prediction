@@ -1,0 +1,84 @@
+{
+  "hc18": {
+    "source": "Mask-R2CNN (PMC8580944)",
+    "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8580944/",
+    "protocol": "Official HC18 challenge 335-image test set, HC mean absolute difference (MAD) in mm (mean +- SD)",
+    "note": "second-hand; paper has an inconsistent attribution for one reference.",
+    "models": [
+      {
+        "name": "Fiorentino2020 (with post-proc)",
+        "hc_mad_mean": 1.90,
+        "hc_mad_sd": 1.77,
+        "metric": "HC MAD (mm)"
+      },
+      {
+        "name": "Mask-R2CNN",
+        "hc_mad_mean": 1.95,
+        "hc_mad_sd": 1.92,
+        "metric": "HC MAD (mm)"
+      },
+      {
+        "name": "Sobhaninia2019",
+        "hc_mad_mean": 2.12,
+        "hc_mad_sd": 1.87,
+        "metric": "HC MAD (mm)"
+      },
+      {
+        "name": "Al-Bander2019",
+        "hc_mad_mean": 2.33,
+        "hc_mad_sd": 2.21,
+        "metric": "HC MAD (mm)"
+      },
+      {
+        "name": "Rong2019",
+        "hc_mad_mean": 2.45,
+        "hc_mad_sd": 2.55,
+        "metric": "HC MAD (mm)"
+      },
+      {
+        "name": "van den Heuvel2018",
+        "hc_mad_mean": 2.80,
+        "hc_mad_sd": 3.30,
+        "metric": "HC MAD (mm)"
+      }
+    ]
+  },
+  "ac": {
+    "source": "arXiv 2512.16710, Table 2",
+    "url": "https://arxiv.org/abs/2512.16710",
+    "protocol": "NME +- SD, model trained on combined data, tested on combined; FP->FP",
+    "note": "reports NME, not AC in mm; test set sizes not stated.",
+    "settings": [
+      {
+        "name": "Combined -> Combined",
+        "apad_nme_mean": 0.07,
+        "apad_nme_sd": 0.08,
+        "tad_nme_mean": 0.08,
+        "tad_nme_sd": 0.08
+      },
+      {
+        "name": "FP -> FP",
+        "apad_nme_mean": 0.08,
+        "apad_nme_sd": 0.06,
+        "tad_nme_mean": 0.08,
+        "tad_nme_sd": 0.06
+      }
+    ]
+  },
+  "femur": {
+    "source": "arXiv 2512.16710, Table 2",
+    "url": "https://arxiv.org/abs/2512.16710",
+    "protocol": "FL NME m-c->m-c (multi-center to multi-center)",
+    "note": "for later comparison",
+    "fl_nme_mean": 0.03,
+    "fl_nme_sd": 0.09
+  },
+  "stream3": {
+    "source": "Koivu and Sairanen 2020",
+    "url": "https://doi.org/10.1016/j.artmed.2020.101864",
+    "protocol": "CDC Natality data, stillbirth risk prediction",
+    "note": "approximate, from our literature check; re-verify the exact numbers before the final thesis.",
+    "auc_early": "about 0.75-0.76",
+    "auc_late": "about 0.60-0.63"
+  }
+}

@@ -75,6 +75,18 @@ def test_hash_results_generate_and_verify(tmp_path):
     assert verify_sums(tmp_path) is False
 
 
+def test_hash_results_line_ending_invariance(tmp_path):
+    f_text = tmp_path / "table.md"
+    f_text.write_bytes(b"# Header\r\nLine 1\r\nLine 2\r\n")
+    sums_path = generate_sums(tmp_path)
+    assert sums_path.is_file()
+    assert verify_sums(tmp_path) is True
+
+    # Convert to LF (as git does on checkout/commit normalization)
+    f_text.write_bytes(b"# Header\nLine 1\nLine 2\n")
+    assert verify_sums(tmp_path) is True
+
+
 def test_results_integrity_all_files_have_sha256sums_and_verify():
     """Verify that every file under docs/results/**/ has a SHA256SUMS entry and verifies."""
     work_dir = Path(__file__).resolve().parent.parent
