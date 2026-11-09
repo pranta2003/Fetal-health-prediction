@@ -5,6 +5,8 @@ Reads:
   - docs/results/hc18/metrics.json
   - docs/results/hc18_ladder/ladder_results.json
   - docs/results/hc18_ladder/d_5fold_results.json
+  - docs/results/hc18_ladder/row_D_metrics.json
+  - docs/results/hc18_ladder/row_D_fold1_metrics.json
   - docs/results/ac/ac_v3/v3_full/results.json
   - docs/results/ac/ac_v3_ens/results.json
   - docs/results/stream3_bench/benchmark_results.json
@@ -31,34 +33,6 @@ if str(work_root / "src") not in sys.path:
     sys.path.insert(0, str(work_root / "src"))
 
 
-RULES_TABLE = {
-    "hc18": {
-        "comparable": "No (5-fold patient CV on 999 training images vs official 335 challenge test set)",
-        "claim": "Claim only 'same range' (Ours: 2.30 mm vs published 1.90–2.80 mm); cannot claim superior/inferior due to different evaluation sets.",
-    },
-    "ac_nme": {
-        "comparable": "Partly (same NME formula; test set split sizes not stated in publication)",
-        "claim": "Claim 'on par', not 'better' (Ours: TAD 0.072 +- 0.058, APAD 0.062 +- 0.049 vs Published: TAD 0.08 +- 0.08, APAD 0.07 +- 0.08).",
-    },
-    "ac_mm": {
-        "comparable": "Partly (different metric: mm vs NME; paper does not report mm)",
-        "claim": "Direct mm comparison unavailable in published baseline; established absolute geometric benchmark (4.34 mm median ensemble).",
-    },
-    "femur": {
-        "comparable": "No (model training pending; data check complete)",
-        "claim": "Reference baseline established for upcoming model (FL NME 0.03 +- 0.09).",
-    },
-    "stream3_e1": {
-        "comparable": "Partly (both CDC Natality; different cohort inclusion, gestation window, and temporal split)",
-        "claim": "Claim 'approximately same range' (Ours: 0.7381 [95% CI: 0.7358, 0.7413] vs Published: ~0.75–0.76 early / ~0.60–0.63 late); verified leak-free.",
-    },
-    "stream3_e4": {
-        "comparable": "Partly (different feature set definitions and gestational cutoffs)",
-        "claim": "Claim 'approximately same range' (Ours: 0.7070 [95% CI: 0.7040, 0.7101] vs Published: ~0.60–0.76); robust pre-delivery clinical baseline.",
-    },
-}
-
-
 def load_json(path: Path) -> dict:
     if not path.is_file():
         raise FileNotFoundError(f"Missing required result file: {path}")
@@ -72,7 +46,8 @@ def generate_benchmark_summary(results_dir: Path) -> str:
     hc18_metrics = load_json(results_dir / "hc18" / "metrics.json")
     ladder_results = load_json(results_dir / "hc18_ladder" / "ladder_results.json")
     d_5fold_results = load_json(results_dir / "hc18_ladder" / "d_5fold_results.json")
-    ac_v3_full = load_json(results_dir / "ac" / "ac_v3" / "v3_full" / "results.json")
+    row_d_run1 = load_json(results_dir / "hc18_ladder" / "row_D_metrics.json")
+    row_d_run2 = load_json(results_dir / "hc18_ladder" / "row_D_fold1_metrics.json")
     ac_ens = load_json(results_dir / "ac" / "ac_v3_ens" / "results.json")
     stream3_bench = load_json(results_dir / "stream3_bench" / "benchmark_results.json")
 
@@ -108,18 +83,19 @@ def generate_benchmark_summary(results_dir: Path) -> str:
         f"• Source: [{pub_hc['source']}]({pub_hc['url']})<br>"
         f"• Protocol: {pub_hc['protocol']}"
     )
+    hc_comparable = "No (5-fold patient CV on 999 training images vs official 335 challenge test set)"
+    hc_claim = "Claim only 'same range' (Ours: 2.30 mm vs published 1.90–2.80 mm); cannot claim superior/inferior due to different evaluation sets."
     lines.append(
-        f"| **Head (HC18)** | HC MAE | {hc_ours} | {hc_pub} | "
-        f"{RULES_TABLE['hc18']['comparable']} | {RULES_TABLE['hc18']['claim']} |"
+        f"| **Head (HC18)** | HC MAE | {hc_ours} | {hc_pub} | {hc_comparable} | {hc_claim} |"
     )
 
-    # Row 2: AC Landmark NME
+    # Row 2: AC Landmark NME (Using ONE model: 4-model median ensemble)
     ens_med = ac_ens["ENS_median"]
-    v3_test = ac_v3_full.get("test_tta", ac_v3_full.get("test", ac_v3_full))
+    ac_tad_str = f"{ens_med['tad_nme']:.3f} +- {ens_med['tad_nme_sd']:.3f}"
+    ac_apad_str = f"{ens_med['apad_nme']:.3f} +- {ens_med['apad_nme_sd']:.3f}"
     ac_nme_ours = (
-        f"**TAD NME: {ens_med['tad_nme']:.3f} +- {ens_med['tad_nme_sd']:.3f}**<br>"
-        f"**APAD NME: {ens_med['apad_nme']:.3f} +- {ens_med['apad_nme_sd']:.3f}**<br>"
-        f"• Overall NME: {v3_test['nme']:.4f} (v3_full)<br>"
+        f"**TAD NME: {ac_tad_str}**<br>"
+        f"**APAD NME: {ac_apad_str}** (4-model median ensemble)<br>"
         f"• Protocol: 147 official test images (114 patients)<br>"
         f"• Source: `docs/results/ac/ac_v3_ens/results.json`"
     )
@@ -133,15 +109,21 @@ def generate_benchmark_summary(results_dir: Path) -> str:
         f"• Source: [{pub_ac['source']}]({pub_ac['url']})<br>"
         f"• Protocol: {pub_ac['protocol']}"
     )
+    ac_nme_comparable = "Partly (same NME formula; test set split sizes not stated in publication)"
+    ac_nme_claim = (
+        f"Claim 'on par', not 'better' (Ours [4-model median ensemble]: TAD {ac_tad_str}, APAD {ac_apad_str} vs "
+        f"Published: TAD {comb_set['tad_nme_mean']:.2f} +- {comb_set['tad_nme_sd']:.2f}, "
+        f"APAD {comb_set['apad_nme_mean']:.2f} +- {comb_set['apad_nme_sd']:.2f})."
+    )
     lines.append(
         f"| **Abdomen (AC)** | Landmark NME (TAD, APAD) | {ac_nme_ours} | {ac_nme_pub} | "
-        f"{RULES_TABLE['ac_nme']['comparable']} | {RULES_TABLE['ac_nme']['claim']} |"
+        f"{ac_nme_comparable} | {ac_nme_claim} |"
     )
 
-    # Row 3: AC Circumference in mm
+    # Row 3: AC Circumference in mm (Using ONE model: 4-model median ensemble)
+    ac_mae_str = f"{ens_med['ac_mae']:.2f} mm"
     ac_mm_ours = (
-        f"**{ens_med['ac_mae']:.2f} mm** (4-model median ensemble)<br>"
-        f"• Single model: {v3_test['ac_mae']:.2f} mm (v3_full TTA)<br>"
+        f"**{ac_mae_str}** (4-model median ensemble)<br>"
         f"• Protocol: 147 official test images (114 patients)<br>"
         f"• Source: `docs/results/ac/ac_v3_ens/results.json`"
     )
@@ -151,9 +133,14 @@ def generate_benchmark_summary(results_dir: Path) -> str:
         f"• Source: [{pub_ac['source']}]({pub_ac['url']})<br>"
         f"• Note: {pub_ac['note']}"
     )
+    ac_mm_comparable = "Partly (different metric: mm vs NME; paper does not report mm)"
+    ac_mm_claim = (
+        f"Direct mm comparison unavailable in published baseline; established absolute geometric benchmark "
+        f"(Ours: {ac_mae_str} [4-model median ensemble])."
+    )
     lines.append(
         f"| **Abdomen (AC)** | AC MAE (mm) | {ac_mm_ours} | {ac_mm_pub} | "
-        f"{RULES_TABLE['ac_mm']['comparable']} | {RULES_TABLE['ac_mm']['claim']} |"
+        f"{ac_mm_comparable} | {ac_mm_claim} |"
     )
 
     # Row 4: Femur (FL)
@@ -169,9 +156,11 @@ def generate_benchmark_summary(results_dir: Path) -> str:
         f"• Source: [{pub_femur['source']}]({pub_femur['url']})<br>"
         f"• Protocol: {pub_femur['protocol']}"
     )
+    femur_comparable = "No (model training pending; data check complete)"
+    femur_claim = "model not trained; no comparison yet"
     lines.append(
         f"| **Femur (FL)** | FL NME | {femur_ours} | {femur_pub} | "
-        f"{RULES_TABLE['femur']['comparable']} | {RULES_TABLE['femur']['claim']} |"
+        f"{femur_comparable} | {femur_claim} |"
     )
 
     # Row 5: Stream 3 Clinical Risk (E1)
@@ -179,35 +168,47 @@ def generate_benchmark_summary(results_dir: Path) -> str:
     s3_pub = pub_refs["stream3"]
     s3_e1_ours = (
         f"**{s3_e1_xgb['test_auc']:.4f}** (95% CI: [{s3_e1_xgb['ci_95_low']:.4f}, {s3_e1_xgb['ci_95_high']:.4f}])<br>"
-        f"• Protocol: Train <=2021 ({s3_e1_xgb['train_rows']:,} rows), Test >=2022 ({s3_e1_xgb['test_rows']:,} rows), COMBGEST >=20<br>"
+        f"• Protocol: Temporal split: Train <=2021 ({s3_e1_xgb['train_rows']:,} rows), Test >=2022 ({s3_e1_xgb['test_rows']:,} rows), COMBGEST >=20<br>"
         f"• Source: `docs/results/stream3_bench/benchmark_results.json`"
     )
+    s3_early_auc_str = ", ".join(f"{k} {v:.2f}" for k, v in s3_pub["auc_cdc_early_stillbirth"].items())
+    s3_late_auc_str = ", ".join(f"{k} {v:.2f}" for k, v in s3_pub["auc_cdc_late_stillbirth"].items())
     s3_e1_pub = (
-        f"**AUC {s3_pub['auc_early']}** (early gestation)<br>"
-        f"• Late gestation: AUC {s3_pub['auc_late']}<br>"
-        f"• Source: [{s3_pub['source']}]({s3_pub['url']})<br>"
-        f"• Protocol: {s3_pub['protocol']}"
+        f"CDC early stillbirth: {s3_early_auc_str}<br>"
+        f"CDC late stillbirth: {s3_late_auc_str}<br>"
+        f"• Source: [{s3_pub['source']}]({s3_pub['url']}) (DOI: {s3_pub['doi']})<br>"
+        f"• Protocol: {s3_pub['protocol']} ({s3_pub['data']})"
+    )
+    s3_e1_comparable = "Partly (random vs temporal split, different years [2013-2016 vs <=2021/>=2022], different outcome definitions)"
+    s3_e1_claim = (
+        f"same order of magnitude; not directly comparable (Ours: {s3_e1_xgb['test_auc']:.4f} "
+        f"[95% CI: {s3_e1_xgb['ci_95_low']:.4f}, {s3_e1_xgb['ci_95_high']:.4f}] vs Published early stillbirth: 0.73–0.75).<br>"
+        f"Warning: term-band AUC 0.748 must not be compared with their late-stillbirth 0.60; possible source-file artifact."
     )
     lines.append(
         f"| **Maternal Risk (Stream 3)** | E1 Test AUC (Primary, >=20 wk) | {s3_e1_ours} | {s3_e1_pub} | "
-        f"{RULES_TABLE['stream3_e1']['comparable']} | {RULES_TABLE['stream3_e1']['claim']} |"
+        f"{s3_e1_comparable} | {s3_e1_claim} |"
     )
 
     # Row 6: Stream 3 Clinical Risk (E4)
     s3_e4_xgb = next(r for r in stream3_bench["results"] if r["setting"].startswith("E4") and r["model"] == "Our XGBoost")
     s3_e4_ours = (
         f"**{s3_e4_xgb['test_auc']:.4f}** (95% CI: [{s3_e4_xgb['ci_95_low']:.4f}, {s3_e4_xgb['ci_95_high']:.4f}])<br>"
-        f"• Protocol: Strictly pre-delivery maternal features (no GA/sex)<br>"
+        f"• Protocol: Strictly pre-delivery clinical features (no GA/sex)<br>"
         f"• Source: `docs/results/stream3_bench/benchmark_results.json`"
     )
     s3_e4_pub = (
-        f"**AUC ~0.60–0.76** (depending on timing & predictors)<br>"
-        f"• Source: [{s3_pub['source']}]({s3_pub['url']})<br>"
-        f"• Note: {s3_pub['note']}"
+        f"No clinical-only (GA-free) subset reported in Koivu et al. 2020 (all published models include GA/timing)<br>"
+        f"• Source: [{s3_pub['source']}]({s3_pub['url']}) (DOI: {s3_pub['doi']})"
+    )
+    s3_e4_comparable = "No (random vs temporal split, different years, different feature subsets and outcome definitions)"
+    s3_e4_claim = (
+        f"same order of magnitude; not directly comparable (Ours clinical-only: {s3_e4_xgb['test_auc']:.4f} "
+        f"[95% CI: {s3_e4_xgb['ci_95_low']:.4f}, {s3_e4_xgb['ci_95_high']:.4f}])."
     )
     lines.append(
         f"| **Maternal Risk (Stream 3)** | E4 Test AUC (Clinical-Only, >=20 wk) | {s3_e4_ours} | {s3_e4_pub} | "
-        f"{RULES_TABLE['stream3_e4']['comparable']} | {RULES_TABLE['stream3_e4']['claim']} |"
+        f"{s3_e4_comparable} | {s3_e4_claim} |"
     )
 
     lines.append("\n---\n")
@@ -233,7 +234,16 @@ def generate_benchmark_summary(results_dir: Path) -> str:
             f"{epochs_str} | {time_str} |"
         )
 
-    lines.append("\n### B. 5-Fold Cross-Validation: Row D vs Row E (All 999 Images)\n")
+    # Note on Fold-1 Re-runs (dynamically read)
+    d_run1_mae = row_d_run1["hc_mae"]
+    d_run2_mae = row_d_run2["hc_mae"]
+    lines.append(
+        f"\n> **Note on Fold-1 Re-runs**: Fold-1 numbers are single runs. The D recipe gave {d_run1_mae:.2f} in run 1 "
+        f"and {d_run2_mae:.2f} in run 2 on fold 1 (GPU training is not bit-reproducible); "
+        f"differences under about 0.3 mm are noise.\n"
+    )
+
+    lines.append("### B. 5-Fold Cross-Validation: Row D vs Row E (All 999 Images)\n")
     pooled = d_5fold_results["pooled"]
     paired_diffs = d_5fold_results.get("paired_differences", {})
     d_tta_stat = paired_diffs.get("d_tta_vs_e", {}).get("all_images", {})

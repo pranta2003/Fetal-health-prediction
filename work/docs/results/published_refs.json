@@ -74,11 +74,21 @@
     "fl_nme_sd": 0.09
   },
   "stream3": {
-    "source": "Koivu and Sairanen 2020",
-    "url": "https://doi.org/10.1016/j.artmed.2020.101864",
-    "protocol": "CDC Natality data, stillbirth risk prediction",
-    "note": "approximate, from our literature check; re-verify the exact numbers before the final thesis.",
-    "auc_early": "about 0.75-0.76",
-    "auc_late": "about 0.60-0.63"
+    "source": "Koivu and Sairanen 2020 (Springer Health Inf Sci Syst)",
+    "url": "https://link.springer.com/article/10.1007/s13755-020-00105-9",
+    "doi": "10.1007/s13755-020-00105-9",
+    "data": "CDC NVSS 2013-2016",
+    "protocol": "RANDOM split 70/10/10/10 + external NYC set; not temporal",
+    "auc_cdc_early_stillbirth": {
+      "LR": 0.73,
+      "SELU": 0.75,
+      "LightGBM": 0.75
+    },
+    "auc_cdc_late_stillbirth": {
+      "LR": 0.58,
+      "SELU": 0.59,
+      "LightGBM": 0.60
+    },
+    "note": "random vs temporal split, different years (2013-2016 vs train <=2021/test >=2022), different outcome definitions (early/late stillbirth vs >=20 wk stillbirth)."
   }
 }
