@@ -9,7 +9,7 @@ File names tell you the part. The prefix is the part:
 |---|---|---|
 | `hc18_...` | **Head** (head circumference HC, BPD) | HC18 |
 | `ac_...` | **Abdomen** (abdominal circumference AC) | FP + UCL abdomen images |
-| `femur_...` (coming) | **Femur** (femur length FL) | femur images inside FP + UCL |
+| `femur_...` | **Femur** (femur length FL) | femur images inside FP + UCL |
 | `fassd_...` (coming) | **Organs** (explanations) | FASSD |
 | inside `clinical/` | **Maternal risk** (stillbirth risk, tables) | CDC natality + fetal death files |
 | `hadlock.py` | **Weight formula** (EFW from HC, AC, FL) | no dataset, a formula |
@@ -55,9 +55,12 @@ File names tell you the part. The prefix is the part:
 ## FEMUR (FL)
 | Step | File | What it does |
 |---|---|---|
-| 1 Prepare data | `src/fetal/data/femur_dataset.py` | Reads FP and UCL femur images and landmark annotations, computes FL in mm |
+| 1 Prepare data | `src/fetal/data/femur_dataset.py` | Reads FP and UCL femur images and landmark annotations, computes FL in mm, excludes uncalibrated images, patient-grouped splits |
 | 5 Report | `scripts/15_femur_data_report.py` | Data check, landmark validation, patient leakage check, and FL distribution |
-| Proof | `tests/test_femur_*.py` | Fast tests for coordinate parsing, endpoint math, and synthetic loaders |
+| 5 Report | `scripts/21_femur_data_followup.py` | Outlier inspection (FL > 85 mm and 10 shortest), uncalibrated exclusions, UCL 125 audit, Hadlock check, and split verification |
+| Proof | `notebooks/benchmarks/femur_data.ipynb` | Executed benchmark notebook for femur data follow-up, outlier overlays, and split integrity |
+| Proof | `tests/test_femur_*.py` | Fast tests for coordinate parsing, endpoint math, uncalibrated exclusion, and patient isolation |
+| Results | `docs/results/femur/` | Results JSON (`femur_data_followup.json`), outlier overlay images, and `SHA256SUMS` |
 
 ## FASSD
 Not built yet. When it arrives, it follows the same pattern: `fassd_dataset.py`, `fassd_model.py`, `train_fassd.py`, `fassd_eval.py`.

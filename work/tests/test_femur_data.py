@@ -9,12 +9,14 @@ import pandas as pd
 import pytest
 
 from fetal.data.femur_dataset import (
+    DEV_FRACTION,
     LM_COLS,
     build_femur_data,
     compute_femur_length,
     load_femur_source,
     patient_id_from_name,
     read_split_names,
+    split_femur_data,
 )
 
 
@@ -190,3 +192,116 @@ def test_build_femur_data_synthetic(tmp_path: Path):
     assert len(combined) == 2
     assert set(combined["source"]) == {"FP", "UCL"}
     assert set(combined["official_split"]) == {"train", "test"}
+
+
+def test_build_femur_data_drop_missing_rate(tmp_path: Path):
+    fp_ann = tmp_path / "FP" / "annotations"
+    fp_img = tmp_path / "FP" / "images" / "Femur"
+    ucl_ann = tmp_path / "UCL" / "annotations" / "px_to_mm"
+    ucl_img = tmp_path / "UCL" / "images" / "Femur"
+
+    fp_ann.mkdir(parents=True)
+    fp_img.mkdir(parents=True)
+    ucl_ann.mkdir(parents=True)
+    ucl_img.mkdir(parents=True)
+
+    pd.DataFrame(
+        {
+            "image_name": [
+                "Patient001_Plane5_1_of_1.png",
+                "Patient00888_Plane5_1_of_1.png",
+            ],
+            "fl_1_x": [0.0, 0.0],
+            "fl_1_y": [0.0, 0.0],
+            "fl_2_x": [3.0, 3.0],
+            "fl_2_y": [4.0, 4.0],
+            "px_to_mm_rate": [0.1, np.nan],
+        }
+    ).to_csv(fp_ann / "Femur.csv", index=False)
+    pd.DataFrame(
+        {"image_name": ["Patient001_Plane5_1_of_1.png", "Patient00888_Plane5_1_of_1.png"]}
+    ).to_csv(fp_ann / "Femur_Train.csv", index=False)
+
+    pd.DataFrame(
+        {
+            "image_name": ["010_FL.png"],
+            "fl_1_x": [0.0],
+            "fl_1_y": [0.0],
+            "fl_2_x": [6.0],
+            "fl_2_y": [8.0],
+            "px_to_mm_rate": [0.1],
+        }
+    ).to_csv(ucl_ann / "Femur.csv", index=False)
+    pd.DataFrame({"image_name": ["010_FL.png"]}).to_csv(ucl_ann / "Femur_Test.csv", index=False)
+
+    # When drop_missing_rate is True (default)
+    data_dropped = build_femur_data(tmp_path, drop_missing_rate=True)
+    assert len(data_dropped) == 2
+    assert "Patient00888_Plane5_1_of_1.png" not in data_dropped["image_name"].values
+    assert data_dropped["px_to_mm_rate"].notna().all()
+
+    # When drop_missing_rate is False
+    data_all = build_femur_data(tmp_path, drop_missing_rate=False)
+    assert len(data_all) == 3
+    assert "Patient00888_Plane5_1_of_1.png" in data_all["image_name"].values
+
+
+def test_split_femur_data_patient_isolation():
+    # Construct a synthetic DataFrame with multiple patients and images
+    rows = []
+    for p in range(10):
+        # 2 images per patient
+        for img_idx in range(2):
+            rows.append(
+                {
+                    "image_name": f"Patient{p:03d}_Plane5_{img_idx+1}_of_2.png",
+                    "image_path": f"/fake/path/Patient{p:03d}_{img_idx}.png",
+                    "source": "FP",
+                    "patient": f"FP_Patient{p:03d}",
+                    "official_split": "train" if p < 8 else "test",
+                    "px_to_mm_rate": 0.1,
+                    "fl_length_mm": 30.0,
+                    "fl_1_x": 0.0,
+                    "fl_1_y": 0.0,
+                    "fl_2_x": 30.0,
+                    "fl_2_y": 40.0,
+                }
+            )
+    df = pd.DataFrame(rows)
+
+    tr, dv, te = split_femur_data(df, dev_fraction=0.25, seed=42)
+    # Check disjoint patients
+    tr_p = set(tr["patient"])
+    dv_p = set(dv["patient"])
+    te_p = set(te["patient"])
+
+    assert len(tr_p & dv_p) == 0
+    assert len(tr_p & te_p) == 0
+    assert len(dv_p & te_p) == 0
+
+    assert len(te) == 4  # 2 patients * 2 images = 4 test images
+    assert len(tr) + len(dv) == 16  # 8 train patients * 2 images = 16 images
+    assert len(dv_p) == 2  # round(0.25 * 8) = 2 patients
+
+
+def test_real_femur_data_missing_rate_excluded():
+    """Verify that build_femur_data() excludes the 3 uncalibrated images when run on real data."""
+    try:
+        data = build_femur_data(drop_missing_rate=True)
+    except Exception:
+        pytest.skip("Real data directory not available or accessible")
+
+    uncalibrated = [
+        "Patient00888_Plane5_1_of_1.png",
+        "Patient01319_Plane5_1_of_1.png",
+        "Patient01423_Plane5_1_of_1.png",
+    ]
+    for name in uncalibrated:
+        assert name not in data["image_name"].values
+    assert data["px_to_mm_rate"].notna().all()
+
+    tr, dv, te = split_femur_data(data)
+    assert len(set(tr["patient"]) & set(dv["patient"])) == 0
+    assert len(set(tr["patient"]) & set(te["patient"])) == 0
+    assert len(set(dv["patient"]) & set(te["patient"])) == 0
+
