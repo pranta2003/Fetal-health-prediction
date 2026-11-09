@@ -20,14 +20,26 @@ if str(src_dir) not in sys.path:
     sys.path.insert(0, str(src_dir))
 
 SUMS_FILENAME = "SHA256SUMS"
+TEXT_EXTENSIONS = {".json", ".md", ".csv", ".txt", ".log", ".yaml", ".yml"}
 
 
 def compute_sha256(filepath: str | Path, chunk_size: int = 1024 * 1024) -> str:
-    """Compute hex SHA-256 digest of a file in chunks."""
+    """Compute hex SHA-256 digest of a file, normalizing CRLF to LF for text files.
+    
+    This ensures that SHA256SUMS digests remain strictly deterministic across
+    Windows (CRLF) and Linux/Git (LF) checkouts.
+    """
+    filepath = Path(filepath)
     h = hashlib.sha256()
-    with open(filepath, "rb") as f:
-        while chunk := f.read(chunk_size):
-            h.update(chunk)
+    if filepath.suffix.lower() in TEXT_EXTENSIONS:
+        with open(filepath, "rb") as f:
+            content = f.read()
+        content = content.replace(b"\r\n", b"\n")
+        h.update(content)
+    else:
+        with open(filepath, "rb") as f:
+            while chunk := f.read(chunk_size):
+                h.update(chunk)
     return h.hexdigest()
 
 

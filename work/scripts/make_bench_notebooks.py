@@ -272,11 +272,74 @@ print(f"  Ensemble check pass (<= 0.002 mm): {diff_ens <= 0.002}")
     print(f"Saved {dest_path}")
 
 
+def build_summary_notebook(dest_path: Path):
+    nb = new_notebook()
+    nb.metadata["language_info"] = {"name": "python"}
+
+    md_text = """# Multi-Modal Fetal Health Benchmark Summary
+
+## Purpose & Protocol
+This notebook synthesizes and documents the full benchmark comparison across:
+1. **Head (HC18)**: 5-fold CV vs published literature (Mask-R2CNN, Fiorentino, Sobhaninia, etc.).
+2. **Abdomen (AC)**: 147 official test set evaluation vs published baseline (arXiv 2512.16710 Table 2).
+3. **Femur (FL)**: Data verification and baseline reference.
+4. **Maternal Risk (Stream 3)**: Model family comparison (LR, RF, LightGBM, XGBoost) and published CDC comparisons.
+5. **HC18 Approach Ladder**: Direct regression, Geometry v3, Multi-Task, ResNet-34 U-Net, and EfficientNet-B4.
+
+All numbers are dynamically read from result files produced by audited script executions.
+"""
+
+    code_run = """import sys
+from pathlib import Path
+import subprocess
+
+work_dir = Path.cwd()
+while work_dir.name != "work" and work_dir.parent != work_dir:
+    work_dir = work_dir.parent
+if str(work_dir / "src") not in sys.path:
+    sys.path.insert(0, str(work_dir / "src"))
+
+print(f"Work directory: {work_dir}")
+script_path = work_dir / "scripts" / "20_benchmark_summary.py"
+print(f"Executing {script_path.name}...")
+
+proc = subprocess.run(
+    [sys.executable, str(script_path)],
+    cwd=str(work_dir),
+    capture_output=True,
+    text=True,
+    check=True,
+)
+print(proc.stdout)
+"""
+
+    code_table = """from pathlib import Path
+from IPython.display import Markdown, display
+
+summary_file = work_dir / "docs" / "results" / "benchmark_summary.md"
+assert summary_file.is_file(), f"Missing {summary_file}"
+
+text = summary_file.read_text(encoding="utf-8")
+print(text)
+display(Markdown(text))
+"""
+
+    nb.cells = [
+        new_markdown_cell(md_text),
+        new_code_cell(code_run),
+        new_code_cell(code_table),
+    ]
+
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(dest_path, "w", encoding="utf-8") as f:
+        nbformat.write(nb, f)
+    print(f"Saved {dest_path}")
+
+
 def main():
     root = Path(__file__).resolve().parent.parent
     nb_dir = root / "notebooks" / "benchmarks"
-    build_stream3_notebook(nb_dir / "stream3_bench.ipynb")
-    build_ac_notebook(nb_dir / "ac_results.ipynb")
+    build_summary_notebook(nb_dir / "benchmark_summary.ipynb")
 
 
 if __name__ == "__main__":
