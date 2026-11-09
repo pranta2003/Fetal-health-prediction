@@ -88,6 +88,7 @@ Not built yet. When it arrives, it follows the same pattern: `fassd_dataset.py`,
 | `scripts/08_make_manifest.py`, `scripts/14_hash_results.py`, `scripts/16_extract_notebook_results.py`, `scripts/make_bench_notebooks.py`, `scripts/20_benchmark_summary.py` | Make and check file fingerprints, extract historical metrics from notebooks, construct benchmark notebooks, and generate supervisor summary |
 | `notebooks/benchmarks/benchmark_summary.ipynb` | Executed notebook synthesizing multi-modal benchmark summary |
 | `docs/results/published_refs.json`, `docs/results/benchmark_summary.md` | Published reference numbers with URLs/protocols, and synthesized executive summary table |
+| `tests/test_benchmark_summary.py` | Unit tests ensuring AC Ours/Claim consistency, published references, and dynamic ladder notes |
 | `scripts/run_all.ps1` | One command to run groups of the buttons above |
 
 ## How the whole system fits (the flow)
