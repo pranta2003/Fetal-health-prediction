@@ -1,0 +1,857 @@
+{
+  "dataset_origin": {
+    "source_repo": "https://github.com/surgical-vision/Multicentre-Fetal-Biometry",
+    "paper_citation": "arXiv 2512.16710",
+    "doi": "10.5522/04/30819911",
+    "license": "CC BY 4.0",
+    "raw_local_archive_path": "E:\\BUBT-CSE-4th yr\\Capstone\\data\\raw\\Multicentre-Fetal-Biometry-2026\\FetalBiometry-Multicentre-Landmarks-2026",
+    "local_fetal_data_path": "C:\\fetal-data",
+    "explanation": "The Abdomen and Femur data originally copied to C:/fetal-data originated from E:/BUBT-CSE-4th yr/Capstone/data/raw/Multicentre-Fetal-Biometry-2026/FetalBiometry-Multicentre-Landmarks-2026. The Head plane files (Head.csv, Head_Train.csv, Head_Test.csv and images/FP/Head, images/UCL/Head) were present in that local raw release but omitted in the earlier selective copy to C:/fetal-data. They have now been copied into C:/fetal-data (1,637 FP Head images, 159 UCL Head images)."
+  },
+  "directory_listings": {
+    "local_fetal_data": {
+      "base_path": "C:\\fetal-data",
+      "exists": true,
+      "entries": [
+        {
+          "path": "FP/annotations",
+          "exists": true,
+          "type": "directory",
+          "files_count": 9,
+          "subdirs_count": 0,
+          "files": [
+            "Abdomen.csv",
+            "Abdomen_Test.csv",
+            "Abdomen_Train.csv",
+            "Femur.csv",
+            "Femur_Test.csv",
+            "Femur_Train.csv",
+            "Head.csv",
+            "Head_Test.csv",
+            "Head_Train.csv"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "FP/images",
+          "exists": true,
+          "type": "directory",
+          "files_count": 0,
+          "subdirs_count": 3,
+          "files": [],
+          "subdirs": [
+            "Abdomen",
+            "Femur",
+            "Head"
+          ]
+        },
+        {
+          "path": "FP/images/Abdomen",
+          "exists": true,
+          "type": "directory",
+          "files_count": 693,
+          "subdirs_count": 0,
+          "files": [
+            "Patient00168_Plane2_1_of_2.png",
+            "Patient00168_Plane2_2_of_2.png",
+            "Patient00188_Plane2_1_of_1.png",
+            "Patient00216_Plane2_1_of_1.png",
+            "Patient00305_Plane2_1_of_2.png",
+            "Patient00305_Plane2_2_of_2.png",
+            "Patient00631_Plane2_1_of_1.png",
+            "Patient00640_Plane2_1_of_1.png",
+            "Patient00644_Plane2_1_of_2.png",
+            "Patient00644_Plane2_2_of_2.png",
+            "... (693 total files)"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "FP/images/Femur",
+          "exists": true,
+          "type": "directory",
+          "files_count": 760,
+          "subdirs_count": 0,
+          "files": [
+            "Patient00168_Plane5_1_of_2.png",
+            "Patient00168_Plane5_2_of_2.png",
+            "Patient00188_Plane5_1_of_1.png",
+            "Patient00305_Plane5_1_of_1.png",
+            "Patient00627_Plane5_1_of_1.png",
+            "Patient00629_Plane5_1_of_1.png",
+            "Patient00631_Plane5_1_of_1.png",
+            "Patient00640_Plane5_1_of_1.png",
+            "Patient00641_Plane5_1_of_1.png",
+            "Patient00642_Plane5_1_of_1.png",
+            "... (760 total files)"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "FP/images/Head",
+          "exists": true,
+          "type": "directory",
+          "files_count": 1637,
+          "subdirs_count": 0,
+          "files": [
+            "Patient00168_Plane3_1_of_3.png",
+            "Patient00168_Plane3_2_of_3.png",
+            "Patient00188_Plane3_1_of_3.png",
+            "Patient00216_Plane3_1_of_5.png",
+            "Patient00216_Plane3_3_of_5.png",
+            "Patient00216_Plane3_5_of_5.png",
+            "Patient00305_Plane3_2_of_5.png",
+            "Patient00305_Plane3_3_of_5.png",
+            "Patient00305_Plane3_5_of_5.png",
+            "Patient00627_Plane3_1_of_1.png",
+            "... (1637 total files)"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "UCL/annotations",
+          "exists": true,
+          "type": "directory",
+          "files_count": 9,
+          "subdirs_count": 1,
+          "files": [
+            "Abdomen.csv",
+            "Abdomen_Test.csv",
+            "Abdomen_Train.csv",
+            "Femur.csv",
+            "Femur_Test.csv",
+            "Femur_Train.csv",
+            "Head.csv",
+            "Head_Test.csv",
+            "Head_Train.csv"
+          ],
+          "subdirs": [
+            "px_to_mm"
+          ]
+        },
+        {
+          "path": "UCL/annotations/px_to_mm",
+          "exists": true,
+          "type": "directory",
+          "files_count": 9,
+          "subdirs_count": 0,
+          "files": [
+            "Abdomen.csv",
+            "Abdomen_Test.csv",
+            "Abdomen_Train.csv",
+            "Femur.csv",
+            "Femur_Test.csv",
+            "Femur_Train.csv",
+            "Head.csv",
+            "Head_Test.csv",
+            "Head_Train.csv"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "UCL/images",
+          "exists": true,
+          "type": "directory",
+          "files_count": 0,
+          "subdirs_count": 3,
+          "files": [],
+          "subdirs": [
+            "Abdomen",
+            "Femur",
+            "Head"
+          ]
+        },
+        {
+          "path": "UCL/images/Abdomen",
+          "exists": true,
+          "type": "directory",
+          "files_count": 130,
+          "subdirs_count": 0,
+          "files": [
+            "001_2AC.jpg",
+            "001_AC.jpg",
+            "002_2AC.jpg",
+            "002_3AC.jpg",
+            "002_4AC.jpg",
+            "002_5AC.jpg",
+            "002_AC.jpg",
+            "004_AC.jpg",
+            "005_10AC.jpeg",
+            "005_11AC.jpeg",
+            "... (130 total files)"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "UCL/images/Femur",
+          "exists": true,
+          "type": "directory",
+          "files_count": 135,
+          "subdirs_count": 0,
+          "files": [
+            "001_FL.jpg",
+            "002_2FL.jpeg",
+            "002_3FL.jpeg",
+            "002_FL.jpeg",
+            "004_2FL.jpeg",
+            "004_FL.jpeg",
+            "005_10FL.jpeg",
+            "005_11FL.jpeg",
+            "005_12FL.jpeg",
+            "005_13FL.jpeg",
+            "... (135 total files)"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "UCL/images/Head",
+          "exists": true,
+          "type": "directory",
+          "files_count": 159,
+          "subdirs_count": 0,
+          "files": [
+            "001_HC.jpg",
+            "002_10HC.jpeg",
+            "002_3HC.jpeg",
+            "002_4HC.jpeg",
+            "002_5HC.jpeg",
+            "002_6HC.jpeg",
+            "002_7HC.jpeg",
+            "002_8HC.jpeg",
+            "002_9HC.jpeg",
+            "002_HC.jpeg",
+            "... (159 total files)"
+          ],
+          "subdirs": []
+        }
+      ]
+    },
+    "raw_capstone_release": {
+      "base_path": "E:\\BUBT-CSE-4th yr\\Capstone\\data\\raw\\Multicentre-Fetal-Biometry-2026\\FetalBiometry-Multicentre-Landmarks-2026",
+      "exists": true,
+      "entries": [
+        {
+          "path": "annotations/FP",
+          "exists": true,
+          "type": "directory",
+          "files_count": 9,
+          "subdirs_count": 0,
+          "files": [
+            "Abdomen.csv",
+            "Abdomen_Test.csv",
+            "Abdomen_Train.csv",
+            "Femur.csv",
+            "Femur_Test.csv",
+            "Femur_Train.csv",
+            "Head.csv",
+            "Head_Test.csv",
+            "Head_Train.csv"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "images/FP",
+          "exists": true,
+          "type": "directory",
+          "files_count": 0,
+          "subdirs_count": 3,
+          "files": [],
+          "subdirs": [
+            "Abdomen",
+            "Femur",
+            "Head"
+          ]
+        },
+        {
+          "path": "images/FP/Abdomen",
+          "exists": true,
+          "type": "directory",
+          "files_count": 693,
+          "subdirs_count": 0,
+          "files": [
+            "Patient00168_Plane2_1_of_2.png",
+            "Patient00168_Plane2_2_of_2.png",
+            "Patient00188_Plane2_1_of_1.png",
+            "Patient00216_Plane2_1_of_1.png",
+            "Patient00305_Plane2_1_of_2.png",
+            "Patient00305_Plane2_2_of_2.png",
+            "Patient00631_Plane2_1_of_1.png",
+            "Patient00640_Plane2_1_of_1.png",
+            "Patient00644_Plane2_1_of_2.png",
+            "Patient00644_Plane2_2_of_2.png",
+            "... (693 total files)"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "images/FP/Femur",
+          "exists": true,
+          "type": "directory",
+          "files_count": 760,
+          "subdirs_count": 0,
+          "files": [
+            "Patient00168_Plane5_1_of_2.png",
+            "Patient00168_Plane5_2_of_2.png",
+            "Patient00188_Plane5_1_of_1.png",
+            "Patient00305_Plane5_1_of_1.png",
+            "Patient00627_Plane5_1_of_1.png",
+            "Patient00629_Plane5_1_of_1.png",
+            "Patient00631_Plane5_1_of_1.png",
+            "Patient00640_Plane5_1_of_1.png",
+            "Patient00641_Plane5_1_of_1.png",
+            "Patient00642_Plane5_1_of_1.png",
+            "... (760 total files)"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "images/FP/Head",
+          "exists": true,
+          "type": "directory",
+          "files_count": 1637,
+          "subdirs_count": 0,
+          "files": [
+            "Patient00168_Plane3_1_of_3.png",
+            "Patient00168_Plane3_2_of_3.png",
+            "Patient00188_Plane3_1_of_3.png",
+            "Patient00216_Plane3_1_of_5.png",
+            "Patient00216_Plane3_3_of_5.png",
+            "Patient00216_Plane3_5_of_5.png",
+            "Patient00305_Plane3_2_of_5.png",
+            "Patient00305_Plane3_3_of_5.png",
+            "Patient00305_Plane3_5_of_5.png",
+            "Patient00627_Plane3_1_of_1.png",
+            "... (1637 total files)"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "annotations/UCL",
+          "exists": true,
+          "type": "directory",
+          "files_count": 9,
+          "subdirs_count": 1,
+          "files": [
+            "Abdomen.csv",
+            "Abdomen_Test.csv",
+            "Abdomen_Train.csv",
+            "Femur.csv",
+            "Femur_Test.csv",
+            "Femur_Train.csv",
+            "Head.csv",
+            "Head_Test.csv",
+            "Head_Train.csv"
+          ],
+          "subdirs": [
+            "px_to_mm"
+          ]
+        },
+        {
+          "path": "annotations/UCL/px_to_mm",
+          "exists": true,
+          "type": "directory",
+          "files_count": 9,
+          "subdirs_count": 0,
+          "files": [
+            "Abdomen.csv",
+            "Abdomen_Test.csv",
+            "Abdomen_Train.csv",
+            "Femur.csv",
+            "Femur_Test.csv",
+            "Femur_Train.csv",
+            "Head.csv",
+            "Head_Test.csv",
+            "Head_Train.csv"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "images/UCL",
+          "exists": true,
+          "type": "directory",
+          "files_count": 0,
+          "subdirs_count": 3,
+          "files": [],
+          "subdirs": [
+            "Abdomen",
+            "Femur",
+            "Head"
+          ]
+        },
+        {
+          "path": "images/UCL/Abdomen",
+          "exists": true,
+          "type": "directory",
+          "files_count": 130,
+          "subdirs_count": 0,
+          "files": [
+            "001_2AC.jpg",
+            "001_AC.jpg",
+            "002_2AC.jpg",
+            "002_3AC.jpg",
+            "002_4AC.jpg",
+            "002_5AC.jpg",
+            "002_AC.jpg",
+            "004_AC.jpg",
+            "005_10AC.jpeg",
+            "005_11AC.jpeg",
+            "... (130 total files)"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "images/UCL/Femur",
+          "exists": true,
+          "type": "directory",
+          "files_count": 135,
+          "subdirs_count": 0,
+          "files": [
+            "001_FL.jpg",
+            "002_2FL.jpeg",
+            "002_3FL.jpeg",
+            "002_FL.jpeg",
+            "004_2FL.jpeg",
+            "004_FL.jpeg",
+            "005_10FL.jpeg",
+            "005_11FL.jpeg",
+            "005_12FL.jpeg",
+            "005_13FL.jpeg",
+            "... (135 total files)"
+          ],
+          "subdirs": []
+        },
+        {
+          "path": "images/UCL/Head",
+          "exists": true,
+          "type": "directory",
+          "files_count": 159,
+          "subdirs_count": 0,
+          "files": [
+            "001_HC.jpg",
+            "002_10HC.jpeg",
+            "002_3HC.jpeg",
+            "002_4HC.jpeg",
+            "002_5HC.jpeg",
+            "002_6HC.jpeg",
+            "002_7HC.jpeg",
+            "002_8HC.jpeg",
+            "002_9HC.jpeg",
+            "002_HC.jpeg",
+            "... (159 total files)"
+          ],
+          "subdirs": []
+        }
+      ]
+    }
+  },
+  "metadata_columns_audit": {
+    "FP": {
+      "Head": {
+        "columns": [
+          "image_name",
+          "scale",
+          "center_w",
+          "center_h",
+          "ofd_1_x",
+          "ofd_1_y",
+          "ofd_2_x",
+          "ofd_2_y",
+          "bpd_1_x",
+          "bpd_1_y",
+          "bpd_2_x",
+          "bpd_2_y",
+          "SubjectID",
+          "px_to_mm_rate",
+          "Algo",
+          "Split"
+        ],
+        "matched_clinical_or_outcome_columns": [],
+        "has_gestational_age": false,
+        "has_estimated_fetal_weight": false,
+        "has_birth_weight": false,
+        "has_outcome": false
+      },
+      "Abdomen": {
+        "columns": [
+          "image_name",
+          "scale",
+          "center_w",
+          "center_h",
+          "tad_1_x",
+          "tad_1_y",
+          "tad_2_x",
+          "tad_2_y",
+          "apad_1_x",
+          "apad_1_y",
+          "apad_2_x",
+          "apad_2_y",
+          "px_to_mm_rate",
+          "mm_dist",
+          "Algo",
+          "SubjectID",
+          "Split"
+        ],
+        "matched_clinical_or_outcome_columns": [],
+        "has_gestational_age": false,
+        "has_estimated_fetal_weight": false,
+        "has_birth_weight": false,
+        "has_outcome": false
+      },
+      "Femur": {
+        "columns": [
+          "image_name",
+          "scale",
+          "center_w",
+          "center_h",
+          "fl_1_x",
+          "fl_1_y",
+          "fl_2_x",
+          "fl_2_y",
+          "px_to_mm_rate",
+          "mm_dist",
+          "Patient",
+          "Split",
+          "Algo"
+        ],
+        "matched_clinical_or_outcome_columns": [],
+        "has_gestational_age": false,
+        "has_estimated_fetal_weight": false,
+        "has_birth_weight": false,
+        "has_outcome": false
+      }
+    },
+    "UCL_Raw": {
+      "Head": {
+        "columns": [
+          "image_name",
+          "scale",
+          "center_w",
+          "center_h",
+          "ofd_1_x",
+          "ofd_1_y",
+          "ofd_2_x",
+          "ofd_2_y",
+          "bpd_1_x",
+          "bpd_1_y",
+          "bpd_2_x",
+          "bpd_2_y",
+          "SubjectID",
+          "px_to_mm_rate",
+          "Algo",
+          "Split",
+          "SubjectID_extracted"
+        ],
+        "matched_clinical_or_outcome_columns": [],
+        "has_gestational_age": false,
+        "has_estimated_fetal_weight": false,
+        "has_birth_weight": false,
+        "has_outcome": false
+      },
+      "Abdomen": {
+        "columns": [
+          "image_name",
+          "scale",
+          "center_w",
+          "center_h",
+          "tad_1_x",
+          "tad_1_y",
+          "tad_2_x",
+          "tad_2_y",
+          "apad_1_x",
+          "apad_1_y",
+          "apad_2_x",
+          "apad_2_y",
+          "px_to_mm_rate",
+          "mm_dist",
+          "Algo",
+          "SubjectID",
+          "Split",
+          "SubjectID_extracted"
+        ],
+        "matched_clinical_or_outcome_columns": [],
+        "has_gestational_age": false,
+        "has_estimated_fetal_weight": false,
+        "has_birth_weight": false,
+        "has_outcome": false
+      },
+      "Femur": {
+        "columns": [
+          "image_name",
+          "scale",
+          "center_w",
+          "center_h",
+          "fl_1_x",
+          "fl_1_y",
+          "fl_2_x",
+          "fl_2_y",
+          "px_to_mm_rate",
+          "mm_dist",
+          "Patient",
+          "Split",
+          "Algo",
+          "SubjectID_extracted"
+        ],
+        "matched_clinical_or_outcome_columns": [],
+        "has_gestational_age": false,
+        "has_estimated_fetal_weight": false,
+        "has_birth_weight": false,
+        "has_outcome": false
+      }
+    },
+    "UCL_px_to_mm": {
+      "Head": {
+        "columns": [
+          "image_name",
+          "scale",
+          "center_w",
+          "center_h",
+          "ofd_1_x",
+          "ofd_1_y",
+          "ofd_2_x",
+          "ofd_2_y",
+          "bpd_1_x",
+          "bpd_1_y",
+          "bpd_2_x",
+          "bpd_2_y",
+          "SubjectID",
+          "px_to_mm_rate",
+          "Algo",
+          "Split",
+          "SubjectID_extracted"
+        ],
+        "matched_clinical_or_outcome_columns": [],
+        "has_gestational_age": false,
+        "has_estimated_fetal_weight": false,
+        "has_birth_weight": false,
+        "has_outcome": false
+      },
+      "Abdomen": {
+        "columns": [
+          "image_name",
+          "scale",
+          "center_w",
+          "center_h",
+          "tad_1_x",
+          "tad_1_y",
+          "tad_2_x",
+          "tad_2_y",
+          "apad_1_x",
+          "apad_1_y",
+          "apad_2_x",
+          "apad_2_y",
+          "px_to_mm_rate",
+          "mm_dist",
+          "Algo",
+          "SubjectID",
+          "Split",
+          "SubjectID_extracted"
+        ],
+        "matched_clinical_or_outcome_columns": [],
+        "has_gestational_age": false,
+        "has_estimated_fetal_weight": false,
+        "has_birth_weight": false,
+        "has_outcome": false
+      },
+      "Femur": {
+        "columns": [
+          "image_name",
+          "scale",
+          "center_w",
+          "center_h",
+          "fl_1_x",
+          "fl_1_y",
+          "fl_2_x",
+          "fl_2_y",
+          "px_to_mm_rate",
+          "mm_dist",
+          "Patient",
+          "Split",
+          "Algo",
+          "SubjectID_extracted"
+        ],
+        "matched_clinical_or_outcome_columns": [],
+        "has_gestational_age": false,
+        "has_estimated_fetal_weight": false,
+        "has_birth_weight": false,
+        "has_outcome": false
+      }
+    }
+  },
+  "subject_counts": {
+    "fp": {
+      "dataset_name": "FP (Fetal Planes)",
+      "images_per_plane": {
+        "head": 1637,
+        "abdomen": 693,
+        "femur": 760,
+        "total_images": 3090
+      },
+      "subjects_per_plane": {
+        "head": 909,
+        "abdomen": 586,
+        "femur": 629,
+        "total_union": 1047
+      },
+      "pairwise_intersections": {
+        "head_and_abdomen": 507,
+        "head_and_femur": 524,
+        "abdomen_and_femur": 407
+      },
+      "three_plane_intersection": 361,
+      "venn_partitions": {
+        "head_only": 239,
+        "abdomen_only": 33,
+        "femur_only": 59,
+        "head_abdomen_only": 146,
+        "head_femur_only": 163,
+        "abdomen_femur_only": 46,
+        "all_three": 361
+      }
+    },
+    "ucl_raw": {
+      "dataset_name": "UCL Raw Annotations",
+      "images_per_plane": {
+        "head": 159,
+        "abdomen": 130,
+        "femur": 135,
+        "total_images": 424
+      },
+      "subjects_per_plane": {
+        "head": 47,
+        "abdomen": 45,
+        "femur": 47,
+        "total_union": 51
+      },
+      "pairwise_intersections": {
+        "head_and_abdomen": 41,
+        "head_and_femur": 44,
+        "abdomen_and_femur": 41
+      },
+      "three_plane_intersection": 38,
+      "venn_partitions": {
+        "head_only": 0,
+        "abdomen_only": 1,
+        "femur_only": 0,
+        "head_abdomen_only": 3,
+        "head_femur_only": 6,
+        "abdomen_femur_only": 3,
+        "all_three": 38
+      }
+    },
+    "ucl_px_to_mm": {
+      "dataset_name": "UCL Calibrated (px_to_mm)",
+      "images_per_plane": {
+        "head": 126,
+        "abdomen": 99,
+        "femur": 107,
+        "total_images": 332
+      },
+      "subjects_per_plane": {
+        "head": 31,
+        "abdomen": 30,
+        "femur": 32,
+        "total_union": 35
+      },
+      "pairwise_intersections": {
+        "head_and_abdomen": 26,
+        "head_and_femur": 29,
+        "abdomen_and_femur": 27
+      },
+      "three_plane_intersection": 24,
+      "venn_partitions": {
+        "head_only": 0,
+        "abdomen_only": 1,
+        "femur_only": 0,
+        "head_abdomen_only": 2,
+        "head_femur_only": 5,
+        "abdomen_femur_only": 3,
+        "all_three": 24
+      }
+    },
+    "paper_comparison_fp": {
+      "head": {
+        "ours": 909,
+        "paper": 909,
+        "diff": 0
+      },
+      "abdomen": {
+        "ours": 586,
+        "paper": 586,
+        "diff": 0
+      },
+      "femur": {
+        "ours": 629,
+        "paper": 629,
+        "diff": 0
+      },
+      "total_union": {
+        "ours": 1047,
+        "paper": 1047,
+        "diff": 0
+      },
+      "exact_match_all": true
+    }
+  },
+  "splits_and_leakage_audit": {
+    "fp": {
+      "dataset_name": "FP (Fetal Planes)",
+      "three_plane_subjects_total": 361,
+      "three_plane_subjects_in_head_test": 147,
+      "three_plane_subjects_in_abdomen_test": 70,
+      "three_plane_subjects_in_femur_test": 142,
+      "three_plane_subjects_all_test": 17,
+      "three_plane_subjects_all_train": 136,
+      "cross_plane_split_mismatch_count": 208,
+      "mismatch_breakdown": {
+        "head=test|abd=test|femur=test": 17,
+        "head=test|abd=test|femur=train": 8,
+        "head=test|abd=train|femur=test": 80,
+        "head=test|abd=train|femur=train": 42,
+        "head=train|abd=test|femur=test": 12,
+        "head=train|abd=test|femur=train": 33,
+        "head=train|abd=train|femur=test": 33,
+        "head=train|abd=train|femur=train": 136
+      },
+      "leakage_risk_explanation": "Because per-plane test splits were constructed independently in the benchmark paper, 208 subjects have conflicting split assignments across planes. Only 17 subjects are held-out in test across all three planes simultaneously. Evaluating multi-plane Hadlock on the remaining subjects causes cross-plane leakage if any single plane model was exposed to that subject during training."
+    },
+    "ucl_raw": {
+      "dataset_name": "UCL Raw Annotations",
+      "three_plane_subjects_total": 38,
+      "three_plane_subjects_in_head_test": 9,
+      "three_plane_subjects_in_abdomen_test": 9,
+      "three_plane_subjects_in_femur_test": 10,
+      "three_plane_subjects_all_test": 4,
+      "three_plane_subjects_all_train": 20,
+      "cross_plane_split_mismatch_count": 12,
+      "mismatch_breakdown": {
+        "head=mixed|abd=mixed|femur=mixed": 2,
+        "head=mixed|abd=test|femur=test": 2,
+        "head=mixed|abd=test|femur=train": 1,
+        "head=mixed|abd=train|femur=test": 1,
+        "head=test|abd=mixed|femur=mixed": 1,
+        "head=test|abd=mixed|femur=test": 1,
+        "head=test|abd=test|femur=test": 4,
+        "head=test|abd=test|femur=train": 1,
+        "head=test|abd=train|femur=test": 1,
+        "head=test|abd=train|femur=train": 1,
+        "head=train|abd=mixed|femur=train": 1,
+        "head=train|abd=test|femur=train": 1,
+        "head=train|abd=train|femur=test": 1,
+        "head=train|abd=train|femur=train": 20
+      },
+      "leakage_risk_explanation": "Because per-plane test splits were constructed independently in the benchmark paper, 12 subjects have conflicting split assignments across planes. Only 4 subjects are held-out in test across all three planes simultaneously. Evaluating multi-plane Hadlock on the remaining subjects causes cross-plane leakage if any single plane model was exposed to that subject during training."
+    },
+    "ucl_px_to_mm": {
+      "dataset_name": "UCL Calibrated (px_to_mm)",
+      "three_plane_subjects_total": 24,
+      "three_plane_subjects_in_head_test": 5,
+      "three_plane_subjects_in_abdomen_test": 5,
+      "three_plane_subjects_in_femur_test": 5,
+      "three_plane_subjects_all_test": 5,
+      "three_plane_subjects_all_train": 19,
+      "cross_plane_split_mismatch_count": 0,
+      "mismatch_breakdown": {},
+      "leakage_risk_explanation": "Because per-plane test splits were constructed independently in the benchmark paper, 0 subjects have conflicting split assignments across planes. Only 5 subjects are held-out in test across all three planes simultaneously. Evaluating multi-plane Hadlock on the remaining subjects causes cross-plane leakage if any single plane model was exposed to that subject during training."
+    }
+  }
+}
