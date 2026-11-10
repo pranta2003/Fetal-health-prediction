@@ -34,7 +34,7 @@ def test_ac_ours_and_claim_values_match(summary_md_text):
     table_lines = [l for l in summary_md_text.splitlines() if l.startswith("|")]
     
     # 1. AC Landmark NME row
-    ac_nme_row = next(l for l in table_lines if "Landmark NME" in l)
+    ac_nme_row = next(l for l in table_lines if "Abdomen (AC)" in l and "Landmark NME" in l)
     cols = [c.strip() for c in ac_nme_row.split("|")[1:-1]]
     ours_cell = cols[2]
     claim_cell = cols[5]
@@ -124,3 +124,19 @@ def test_ladder_fold1_note_matches_files(summary_md_text):
         f"differences under about 0.3 mm are noise."
     )
     assert expected_note in summary_md_text
+
+
+def test_head_landmark_summary_row(summary_md_text):
+    """Verify that Head Landmark row in benchmark summary matches results json and claims at most 'on par'."""
+    table_lines = [l for l in summary_md_text.splitlines() if l.startswith("|")]
+    head_row = next((l for l in table_lines if "Head (FP+UCL)" in l), None)
+    assert head_row is not None, "Head (FP+UCL) row missing from summary table"
+    cols = [c.strip() for c in head_row.split("|")[1:-1]]
+    ours_cell = cols[2]
+    claim_cell = cols[5]
+
+    assert "3-seed median ensemble" in ours_cell
+    assert "at most 'on par'" in claim_cell
+    assert "BPD NME:" in ours_cell
+    assert "OFD NME:" in ours_cell
+

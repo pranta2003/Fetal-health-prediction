@@ -73,6 +73,16 @@
     "fl_nme_mean": 0.03,
     "fl_nme_sd": 0.09
   },
+  "head": {
+    "source": "arXiv 2512.16710, Table 2",
+    "url": "https://arxiv.org/abs/2512.16710",
+    "protocol": "NME +- SD, model trained on combined data (m-c), tested on combined (m-c)",
+    "note": "reports NME, not measurements in mm; test set sizes not stated; claim at most 'on par'.",
+    "bpd_nme_mean": 0.04,
+    "bpd_nme_sd": 0.07,
+    "ofd_nme_mean": 0.03,
+    "ofd_nme_sd": 0.06
+  },
   "stream3": {
     "source": "Koivu and Sairanen 2020 (Springer Health Inf Sci Syst)",
     "url": "https://link.springer.com/article/10.1007/s13755-020-00105-9",

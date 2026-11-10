@@ -89,6 +89,42 @@ def generate_benchmark_summary(results_dir: Path) -> str:
         f"| **Head (HC18)** | HC MAE | {hc_ours} | {hc_pub} | {hc_comparable} | {hc_claim} |"
     )
 
+    # Row 1b: Head Landmark (FP+UCL)
+    head_res_path = results_dir / "head_landmark" / "head_landmark_results.json"
+    if head_res_path.is_file():
+        head_res = load_json(head_res_path)
+        head_ens = head_res["ensemble_test_all"]
+        head_bpd_nme_str = f"{head_ens['bpd_nme_mean']:.3f} +- {head_ens['bpd_nme_sd']:.3f}"
+        head_ofd_nme_str = f"{head_ens['ofd_nme_mean']:.3f} +- {head_ens['ofd_nme_sd']:.3f}"
+        head_bpd_mae_str = f"{head_ens['bpd_mae']:.2f} mm"
+        head_ofd_mae_str = f"{head_ens['ofd_mae']:.2f} mm"
+        head_hc_mae_str = f"{head_ens['hc_mae']:.2f} mm"
+        head_nme_ours = (
+            f"**BPD NME: {head_bpd_nme_str}**<br>"
+            f"**OFD NME: {head_ofd_nme_str}** (3-seed median ensemble)<br>"
+            f"• Biometry: BPD {head_bpd_mae_str}, OFD {head_ofd_mae_str}, HC {head_hc_mae_str}<br>"
+            f"• Protocol: {head_ens['n_images']} official test images ({head_ens['n_patients']} patients)<br>"
+            f"• Source: `docs/results/head_landmark/head_landmark_results.json`"
+        )
+        pub_head = pub_refs["head"]
+        head_nme_pub = (
+            f"Combined->Combined (m-c->m-c):<br>"
+            f"• BPD: **{pub_head['bpd_nme_mean']:.2f} +- {pub_head['bpd_nme_sd']:.2f}**<br>"
+            f"• OFD: **{pub_head['ofd_nme_mean']:.2f} +- {pub_head['ofd_nme_sd']:.2f}**<br>"
+            f"• Source: [{pub_head['source']}]({pub_head['url']})<br>"
+            f"• Protocol: {pub_head['protocol']}"
+        )
+        head_comparable = "Partly (same NME formula; test set split sizes not stated in publication)"
+        head_claim = (
+            f"Claim at most 'on par' (Ours [3-seed median ensemble]: BPD {head_bpd_nme_str}, OFD {head_ofd_nme_str} vs "
+            f"Published: BPD {pub_head['bpd_nme_mean']:.2f} +- {pub_head['bpd_nme_sd']:.2f}, "
+            f"OFD {pub_head['ofd_nme_mean']:.2f} +- {pub_head['ofd_nme_sd']:.2f}; test set sizes not stated)."
+        )
+        lines.append(
+            f"| **Head (FP+UCL)** | Landmark NME (BPD, OFD) | {head_nme_ours} | {head_nme_pub} | "
+            f"{head_comparable} | {head_claim} |"
+        )
+
     # Row 2: AC Landmark NME (Using ONE model: 4-model median ensemble)
     ens_med = ac_ens["ENS_median"]
     ac_tad_str = f"{ens_med['tad_nme']:.3f} +- {ens_med['tad_nme_sd']:.3f}"

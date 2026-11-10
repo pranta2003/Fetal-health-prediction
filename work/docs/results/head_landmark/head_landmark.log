@@ -1,0 +1,127 @@
+[{"stream_name":"stdout","time":8.243315068,"data":"Installing segmentation-models-pytorch==0.5.0...\n"}
+,{"stream_name":"stdout","time":9.065348896,"data":"Collecting segmentation-models-pytorch==0.5.0\n"}
+,{"stream_name":"stdout","time":9.136264104,"data":"  Downloading segmentation_models_pytorch-0.5.0-py3-none-any.whl.metadata (17 kB)\n"}
+,{"stream_name":"stdout","time":9.158946522,"data":"Requirement already satisfied: huggingface-hub\u003e=0.24 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (1.33.0)\n"}
+,{"stream_name":"stdout","time":9.159660447,"data":"Requirement already satisfied: numpy\u003e=1.19.3 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (2.1.3)\n"}
+,{"stream_name":"stdout","time":9.160439269,"data":"Requirement already satisfied: pillow\u003e=8 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (13.0.0)\n"}
+,{"stream_name":"stdout","time":9.161163208,"data":"Requirement already satisfied: safetensors\u003e=0.3.1 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (0.8.0)\n"}
+,{"stream_name":"stdout","time":9.161857666,"data":"Requirement already satisfied: timm\u003e=0.9 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (1.0.30)\n"}
+,{"stream_name":"stdout","time":9.162599495,"data":"Requirement already satisfied: torch\u003e=1.8 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (2.11.0+cu130)\n"}
+,{"stream_name":"stdout","time":9.163246772,"data":"Requirement already satisfied: torchvision\u003e=0.9 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (0.26.0+cu130)\n"}
+,{"stream_name":"stdout","time":9.163852433,"data":"Requirement already satisfied: tqdm\u003e=4.42.1 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (4.67.3)\n"}
+,{"stream_name":"stdout","time":9.166691098,"data":"Requirement already satisfied: click\u003c9.0.0,\u003e=8.4.2 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (8.5.0)\n"}
+,{"stream_name":"stdout","time":9.167376854,"data":"Requirement already satisfied: filelock\u003e=3.10.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.2.4)\n"}
+,{"stream_name":"stdout","time":9.168019701,"data":"Requirement already satisfied: fsspec\u003e=2023.5.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (2025.12.0)\n"}
+,{"stream_name":"stdout","time":9.169453747,"data":"Requirement already satisfied: hf-xet\u003c2.0.0,\u003e=1.6.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (1.7.0)\n"}
+,{"stream_name":"stdout","time":9.170136407,"data":"Requirement already satisfied: httpx\u003c1,\u003e=0.23.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (0.28.1)\n"}
+,{"stream_name":"stdout","time":9.170792378,"data":"Requirement already satisfied: packaging\u003e=20.9 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (26.3)\n"}
+,{"stream_name":"stdout","time":9.171479459,"data":"Requirement already satisfied: pyyaml\u003e=5.1 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (6.0.3)\n"}
+,{"stream_name":"stdout","time":9.17230365,"data":"Requirement already satisfied: typing-extensions\u003e=4.1.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.16.0)\n"}
+,{"stream_name":"stdout","time":9.181281425,"data":"Requirement already satisfied: anyio in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.15.1)\n"}
+,{"stream_name":"stdout","time":9.181899924,"data":"Requirement already satisfied: certifi in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (2026.10.23)\n"}
+,{"stream_name":"stdout","time":9.182599376,"data":"Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (1.0.9)\n"}
+,{"stream_name":"stdout","time":9.183227795,"data":"Requirement already satisfied: idna in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (3.20)\n"}
+,{"stream_name":"stdout","time":9.185908799,"data":"Requirement already satisfied: h11\u003e=0.16 in /usr/local/lib/python3.13/dist-packages (from httpcore==1.*-\u003ehttpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (0.16.0)\n"}
+,{"stream_name":"stdout","time":9.212893308,"data":"Requirement already satisfied: setuptools\u003c82 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (81.0.0)\n"}
+,{"stream_name":"stdout","time":9.213533332,"data":"Requirement already satisfied: sympy\u003e=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.14.0)\n"}
+,{"stream_name":"stdout","time":9.214164104,"data":"Requirement already satisfied: networkx\u003e=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.7)\n"}
+,{"stream_name":"stdout","time":9.214737438,"data":"Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.1.6)\n"}
+,{"stream_name":"stdout","time":9.215997545,"data":"Requirement already satisfied: cuda-toolkit==13.0.2 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.2)\n"}
+,{"stream_name":"stdout","time":9.217082691,"data":"Requirement already satisfied: cuda-bindings\u003c14,\u003e=13.0.3 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.3)\n"}
+,{"stream_name":"stdout","time":9.217917046,"data":"Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (9.19.0.56)\n"}
+,{"stream_name":"stdout","time":9.218738282,"data":"Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (0.8.0)\n"}
+,{"stream_name":"stdout","time":9.219597228,"data":"Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (2.28.9)\n"}
+,{"stream_name":"stdout","time":9.220397414,"data":"Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.4.5)\n"}
+,{"stream_name":"stdout","time":9.221165617,"data":"Requirement already satisfied: triton==3.6.0 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.6.0)\n"}
+,{"stream_name":"stdout","time":9.231504369,"data":"Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.1.0.3)\n"}
+,{"stream_name":"stdout","time":9.232642353,"data":"Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.96)\n"}
+,{"stream_name":"stdout","time":9.233664969,"data":"Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.0.0.61)\n"}
+,{"stream_name":"stdout","time":9.234717375,"data":"Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.15.1.6)\n"}
+,{"stream_name":"stdout","time":9.235846546,"data":"Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.85)\n"}
+,{"stream_name":"stdout","time":9.236821881000001,"data":"Requirement already satisfied: nvidia-curand==10.4.0.35.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (10.4.0.35)\n"}
+,{"stream_name":"stdout","time":9.23783841,"data":"Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.0.4.66)\n"}
+,{"stream_name":"stdout","time":9.238915491,"data":"Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.6.3.3)\n"}
+,{"stream_name":"stdout","time":9.240362816,"data":"Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.88)\n"}
+,{"stream_name":"stdout","time":9.241676209,"data":"Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.88)\n"}
+,{"stream_name":"stdout","time":9.242816314,"data":"Requirement already satisfied: nvidia-nvtx==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.85)\n"}
+,{"stream_name":"stdout","time":9.251940136,"data":"Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings\u003c14,\u003e=13.0.3-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.8.4)\n"}
+,{"stream_name":"stdout","time":9.278236232,"data":"Requirement already satisfied: mpmath\u003c1.4,\u003e=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy\u003e=1.13.3-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.3.0)\n"}
+,{"stream_name":"stdout","time":9.293157774,"data":"Requirement already satisfied: MarkupSafe\u003e=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.0.4)\n"}
+,{"stream_name":"stdout","time":9.300678931,"data":"Downloading segmentation_models_pytorch-0.5.0-py3-none-any.whl (154 kB)\n"}
+,{"stream_name":"stdout","time":10.696460223999999,"data":"Installing collected packages: segmentation-models-pytorch\n"}
+,{"stream_name":"stdout","time":10.920160435,"data":"Successfully installed segmentation-models-pytorch-0.5.0\n"}
+,{"stream_name":"stdout","time":19.635930066,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":19.63595845,"data":"HEAD LANDMARK MODEL TRAINING \u0026 EVALUATION (SEEDS 42, 43, 44)\n"}
+,{"stream_name":"stdout","time":19.636017662,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":19.877743677,"data":"Device: cuda\n"}
+,{"stream_name":"stdout","time":21.180943352,"data":"Base data directory: /kaggle/input/datasets/prantakumerpandit390/fetal-head-eval-data\n"}
+,{"stream_name":"stdout","time":21.181054915,"data":"Loading datasets...\n"}
+,{"stream_name":"stdout","time":21.510359715,"data":"Total calibrated head images: 1761 (FP: 1635, UCL: 126)\n"}
+,{"stream_name":"stdout","time":21.512650298,"data":"\n"}
+,{"stream_name":"stdout","time":21.512669636,"data":"Flagged outliers count: 4\n"}
+,{"stream_name":"stdout","time":21.512971291,"data":"  Patient00957_Plane3_2_of_3.png | Split: train | BPD: 0.21mm | OFD: 0.64mm | HC: 1.42mm\n"}
+,{"stream_name":"stdout","time":21.768976372,"data":"  Patient00955_Plane3_2_of_3.png | Split: train | BPD: 0.24mm | OFD: 0.49mm | HC: 1.18mm\n"}
+,{"stream_name":"stdout","time":22.011202674,"data":"  Patient01070_Plane3_2_of_6.png | Split: train | BPD: 0.32mm | OFD: 0.87mm | HC: 1.97mm\n"}
+,{"stream_name":"stdout","time":22.289692841,"data":"  Patient01738_Plane3_2_of_2.png | Split: train | BPD: 18.55mm | OFD: 34.01mm | HC: 84.37mm\n"}
+,{"stream_name":"stdout","time":22.541039404,"data":"\n"}
+,{"stream_name":"stdout","time":22.541072963,"data":"Final Splits:\n"}
+,{"stream_name":"stdout","time":22.541433025,"data":"  Train: 755 images, 427 patients (outliers excluded)\n"}
+,{"stream_name":"stdout","time":22.541678621,"data":"  Val:   87 images, 47 patients\n"}
+,{"stream_name":"stdout","time":22.542000363,"data":"  Test:  915 images, 465 patients (nothing excluded)\n"}
+,{"stream_name":"stdout","time":22.543358356,"data":"\n"}
+,{"stream_name":"stdout","time":22.543392992,"data":"Found pretrained checkpoints in /kaggle/input/fetal-head-models!\n"}
+,{"stream_name":"stdout","time":23.775438454,"data":"Loading checkpoint for Seed 42: /kaggle/working/head_landmark_out/head_s42_best.pt\n"}
+,{"stream_name":"stdout","time":25.046973277,"data":"Loading checkpoint for Seed 43: /kaggle/working/head_landmark_out/head_s43_best.pt\n"}
+,{"stream_name":"stdout","time":25.996560534,"data":"Loading checkpoint for Seed 44: /kaggle/working/head_landmark_out/head_s44_best.pt\n"}
+,{"stream_name":"stdout","time":26.376594412,"data":"\n"}
+,{"stream_name":"stdout","time":26.376650979,"data":"==================================================\n"}
+,{"stream_name":"stdout","time":26.376656713,"data":"EVALUATING TEST SET (PER-SEED \u0026 3-SEED MEDIAN ENSEMBLE)\n"}
+,{"stream_name":"stdout","time":26.376671093,"data":"==================================================\n"}
+,{"stream_name":"stdout","time":106.540876812,"data":"Seed 42 Test -\u003e HC MAE: All=2.03mm, FP=1.83mm, UCL=6.95mm\n"}
+,{"stream_name":"stdout","time":127.918128031,"data":"Seed 43 Test -\u003e HC MAE: All=1.86mm, FP=1.75mm, UCL=4.74mm\n"}
+,{"stream_name":"stdout","time":150.211236429,"data":"Seed 44 Test -\u003e HC MAE: All=1.85mm, FP=1.82mm, UCL=2.72mm\n"}
+,{"stream_name":"stdout","time":150.211341114,"data":"\n"}
+,{"stream_name":"stdout","time":150.211350253,"data":"Evaluating 3-Seed Median Ensemble...\n"}
+,{"stream_name":"stdout","time":207.241553873,"data":"Flagged images in Test set: 0 (as expected: 0)\n"}
+,{"stream_name":"stdout","time":209.359074916,"data":"\n"}
+,{"stream_name":"stdout","time":209.359103956,"data":"==================================================\n"}
+,{"stream_name":"stdout","time":209.359132328,"data":"RESULTS SUMMARY:\n"}
+,{"stream_name":"stdout","time":209.359146288,"data":"==================================================\n"}
+,{"stream_name":"stdout","time":209.359275237,"data":"# Head Landmark Model Evaluation (FP + UCL Head Test Set)\n"}
+,{"stream_name":"stdout","time":209.359287446,"data":"\n"}
+,{"stream_name":"stdout","time":209.359291818,"data":"## 1. Head Test Landmark \u0026 Biometry Performance\n"}
+,{"stream_name":"stdout","time":209.359296427,"data":"\n"}
+,{"stream_name":"stdout","time":209.359300685,"data":"\u003e Reference BPD \u0026 OFD are from annotated calipers Ã— px_to_mm_rate.\n"}
+,{"stream_name":"stdout","time":209.359306377,"data":"\u003e Reference HC is computed from annotated OFD \u0026 BPD using Ramanujan's formula (labelled 'approximate HC reference').\n"}
+,{"stream_name":"stdout","time":209.359312097,"data":"\u003e Model: U-Net EfficientNet-B4 (384 letterbox, heatmap JS + length/HC loss, flip TTA).\n"}
+,{"stream_name":"stdout","time":209.35931727,"data":"\u003e Evaluation: Patient-level bootstrap 95% CIs (1000 iterations).\n"}
+,{"stream_name":"stdout","time":209.359322036,"data":"\n"}
+,{"stream_name":"stdout","time":209.359326734,"data":"| Source | Model / Evaluation | N (Img / Subj) | BPD MAE [95% CI] (mm) | BPD Bias [95% CI] (mm) | OFD MAE [95% CI] (mm) | OFD Bias [95% CI] (mm) | HC MAE [95% CI] (mm) | HC Bias [95% CI] (mm) | BPD NME (meanÂ±SD) | OFD NME (meanÂ±SD) |\n"}
+,{"stream_name":"stdout","time":209.359331836,"data":"| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"}
+,{"stream_name":"stdout","time":209.359336239,"data":"| **FP Test** | Seed 42 | 880 / 460 | 0.497 | -0.010 | 1.071 | -0.167 | 1.832 | -0.291 | 0.030Â±0.046 | 0.028Â±0.040 |\n"}
+,{"stream_name":"stdout","time":209.359340724,"data":"| **FP Test** | Seed 43 | 880 / 460 | 0.516 | +0.252 | 1.090 | -0.204 | 1.750 | +0.046 | 0.029Â±0.043 | 0.028Â±0.040 |\n"}
+,{"stream_name":"stdout","time":209.359345237,"data":"| **FP Test** | Seed 44 | 880 / 460 | 0.504 | +0.038 | 1.077 | -0.024 | 1.819 | +0.016 | 0.030Â±0.046 | 0.029Â±0.042 |\n"}
+,{"stream_name":"stdout","time":209.359349824,"data":"| **FP Test** | Seeds Mean Â± SD | 880 / 460 | 0.506Â±0.008 | - | 1.079Â±0.008 | - | 1.800Â±0.036 | - | 0.030Â±0.001 | 0.028Â±0.000 |\n"}
+,{"stream_name":"stdout","time":209.359359902,"data":"| **FP Test** | **3-Seed Median Ens** | 880 / 460 | **0.474** [0.414, 0.545] | +0.091 [+0.023, +0.167] | **1.056** [0.955, 1.168] | -0.108 [-0.232, +0.010] | **1.743** [1.577, 1.920] | -0.045 [-0.242, +0.134] | 0.029Â±0.044 | 0.027Â±0.039 |\n"}
+,{"stream_name":"stdout","time":209.359371652,"data":"| *FP Test (Comparison)* | *HC18 5-Fold Ens* | 880 / 460 | 1.664 | +1.644 | - | - | 7.255 | +7.240 | - | - |\n"}
+,{"stream_name":"stdout","time":209.35937425,"data":"| **UCL Test (tiny)** | Seeds Mean Â± SD | 35 / 5 | 1.070Â±0.455 | - | 2.315Â±0.717 | - | 4.806Â±1.727 | - | 0.033Â±0.002 | 0.029Â±0.002 |\n"}
+,{"stream_name":"stdout","time":209.359376772,"data":"| **UCL Test (tiny)** | **3-Seed Median Ens** | 35 / 5 | **0.833** [0.284, 1.220] | -0.393 [-0.929, +0.380] | **2.616** [0.433, 3.499] | -1.547 [-2.613, +0.329] | **4.916** [0.985, 6.766] | -3.026 [-5.457, +1.102] | 0.033Â±0.066 | 0.028Â±0.053 |\n"}
+,{"stream_name":"stdout","time":209.35937987,"data":"| *UCL Test (Comparison)* | *HC18 5-Fold Ens* | 35 / 5 | 0.985 | +0.594 | - | - | 3.664 | +1.316 | - | - |\n"}
+,{"stream_name":"stdout","time":209.359382262,"data":"| **All Test (Combined)** | **3-Seed Median Ens (All)** | 915 / 465 | **0.488** [0.420, 0.558] | +0.072 [-0.002, +0.155] | **1.115** [0.997, 1.264] | -0.163 [-0.326, -0.026] | **1.864** [1.650, 2.131] | -0.159 [-0.454, +0.085] | 0.029Â±0.045 | 0.027Â±0.040 |\n"}
+,{"stream_name":"stdout","time":209.359384839,"data":"| **All Test (Combined)** | **3-Seed Median Ens (No Flagged)** | 915 / 465 | **0.488** [0.420, 0.558] | +0.072 [-0.002, +0.155] | **1.115** [0.997, 1.264] | -0.163 [-0.326, -0.026] | **1.864** [1.650, 2.131] | -0.159 [-0.454, +0.085] | 0.029Â±0.045 | 0.027Â±0.040 |\n"}
+,{"stream_name":"stdout","time":209.35938748,"data":"\n"}
+,{"stream_name":"stdout","time":209.359389625,"data":"## 2. Excluded Training Outliers\n"}
+,{"stream_name":"stdout","time":209.359391799,"data":"\n"}
+,{"stream_name":"stdout","time":209.359393944,"data":"| Image Name | Subject | Source | Split | Annotated BPD (mm) | Annotated OFD (mm) | Annotated HC (mm) | Reason |\n"}
+,{"stream_name":"stdout","time":209.359396242,"data":"| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |\n"}
+,{"stream_name":"stdout","time":209.359398499,"data":"| `Patient00957_Plane3_2_of_3.png` | FP_957 | FP | train | 0.21 | 0.64 | 1.42 | collapsed calipers (\u003c10mm BPD/OFD or \u003c20mm HC) |\n"}
+,{"stream_name":"stdout","time":209.359403225,"data":"| `Patient00955_Plane3_2_of_3.png` | FP_955 | FP | train | 0.24 | 0.49 | 1.18 | collapsed calipers (\u003c10mm BPD/OFD or \u003c20mm HC) |\n"}
+,{"stream_name":"stdout","time":209.35940573,"data":"| `Patient01070_Plane3_2_of_6.png` | FP_1070 | FP | train | 0.32 | 0.87 | 1.97 | collapsed calipers (\u003c10mm BPD/OFD or \u003c20mm HC) |\n"}
+,{"stream_name":"stdout","time":209.359408105,"data":"| `Patient01738_Plane3_2_of_2.png` | FP_1738 | FP | train | 18.55 | 34.01 | 84.37 | 84mm vs 152mm annotated outlier |\n"}
+,{"stream_name":"stderr","time":216.255623693,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":216.255662293,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":216.481786432,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":216.481811797,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":217.230090279,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":218.274863565,"data":"[NbConvertApp] Writing 521298 bytes to __results__.html\n"}
+]
