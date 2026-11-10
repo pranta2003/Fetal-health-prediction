@@ -82,6 +82,7 @@ Not built yet. When it arrives, it follows the same pattern: `fassd_dataset.py`,
 
 ## WEIGHT FORMULA (Hadlock)
 `src/fetal/explain/hadlock.py` turns HC, AC and FL into an estimated weight and a growth percentile. Tests: `tests/test_hadlock.py`.
+`scripts/23_three_plane_check.py` audits multi-plane subject overlap, metadata columns, and cross-plane split leakage between FP and UCL cohorts. Results: `docs/results/three_plane/three_plane_check.json`. Tests: `tests/test_three_plane.py`.
 
 ## SHARED HELPERS
 | File | What it does |
