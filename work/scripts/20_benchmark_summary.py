@@ -179,25 +179,56 @@ def generate_benchmark_summary(results_dir: Path) -> str:
         f"{ac_mm_comparable} | {ac_mm_claim} |"
     )
 
-    # Row 4: Femur (FL)
-    pub_femur = pub_refs["femur"]
-    femur_ours = (
-        f"**Data verification complete**<br>"
-        f"• Model training pending<br>"
-        f"• Protocol: Multi-center FP+UCL cohort<br>"
-        f"• Source: `scripts/15_femur_data_report.py`"
-    )
-    femur_pub = (
-        f"**FL NME: {pub_femur['fl_nme_mean']:.2f} +- {pub_femur['fl_nme_sd']:.2f}** (m-c->m-c)<br>"
-        f"• Source: [{pub_femur['source']}]({pub_femur['url']})<br>"
-        f"• Protocol: {pub_femur['protocol']}"
-    )
-    femur_comparable = "No (model training pending; data check complete)"
-    femur_claim = "model not trained; no comparison yet"
-    lines.append(
-        f"| **Femur (FL)** | FL NME | {femur_ours} | {femur_pub} | "
-        f"{femur_comparable} | {femur_claim} |"
-    )
+    # Row 4: Femur Landmark NME (FP+UCL)
+    femur_res_path = results_dir / "femur_ablation" / "femur_ablation_results.json"
+    if femur_res_path.is_file():
+        femur_res = load_json(femur_res_path)
+        row_key = "row_A" if "row_A" in femur_res else list(femur_res.keys())[0]
+        femur_data = femur_res[row_key]
+        femur_ens = femur_data["ensemble_all"]
+        femur_nme_str = f"{femur_ens['fl_nme_mean']:.3f} +- {femur_ens['fl_nme_sd']:.3f}"
+        femur_mae_str = f"{femur_ens['fl_mae']:.2f} mm"
+        femur_nme_ours = (
+            f"**FL NME: {femur_nme_str}** (3-seed median ensemble)<br>"
+            f"• Biometry: FL MAE {femur_mae_str} (95% CI: [{femur_ens['fl_mae_ci'][0]:.2f}, {femur_ens['fl_mae_ci'][1]:.2f}])<br>"
+            f"• Protocol: {femur_ens['n_images']} official test images ({femur_ens['n_patients']} patients)<br>"
+            f"• Source: `docs/results/femur_ablation/femur_ablation_results.json`"
+        )
+        pub_femur = pub_refs["femur"]
+        femur_nme_pub = (
+            f"Combined->Combined (m-c->m-c):<br>"
+            f"• FL: **{pub_femur['fl_nme_mean']:.2f} +- {pub_femur['fl_nme_sd']:.2f}**<br>"
+            f"• Source: [{pub_femur['source']}]({pub_femur['url']})<br>"
+            f"• Protocol: {pub_femur['protocol']}"
+        )
+        femur_comparable = "Partly (same NME formula; test set split sizes not stated in publication)"
+        femur_claim = (
+            f"Claim at most 'on par' (Ours [3-seed median ensemble]: FL NME {femur_nme_str} vs "
+            f"Published: FL NME {pub_femur['fl_nme_mean']:.2f} +- {pub_femur['fl_nme_sd']:.2f}; test set sizes not stated)."
+        )
+        lines.append(
+            f"| **Femur (FP+UCL)** | Landmark NME (FL) | {femur_nme_ours} | {femur_nme_pub} | "
+            f"{femur_comparable} | {femur_claim} |"
+        )
+    else:
+        pub_femur = pub_refs["femur"]
+        femur_ours = (
+            f"**Data verification complete**<br>"
+            f"• Model training pending<br>"
+            f"• Protocol: Multi-center FP+UCL cohort<br>"
+            f"• Source: `scripts/15_femur_data_report.py`"
+        )
+        femur_pub = (
+            f"**FL NME: {pub_femur['fl_nme_mean']:.2f} +- {pub_femur['fl_nme_sd']:.2f}** (m-c->m-c)<br>"
+            f"• Source: [{pub_femur['source']}]({pub_femur['url']})<br>"
+            f"• Protocol: {pub_femur['protocol']}"
+        )
+        femur_comparable = "No (model training pending; data check complete)"
+        femur_claim = "model not trained; no comparison yet"
+        lines.append(
+            f"| **Femur (FL)** | FL NME | {femur_ours} | {femur_pub} | "
+            f"{femur_comparable} | {femur_claim} |"
+        )
 
     # Row 5: Stream 3 Clinical Risk (E1)
     s3_e1_xgb = next(r for r in stream3_bench["results"] if r["setting"].startswith("E1") and r["model"] == "Our XGBoost")

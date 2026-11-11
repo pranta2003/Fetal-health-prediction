@@ -65,14 +65,22 @@ def test_ac_ours_and_claim_values_match(summary_md_text):
 
 
 def test_femur_claim(summary_md_text):
-    """Verify femur claim cell reflects that model is not yet trained."""
+    """Verify femur claim cell reflects either pending state or at most 'on par' claim when trained."""
+    femur_res_path = work_root / "docs" / "results" / "femur_ablation" / "femur_ablation_results.json"
     table_lines = [l for l in summary_md_text.splitlines() if l.startswith("|")]
-    femur_row = next(l for l in table_lines if "Femur (FL)" in l)
-    cols = [c.strip() for c in femur_row.split("|")[1:-1]]
-    claim_cell = cols[5]
 
-    assert claim_cell == "model not trained; no comparison yet"
-    assert "Reference baseline established" not in claim_cell
+    if femur_res_path.is_file():
+        femur_row = next((l for l in table_lines if "Femur (FP+UCL)" in l), None)
+        assert femur_row is not None
+        cols = [c.strip() for c in femur_row.split("|")[1:-1]]
+        claim_cell = cols[5]
+        assert "at most 'on par'" in claim_cell
+    else:
+        femur_row = next((l for l in table_lines if "Femur (FL)" in l), None)
+        assert femur_row is not None
+        cols = [c.strip() for c in femur_row.split("|")[1:-1]]
+        claim_cell = cols[5]
+        assert claim_cell == "model not trained; no comparison yet"
 
 
 def test_stream3_published_refs_and_claims(summary_md_text):
@@ -139,4 +147,22 @@ def test_head_landmark_summary_row(summary_md_text):
     assert "at most 'on par'" in claim_cell
     assert "BPD NME:" in ours_cell
     assert "OFD NME:" in ours_cell
+
+
+def test_femur_landmark_summary_row(summary_md_text):
+    """Verify that Femur Landmark row in benchmark summary claims at most 'on par' if results exist."""
+    femur_res_path = work_root / "docs" / "results" / "femur_ablation" / "femur_ablation_results.json"
+    if not femur_res_path.is_file():
+        pytest.skip("Femur ablation results json not yet downloaded")
+
+    table_lines = [l for l in summary_md_text.splitlines() if l.startswith("|")]
+    femur_row = next((l for l in table_lines if "Femur (FP+UCL)" in l), None)
+    assert femur_row is not None, "Femur (FP+UCL) row missing from summary table"
+    cols = [c.strip() for c in femur_row.split("|")[1:-1]]
+    ours_cell = cols[2]
+    claim_cell = cols[5]
+
+    assert "3-seed median ensemble" in ours_cell
+    assert "at most 'on par'" in claim_cell
+    assert "FL NME:" in ours_cell
 

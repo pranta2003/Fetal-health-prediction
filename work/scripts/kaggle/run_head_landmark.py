@@ -767,7 +767,7 @@ def main():
         f"{metrics_ens_fp['ofd_nme_mean']:.3f}Â±{metrics_ens_fp['ofd_nme_sd']:.3f} |"
     )
     md_lines.append(
-        f"| *FP Test (Comparison)* | *HC18 5-Fold Ens* | 880 / 460 | "
+        f"| *FP Test (Comparison)* | *HC18 model, different annotation protocol* | 880 / 460 | "
         f"{hc18_fp_test_bpd_mae:.3f} | +1.644 | - | - | {hc18_fp_test_hc_mae:.3f} | +7.240 | - | - |"
     )
 
@@ -792,7 +792,7 @@ def main():
         f"{metrics_ens_ucl['ofd_nme_mean']:.3f}Â±{metrics_ens_ucl['ofd_nme_sd']:.3f} |"
     )
     md_lines.append(
-        f"| *UCL Test (Comparison)* | *HC18 5-Fold Ens* | 35 / 5 | "
+        f"| *UCL Test (Comparison)* | *HC18 model, different annotation protocol* | 35 / 5 | "
         f"{hc18_ucl_test_bpd_mae:.3f} | +0.594 | - | - | {hc18_ucl_test_hc_mae:.3f} | +1.316 | - | - |"
     )
 
