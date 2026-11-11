@@ -68,8 +68,8 @@
   "femur": {
     "source": "arXiv 2512.16710, Table 2",
     "url": "https://arxiv.org/abs/2512.16710",
-    "protocol": "FL NME m-c->m-c (multi-center to multi-center)",
-    "note": "for later comparison",
+    "protocol": "NME +- SD, model trained on combined data (m-c), tested on combined (m-c)",
+    "note": "reports NME, not measurements in mm; test set sizes not stated; claim at most 'on par'.",
     "fl_nme_mean": 0.03,
     "fl_nme_sd": 0.09
   },

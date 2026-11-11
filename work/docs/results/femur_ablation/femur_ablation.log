@@ -1,0 +1,366 @@
+[{"stream_name":"stdout","time":9.750571367,"data":"Installing segmentation-models-pytorch==0.5.0...\n"}
+,{"stream_name":"stdout","time":10.675414504999999,"data":"Collecting segmentation-models-pytorch==0.5.0\n"}
+,{"stream_name":"stdout","time":10.805382062,"data":"  Downloading segmentation_models_pytorch-0.5.0-py3-none-any.whl.metadata (17 kB)\n"}
+,{"stream_name":"stdout","time":10.833124052,"data":"Requirement already satisfied: huggingface-hub\u003e=0.24 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (1.33.0)\n"}
+,{"stream_name":"stdout","time":10.833890345,"data":"Requirement already satisfied: numpy\u003e=1.19.3 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (2.1.3)\n"}
+,{"stream_name":"stdout","time":10.83453361,"data":"Requirement already satisfied: pillow\u003e=8 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (13.0.0)\n"}
+,{"stream_name":"stdout","time":10.835286083,"data":"Requirement already satisfied: safetensors\u003e=0.3.1 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (0.8.0)\n"}
+,{"stream_name":"stdout","time":10.836009722,"data":"Requirement already satisfied: timm\u003e=0.9 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (1.0.30)\n"}
+,{"stream_name":"stdout","time":10.836740834,"data":"Requirement already satisfied: torch\u003e=1.8 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (2.11.0+cu130)\n"}
+,{"stream_name":"stdout","time":10.837406534,"data":"Requirement already satisfied: torchvision\u003e=0.9 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (0.26.0+cu130)\n"}
+,{"stream_name":"stdout","time":10.838053013,"data":"Requirement already satisfied: tqdm\u003e=4.42.1 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (4.67.3)\n"}
+,{"stream_name":"stdout","time":10.840619514,"data":"Requirement already satisfied: click\u003c9.0.0,\u003e=8.4.2 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (8.5.0)\n"}
+,{"stream_name":"stdout","time":10.841280933,"data":"Requirement already satisfied: filelock\u003e=3.10.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.2.4)\n"}
+,{"stream_name":"stdout","time":10.84199212,"data":"Requirement already satisfied: fsspec\u003e=2023.5.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (2025.12.0)\n"}
+,{"stream_name":"stdout","time":10.843446467,"data":"Requirement already satisfied: hf-xet\u003c2.0.0,\u003e=1.6.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (1.7.0)\n"}
+,{"stream_name":"stdout","time":10.844257021,"data":"Requirement already satisfied: httpx\u003c1,\u003e=0.23.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (0.28.1)\n"}
+,{"stream_name":"stdout","time":10.845093271,"data":"Requirement already satisfied: packaging\u003e=20.9 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (26.3)\n"}
+,{"stream_name":"stdout","time":10.845902354,"data":"Requirement already satisfied: pyyaml\u003e=5.1 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (6.0.3)\n"}
+,{"stream_name":"stdout","time":10.846871248,"data":"Requirement already satisfied: typing-extensions\u003e=4.1.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.16.0)\n"}
+,{"stream_name":"stdout","time":10.856695981,"data":"Requirement already satisfied: anyio in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.15.1)\n"}
+,{"stream_name":"stdout","time":10.857335912,"data":"Requirement already satisfied: certifi in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (2026.10.23)\n"}
+,{"stream_name":"stdout","time":10.858059373,"data":"Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (1.0.9)\n"}
+,{"stream_name":"stdout","time":10.858784467,"data":"Requirement already satisfied: idna in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (3.20)\n"}
+,{"stream_name":"stdout","time":10.861875844,"data":"Requirement already satisfied: h11\u003e=0.16 in /usr/local/lib/python3.13/dist-packages (from httpcore==1.*-\u003ehttpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (0.16.0)\n"}
+,{"stream_name":"stdout","time":10.897568544,"data":"Requirement already satisfied: setuptools\u003c82 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (81.0.0)\n"}
+,{"stream_name":"stdout","time":10.897626235,"data":"Requirement already satisfied: sympy\u003e=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.14.0)\n"}
+,{"stream_name":"stdout","time":10.89763135,"data":"Requirement already satisfied: networkx\u003e=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.7)\n"}
+,{"stream_name":"stdout","time":10.898342733,"data":"Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.1.6)\n"}
+,{"stream_name":"stdout","time":10.900501050999999,"data":"Requirement already satisfied: cuda-toolkit==13.0.2 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.2)\n"}
+,{"stream_name":"stdout","time":10.90201702,"data":"Requirement already satisfied: cuda-bindings\u003c14,\u003e=13.0.3 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.3)\n"}
+,{"stream_name":"stdout","time":10.903010137,"data":"Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (9.19.0.56)\n"}
+,{"stream_name":"stdout","time":10.903883371,"data":"Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (0.8.0)\n"}
+,{"stream_name":"stdout","time":10.904692504,"data":"Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (2.28.9)\n"}
+,{"stream_name":"stdout","time":10.905569421,"data":"Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.4.5)\n"}
+,{"stream_name":"stdout","time":10.906870705,"data":"Requirement already satisfied: triton==3.6.0 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.6.0)\n"}
+,{"stream_name":"stdout","time":10.91835756,"data":"Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.1.0.3)\n"}
+,{"stream_name":"stdout","time":10.91939339,"data":"Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.96)\n"}
+,{"stream_name":"stdout","time":10.920378009,"data":"Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.0.0.61)\n"}
+,{"stream_name":"stdout","time":10.921337139,"data":"Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.15.1.6)\n"}
+,{"stream_name":"stdout","time":10.922447533,"data":"Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.85)\n"}
+,{"stream_name":"stdout","time":10.923374064,"data":"Requirement already satisfied: nvidia-curand==10.4.0.35.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (10.4.0.35)\n"}
+,{"stream_name":"stdout","time":10.924355861,"data":"Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.0.4.66)\n"}
+,{"stream_name":"stdout","time":10.925439845,"data":"Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.6.3.3)\n"}
+,{"stream_name":"stdout","time":10.92681619,"data":"Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.88)\n"}
+,{"stream_name":"stdout","time":10.928164988,"data":"Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.88)\n"}
+,{"stream_name":"stdout","time":10.929335934000001,"data":"Requirement already satisfied: nvidia-nvtx==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.85)\n"}
+,{"stream_name":"stdout","time":10.939651426,"data":"Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings\u003c14,\u003e=13.0.3-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.8.4)\n"}
+,{"stream_name":"stdout","time":10.985007444,"data":"Requirement already satisfied: mpmath\u003c1.4,\u003e=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy\u003e=1.13.3-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.3.0)\n"}
+,{"stream_name":"stdout","time":11.010393964,"data":"Requirement already satisfied: MarkupSafe\u003e=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.0.4)\n"}
+,{"stream_name":"stdout","time":11.032569574,"data":"Downloading segmentation_models_pytorch-0.5.0-py3-none-any.whl (154 kB)\n"}
+,{"stream_name":"stdout","time":12.66839513,"data":"Installing collected packages: segmentation-models-pytorch\n"}
+,{"stream_name":"stdout","time":12.882623174,"data":"Successfully installed segmentation-models-pytorch-0.5.0\n"}
+,{"stream_name":"stdout","time":22.481487326,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":22.481554909,"data":"FEMUR MODEL ABLATION EXPERIMENT (Rows A, B, C; Seeds 42, 43, 44)\n"}
+,{"stream_name":"stdout","time":22.481571664,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":22.726288211,"data":"Device: cuda\n"}
+,{"stream_name":"stdout","time":22.761888853,"data":"GPU: Tesla T4\n"}
+,{"stream_name":"stdout","time":22.762097783,"data":"Listing /kaggle/input: ['datasets']\n"}
+,{"stream_name":"stdout","time":25.207666538,"data":"Found dataset root at: /kaggle/input/datasets/prantakumerpandit390/fetal-femur-eval-data\n"}
+,{"stream_name":"stdout","time":25.208136109,"data":"Using data directory: /kaggle/input/datasets/prantakumerpandit390/fetal-femur-eval-data\n"}
+,{"stream_name":"stdout","time":25.779495908,"data":"Total calibrated femur images: 864\n"}
+,{"stream_name":"stdout","time":25.787312992,"data":"Splits: Train = 451 (345 pats), Val = 65 (47 pats), Test = 348 (266 pats)\n"}
+,{"stream_name":"stdout","time":25.78769712,"data":"\n"}
+,{"stream_name":"stdout","time":25.787710156,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":25.787775396,"data":"STARTING Row A (EffNet-B4 1-ch Heatmap, 384px)\n"}
+,{"stream_name":"stdout","time":25.787834595,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":25.787841957,"data":"\n"}
+,{"stream_name":"stdout","time":25.78787812,"data":"\u003e\u003e\u003e Starting row_A (Seed 42, S=384, model=heatmap)\n"}
+,{"stream_name":"stderr","time":26.224966417,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":111.354256458,"data":"[row_A s42] Ep 01/35 | loss: 1.0244 | val MAE: 35.339 mm, NME: 1.0265 | 82.7s *\n"}
+,{"stream_name":"stdout","time":128.056641494,"data":"[row_A s42] Ep 02/35 | loss: 0.6818 | val MAE: 1.920 mm, NME: 0.0564 | 16.7s *\n"}
+,{"stream_name":"stdout","time":144.611091778,"data":"[row_A s42] Ep 03/35 | loss: 0.2834 | val MAE: 1.675 mm, NME: 0.0531 | 16.6s *\n"}
+,{"stream_name":"stdout","time":161.424173072,"data":"[row_A s42] Ep 04/35 | loss: 0.2046 | val MAE: 1.608 mm, NME: 0.0657 | 16.8s *\n"}
+,{"stream_name":"stdout","time":178.485381528,"data":"[row_A s42] Ep 05/35 | loss: 0.1697 | val MAE: 1.483 mm, NME: 0.0618 | 17.1s *\n"}
+,{"stream_name":"stdout","time":195.721815792,"data":"[row_A s42] Ep 06/35 | loss: 0.1506 | val MAE: 1.154 mm, NME: 0.0467 | 17.2s *\n"}
+,{"stream_name":"stdout","time":213.146590585,"data":"[row_A s42] Ep 07/35 | loss: 0.1260 | val MAE: 1.470 mm, NME: 0.0487 | 17.4s\n"}
+,{"stream_name":"stdout","time":230.872819804,"data":"[row_A s42] Ep 08/35 | loss: 0.1140 | val MAE: 1.285 mm, NME: 0.0473 | 17.7s\n"}
+,{"stream_name":"stdout","time":248.582394016,"data":"[row_A s42] Ep 09/35 | loss: 0.1015 | val MAE: 1.460 mm, NME: 0.0482 | 17.7s\n"}
+,{"stream_name":"stdout","time":265.948839722,"data":"[row_A s42] Ep 10/35 | loss: 0.0934 | val MAE: 1.412 mm, NME: 0.0476 | 17.4s\n"}
+,{"stream_name":"stdout","time":283.1780395,"data":"[row_A s42] Ep 11/35 | loss: 0.0823 | val MAE: 1.299 mm, NME: 0.0553 | 17.2s\n"}
+,{"stream_name":"stdout","time":300.598742842,"data":"[row_A s42] Ep 12/35 | loss: 0.0775 | val MAE: 1.294 mm, NME: 0.0551 | 17.4s\n"}
+,{"stream_name":"stdout","time":318.146591882,"data":"[row_A s42] Ep 13/35 | loss: 0.0705 | val MAE: 1.422 mm, NME: 0.0477 | 17.5s\n"}
+,{"stream_name":"stdout","time":335.617963673,"data":"[row_A s42] Ep 14/35 | loss: 0.0640 | val MAE: 1.408 mm, NME: 0.0473 | 17.5s\n"}
+,{"stream_name":"stdout","time":335.618003718,"data":"[row_A s42] Early stopping triggered at epoch 14\n"}
+,{"stream_name":"stdout","time":335.6180216,"data":"[row_A s42] Training finished in 307.0s (14 epochs). Loading best checkpoint...\n"}
+,{"stream_name":"stdout","time":397.27091969,"data":"\n"}
+,{"stream_name":"stdout","time":397.270969736,"data":"\u003e\u003e\u003e Starting row_A (Seed 43, S=384, model=heatmap)\n"}
+,{"stream_name":"stdout","time":415.171771528,"data":"[row_A s43] Ep 01/35 | loss: 1.0226 | val MAE: 30.670 mm, NME: 0.8514 | 17.6s *\n"}
+,{"stream_name":"stdout","time":433.142038113,"data":"[row_A s43] Ep 02/35 | loss: 0.5329 | val MAE: 1.533 mm, NME: 0.0544 | 18.0s *\n"}
+,{"stream_name":"stdout","time":451.114906232,"data":"[row_A s43] Ep 03/35 | loss: 0.2766 | val MAE: 1.499 mm, NME: 0.0552 | 18.0s *\n"}
+,{"stream_name":"stdout","time":468.650650242,"data":"[row_A s43] Ep 04/35 | loss: 0.2048 | val MAE: 1.374 mm, NME: 0.0505 | 17.5s *\n"}
+,{"stream_name":"stdout","time":485.920972752,"data":"[row_A s43] Ep 05/35 | loss: 0.1701 | val MAE: 1.939 mm, NME: 0.0758 | 17.3s\n"}
+,{"stream_name":"stdout","time":503.455756427,"data":"[row_A s43] Ep 06/35 | loss: 0.1436 | val MAE: 1.362 mm, NME: 0.0579 | 17.5s *\n"}
+,{"stream_name":"stdout","time":521.027253752,"data":"[row_A s43] Ep 07/35 | loss: 0.1261 | val MAE: 1.550 mm, NME: 0.0442 | 17.6s\n"}
+,{"stream_name":"stdout","time":538.548112843,"data":"[row_A s43] Ep 08/35 | loss: 0.1143 | val MAE: 1.629 mm, NME: 0.0505 | 17.5s\n"}
+,{"stream_name":"stdout","time":555.947315991,"data":"[row_A s43] Ep 09/35 | loss: 0.1006 | val MAE: 1.487 mm, NME: 0.0486 | 17.4s\n"}
+,{"stream_name":"stdout","time":573.406387787,"data":"[row_A s43] Ep 10/35 | loss: 0.0921 | val MAE: 1.330 mm, NME: 0.0490 | 17.5s *\n"}
+,{"stream_name":"stdout","time":590.88982669,"data":"[row_A s43] Ep 11/35 | loss: 0.0833 | val MAE: 1.409 mm, NME: 0.0519 | 17.5s\n"}
+,{"stream_name":"stdout","time":608.625518384,"data":"[row_A s43] Ep 12/35 | loss: 0.0772 | val MAE: 1.270 mm, NME: 0.0518 | 17.7s *\n"}
+,{"stream_name":"stdout","time":626.192013639,"data":"[row_A s43] Ep 13/35 | loss: 0.0713 | val MAE: 1.249 mm, NME: 0.0466 | 17.6s *\n"}
+,{"stream_name":"stdout","time":643.606173662,"data":"[row_A s43] Ep 14/35 | loss: 0.0712 | val MAE: 1.385 mm, NME: 0.0580 | 17.4s\n"}
+,{"stream_name":"stdout","time":661.060125917,"data":"[row_A s43] Ep 15/35 | loss: 0.0639 | val MAE: 1.391 mm, NME: 0.0479 | 17.5s\n"}
+,{"stream_name":"stdout","time":678.501593507,"data":"[row_A s43] Ep 16/35 | loss: 0.0595 | val MAE: 1.306 mm, NME: 0.0466 | 17.4s\n"}
+,{"stream_name":"stdout","time":695.906012602,"data":"[row_A s43] Ep 17/35 | loss: 0.0559 | val MAE: 1.643 mm, NME: 0.0522 | 17.4s\n"}
+,{"stream_name":"stdout","time":713.399420237,"data":"[row_A s43] Ep 18/35 | loss: 0.0534 | val MAE: 1.491 mm, NME: 0.0585 | 17.5s\n"}
+,{"stream_name":"stdout","time":730.841272009,"data":"[row_A s43] Ep 19/35 | loss: 0.0498 | val MAE: 1.262 mm, NME: 0.0456 | 17.4s\n"}
+,{"stream_name":"stdout","time":748.238837614,"data":"[row_A s43] Ep 20/35 | loss: 0.0449 | val MAE: 1.277 mm, NME: 0.0456 | 17.4s\n"}
+,{"stream_name":"stdout","time":765.621555507,"data":"[row_A s43] Ep 21/35 | loss: 0.0434 | val MAE: 1.254 mm, NME: 0.0454 | 17.4s\n"}
+,{"stream_name":"stdout","time":765.621597997,"data":"[row_A s43] Early stopping triggered at epoch 21\n"}
+,{"stream_name":"stdout","time":765.621602644,"data":"[row_A s43] Training finished in 368.0s (21 epochs). Loading best checkpoint...\n"}
+,{"stream_name":"stdout","time":777.354864771,"data":"\n"}
+,{"stream_name":"stdout","time":777.355053638,"data":"\u003e\u003e\u003e Starting row_A (Seed 44, S=384, model=heatmap)\n"}
+,{"stream_name":"stdout","time":795.578766859,"data":"[row_A s44] Ep 01/35 | loss: 0.9930 | val MAE: 4.664 mm, NME: 0.1841 | 17.9s *\n"}
+,{"stream_name":"stdout","time":813.382739135,"data":"[row_A s44] Ep 02/35 | loss: 0.4328 | val MAE: 1.625 mm, NME: 0.0658 | 17.8s *\n"}
+,{"stream_name":"stdout","time":830.989405767,"data":"[row_A s44] Ep 03/35 | loss: 0.2877 | val MAE: 1.260 mm, NME: 0.0407 | 17.6s *\n"}
+,{"stream_name":"stdout","time":848.616267581,"data":"[row_A s44] Ep 04/35 | loss: 0.2169 | val MAE: 1.180 mm, NME: 0.0336 | 17.6s *\n"}
+,{"stream_name":"stdout","time":866.068320942,"data":"[row_A s44] Ep 05/35 | loss: 0.1833 | val MAE: 1.332 mm, NME: 0.0353 | 17.5s\n"}
+,{"stream_name":"stdout","time":883.55120674,"data":"[row_A s44] Ep 06/35 | loss: 0.1560 | val MAE: 1.220 mm, NME: 0.0460 | 17.5s\n"}
+,{"stream_name":"stdout","time":901.064979852,"data":"[row_A s44] Ep 07/35 | loss: 0.1396 | val MAE: 1.319 mm, NME: 0.0492 | 17.5s\n"}
+,{"stream_name":"stdout","time":918.509133101,"data":"[row_A s44] Ep 08/35 | loss: 0.1204 | val MAE: 1.359 mm, NME: 0.0367 | 17.4s\n"}
+,{"stream_name":"stdout","time":936.013228008,"data":"[row_A s44] Ep 09/35 | loss: 0.1071 | val MAE: 1.247 mm, NME: 0.0343 | 17.5s\n"}
+,{"stream_name":"stdout","time":953.697085237,"data":"[row_A s44] Ep 10/35 | loss: 0.0962 | val MAE: 1.179 mm, NME: 0.0337 | 17.7s *\n"}
+,{"stream_name":"stdout","time":971.227885297,"data":"[row_A s44] Ep 11/35 | loss: 0.0894 | val MAE: 1.391 mm, NME: 0.0356 | 17.5s\n"}
+,{"stream_name":"stdout","time":988.666370293,"data":"[row_A s44] Ep 12/35 | loss: 0.0831 | val MAE: 1.375 mm, NME: 0.0364 | 17.4s\n"}
+,{"stream_name":"stdout","time":1006.116458897,"data":"[row_A s44] Ep 13/35 | loss: 0.0774 | val MAE: 1.352 mm, NME: 0.0360 | 17.4s\n"}
+,{"stream_name":"stdout","time":1023.582511567,"data":"[row_A s44] Ep 14/35 | loss: 0.0735 | val MAE: 1.414 mm, NME: 0.0486 | 17.5s\n"}
+,{"stream_name":"stdout","time":1041.065171908,"data":"[row_A s44] Ep 15/35 | loss: 0.0713 | val MAE: 1.362 mm, NME: 0.0364 | 17.5s\n"}
+,{"stream_name":"stdout","time":1058.541559512,"data":"[row_A s44] Ep 16/35 | loss: 0.0659 | val MAE: 1.397 mm, NME: 0.0358 | 17.5s\n"}
+,{"stream_name":"stdout","time":1076.218387332,"data":"[row_A s44] Ep 17/35 | loss: 0.0627 | val MAE: 1.380 mm, NME: 0.0355 | 17.7s\n"}
+,{"stream_name":"stdout","time":1093.685562296,"data":"[row_A s44] Ep 18/35 | loss: 0.0635 | val MAE: 1.391 mm, NME: 0.0365 | 17.5s\n"}
+,{"stream_name":"stdout","time":1093.685612414,"data":"[row_A s44] Early stopping triggered at epoch 18\n"}
+,{"stream_name":"stdout","time":1093.685618246,"data":"[row_A s44] Training finished in 316.0s (18 epochs). Loading best checkpoint...\n"}
+,{"stream_name":"stdout","time":1109.528673472,"data":"\n"}
+,{"stream_name":"stdout","time":1109.528712639,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":1109.528732796,"data":"STARTING Row B (ConvNeXt-Tiny Direct Reg, 384px)\n"}
+,{"stream_name":"stdout","time":1109.528738811,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":1109.52896283,"data":"\n"}
+,{"stream_name":"stdout","time":1109.528980532,"data":"\u003e\u003e\u003e Starting row_B (Seed 42, S=384, model=regression)\n"}
+,{"stream_name":"stdout","time":1109.960892576,"data":"Downloading: \"https://download.pytorch.org/models/convnext_tiny-983f1562.pth\" to /root/.cache/torch/hub/checkpoints/convnext_tiny-983f1562.pth\n"}
+,{"stream_name":"stderr","time":1110.597066608,"data":"\r  0%|          | 0.00/109M [00:00\u003c?, ?B/s]\r  7%|▋         | 8.12M/109M [00:00\u003c00:01, 85.0MB/s]\r 29%|██▉       | 31.4M/109M [00:00\u003c00:00, 178MB/s] \r 49%|████▉     | 53.9M/109M [00:00\u003c00:00, 204MB/s]\r 70%|██████▉   | 76.4M/109M [00:00\u003c00:00, 216MB/s]\r 90%|█████████ | 98.6M/109M [00:00\u003c00:00, 222MB/s]\r100%|██████████| 109M/109M [00:00\u003c00:00, 211MB/s] \n"}
+,{"stream_name":"stdout","time":1128.422022453,"data":"[row_B s42] Ep 01/35 | loss: 48.5083 | val MAE: 41.082 mm, NME: 1.6286 | 17.7s *\n"}
+,{"stream_name":"stdout","time":1139.647526628,"data":"[row_B s42] Ep 02/35 | loss: 46.2224 | val MAE: 41.094 mm, NME: 1.5512 | 11.2s\n"}
+,{"stream_name":"stdout","time":1150.929169281,"data":"[row_B s42] Ep 03/35 | loss: 44.0723 | val MAE: 41.156 mm, NME: 1.4645 | 11.3s\n"}
+,{"stream_name":"stdout","time":1162.492110861,"data":"[row_B s42] Ep 04/35 | loss: 41.0480 | val MAE: 40.940 mm, NME: 1.3714 | 11.6s *\n"}
+,{"stream_name":"stdout","time":1173.873114109,"data":"[row_B s42] Ep 05/35 | loss: 38.4868 | val MAE: 40.668 mm, NME: 1.2734 | 11.4s *\n"}
+,{"stream_name":"stdout","time":1185.081011382,"data":"[row_B s42] Ep 06/35 | loss: 35.1580 | val MAE: 40.227 mm, NME: 1.1710 | 11.2s *\n"}
+,{"stream_name":"stdout","time":1196.193799113,"data":"[row_B s42] Ep 07/35 | loss: 32.3563 | val MAE: 39.687 mm, NME: 1.0650 | 11.1s *\n"}
+,{"stream_name":"stdout","time":1207.397289638,"data":"[row_B s42] Ep 08/35 | loss: 29.0032 | val MAE: 38.785 mm, NME: 0.9577 | 11.2s *\n"}
+,{"stream_name":"stdout","time":1218.671550257,"data":"[row_B s42] Ep 09/35 | loss: 26.0935 | val MAE: 37.542 mm, NME: 0.8516 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1230.028288538,"data":"[row_B s42] Ep 10/35 | loss: 23.2584 | val MAE: 36.084 mm, NME: 0.7514 | 11.4s *\n"}
+,{"stream_name":"stdout","time":1241.422349349,"data":"[row_B s42] Ep 11/35 | loss: 20.8452 | val MAE: 33.935 mm, NME: 0.6649 | 11.4s *\n"}
+,{"stream_name":"stdout","time":1252.817512501,"data":"[row_B s42] Ep 12/35 | loss: 18.1096 | val MAE: 31.197 mm, NME: 0.5949 | 11.4s *\n"}
+,{"stream_name":"stdout","time":1264.126011273,"data":"[row_B s42] Ep 13/35 | loss: 16.5830 | val MAE: 27.713 mm, NME: 0.5377 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1275.423633306,"data":"[row_B s42] Ep 14/35 | loss: 14.8702 | val MAE: 23.753 mm, NME: 0.4901 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1286.671142362,"data":"[row_B s42] Ep 15/35 | loss: 13.1958 | val MAE: 20.420 mm, NME: 0.4439 | 11.2s *\n"}
+,{"stream_name":"stdout","time":1297.925522874,"data":"[row_B s42] Ep 16/35 | loss: 12.1607 | val MAE: 18.084 mm, NME: 0.4023 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1309.196226859,"data":"[row_B s42] Ep 17/35 | loss: 10.6846 | val MAE: 15.629 mm, NME: 0.3711 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1320.469092912,"data":"[row_B s42] Ep 18/35 | loss: 9.9966 | val MAE: 14.181 mm, NME: 0.3397 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1331.887585496,"data":"[row_B s42] Ep 19/35 | loss: 9.1296 | val MAE: 13.316 mm, NME: 0.3117 | 11.4s *\n"}
+,{"stream_name":"stdout","time":1343.123175726,"data":"[row_B s42] Ep 20/35 | loss: 8.2449 | val MAE: 12.610 mm, NME: 0.2912 | 11.2s *\n"}
+,{"stream_name":"stdout","time":1354.377884277,"data":"[row_B s42] Ep 21/35 | loss: 7.8083 | val MAE: 11.506 mm, NME: 0.2812 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1365.658580177,"data":"[row_B s42] Ep 22/35 | loss: 7.3008 | val MAE: 11.423 mm, NME: 0.2602 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1376.941138111,"data":"[row_B s42] Ep 23/35 | loss: 7.0122 | val MAE: 11.154 mm, NME: 0.2511 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1388.220243673,"data":"[row_B s42] Ep 24/35 | loss: 6.4448 | val MAE: 10.459 mm, NME: 0.2336 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1399.534974936,"data":"[row_B s42] Ep 25/35 | loss: 6.1130 | val MAE: 9.385 mm, NME: 0.2355 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1410.685234051,"data":"[row_B s42] Ep 26/35 | loss: 5.8867 | val MAE: 9.737 mm, NME: 0.2255 | 11.1s\n"}
+,{"stream_name":"stdout","time":1422.006078667,"data":"[row_B s42] Ep 27/35 | loss: 5.5373 | val MAE: 8.818 mm, NME: 0.2112 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1433.255065284,"data":"[row_B s42] Ep 28/35 | loss: 5.3954 | val MAE: 7.662 mm, NME: 0.2036 | 11.2s *\n"}
+,{"stream_name":"stdout","time":1444.488367809,"data":"[row_B s42] Ep 29/35 | loss: 4.8310 | val MAE: 7.122 mm, NME: 0.1904 | 11.2s *\n"}
+,{"stream_name":"stdout","time":1455.760777765,"data":"[row_B s42] Ep 30/35 | loss: 4.7387 | val MAE: 6.864 mm, NME: 0.1838 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1467.009390562,"data":"[row_B s42] Ep 31/35 | loss: 4.6137 | val MAE: 6.246 mm, NME: 0.1716 | 11.2s *\n"}
+,{"stream_name":"stdout","time":1478.135487542,"data":"[row_B s42] Ep 32/35 | loss: 4.1938 | val MAE: 6.563 mm, NME: 0.1632 | 11.1s\n"}
+,{"stream_name":"stdout","time":1489.466563234,"data":"[row_B s42] Ep 33/35 | loss: 4.1473 | val MAE: 5.890 mm, NME: 0.1634 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1500.83431607,"data":"[row_B s42] Ep 34/35 | loss: 3.8630 | val MAE: 5.765 mm, NME: 0.1505 | 11.4s *\n"}
+,{"stream_name":"stdout","time":1512.038577633,"data":"[row_B s42] Ep 35/35 | loss: 3.7905 | val MAE: 5.948 mm, NME: 0.1542 | 11.2s\n"}
+,{"stream_name":"stdout","time":1512.038642399,"data":"[row_B s42] Training finished in 401.3s (35 epochs). Loading best checkpoint...\n"}
+,{"stream_name":"stdout","time":1520.878555598,"data":"\n"}
+,{"stream_name":"stdout","time":1520.878596412,"data":"\u003e\u003e\u003e Starting row_B (Seed 43, S=384, model=regression)\n"}
+,{"stream_name":"stdout","time":1532.761822817,"data":"[row_B s43] Ep 01/35 | loss: 48.4535 | val MAE: 40.954 mm, NME: 1.6243 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1544.118558447,"data":"[row_B s43] Ep 02/35 | loss: 46.4503 | val MAE: 40.840 mm, NME: 1.5490 | 11.4s *\n"}
+,{"stream_name":"stdout","time":1555.493482739,"data":"[row_B s43] Ep 03/35 | loss: 43.7511 | val MAE: 40.703 mm, NME: 1.4625 | 11.4s *\n"}
+,{"stream_name":"stdout","time":1566.806796892,"data":"[row_B s43] Ep 04/35 | loss: 41.1241 | val MAE: 40.453 mm, NME: 1.3695 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1578.106507708,"data":"[row_B s43] Ep 05/35 | loss: 38.4280 | val MAE: 40.216 mm, NME: 1.2709 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1589.41845838,"data":"[row_B s43] Ep 06/35 | loss: 35.3944 | val MAE: 39.746 mm, NME: 1.1678 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1600.625981254,"data":"[row_B s43] Ep 07/35 | loss: 32.5861 | val MAE: 39.210 mm, NME: 1.0613 | 11.2s *\n"}
+,{"stream_name":"stdout","time":1611.933932985,"data":"[row_B s43] Ep 08/35 | loss: 29.0398 | val MAE: 38.381 mm, NME: 0.9544 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1623.174695306,"data":"[row_B s43] Ep 09/35 | loss: 26.3772 | val MAE: 37.349 mm, NME: 0.8472 | 11.2s *\n"}
+,{"stream_name":"stdout","time":1634.44657591,"data":"[row_B s43] Ep 10/35 | loss: 23.1279 | val MAE: 35.899 mm, NME: 0.7467 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1645.736713559,"data":"[row_B s43] Ep 11/35 | loss: 20.3880 | val MAE: 33.552 mm, NME: 0.6617 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1657.019466411,"data":"[row_B s43] Ep 12/35 | loss: 18.2859 | val MAE: 30.547 mm, NME: 0.5918 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1668.292085924,"data":"[row_B s43] Ep 13/35 | loss: 16.3928 | val MAE: 27.311 mm, NME: 0.5348 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1679.573392348,"data":"[row_B s43] Ep 14/35 | loss: 14.8697 | val MAE: 23.492 mm, NME: 0.4846 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1690.895971932,"data":"[row_B s43] Ep 15/35 | loss: 13.4037 | val MAE: 20.365 mm, NME: 0.4452 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1702.244267231,"data":"[row_B s43] Ep 16/35 | loss: 12.1185 | val MAE: 17.989 mm, NME: 0.4062 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1713.492979675,"data":"[row_B s43] Ep 17/35 | loss: 10.8962 | val MAE: 15.531 mm, NME: 0.3708 | 11.2s *\n"}
+,{"stream_name":"stdout","time":1724.757905656,"data":"[row_B s43] Ep 18/35 | loss: 9.9533 | val MAE: 14.280 mm, NME: 0.3396 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1736.059490224,"data":"[row_B s43] Ep 19/35 | loss: 8.9959 | val MAE: 13.291 mm, NME: 0.3127 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1747.400319343,"data":"[row_B s43] Ep 20/35 | loss: 8.3560 | val MAE: 12.839 mm, NME: 0.2966 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1758.709771682,"data":"[row_B s43] Ep 21/35 | loss: 7.7740 | val MAE: 11.762 mm, NME: 0.2851 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1769.986164314,"data":"[row_B s43] Ep 22/35 | loss: 7.4114 | val MAE: 11.700 mm, NME: 0.2610 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1781.29813426,"data":"[row_B s43] Ep 23/35 | loss: 7.0415 | val MAE: 11.248 mm, NME: 0.2514 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1792.569189972,"data":"[row_B s43] Ep 24/35 | loss: 6.5289 | val MAE: 9.957 mm, NME: 0.2459 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1803.716537251,"data":"[row_B s43] Ep 25/35 | loss: 6.3463 | val MAE: 9.982 mm, NME: 0.2433 | 11.1s\n"}
+,{"stream_name":"stdout","time":1814.971097868,"data":"[row_B s43] Ep 26/35 | loss: 5.9889 | val MAE: 9.657 mm, NME: 0.2250 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1826.207551006,"data":"[row_B s43] Ep 27/35 | loss: 5.7510 | val MAE: 8.331 mm, NME: 0.2195 | 11.2s *\n"}
+,{"stream_name":"stdout","time":1837.477296082,"data":"[row_B s43] Ep 28/35 | loss: 5.2987 | val MAE: 8.255 mm, NME: 0.2114 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1848.636187147,"data":"[row_B s43] Ep 29/35 | loss: 5.3324 | val MAE: 8.350 mm, NME: 0.1992 | 11.2s\n"}
+,{"stream_name":"stdout","time":1859.90913957,"data":"[row_B s43] Ep 30/35 | loss: 4.9556 | val MAE: 7.130 mm, NME: 0.1965 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1871.126527138,"data":"[row_B s43] Ep 31/35 | loss: 4.6967 | val MAE: 7.410 mm, NME: 0.1859 | 11.2s\n"}
+,{"stream_name":"stdout","time":1882.38567239,"data":"[row_B s43] Ep 32/35 | loss: 4.4398 | val MAE: 6.893 mm, NME: 0.1773 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1893.639835203,"data":"[row_B s43] Ep 33/35 | loss: 4.3380 | val MAE: 6.197 mm, NME: 0.1710 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1904.957169627,"data":"[row_B s43] Ep 34/35 | loss: 4.0023 | val MAE: 6.121 mm, NME: 0.1692 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1916.247543566,"data":"[row_B s43] Ep 35/35 | loss: 4.0068 | val MAE: 5.960 mm, NME: 0.1565 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1916.247659745,"data":"[row_B s43] Training finished in 394.8s (35 epochs). Loading best checkpoint...\n"}
+,{"stream_name":"stdout","time":1925.037134039,"data":"\n"}
+,{"stream_name":"stdout","time":1925.037176002,"data":"\u003e\u003e\u003e Starting row_B (Seed 44, S=384, model=regression)\n"}
+,{"stream_name":"stdout","time":1936.928106881,"data":"[row_B s44] Ep 01/35 | loss: 48.3108 | val MAE: 41.258 mm, NME: 1.6239 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1948.302002775,"data":"[row_B s44] Ep 02/35 | loss: 45.9865 | val MAE: 41.206 mm, NME: 1.5481 | 11.4s *\n"}
+,{"stream_name":"stdout","time":1959.6992789,"data":"[row_B s44] Ep 03/35 | loss: 44.1134 | val MAE: 41.170 mm, NME: 1.4612 | 11.4s *\n"}
+,{"stream_name":"stdout","time":1970.994893348,"data":"[row_B s44] Ep 04/35 | loss: 41.2732 | val MAE: 40.972 mm, NME: 1.3678 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1982.30163349,"data":"[row_B s44] Ep 05/35 | loss: 38.6223 | val MAE: 40.683 mm, NME: 1.2692 | 11.3s *\n"}
+,{"stream_name":"stdout","time":1993.555797192,"data":"[row_B s44] Ep 06/35 | loss: 35.4084 | val MAE: 40.305 mm, NME: 1.1661 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2004.797671616,"data":"[row_B s44] Ep 07/35 | loss: 32.2821 | val MAE: 39.615 mm, NME: 1.0600 | 11.2s *\n"}
+,{"stream_name":"stdout","time":2015.984875667,"data":"[row_B s44] Ep 08/35 | loss: 29.2492 | val MAE: 38.946 mm, NME: 0.9519 | 11.2s *\n"}
+,{"stream_name":"stdout","time":2027.310007368,"data":"[row_B s44] Ep 09/35 | loss: 25.9867 | val MAE: 37.824 mm, NME: 0.8456 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2038.614892417,"data":"[row_B s44] Ep 10/35 | loss: 23.1954 | val MAE: 36.170 mm, NME: 0.7457 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2049.988687587,"data":"[row_B s44] Ep 11/35 | loss: 20.6959 | val MAE: 33.916 mm, NME: 0.6589 | 11.4s *\n"}
+,{"stream_name":"stdout","time":2061.35225996,"data":"[row_B s44] Ep 12/35 | loss: 18.2117 | val MAE: 31.150 mm, NME: 0.5913 | 11.4s *\n"}
+,{"stream_name":"stdout","time":2072.570759212,"data":"[row_B s44] Ep 13/35 | loss: 16.2126 | val MAE: 27.373 mm, NME: 0.5332 | 11.2s *\n"}
+,{"stream_name":"stdout","time":2083.814549324,"data":"[row_B s44] Ep 14/35 | loss: 14.9091 | val MAE: 23.834 mm, NME: 0.4835 | 11.2s *\n"}
+,{"stream_name":"stdout","time":2095.11402437,"data":"[row_B s44] Ep 15/35 | loss: 13.2060 | val MAE: 20.225 mm, NME: 0.4441 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2106.408504038,"data":"[row_B s44] Ep 16/35 | loss: 11.8349 | val MAE: 17.090 mm, NME: 0.4053 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2117.69836369,"data":"[row_B s44] Ep 17/35 | loss: 10.7817 | val MAE: 15.421 mm, NME: 0.3640 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2128.945747087,"data":"[row_B s44] Ep 18/35 | loss: 9.7117 | val MAE: 13.962 mm, NME: 0.3316 | 11.2s *\n"}
+,{"stream_name":"stdout","time":2140.237082833,"data":"[row_B s44] Ep 19/35 | loss: 8.9129 | val MAE: 12.954 mm, NME: 0.3053 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2151.589585727,"data":"[row_B s44] Ep 20/35 | loss: 8.1984 | val MAE: 12.535 mm, NME: 0.2857 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2162.879893107,"data":"[row_B s44] Ep 21/35 | loss: 7.5921 | val MAE: 12.089 mm, NME: 0.2663 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2174.144777899,"data":"[row_B s44] Ep 22/35 | loss: 6.9669 | val MAE: 10.785 mm, NME: 0.2514 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2185.458032778,"data":"[row_B s44] Ep 23/35 | loss: 6.7564 | val MAE: 10.464 mm, NME: 0.2430 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2196.728597907,"data":"[row_B s44] Ep 24/35 | loss: 6.3019 | val MAE: 9.892 mm, NME: 0.2325 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2208.061574911,"data":"[row_B s44] Ep 25/35 | loss: 5.9912 | val MAE: 9.227 mm, NME: 0.2260 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2219.162378771,"data":"[row_B s44] Ep 26/35 | loss: 5.7116 | val MAE: 9.348 mm, NME: 0.2211 | 11.1s\n"}
+,{"stream_name":"stdout","time":2230.498146131,"data":"[row_B s44] Ep 27/35 | loss: 5.3964 | val MAE: 7.935 mm, NME: 0.2082 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2241.912734341,"data":"[row_B s44] Ep 28/35 | loss: 5.2184 | val MAE: 7.697 mm, NME: 0.1957 | 11.4s *\n"}
+,{"stream_name":"stdout","time":2253.093878058,"data":"[row_B s44] Ep 29/35 | loss: 4.9497 | val MAE: 7.817 mm, NME: 0.1892 | 11.2s\n"}
+,{"stream_name":"stdout","time":2264.498521091,"data":"[row_B s44] Ep 30/35 | loss: 4.6435 | val MAE: 7.209 mm, NME: 0.1812 | 11.4s *\n"}
+,{"stream_name":"stdout","time":2275.82211633,"data":"[row_B s44] Ep 31/35 | loss: 4.5003 | val MAE: 5.919 mm, NME: 0.1724 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2286.993051244,"data":"[row_B s44] Ep 32/35 | loss: 4.2515 | val MAE: 5.981 mm, NME: 0.1614 | 11.2s\n"}
+,{"stream_name":"stdout","time":2298.301829674,"data":"[row_B s44] Ep 33/35 | loss: 4.0144 | val MAE: 5.492 mm, NME: 0.1512 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2309.569822954,"data":"[row_B s44] Ep 34/35 | loss: 3.7676 | val MAE: 5.199 mm, NME: 0.1481 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2320.833557695,"data":"[row_B s44] Ep 35/35 | loss: 3.7128 | val MAE: 5.150 mm, NME: 0.1432 | 11.3s *\n"}
+,{"stream_name":"stdout","time":2320.833675942,"data":"[row_B s44] Training finished in 395.2s (35 epochs). Loading best checkpoint...\n"}
+,{"stream_name":"stdout","time":2333.850447704,"data":"\n"}
+,{"stream_name":"stdout","time":2333.850488553,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":2333.850502283,"data":"STARTING Row C (EffNet-B4 1-ch Heatmap, 512px)\n"}
+,{"stream_name":"stdout","time":2333.851560233,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":2333.851573499,"data":"\n"}
+,{"stream_name":"stdout","time":2333.851578224,"data":"\u003e\u003e\u003e Starting row_C (Seed 42, S=512, model=heatmap)\n"}
+,{"stream_name":"stdout","time":2366.569125916,"data":"[row_C s42] Ep 01/35 | loss: 1.0222 | val MAE: 34.948 mm, NME: 0.9329 | 32.4s *\n"}
+,{"stream_name":"stdout","time":2396.483299097,"data":"[row_C s42] Ep 02/35 | loss: 0.7241 | val MAE: 1.687 mm, NME: 0.0717 | 29.9s *\n"}
+,{"stream_name":"stdout","time":2425.557571199,"data":"[row_C s42] Ep 03/35 | loss: 0.2782 | val MAE: 1.425 mm, NME: 0.0497 | 29.1s *\n"}
+,{"stream_name":"stdout","time":2454.733146018,"data":"[row_C s42] Ep 04/35 | loss: 0.1995 | val MAE: 2.178 mm, NME: 0.0885 | 29.2s\n"}
+,{"stream_name":"stdout","time":2483.927160737,"data":"[row_C s42] Ep 05/35 | loss: 0.1616 | val MAE: 1.927 mm, NME: 0.0591 | 29.2s\n"}
+,{"stream_name":"stdout","time":2512.899460364,"data":"[row_C s42] Ep 06/35 | loss: 0.1397 | val MAE: 1.829 mm, NME: 0.0651 | 29.0s\n"}
+,{"stream_name":"stdout","time":2541.955128678,"data":"[row_C s42] Ep 07/35 | loss: 0.1252 | val MAE: 1.795 mm, NME: 0.0584 | 29.1s\n"}
+,{"stream_name":"stdout","time":2571.066766,"data":"[row_C s42] Ep 08/35 | loss: 0.1086 | val MAE: 1.655 mm, NME: 0.0639 | 29.1s\n"}
+,{"stream_name":"stdout","time":2600.357415793,"data":"[row_C s42] Ep 09/35 | loss: 0.0972 | val MAE: 1.164 mm, NME: 0.0524 | 29.3s *\n"}
+,{"stream_name":"stdout","time":2629.690003646,"data":"[row_C s42] Ep 10/35 | loss: 0.0884 | val MAE: 1.150 mm, NME: 0.0523 | 29.3s *\n"}
+,{"stream_name":"stdout","time":2658.794301876,"data":"[row_C s42] Ep 11/35 | loss: 0.0806 | val MAE: 2.041 mm, NME: 0.0849 | 29.1s\n"}
+,{"stream_name":"stdout","time":2688.140750021,"data":"[row_C s42] Ep 12/35 | loss: 0.0779 | val MAE: 1.137 mm, NME: 0.0522 | 29.3s *\n"}
+,{"stream_name":"stdout","time":2717.25565815,"data":"[row_C s42] Ep 13/35 | loss: 0.0735 | val MAE: 1.157 mm, NME: 0.0530 | 29.1s\n"}
+,{"stream_name":"stdout","time":2746.416131325,"data":"[row_C s42] Ep 14/35 | loss: 0.0692 | val MAE: 1.921 mm, NME: 0.0744 | 29.2s\n"}
+,{"stream_name":"stdout","time":2775.571613633,"data":"[row_C s42] Ep 15/35 | loss: 0.0639 | val MAE: 1.158 mm, NME: 0.0525 | 29.2s\n"}
+,{"stream_name":"stdout","time":2804.667979495,"data":"[row_C s42] Ep 16/35 | loss: 0.0609 | val MAE: 1.150 mm, NME: 0.0521 | 29.1s\n"}
+,{"stream_name":"stdout","time":2833.913663054,"data":"[row_C s42] Ep 17/35 | loss: 0.0595 | val MAE: 1.127 mm, NME: 0.0519 | 29.2s *\n"}
+,{"stream_name":"stdout","time":2863.016543122,"data":"[row_C s42] Ep 18/35 | loss: 0.0576 | val MAE: 1.166 mm, NME: 0.0534 | 29.1s\n"}
+,{"stream_name":"stdout","time":2892.133097446,"data":"[row_C s42] Ep 19/35 | loss: 0.0545 | val MAE: 1.185 mm, NME: 0.0523 | 29.1s\n"}
+,{"stream_name":"stdout","time":2921.246330435,"data":"[row_C s42] Ep 20/35 | loss: 0.0515 | val MAE: 1.951 mm, NME: 0.0757 | 29.1s\n"}
+,{"stream_name":"stdout","time":2950.369518169,"data":"[row_C s42] Ep 21/35 | loss: 0.0495 | val MAE: 1.166 mm, NME: 0.0522 | 29.1s\n"}
+,{"stream_name":"stdout","time":2979.484025469,"data":"[row_C s42] Ep 22/35 | loss: 0.0473 | val MAE: 1.150 mm, NME: 0.0522 | 29.1s\n"}
+,{"stream_name":"stdout","time":3008.58792909,"data":"[row_C s42] Ep 23/35 | loss: 0.0452 | val MAE: 1.191 mm, NME: 0.0523 | 29.1s\n"}
+,{"stream_name":"stdout","time":3037.622906631,"data":"[row_C s42] Ep 24/35 | loss: 0.0445 | val MAE: 1.977 mm, NME: 0.0742 | 29.0s\n"}
+,{"stream_name":"stdout","time":3066.742294849,"data":"[row_C s42] Ep 25/35 | loss: 0.0416 | val MAE: 1.986 mm, NME: 0.0748 | 29.1s\n"}
+,{"stream_name":"stdout","time":3066.742336175,"data":"[row_C s42] Early stopping triggered at epoch 25\n"}
+,{"stream_name":"stdout","time":3066.742409599,"data":"[row_C s42] Training finished in 732.6s (25 epochs). Loading best checkpoint...\n"}
+,{"stream_name":"stdout","time":3083.639638459,"data":"\n"}
+,{"stream_name":"stdout","time":3083.639693546,"data":"\u003e\u003e\u003e Starting row_C (Seed 43, S=512, model=heatmap)\n"}
+,{"stream_name":"stdout","time":3113.612690968,"data":"[row_C s43] Ep 01/35 | loss: 1.0229 | val MAE: 24.962 mm, NME: 0.5698 | 29.7s *\n"}
+,{"stream_name":"stdout","time":3143.027908236,"data":"[row_C s43] Ep 02/35 | loss: 0.4671 | val MAE: 2.549 mm, NME: 0.0941 | 29.4s *\n"}
+,{"stream_name":"stdout","time":3172.277438423,"data":"[row_C s43] Ep 03/35 | loss: 0.2706 | val MAE: 2.639 mm, NME: 0.0634 | 29.2s\n"}
+,{"stream_name":"stdout","time":3201.716066739,"data":"[row_C s43] Ep 04/35 | loss: 0.1974 | val MAE: 1.546 mm, NME: 0.0494 | 29.4s *\n"}
+,{"stream_name":"stdout","time":3230.909612134,"data":"[row_C s43] Ep 05/35 | loss: 0.1579 | val MAE: 2.204 mm, NME: 0.0533 | 29.2s\n"}
+,{"stream_name":"stdout","time":3260.284511159,"data":"[row_C s43] Ep 06/35 | loss: 0.1356 | val MAE: 1.297 mm, NME: 0.0469 | 29.4s *\n"}
+,{"stream_name":"stdout","time":3289.575378899,"data":"[row_C s43] Ep 07/35 | loss: 0.1171 | val MAE: 1.373 mm, NME: 0.0469 | 29.3s\n"}
+,{"stream_name":"stdout","time":3318.792580628,"data":"[row_C s43] Ep 08/35 | loss: 0.1112 | val MAE: 1.345 mm, NME: 0.0489 | 29.2s\n"}
+,{"stream_name":"stdout","time":3347.906504165,"data":"[row_C s43] Ep 09/35 | loss: 0.0956 | val MAE: 2.097 mm, NME: 0.0702 | 29.1s\n"}
+,{"stream_name":"stdout","time":3377.125797274,"data":"[row_C s43] Ep 10/35 | loss: 0.0907 | val MAE: 1.358 mm, NME: 0.0581 | 29.2s\n"}
+,{"stream_name":"stdout","time":3406.419623424,"data":"[row_C s43] Ep 11/35 | loss: 0.0785 | val MAE: 2.651 mm, NME: 0.0911 | 29.3s\n"}
+,{"stream_name":"stdout","time":3435.580305201,"data":"[row_C s43] Ep 12/35 | loss: 0.0709 | val MAE: 1.300 mm, NME: 0.0466 | 29.2s\n"}
+,{"stream_name":"stdout","time":3464.83163716,"data":"[row_C s43] Ep 13/35 | loss: 0.0667 | val MAE: 1.356 mm, NME: 0.0477 | 29.3s\n"}
+,{"stream_name":"stdout","time":3494.090595003,"data":"[row_C s43] Ep 14/35 | loss: 0.0627 | val MAE: 1.328 mm, NME: 0.0466 | 29.3s\n"}
+,{"stream_name":"stdout","time":3494.090650033,"data":"[row_C s43] Early stopping triggered at epoch 14\n"}
+,{"stream_name":"stdout","time":3494.090719429,"data":"[row_C s43] Training finished in 410.2s (14 epochs). Loading best checkpoint...\n"}
+,{"stream_name":"stdout","time":3510.903692865,"data":"\n"}
+,{"stream_name":"stdout","time":3510.903778405,"data":"\u003e\u003e\u003e Starting row_C (Seed 44, S=512, model=heatmap)\n"}
+,{"stream_name":"stdout","time":3540.847374529,"data":"[row_C s44] Ep 01/35 | loss: 0.9735 | val MAE: 13.560 mm, NME: 0.2177 | 29.6s *\n"}
+,{"stream_name":"stdout","time":3570.338883548,"data":"[row_C s44] Ep 02/35 | loss: 0.4185 | val MAE: 2.340 mm, NME: 0.1124 | 29.5s *\n"}
+,{"stream_name":"stdout","time":3599.629522754,"data":"[row_C s44] Ep 03/35 | loss: 0.2781 | val MAE: 1.463 mm, NME: 0.0511 | 29.3s *\n"}
+,{"stream_name":"stdout","time":3629.061838559,"data":"[row_C s44] Ep 04/35 | loss: 0.2083 | val MAE: 1.421 mm, NME: 0.0507 | 29.4s *\n"}
+,{"stream_name":"stdout","time":3658.409854028,"data":"[row_C s44] Ep 05/35 | loss: 0.1718 | val MAE: 1.212 mm, NME: 0.0487 | 29.3s *\n"}
+,{"stream_name":"stdout","time":3687.654603011,"data":"[row_C s44] Ep 06/35 | loss: 0.1516 | val MAE: 1.371 mm, NME: 0.0479 | 29.2s\n"}
+,{"stream_name":"stdout","time":3716.868256694,"data":"[row_C s44] Ep 07/35 | loss: 0.1302 | val MAE: 1.385 mm, NME: 0.0563 | 29.2s\n"}
+,{"stream_name":"stdout","time":3745.966784264,"data":"[row_C s44] Ep 08/35 | loss: 0.1118 | val MAE: 1.324 mm, NME: 0.0473 | 29.1s\n"}
+,{"stream_name":"stdout","time":3775.132824933,"data":"[row_C s44] Ep 09/35 | loss: 0.1053 | val MAE: 1.307 mm, NME: 0.0482 | 29.2s\n"}
+,{"stream_name":"stdout","time":3804.426678854,"data":"[row_C s44] Ep 10/35 | loss: 0.0906 | val MAE: 1.502 mm, NME: 0.0493 | 29.3s\n"}
+,{"stream_name":"stdout","time":3833.575853675,"data":"[row_C s44] Ep 11/35 | loss: 0.0824 | val MAE: 1.324 mm, NME: 0.0466 | 29.1s\n"}
+,{"stream_name":"stdout","time":3862.730483179,"data":"[row_C s44] Ep 12/35 | loss: 0.0759 | val MAE: 1.323 mm, NME: 0.0464 | 29.2s\n"}
+,{"stream_name":"stdout","time":3891.890704381,"data":"[row_C s44] Ep 13/35 | loss: 0.0707 | val MAE: 1.262 mm, NME: 0.0464 | 29.2s\n"}
+,{"stream_name":"stdout","time":3891.890748457,"data":"[row_C s44] Early stopping triggered at epoch 13\n"}
+,{"stream_name":"stdout","time":3891.890766247,"data":"[row_C s44] Training finished in 380.6s (13 epochs). Loading best checkpoint...\n"}
+,{"stream_name":"stdout","time":3912.76184533,"data":"\n"}
+,{"stream_name":"stdout","time":3912.762410539,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":3912.76244447,"data":"FINAL ABLATION TABLE:\n"}
+,{"stream_name":"stdout","time":3912.762450443,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":3912.762455359,"data":"# Femur Model Ablation Study (FP + UCL Femur Test Set, N=348 images / 266 patients)\n"}
+,{"stream_name":"stdout","time":3912.762460006,"data":"\n"}
+,{"stream_name":"stdout","time":3912.762464502,"data":"\u003e Reference FL: Euclidean distance between annotated endpoints * px_to_mm_rate.\n"}
+,{"stream_name":"stdout","time":3912.762477996,"data":"\u003e Protocol: Train on 451 images, early stop on 65 validation images (0 patient overlap).\n"}
+,{"stream_name":"stdout","time":3912.76248156,"data":"\u003e Evaluation: 348 official test images (323 FP / 261 patients, 25 UCL / 5 patients [tiny]).\n"}
+,{"stream_name":"stdout","time":3912.762484852,"data":"\u003e 95% CIs: Patient-level bootstrap with 1,000 resamples.\n"}
+,{"stream_name":"stdout","time":3912.762488365,"data":"\u003e NME: Mean Euclidean landmark error normalized by ground-truth femur length.\n"}
+,{"stream_name":"stdout","time":3912.762492074,"data":"\n"}
+,{"stream_name":"stdout","time":3912.762495884,"data":"| Approach | Row / Model | Resolution | Epochs | Train Time (s) | FL MAE [95% CI] (mm) | FL RMSE [95% CI] (mm) | FL Median [95% CI] (mm) | % Error [95% CI] | FL NME (mean+-SD) | Top-10 SqErr Share (%) | FP MAE (mm) | UCL MAE (mm, tiny) |\n"}
+,{"stream_name":"stdout","time":3912.76250046,"data":"| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"}
+,{"stream_name":"stdout","time":3912.762503732,"data":"| Row A (U-Net EffNet-B4 1-ch Heatmap, flip TTA) | *Seeds Mean +- SD* | 384 px | 17.7 +- 2.9 | 330.4 +- 26.9 | 1.210 +- 0.051 | 3.708 +- 0.078 | 0.597 +- 0.049 | 3.11% +- 0.14% | 0.036 +- 0.001 | 90.8% +- 0.5% | 1.074 | 2.966 |\n"}
+,{"stream_name":"stdout","time":3912.762507119,"data":"| Row A (U-Net EffNet-B4 1-ch Heatmap, flip TTA) | **3-Seed Median Ens** | 384 px | - | - | **1.147** [0.890, 1.485] | **3.540** [1.457, 5.552] | **0.610** [0.519, 0.704] | **2.94%** [2.03%, 4.29%] | **0.037 +- 0.151** | **90.5%** | **1.011** | **2.893** |\n"}
+,{"stream_name":"stdout","time":3912.762511017,"data":"| Row B (ConvNeXt-Tiny Direct Reg, Order-Inv) | *Seeds Mean +- SD* | 384 px | 35.0 +- 0.0 | 397.1 +- 3.0 | 4.287 +- 0.415 | 7.318 +- 0.512 | 2.350 +- 0.354 | 10.81% +- 1.12% | 0.135 +- 0.006 | 51.8% +- 2.9% | 3.841 | 10.050 |\n"}
+,{"stream_name":"stdout","time":3912.762514328,"data":"| Row B (ConvNeXt-Tiny Direct Reg, Order-Inv) | **3-Seed Median Ens** | 384 px | - | - | **4.149** [3.469, 4.981] | **7.088** [5.299, 9.116] | **2.197** [1.749, 2.658] | **10.40%** [8.45%, 13.02%] | **0.132 +- 0.183** | **51.5%** | **3.712** | **9.788** |\n"}
+,{"stream_name":"stdout","time":3912.762519041,"data":"| Row C (U-Net EffNet-B4 512px Heatmap, flip TTA) | *Seeds Mean +- SD* | 512 px | 17.3 +- 5.4 | 507.8 +- 159.4 | 1.526 +- 0.287 | 6.097 +- 3.264 | 0.622 +- 0.010 | 3.97% +- 1.00% | 0.044 +- 0.004 | 90.6% +- 7.8% | 1.330 | 4.063 |\n"}
+,{"stream_name":"stdout","time":3912.762528965,"data":"| Row C (U-Net EffNet-B4 512px Heatmap, flip TTA) | **3-Seed Median Ens** | 512 px | - | - | **1.210** [0.969, 1.472] | **2.957** [1.734, 3.972] | **0.632** [0.532, 0.706] | **2.97%** [2.23%, 3.84%] | **0.038 +- 0.131** | **83.3%** | **1.148** | **2.012** |\n"}
+,{"stream_name":"stdout","time":3912.762533259,"data":"\n"}
+,{"stream_name":"stdout","time":3912.762577495,"data":"Saved /kaggle/working/out/femur_ablation_table.md\n"}
+,{"stream_name":"stdout","time":3912.765745333,"data":"Saved /kaggle/working/out/femur_ablation_results.json\n"}
+,{"stream_name":"stdout","time":3912.791530868,"data":"Saved /kaggle/working/out/femur_predictions.csv\n"}
+,{"stream_name":"stdout","time":3914.578219346,"data":"Created notebook at /kaggle/working/femur_ablation.ipynb. Executing via nbconvert...\n"}
+,{"stream_name":"stdout","time":3914.578246266,"data":"Trying notebook execution with: /usr/bin/python3 -m nbconvert --to notebook --execute --inplace /kaggle/working/femur_ablation.ipynb\n"}
+,{"stream_name":"stderr","time":3916.329586979,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":3916.329614958,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":3916.585755359,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":3916.585778836,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":3917.341962303,"data":"[NbConvertApp] Converting notebook /kaggle/working/femur_ablation.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":3918.204169604,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":3918.204199454,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":3918.204204149,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":3918.20420773,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":3918.794147138,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":3918.794190898,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":3918.794196263,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":3918.79420034,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":3920.563080599,"data":"[NbConvertApp] Writing 8457 bytes to /kaggle/working/femur_ablation.ipynb\n"}
+,{"stream_name":"stdout","time":3920.884535688,"data":"Successfully executed and saved /kaggle/working/out/femur_ablation.ipynb\n"}
+,{"stream_name":"stdout","time":3920.884565166,"data":"\n"}
+,{"stream_name":"stdout","time":3920.88456948,"data":"All Femur Ablation tasks completed successfully!\n"}
+,{"stream_name":"stderr","time":3929.162817471,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":3929.838393667,"data":"[NbConvertApp] Writing 507511 bytes to __results__.html\n"}
+]
