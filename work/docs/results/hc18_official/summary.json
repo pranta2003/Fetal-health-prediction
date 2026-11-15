@@ -98,6 +98,14 @@
       "hc_mad_sd": 1.87
     }
   },
+  "orientation_fix": {
+    "bug": "First submissions had axis/angle pairing 90 degrees off (cv2 angle belongs to minor axis)",
+    "official_metrics_affected": "Official Dice and Hausdorff distance of those submissions are affected; HC abs difference is not",
+    "roundtrip_dice_legacy": 0.8541516536862868,
+    "roundtrip_dice_corrected": 0.9940813823661515,
+    "hc_abs_diff_discrepancy": 0.0,
+    "official_corrected_result": "NOT YET (to be added after the user resubmits)"
+  },
   "ensemble_vs_single_abs_diff_diff": 0.046522781479309216,
   "statement": "same range as the published values listed; no rank is claimed; test labels are hidden so no paired significance test is possible; ensemble vs single difference = 0.05 mm (no test)"
 }

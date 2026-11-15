@@ -2,38 +2,76 @@
   "n_masks": 999,
   "candidates": {
     "c1": {
+      "mean": 0.9940813823661515,
+      "std": 0.0614490616612957,
+      "min": 0.02226565226495428,
+      "max": 0.9992575536392413,
+      "mean_dice": 0.9940813823661515,
+      "std_dice": 0.0614490616612957,
+      "min_dice": 0.02226565226495428,
+      "max_dice": 0.9992575536392413,
+      "description": "Corrected submission convention (a along rotated x, major axis angle)"
+    },
+    "legacy": {
       "mean": 0.8541516536862868,
       "std": 0.06281173971053135,
       "min": 0.01626971157774328,
-      "max": 0.9766762197125024
+      "max": 0.9766762197125024,
+      "mean_dice": 0.8541516536862868,
+      "std_dice": 0.06281173971053135,
+      "min_dice": 0.01626971157774328,
+      "max_dice": 0.9766762197125024,
+      "description": "Legacy buggy convention (90-deg off axis/angle pairing)"
     },
     "c2": {
-      "mean": 0.8682799388454718,
-      "std": 0.07175630051724444,
-      "min": 0.016259581356633288,
-      "max": 0.9984069571575938
+      "mean": 0.9576683073717415,
+      "std": 0.06977683324809916,
+      "min": 0.018745824567001367,
+      "max": 0.9990646271628567,
+      "mean_dice": 0.9576683073717415,
+      "std_dice": 0.06977683324809916,
+      "min_dice": 0.018745824567001367,
+      "max_dice": 0.9990646271628567,
+      "description": "Angle sign flipped (-angle)"
     },
     "c3": {
-      "mean": 0.9940813823661515,
-      "std": 0.0614490616612957,
-      "min": 0.02226565226495428,
-      "max": 0.9992575536392413
-    },
-    "c4": {
-      "mean": 0.9940813823661515,
-      "std": 0.0614490616612957,
-      "min": 0.02226565226495428,
-      "max": 0.9992575536392413
-    },
-    "c5": {
       "mean": 0.8541516536862868,
       "std": 0.06281173971053135,
       "min": 0.01626971157774328,
-      "max": 0.9766762197125024
+      "max": 0.9766762197125024,
+      "mean_dice": 0.8541516536862868,
+      "std_dice": 0.06281173971053135,
+      "min_dice": 0.01626971157774328,
+      "max_dice": 0.9766762197125024,
+      "description": "Swapped axes (b, a) under corrected angle"
+    },
+    "c4": {
+      "mean": 0.8541516536862868,
+      "std": 0.06281173971053135,
+      "min": 0.01626971157774328,
+      "max": 0.9766762197125024,
+      "mean_dice": 0.8541516536862868,
+      "std_dice": 0.06281173971053135,
+      "min_dice": 0.01626971157774328,
+      "max_dice": 0.9766762197125024,
+      "description": "Angle + 90 deg under corrected angle"
+    },
+    "c5": {
+      "mean": 0.9940813823661515,
+      "std": 0.0614490616612957,
+      "min": 0.02226565226495428,
+      "max": 0.9992575536392413,
+      "mean_dice": 0.9940813823661515,
+      "std_dice": 0.0614490616612957,
+      "min_dice": 0.02226565226495428,
+      "max_dice": 0.9992575536392413,
+      "description": "mm-pixel roundtrip verification of c1"
     }
   },
-  "best_candidate": "c3",
+  "best_candidate": "c1",
   "submission_candidate": "c1",
-  "difference_vs_submission": 0.13992972867986475,
-  "result_statement": "Candidate c3 gives the highest mean Dice of 0.9941 (+0.1399 vs 0.8542 for the convention used in the submission)."
+  "legacy_candidate": "legacy",
+  "difference_vs_legacy": 0.13992972867986475,
+  "result_statement": "Corrected submission convention (candidate c1) achieves the highest mean Dice of 0.9941 (+0.1399 vs 0.8542 for legacy buggy convention).",
+  "sentence": "Corrected submission convention (candidate c1) achieves the highest mean Dice of 0.9941 (+0.1399 vs 0.8542 for legacy buggy convention)."
 }

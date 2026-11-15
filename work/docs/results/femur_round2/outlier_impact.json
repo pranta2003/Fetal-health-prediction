@@ -1,0 +1,106 @@
+{
+  "outlier_image": "005_3FL.jpeg",
+  "n_resamples": 1000,
+  "models": {
+    "Row_A_PR32": {
+      "label": "Row A (PR #32)",
+      "source_file": "docs/results/femur_ablation/femur_predictions.csv",
+      "all_images": {
+        "n": 348,
+        "fl_mae": 1.1466,
+        "ci_95": [
+          0.8895,
+          1.4848
+        ]
+      },
+      "without_outlier": {
+        "outlier_excluded": "005_3FL.jpeg",
+        "n": 347,
+        "fl_mae": 0.9851,
+        "ci_95": [
+          0.8505,
+          1.1504
+        ]
+      },
+      "impact": {
+        "mae_diff": -0.1615,
+        "pct_change": -14.09
+      }
+    },
+    "Row_A_Round2": {
+      "label": "Row A (round 2)",
+      "source_file": "docs/results/femur_round2/femur_round2_predictions.csv",
+      "all_images": {
+        "n": 348,
+        "fl_mae": 1.3496,
+        "ci_95": [
+          1.0654,
+          1.6924
+        ]
+      },
+      "without_outlier": {
+        "outlier_excluded": "005_3FL.jpeg",
+        "n": 347,
+        "fl_mae": 1.1881,
+        "ci_95": [
+          1.0121,
+          1.3911
+        ]
+      },
+      "impact": {
+        "mae_diff": -0.1616,
+        "pct_change": -11.97
+      }
+    },
+    "Row_R4_Round2": {
+      "label": "Row R4 (round 2)",
+      "source_file": "docs/results/femur_round2/femur_round2_predictions.csv",
+      "all_images": {
+        "n": 348,
+        "fl_mae": 1.1179,
+        "ci_95": [
+          0.856,
+          1.4588
+        ]
+      },
+      "without_outlier": {
+        "outlier_excluded": "005_3FL.jpeg",
+        "n": 347,
+        "fl_mae": 0.9561,
+        "ci_95": [
+          0.8111,
+          1.1158
+        ]
+      },
+      "impact": {
+        "mae_diff": -0.1617,
+        "pct_change": -14.47
+      }
+    },
+    "Row_R2_Round2": {
+      "label": "Row R2 (round 2)",
+      "source_file": "docs/results/femur_round2/femur_round2_predictions.csv",
+      "all_images": {
+        "n": 348,
+        "fl_mae": 1.0711,
+        "ci_95": [
+          0.911,
+          1.2616
+        ]
+      },
+      "without_outlier": {
+        "outlier_excluded": "005_3FL.jpeg",
+        "n": 347,
+        "fl_mae": 1.0632,
+        "ci_95": [
+          0.9022,
+          1.2577
+        ]
+      },
+      "impact": {
+        "mae_diff": -0.0079,
+        "pct_change": -0.74
+      }
+    }
+  }
+}
