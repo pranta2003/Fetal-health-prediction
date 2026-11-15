@@ -161,6 +161,8 @@ def evaluate_femur_dataframe(
     model: torch.nn.Module,
     df: pd.DataFrame,
     model_type: str = "heatmap",
+    decode_type: str = "standard",
+    min_dist: float = 8.0,
     S: int = 384,
     tta: bool = True,
     bs: int = 16,
@@ -177,7 +179,16 @@ def evaluate_femur_dataframe(
     with torch.no_grad():
         for x, gt, mmpp, idx_t in dl:
             x, gt, mmpp = x.to(device), gt.to(device), mmpp.to(device)
-            pred = predict_femur_batch(model, x, model_type=model_type, tta=tta, device=device, S=S)
+            pred = predict_femur_batch(
+                model,
+                x,
+                model_type=model_type,
+                decode_type=decode_type,
+                min_dist=min_dist,
+                tta=tta,
+                device=device,
+                S=S,
+            )
             m = compute_femur_metrics(pred, gt, mmpp)
 
             # Map predictions back to original image space
