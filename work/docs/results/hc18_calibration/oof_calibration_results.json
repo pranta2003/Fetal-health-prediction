@@ -1,0 +1,272 @@
+{
+  "dataset": "HC18",
+  "total_images": 999,
+  "total_patients": 806,
+  "local_probability_maps_audit": {
+    "local_oof_maps_exist": false,
+    "count": 0,
+    "paths": [],
+    "statement": "NO: Zero local OOF probability maps (.npy/.pt) exist in docs/ or data/. Only scalar tabular predictions (oof_predictions.csv) are stored."
+  },
+  "protocol": {
+    "evaluation": "Nested 5-fold cross-validation (models fit on 4 folds, evaluated strictly on held-out fold)",
+    "n_bootstrap": 5000,
+    "bootstrap_seed": 42,
+    "tercile_definition": "Equal-frequency terciles (q=3) of true_HC_mm"
+  },
+  "fold_models": {
+    "raw": [
+      {
+        "fold": 1,
+        "method": "raw"
+      },
+      {
+        "fold": 2,
+        "method": "raw"
+      },
+      {
+        "fold": 3,
+        "method": "raw"
+      },
+      {
+        "fold": 4,
+        "method": "raw"
+      },
+      {
+        "fold": 5,
+        "method": "raw"
+      }
+    ],
+    "median_add": [
+      {
+        "fold": 1,
+        "delta_mm": 1.3026
+      },
+      {
+        "fold": 2,
+        "delta_mm": 1.2511
+      },
+      {
+        "fold": 3,
+        "delta_mm": 1.4397
+      },
+      {
+        "fold": 4,
+        "delta_mm": 1.382
+      },
+      {
+        "fold": 5,
+        "delta_mm": 1.3658
+      }
+    ],
+    "median_mult": [
+      {
+        "fold": 1,
+        "ratio": 1.007813
+      },
+      {
+        "fold": 2,
+        "ratio": 1.007706
+      },
+      {
+        "fold": 3,
+        "ratio": 1.008802
+      },
+      {
+        "fold": 4,
+        "ratio": 1.008624
+      },
+      {
+        "fold": 5,
+        "ratio": 1.008129
+      }
+    ],
+    "linear_reg": [
+      {
+        "fold": 1,
+        "slope_a": 1.006332,
+        "intercept_b": 0.1382
+      },
+      {
+        "fold": 2,
+        "slope_a": 1.00639,
+        "intercept_b": 0.0386
+      },
+      {
+        "fold": 3,
+        "slope_a": 1.005996,
+        "intercept_b": 0.2861
+      },
+      {
+        "fold": 4,
+        "slope_a": 1.006539,
+        "intercept_b": 0.2019
+      },
+      {
+        "fold": 5,
+        "slope_a": 1.005586,
+        "intercept_b": 0.2403
+      }
+    ],
+    "isotonic": [
+      {
+        "fold": 1,
+        "n_thresholds": 315
+      },
+      {
+        "fold": 2,
+        "n_thresholds": 306
+      },
+      {
+        "fold": 3,
+        "n_thresholds": 315
+      },
+      {
+        "fold": 4,
+        "n_thresholds": 291
+      },
+      {
+        "fold": 5,
+        "n_thresholds": 319
+      }
+    ]
+  },
+  "tercile_ranges": {
+    "low": {
+      "n": 333,
+      "min_true_hc_mm": 45.0632,
+      "max_true_hc_mm": 167.205
+    },
+    "mid": {
+      "n": 333,
+      "min_true_hc_mm": 167.4944,
+      "max_true_hc_mm": 182.9535
+    },
+    "high": {
+      "n": 333,
+      "min_true_hc_mm": 182.9912,
+      "max_true_hc_mm": 349.2581
+    }
+  },
+  "methods_metrics": {
+    "raw": {
+      "mae": 2.3019423423423424,
+      "rmse": 3.579706604680836,
+      "median_ae": 1.7603000000000009,
+      "signed_bias_true_minus_pred_mean": 1.257585585585586,
+      "signed_bias_true_minus_pred_median": 1.349000000000018,
+      "signed_bias_pred_minus_true_mean": -1.257585585585586,
+      "signed_bias_pred_minus_true_median": -1.349000000000018
+    },
+    "median_add": {
+      "mae": 2.0029066066066075,
+      "rmse": 3.357948269260418,
+      "median_ae": 1.444100000000006,
+      "signed_bias_true_minus_pred_mean": -0.09086656656657256,
+      "signed_bias_true_minus_pred_median": 0.01789999999998315,
+      "signed_bias_pred_minus_true_mean": 0.09086656656657256,
+      "signed_bias_pred_minus_true_median": -0.01789999999998315
+    },
+    "median_mult": {
+      "mae": 1.984645026786874,
+      "rmse": 3.3418217474451035,
+      "median_ae": 1.4258342677486553,
+      "signed_bias_true_minus_pred_mean": -0.17794363241761757,
+      "signed_bias_true_minus_pred_median": -0.015093885120137429,
+      "signed_bias_pred_minus_true_mean": 0.17794363241761757,
+      "signed_bias_pred_minus_true_median": 0.015093885120137429
+    },
+    "linear_reg": {
+      "mae": 1.9845717765121251,
+      "rmse": 3.3350215401229604,
+      "median_ae": 1.427303158392732,
+      "signed_bias_true_minus_pred_mean": -0.002290154305987306,
+      "signed_bias_true_minus_pred_median": 0.1541585633775071,
+      "signed_bias_pred_minus_true_mean": 0.002290154305987306,
+      "signed_bias_pred_minus_true_median": -0.1541585633775071
+    },
+    "isotonic": {
+      "mae": 2.1835552903206477,
+      "rmse": 3.5655558483070044,
+      "median_ae": 1.5232833333333247,
+      "signed_bias_true_minus_pred_mean": -0.027949131342122558,
+      "signed_bias_true_minus_pred_median": 0.031028571428564078,
+      "signed_bias_pred_minus_true_mean": 0.027949131342122558,
+      "signed_bias_pred_minus_true_median": -0.031028571428564078
+    }
+  },
+  "tercile_mae": {
+    "raw": {
+      "low_mae": 1.9167789789789798,
+      "mid_mae": 2.0226846846846858,
+      "high_mae": 2.9663633633633633
+    },
+    "median_add": {
+      "low_mae": 1.7983399399399425,
+      "mid_mae": 1.6182912912912912,
+      "high_mae": 2.5920885885885876
+    },
+    "median_mult": {
+      "low_mae": 1.7580359149954636,
+      "mid_mae": 1.6283349378752876,
+      "high_mae": 2.567564227489871
+    },
+    "linear_reg": {
+      "low_mae": 1.7533708286624752,
+      "mid_mae": 1.6380934720759424,
+      "high_mae": 2.5622510287979576
+    },
+    "isotonic": {
+      "low_mae": 2.0795727957816856,
+      "mid_mae": 1.6733128177945351,
+      "high_mae": 2.797780257385721
+    }
+  },
+  "bootstrap_diff_vs_raw": {
+    "raw": {
+      "mean_diff_vs_raw": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "significant_improvement": false
+    },
+    "median_add": {
+      "mean_diff_vs_raw": -0.2990357357357356,
+      "ci_95": [
+        -0.37384345605987424,
+        -0.21846460887856603
+      ],
+      "significant_improvement": true
+    },
+    "median_mult": {
+      "mean_diff_vs_raw": -0.31729731555546886,
+      "ci_95": [
+        -0.4036040439736352,
+        -0.22700107881954715
+      ],
+      "significant_improvement": true
+    },
+    "linear_reg": {
+      "mean_diff_vs_raw": -0.31737056583021767,
+      "ci_95": [
+        -0.39280940119379654,
+        -0.23983545271560253
+      ],
+      "significant_improvement": true
+    },
+    "isotonic": {
+      "mean_diff_vs_raw": -0.1183870520216955,
+      "ci_95": [
+        -0.22723729757331862,
+        -0.004844206149121235
+      ],
+      "significant_improvement": true
+    }
+  },
+  "caveats": {
+    "caveat_1_single_fold_vs_ensemble": "This study evaluates single-fold out-of-fold predictions. The official HC18 challenge test submission used a 5-fold ensemble average of predicted ellipse parameters. Averaging across 5 independent fold models already reduces prediction variance and naturally shifts predictions toward the ensemble centroid.",
+    "caveat_2_signed_difference_convention": "Both signed difference conventions are explicitly reported: (1) Under (y_true - y_pred), raw predictions have a mean signed bias of +1.2576 mm (median +1.3490 mm), confirming that the single-fold models systematically underestimated ground-truth HC. (2) Under (y_pred - y_true), raw signed mean is -1.2576 mm (median -1.3490 mm).",
+    "caveat_3_no_challenge_submission_changes": "Zero changes are made to the official challenge submission CSVs (submission_ensemble_5fold.csv and submission_single_fold1.csv) or submission generation scripts. This audit is strictly observational on the existing held-out cross-validation records."
+  }
+}
