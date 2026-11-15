@@ -140,7 +140,8 @@
     "efw_predicted_g": 1098.57,
     "err_g": 18.27,
     "err_pct": 1.6911,
-    "explanation": "UCL_5 contains outlier femur image 005_3FL.jpeg. However, because UCL_5 has 16 femur images, averaging FL across all images dampens the single-image peak flip, yielding an EFW error of +18.3g (+1.7%)."
+    "subject_own_error_is_small": true,
+    "explanation": "UCL_5 contains outlier femur image 005_3FL.jpeg. The subject's own EFW error is small (+18.3g, +1.7%) because UCL_5 has 16 femur images, and subject-level averaging across all images dampens the single-image peak flip."
   },
   "replacement_analysis": {
     "replace_bpd_only_mean_abs_pct": 0.12,

@@ -66,7 +66,7 @@ File names tell you the part. The prefix is the part:
 | Use | `src/fetal/infer/ac_infer.py` | One function: give an image, get the AC in mm |
 | Proof | `notebooks/benchmarks/ac_results.ipynb` | Executed notebook reproducing official test set results for AC v3_full and seed ensemble |
 | Proof | `tests/test_ac_*.py`, `test_geometry.py`, `test_recipes_equality.py`, `test_split_equality.py`, `test_train_equivalence.py`, `tests/reference/ac_*.py` | Tests that the moved code equals the original |
-| History Proof | `scripts/28_ac_history_table.py` | Synthesizes AC lab-PC historical proof benchmark tables and audits logs |
+| History Proof | `scripts/28_ac_history_table.py` | Synthesizes AC lab-PC historical proof benchmark tables, Colab history evidence (v1/v2), and audits logs |
 | History Proof | `notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | Executed notebook displaying AC lab-PC history proof tables, log excerpts, and assertions |
 | History Proof | `tests/test_ac_lab_history.py` | Unit tests checking all AC lab-PC history proof assertions pass on committed inputs |
 | History Results | `docs/results/ac_lab_pc/history_table.json`, `docs/results/ac_lab_pc/history_table.md` | AC lab-PC history tables and fact check audit |

@@ -347,10 +347,12 @@ def run_hadlock_demo_step2(
             "efw_predicted_g": float(ucl5_row["efw_predicted_g"]),
             "err_g": float(ucl5_row["err_g"]),
             "err_pct": float(ucl5_row["err_pct"]),
+            "subject_own_error_is_small": True,
             "explanation": (
-                f"UCL_5 contains outlier femur image 005_3FL.jpeg. However, because UCL_5 has "
-                f"{int(ucl5_row['n_femur_images'])} femur images, averaging FL across all images dampens "
-                f"the single-image peak flip, yielding an EFW error of {ucl5_row['err_g']:+.1f}g ({ucl5_row['err_pct']:+.1f}%)."
+                f"UCL_5 contains outlier femur image 005_3FL.jpeg. The subject's own EFW error is small "
+                f"({ucl5_row['err_g']:+.1f}g, {ucl5_row['err_pct']:+.1f}%) because UCL_5 has "
+                f"{int(ucl5_row['n_femur_images'])} femur images, and subject-level averaging across all images dampens "
+                f"the single-image peak flip."
             ),
         },
         "replacement_analysis": {
@@ -390,7 +392,7 @@ def run_hadlock_demo_step2(
         f"| **All Subjects (Primary R4)** | {sum_all_r4['n_subjects']} | **{sum_all_r4['mae_g']:.2f}** [{sum_all_r4['mae_g_95ci'][0]:.2f}, {sum_all_r4['mae_g_95ci'][1]:.2f}] | **{sum_all_r4['mape_pct']:.2f}%** [{sum_all_r4['mape_pct_95ci'][0]:.2f}, {sum_all_r4['mape_pct_95ci'][1]:.2f}] | {sum_all_r4['bias_pct']:+.2f}% [{sum_all_r4['bias_pct_95ci'][0]:.2f}, {sum_all_r4['bias_pct_95ci'][1]:.2f}] | {sum_all_r4['median_abs_g']:.2f} | {sum_all_r4['max_abs_g']:.2f} |",
         f"| • FP Cohort | {sum_fp_r4['n_subjects']} | {sum_fp_r4['mae_g']:.2f} [{sum_fp_r4['mae_g_95ci'][0]:.2f}, {sum_fp_r4['mae_g_95ci'][1]:.2f}] | {sum_fp_r4['mape_pct']:.2f}% [{sum_fp_r4['mape_pct_95ci'][0]:.2f}, {sum_fp_r4['mape_pct_95ci'][1]:.2f}] | {sum_fp_r4['bias_pct']:+.2f}% [{sum_fp_r4['bias_pct_95ci'][0]:.2f}, {sum_fp_r4['bias_pct_95ci'][1]:.2f}] | {sum_fp_r4['median_abs_g']:.2f} | {sum_fp_r4['max_abs_g']:.2f} |",
         f"| • UCL Cohort | {sum_ucl_r4['n_subjects']} | {sum_ucl_r4['mae_g']:.2f} [{sum_ucl_r4['mae_g_95ci'][0]:.2f}, {sum_ucl_r4['mae_g_95ci'][1]:.2f}] | {sum_ucl_r4['mape_pct']:.2f}% [{sum_ucl_r4['mape_pct_95ci'][0]:.2f}, {sum_ucl_r4['mape_pct_95ci'][1]:.2f}] | {sum_ucl_r4['bias_pct']:+.2f}% [{sum_ucl_r4['bias_pct_95ci'][0]:.2f}, {sum_ucl_r4['bias_pct_95ci'][1]:.2f}] | {sum_ucl_r4['median_abs_g']:.2f} | {sum_ucl_r4['max_abs_g']:.2f} |",
-        f"| **Excluding Outlier UCL_5** | {sum_no_ucl5_r4['n_subjects']} | **{sum_no_ucl5_r4['mae_g']:.2f}** [{sum_no_ucl5_r4['mae_g_95ci'][0]:.2f}, {sum_no_ucl5_r4['mae_g_95ci'][1]:.2f}] | **{sum_no_ucl5_r4['mape_pct']:.2f}%** [{sum_no_ucl5_r4['mape_pct_95ci'][0]:.2f}, {sum_no_ucl5_r4['mape_pct_95ci'][1]:.2f}] | {sum_no_ucl5_r4['bias_pct']:+.2f}% [{sum_no_ucl5_r4['bias_pct_95ci'][0]:.2f}, {sum_no_ucl5_r4['bias_pct_95ci'][1]:.2f}] | {sum_no_ucl5_r4['median_abs_g']:.2f} | {sum_no_ucl5_r4['max_abs_g']:.2f} |",
+        f"| **Excluding subject with the femur outlier (005_3FL)** | {sum_no_ucl5_r4['n_subjects']} | **{sum_no_ucl5_r4['mae_g']:.2f}** [{sum_no_ucl5_r4['mae_g_95ci'][0]:.2f}, {sum_no_ucl5_r4['mae_g_95ci'][1]:.2f}] | **{sum_no_ucl5_r4['mape_pct']:.2f}%** [{sum_no_ucl5_r4['mape_pct_95ci'][0]:.2f}, {sum_no_ucl5_r4['mape_pct_95ci'][1]:.2f}] | {sum_no_ucl5_r4['bias_pct']:+.2f}% [{sum_no_ucl5_r4['bias_pct_95ci'][0]:.2f}, {sum_no_ucl5_r4['bias_pct_95ci'][1]:.2f}] | {sum_no_ucl5_r4['median_abs_g']:.2f} | {sum_no_ucl5_r4['max_abs_g']:.2f} |",
         "",
         "> **Note on Sample Size**: The cohort size is small ($N=22$ overall; FP=17, UCL=5) because it strictly enforces zero cross-plane training leakage. The 95% bootstrap confidence intervals reflect this limited sample size.",
         "",
@@ -398,13 +400,15 @@ def run_hadlock_demo_step2(
         "",
         "Starting from annotated ground-truth EFW, replacing each individual measurement by its model prediction reveals which plane drives EFW error:",
         "",
-        "| Replacement Condition | Mean Abs EFW Error (%) | Relative Error Contribution (%) |",
+        "| Replacement Condition | Mean Abs EFW Error (%) | single replacement as % of full replacement error |",
         "|:---|:---:|:---:|",
         f"| Replace **BPD** only | {mean_rep_bpd:.2f}% | {mean_rep_bpd / mean_rep_all * 100.0:.1f}% |",
         f"| Replace **HC** only | {mean_rep_hc:.2f}% | {mean_rep_hc / mean_rep_all * 100.0:.1f}% |",
         f"| Replace **AC** only | **{mean_rep_ac:.2f}%** | **{mean_rep_ac / mean_rep_all * 100.0:.1f}%** |",
         f"| Replace **FL** only | {mean_rep_fl:.2f}% | {mean_rep_fl / mean_rep_all * 100.0:.1f}% |",
         f"| Replace **All Four** (Full Model) | **{mean_rep_all:.2f}%** | 100.0% |",
+        "",
+        "> **Note on Replacement Shares**: The individual single replacement error shares do not add up to 100% because measurement errors across planes partly cancel each other out.",
         "",
         f"> **Error Driver Finding**: From the numbers, **{driver_name}** drives the error ({mean_rep_ac:.2f}% MAPE), followed by FL ({mean_rep_fl:.2f}%), HC ({mean_rep_hc:.2f}%), and BPD ({mean_rep_bpd:.2f}%).",
         "",
@@ -414,11 +418,11 @@ def run_hadlock_demo_step2(
         f"- **Image Counts**: Head = {int(ucl5_row['n_head_images'])}, Abdomen = {int(ucl5_row['n_abdomen_images'])}, Femur = {int(ucl5_row['n_femur_images'])} (contains `005_3FL.jpeg`)",
         f"- **Annotated EFW**: {ucl5_row['efw_annotated_g']:.1f} g vs **Predicted EFW**: {ucl5_row['efw_predicted_g']:.1f} g",
         f"- **Subject EFW Error**: **{ucl5_row['err_g']:+.1f} g** ({ucl5_row['err_pct']:+.1f}%)",
-        "- **Impact Assessment**: Because UCL_5 has 16 femur images, subject-level averaging dampens the single-image dual-peak flip of `005_3FL.jpeg`. Excluding UCL_5 changes cohort MAPE from 2.92% to 2.97% (+0.05%).",
+        "- **Impact Assessment**: The subject's own EFW error is small (+18.3 g, +1.7%). Because UCL_5 has 16 femur images, subject-level averaging dampens the single-image dual-peak flip of `005_3FL.jpeg`. Excluding this subject with the femur outlier changes cohort MAPE marginally from 2.92% to 2.97% (+0.05%).",
         "",
         "## 4. Sensitivity Analysis: PR #32 Row A Baseline",
         "",
-        "| Femur Model Run | All Cohort MAPE (%) | All Cohort MAE (g) | Excl. UCL_5 MAPE (%) | Excl. UCL_5 MAE (g) |",
+        "| Femur Model Run | All Cohort MAPE (%) | All Cohort MAE (g) | Excl. outlier subject MAPE (%) | Excl. outlier subject MAE (g) |",
         "|:---|:---:|:---:|:---:|:---:|",
         f"| **Row R4 (Modern Augmentation)** | **{sum_all_r4['mape_pct']:.2f}%** | **{sum_all_r4['mae_g']:.2f} g** | **{sum_no_ucl5_r4['mape_pct']:.2f}%** | **{sum_no_ucl5_r4['mae_g']:.2f} g** |",
         f"| **Row A (PR #32 Baseline)** | {sum_all_pr32['mape_pct']:.2f}% | {sum_all_pr32['mae_g']:.2f} g | {sum_no_ucl5_pr32['mape_pct']:.2f}% | {sum_no_ucl5_pr32['mae_g']:.2f} g |",
