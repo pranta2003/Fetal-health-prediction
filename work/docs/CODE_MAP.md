@@ -95,7 +95,7 @@ File names tell you the part. The prefix is the part:
 | Results | `docs/results/femur/`, `docs/results/femur_ablation/`, `docs/results/femur_round2/` | Results JSON (`femur_data_followup.json`, `femur_ablation_results.json`, `femur_round2_results.json`, `baseline_sensitivity.json`), tables, predictions, and `SHA256SUMS` |
 
 ## FASSD
-Not built yet. When it arrives, it follows the same pattern: `fassd_dataset.py`, `fassd_model.py`, `train_fassd.py`, `fassd_eval.py`.
+Fetal Abdominal Structures Segmentation Dataset (artery, liver, stomach, vein). See [ORGANS (FASSD)](#organs-fassd-all-files) below.
 
 ## MATERNAL RISK (Stream 3): all files
 | File | What it does |
@@ -123,12 +123,17 @@ Not built yet. When it arrives, it follows the same pattern: `fassd_dataset.py`,
 ## ORGANS (FASSD): all files
 | Step | File | What it does |
 |---|---|---|
-| 1 Prepare data | `src/fetal/data/fassd.py` | Loads FASSD array data and images, isolates allow_pickle to trusted loader, deterministic patient-grouped split |
+| 1 Prepare data | `src/fetal/data/fassd.py` | Loads FASSD array data and images, isolates allow_pickle to trusted loader, deterministic patient-grouped split, hash-based Union-Find patient grouping |
+| 1 Split leakage fix & Kaggle dataset | `scripts/make_fassd_split_v2.py` | Resolves cross-patient hash duplicates, generates group split_v2.csv, encodes compact bit-flag Kaggle dataset, and verifies 100% mask round trip |
 | 2 Audit & Report | `scripts/33_fassd_audit.py` | Audits patient ID widths, pairwise PNG/NPY agreement, structure statistics, duplicate hashes, color Doppler content, and generates 12 overlays |
 | 2 Proof | `scripts/make_fassd_audit_notebook.py` | Generates benchmark notebook for FASSD audit |
+| 3 Train / Model | `src/fetal/seg/fassd_train.py` | 4-channel sigmoid multilabel segmentation dataset, U-Net architecture, combined BCE+Dice loss, Model EMA, surface HD95, and patient bootstrap |
+| 3 Training Script | `scripts/35_fassd_train.py` | CLI training runner on Kaggle T4 GPU or CPU smoke mode with cosine annealing, AMP, and JSON/CSV logging |
+| 4 Kaggle Kernel | `scripts/make_fassd_kaggle_notebook.py` | Generates `notebooks/kaggle/fassd_train_kernel.ipynb` for multi-seed RGB and Gray experiments |
 | Proof | `notebooks/benchmarks/fassd_audit.ipynb` | Executed notebook rendering FASSD audit tables, split integrity, and overlay paths |
-| Proof | `tests/test_fassd_audit.py` | Unit tests for patient ID parsing, array loading, patient-overlap assertion, and split ratios on synthetic data |
-| Results | `docs/results/fassd/` | Audit JSON, markdown report, patient-grouped split_v1.csv, 12 sample overlays, and SHA256SUMS |
+| Proof | `notebooks/kaggle/fassd_train_kernel.ipynb` | Kaggle GPU training orchestration notebook |
+| Proof | `tests/test_fassd_audit.py`, `tests/test_fassd_train.py` | Unit tests for patient ID parsing, array loading, synthetic segmentation dataset, loss functions, EMA, and metric edge cases |
+| Results | `docs/results/fassd/` | Audit JSON, markdown report, patient-grouped split_v1.csv, group-partitioned split_v2.csv, 12 sample overlays, and SHA256SUMS |
 
 ## SHARED HELPERS
 | File | What it does |
