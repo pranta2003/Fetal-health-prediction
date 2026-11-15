@@ -1,0 +1,219 @@
+{
+  "metadata": {
+    "title": "Hadlock Demo Step 2: Multi-Plane EFW Estimation Evaluation",
+    "cohort_definition": "Subjects with held-out test images in all three planes (FP + UCL)",
+    "n_total_cohort": 22,
+    "n_fp": 17,
+    "n_ucl": 5,
+    "femur_primary": "Row R4 (validation-selected ensemble)",
+    "femur_sensitivity": "Row A (PR #32 ensemble)",
+    "head_hc_formula": "Ramanujan second approximation formula from OFD/BPD (approximate HC; identical for annotated and predicted)",
+    "sample_size_caveat": "Sample size is small (N=22 overall; FP=17, UCL=5). Confidence intervals reflect this limited sample size.",
+    "test_vector_check": "Passed: calculate_efw(280, 80, 250, 55) = 1403.0g (target 1403.0g)"
+  },
+  "hadlock_published_reference": {
+    "source_file": "src/fetal/explain/hadlock.py",
+    "source_line": 23,
+    "line_text": "SD as a uniform 12.7% coefficient of variation, per the paper.\"\"\"",
+    "residual_sd_cv_pct": 12.7,
+    "statement": "Hadlock et al. (1991) reports an intrinsic formula residual SD of 12.7% coefficient of variation (src/fetal/explain/hadlock.py:23). In comparison, the measurement propagation error in this demo is 2.92% MAPE across all 22 subjects (2.97% excluding UCL_5). The measurement propagation error is substantially smaller than the physiological modeling error of Hadlock's formula itself."
+  },
+  "primary_evaluation_r4": {
+    "all_cohort_22": {
+      "n_subjects": 22,
+      "mae_g": 46.43,
+      "mae_g_95ci": [
+        25.16,
+        70.01
+      ],
+      "mape_pct": 2.92,
+      "mape_pct_95ci": [
+        2.03,
+        3.86
+      ],
+      "bias_pct": -1.36,
+      "bias_pct_95ci": [
+        -2.76,
+        0.08
+      ],
+      "bias_g": -24.2,
+      "bias_g_95ci": [
+        -51.8,
+        2.59
+      ],
+      "median_abs_g": 18.66,
+      "max_abs_g": 140.43,
+      "median_abs_pct": 2.58,
+      "max_abs_pct": 8.94
+    },
+    "by_source": {
+      "FP": {
+        "n_subjects": 17,
+        "mae_g": 50.68,
+        "mae_g_95ci": [
+          25.97,
+          77.68
+        ],
+        "mape_pct": 2.92,
+        "mape_pct_95ci": [
+          1.87,
+          3.97
+        ],
+        "bias_pct": -1.1,
+        "bias_pct_95ci": [
+          -2.8,
+          0.5
+        ],
+        "bias_g": -24.06,
+        "bias_g_95ci": [
+          -54.34,
+          9.51
+        ],
+        "median_abs_g": 19.04,
+        "max_abs_g": 140.43,
+        "median_abs_pct": 2.62,
+        "max_abs_pct": 8.94
+      },
+      "UCL": {
+        "n_subjects": 5,
+        "mae_g": 31.97,
+        "mae_g_95ci": [
+          7.54,
+          67.35
+        ],
+        "mape_pct": 2.91,
+        "mape_pct_95ci": [
+          1.27,
+          4.7
+        ],
+        "bias_pct": -2.24,
+        "bias_pct_95ci": [
+          -4.69,
+          0.08
+        ],
+        "bias_g": -24.66,
+        "bias_g_95ci": [
+          -63.41,
+          4.82
+        ],
+        "median_abs_g": 18.27,
+        "max_abs_g": 102.1,
+        "median_abs_pct": 2.18,
+        "max_abs_pct": 6.38
+      }
+    },
+    "without_outlier_ucl5_21": {
+      "n_subjects": 21,
+      "mae_g": 47.77,
+      "mae_g_95ci": [
+        26.23,
+        72.35
+      ],
+      "mape_pct": 2.97,
+      "mape_pct_95ci": [
+        2.08,
+        3.95
+      ],
+      "bias_pct": -1.5,
+      "bias_pct_95ci": [
+        -2.98,
+        -0.06
+      ],
+      "bias_g": -26.22,
+      "bias_g_95ci": [
+        -54.96,
+        2.02
+      ],
+      "median_abs_g": 19.04,
+      "max_abs_g": 140.43,
+      "median_abs_pct": 2.62,
+      "max_abs_pct": 8.94
+    }
+  },
+  "outlier_subject_ucl5": {
+    "subject_id": "UCL_5",
+    "contains_005_3FL_jpeg": true,
+    "n_head_images": 15,
+    "n_abdomen_images": 13,
+    "n_femur_images": 16,
+    "efw_annotated_g": 1080.31,
+    "efw_predicted_g": 1098.57,
+    "err_g": 18.27,
+    "err_pct": 1.6911,
+    "explanation": "UCL_5 contains outlier femur image 005_3FL.jpeg. However, because UCL_5 has 16 femur images, averaging FL across all images dampens the single-image peak flip, yielding an EFW error of +18.3g (+1.7%)."
+  },
+  "replacement_analysis": {
+    "replace_bpd_only_mean_abs_pct": 0.12,
+    "replace_hc_only_mean_abs_pct": 0.345,
+    "replace_ac_only_mean_abs_pct": 2.424,
+    "replace_fl_only_mean_abs_pct": 1.687,
+    "replace_all_four_mean_abs_pct": 2.916,
+    "dominant_driver": "AC",
+    "driver_ranking": [
+      "AC (2.42%)",
+      "FL (1.69%)",
+      "HC (0.35%)",
+      "BPD (0.12%)"
+    ],
+    "statement": "From the numbers, AC drives the error: replacing AC alone introduces 2.42% mean absolute error in EFW (accounting for 83.1% of total 4-parameter error), followed by FL (1.69%), HC (0.35%), and BPD (0.12%)."
+  },
+  "sensitivity_pr32_row_a": {
+    "note": "Row R4 is not statistically shown to be superior to Row A; evaluating Row A confirms consistency.",
+    "all_cohort_22": {
+      "n_subjects": 22,
+      "mae_g": 47.39,
+      "mae_g_95ci": [
+        27.93,
+        68.96
+      ],
+      "mape_pct": 3.1,
+      "mape_pct_95ci": [
+        2.27,
+        4.01
+      ],
+      "bias_pct": -1.27,
+      "bias_pct_95ci": [
+        -2.76,
+        0.19
+      ],
+      "bias_g": -25.97,
+      "bias_g_95ci": [
+        -54.37,
+        -0.18
+      ],
+      "median_abs_g": 23.0,
+      "max_abs_g": 169.29,
+      "median_abs_pct": 3.0,
+      "max_abs_pct": 9.3
+    },
+    "without_outlier_ucl5_21": {
+      "n_subjects": 21,
+      "mae_g": 48.67,
+      "mae_g_95ci": [
+        29.36,
+        71.74
+      ],
+      "mape_pct": 3.16,
+      "mape_pct_95ci": [
+        2.31,
+        4.04
+      ],
+      "bias_pct": -1.42,
+      "bias_pct_95ci": [
+        -2.97,
+        0.0
+      ],
+      "bias_g": -28.18,
+      "bias_g_95ci": [
+        -57.83,
+        -2.9
+      ],
+      "median_abs_g": 24.92,
+      "max_abs_g": 169.29,
+      "median_abs_pct": 3.1,
+      "max_abs_pct": 9.3
+    },
+    "r4_vs_pr32_diff_mape": -0.18,
+    "r4_vs_pr32_diff_mae_g": -0.96
+  }
+}
