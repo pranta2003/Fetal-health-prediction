@@ -111,3 +111,32 @@ def test_worst_10_table_and_shares(sensitivity_data):
     assert pytest.approx(shares["Row_A_PR32"]["share_all_pct"], abs=0.1) == 75.01
     assert pytest.approx(shares["Row_A_PR32"]["share_ucl_pct"], abs=0.1) == 99.47
     assert pytest.approx(shares["Row_R2"]["share_all_pct"], abs=0.1) == 1.03
+
+
+def test_outlier_impact_table():
+    """Verify outlier impact script outputs and exact numerical values."""
+    json_path = work_root / "docs" / "results" / "femur_round2" / "outlier_impact.json"
+    assert json_path.is_file(), f"Missing outlier_impact.json at {json_path}"
+    with open(json_path, encoding="utf-8") as f:
+        data = json.load(f)
+
+    assert data["outlier_image"] == "005_3FL.jpeg"
+    models = data["models"]
+    assert "Row_A_PR32" in models
+    assert "Row_A_Round2" in models
+    assert "Row_R4_Round2" in models
+    assert "Row_R2_Round2" in models
+
+    # Check that Row A PR #32 matches raw calculations
+    df1 = pd.read_csv(work_root / "docs" / "results" / "femur_ablation" / "femur_predictions.csv")
+    mask_no_out = df1["image_name"] != "005_3FL.jpeg"
+    expected_all = float(df1["fl_err"].mean())
+    expected_no_out = float(df1.loc[mask_no_out, "fl_err"].mean())
+
+    assert pytest.approx(models["Row_A_PR32"]["all_images"]["fl_mae"], abs=1e-4) == expected_all
+    assert pytest.approx(models["Row_A_PR32"]["without_outlier"]["fl_mae"], abs=1e-4) == expected_no_out
+    assert pytest.approx(models["Row_A_PR32"]["impact"]["mae_diff"], abs=1e-4) == expected_no_out - expected_all
+
+    # Verify R2 has negligible impact compared to dual-peak models
+    assert abs(models["Row_R2_Round2"]["impact"]["mae_diff"]) < 0.01
+    assert abs(models["Row_R4_Round2"]["impact"]["mae_diff"]) > 0.15

@@ -320,7 +320,9 @@ def fit_submission_ellipse(
     semi_minor_mm = (min(axis1_px, axis2_px) / 2.0) * pixel_size
     center_x_mm = cx_px * pixel_size
     center_y_mm = cy_px * pixel_size
-    angle_rad = float(np.deg2rad(angle_deg))
+    # cv2's angle belongs to the minor axis; wrap angle - pi/2 to [-pi/2, pi/2) for major axis
+    raw_angle_rad = np.deg2rad(angle_deg) - np.pi / 2.0
+    angle_rad = float((raw_angle_rad + np.pi / 2.0) % np.pi - np.pi / 2.0)
 
     return {
         "filename": filename,

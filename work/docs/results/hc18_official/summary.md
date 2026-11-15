@@ -34,3 +34,7 @@ Official platform evaluation metrics returned by the HC18 Grand Challenge evalua
 
 > **Statement**: same range as the published values listed; no rank is claimed; test labels are hidden so no paired significance test is possible; ensemble vs single difference = 0.05 mm (no test)
 
+## 5. Submission Ellipse Orientation Audit & Status
+
+> **Notice**: The first submissions had the axis/angle pairing 90 degrees off. Official Dice (85.59%) and Hausdorff distance (7.20 mm) of those submissions are affected (roundtrip mask Dice: 85.42% legacy vs 99.41% corrected; source: `docs/results/hc18_official/roundtrip_dice.json`). HC absolute difference (1.95 mm) is NOT affected (max abs diff = 0.0 mm). Official corrected result: NOT YET (to be added after the user resubmits).
+

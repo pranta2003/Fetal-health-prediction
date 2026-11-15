@@ -121,6 +121,16 @@ def generate_benchmark_summary(results_dir: Path) -> str:
             f"(key: `aggregates.absolute_difference.mean`) vs `metrics_single_fold1.json` "
             f"(key: `aggregates.absolute_difference.mean`)"
         )
+        hc18_sum_path = results_dir / "hc18_official" / "summary.json"
+        if hc18_sum_path.is_file():
+            hc18_sum = load_json(hc18_sum_path)
+            ofix = hc18_sum.get("orientation_fix", {})
+            if ofix:
+                hc_off_claim += (
+                    f"<br>• Orientation status: the first submissions had the axis/angle pairing 90 degrees off, "
+                    f"official Dice/HD of those submissions are affected, HC abs difference is not. "
+                    f"Official corrected result: {ofix.get('official_corrected_result', 'NOT YET (to be added after the user resubmits)')}."
+                )
         lines.append(
             f"| **Head (HC18 Official Test)** | HC Absolute Difference (mm) | {hc_off_ours} | {hc_off_pub} | {hc_off_comparable} | {hc_off_claim} |"
         )

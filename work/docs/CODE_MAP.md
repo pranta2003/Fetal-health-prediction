@@ -82,6 +82,7 @@ File names tell you the part. The prefix is the part:
 | 4 Train / Report | `scripts/27_femur_round2.py` | Validates and reports Femur Round 2 modern techniques (HRNet DARK, Integral soft-argmax, bone line, strong aug, ensemble) |
 | 4 Train / Report | `scripts/kaggle/run_femur_round2.py` | Runs 3-seed Femur Round 2 training, validation selection, and paired bootstrap difference on Kaggle GPU |
 | 4 Check / Audit | `scripts/31_femur_round2_checks.py` | Sensitivity of baseline, paired bootstrap differences, run integrity audit, and worst-10 squared error share |
+| 4 Check / Audit | `scripts/32_femur_outlier_impact.py` | Evaluates FL MAE impact across all 348 images vs excluding outlier 005_3FL.jpeg with patient-level bootstrap CIs |
 | 5 Report | `scripts/15_femur_data_report.py` | Data check, landmark validation, patient leakage check, and FL distribution |
 | 5 Report | `scripts/21_femur_data_followup.py` | Outlier inspection (FL > 85 mm and 10 shortest), uncalibrated exclusions, UCL 125 audit, Hadlock check, and split verification |
 | Proof | `notebooks/benchmarks/femur_data.ipynb` | Executed benchmark notebook for femur data follow-up, outlier overlays, and split integrity |

@@ -91,10 +91,20 @@ def run_roundtrip_analysis(
 
     dices: dict[str, list[float]] = {
         "c1": [],
+        "legacy": [],
         "c2": [],
         "c3": [],
         "c4": [],
         "c5": [],
+    }
+
+    descriptions = {
+        "c1": "Corrected submission convention (a along rotated x, major axis angle)",
+        "legacy": "Legacy buggy convention (90-deg off axis/angle pairing)",
+        "c2": "Angle sign flipped (-angle)",
+        "c3": "Swapped axes (b, a) under corrected angle",
+        "c4": "Angle + 90 deg under corrected angle",
+        "c5": "mm-pixel roundtrip verification of c1",
     }
 
     t0 = time.time()
@@ -135,19 +145,23 @@ def run_roundtrip_analysis(
         b_px = b_mm / ps
         angle_deg = float(np.rad2deg(angle_rad))
 
-        # (c1) angle as written, a along rotated x axis (submission convention)
+        # (c1) Corrected submission convention: major axis a along rotated x axis
         m1 = rasterize_candidate(h, w, cx_px, cy_px, a_px, b_px, angle_deg)
         dices["c1"].append(compute_dice(m1, filled_mask))
+
+        # (legacy) Old buggy submission convention: 90 deg off axis/angle pairing
+        m_leg = rasterize_candidate(h, w, cx_px, cy_px, b_px, a_px, angle_deg)
+        dices["legacy"].append(compute_dice(m_leg, filled_mask))
 
         # (c2) angle sign flipped
         m2 = rasterize_candidate(h, w, cx_px, cy_px, a_px, b_px, -angle_deg)
         dices["c2"].append(compute_dice(m2, filled_mask))
 
-        # (c3) a and b swapped
+        # (c3) a and b swapped (equivalent to legacy)
         m3 = rasterize_candidate(h, w, cx_px, cy_px, b_px, a_px, angle_deg)
         dices["c3"].append(compute_dice(m3, filled_mask))
 
-        # (c4) angle + pi/2 (angle_deg + 90)
+        # (c4) angle + pi/2 (angle_deg + 90, equivalent to legacy)
         m4 = rasterize_candidate(h, w, cx_px, cy_px, a_px, b_px, angle_deg + 90.0)
         dices["c4"].append(compute_dice(m4, filled_mask))
 
@@ -157,24 +171,34 @@ def run_roundtrip_analysis(
     t1 = time.time()
     print(f"Processed {n_masks} masks in {t1 - t0:.2f} s")
 
+    cand_keys = ["c1", "legacy", "c2", "c3", "c4", "c5"]
     stats = {}
-    for cand in ["c1", "c2", "c3", "c4", "c5"]:
+    for cand in cand_keys:
         vals = dices[cand]
+        m_val = float(np.mean(vals))
+        s_val = float(np.std(vals))
+        mn_val = float(np.min(vals))
+        mx_val = float(np.max(vals))
         stats[cand] = {
-            "mean": float(np.mean(vals)),
-            "std": float(np.std(vals)),
-            "min": float(np.min(vals)),
-            "max": float(np.max(vals)),
+            "mean": m_val,
+            "std": s_val,
+            "min": mn_val,
+            "max": mx_val,
+            "mean_dice": m_val,
+            "std_dice": s_val,
+            "min_dice": mn_val,
+            "max_dice": mx_val,
+            "description": descriptions.get(cand, cand),
         }
 
     # Identify candidate with highest mean Dice
-    best_cand = max(["c1", "c2", "c3", "c4", "c5"], key=lambda c: stats[c]["mean"])
+    best_cand = max(cand_keys, key=lambda c: stats[c]["mean"])
     sub_cand = "c1"
-    diff_vs_sub = stats[best_cand]["mean"] - stats[sub_cand]["mean"]
+    diff_vs_legacy = stats[sub_cand]["mean"] - stats["legacy"]["mean"]
 
     summary_sentence = (
-        f"Candidate {best_cand} gives the highest mean Dice of {stats[best_cand]['mean']:.4f} "
-        f"(+{diff_vs_sub:.4f} vs {stats[sub_cand]['mean']:.4f} for the convention used in the submission)."
+        f"Corrected submission convention (candidate {sub_cand}) achieves the highest mean Dice of "
+        f"{stats[sub_cand]['mean']:.4f} (+{diff_vs_legacy:.4f} vs {stats['legacy']['mean']:.4f} for legacy buggy convention)."
     )
 
     out_data = {
@@ -182,8 +206,10 @@ def run_roundtrip_analysis(
         "candidates": stats,
         "best_candidate": best_cand,
         "submission_candidate": sub_cand,
-        "difference_vs_submission": float(diff_vs_sub),
+        "legacy_candidate": "legacy",
+        "difference_vs_legacy": float(diff_vs_legacy),
         "result_statement": summary_sentence,
+        "sentence": summary_sentence,
     }
 
     out_dir.mkdir(parents=True, exist_ok=True)
