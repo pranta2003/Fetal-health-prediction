@@ -1,0 +1,533 @@
+{
+  "sensitivity": {
+    "a_R4_vs_PR32_RowA": {
+      "mean_diff": -0.0287,
+      "ci_95": [
+        -0.1422,
+        0.0855
+      ],
+      "ci_includes_zero": true
+    },
+    "b_R2_vs_PR32_RowA": {
+      "mean_diff": -0.0755,
+      "ci_95": [
+        -0.4259,
+        0.2061
+      ],
+      "ci_includes_zero": true
+    },
+    "c_R6_vs_PR32_RowA": {
+      "mean_diff": 0.0491,
+      "ci_95": [
+        -0.019,
+        0.1358
+      ],
+      "ci_includes_zero": true
+    },
+    "d_Round2_RowA_vs_PR32_RowA_drift": {
+      "mean_diff": 0.2031,
+      "ci_95": [
+        0.1126,
+        0.3261
+      ],
+      "ci_includes_zero": false
+    },
+    "r4_gain_over_round2_row_a": {
+      "mean_diff": -0.2318,
+      "ci_95": [
+        -0.3981,
+        -0.0856
+      ],
+      "ci_includes_zero": false
+    },
+    "pr32_row_a_seed_maes": {
+      "42": 1.2512,
+      "43": 1.138,
+      "44": 1.241
+    },
+    "round2_row_a_seed_maes": {
+      "42": 1.4546,
+      "43": 1.0869,
+      "44": 1.4009
+    },
+    "determinism": {
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "random_seed": true,
+      "numpy_seed": true,
+      "torch_manual_seed": true,
+      "torch_cuda_manual_seed_all": true,
+      "cudnn_deterministic": false,
+      "cudnn_benchmark": "default (not set to False)",
+      "amp_autocast": true,
+      "is_deterministic": false,
+      "note": "cuDNN convolutions and AMP GradScaler atomic reductions operate non-deterministically without torch.use_deterministic_algorithms(True) and torch.backends.cudnn.deterministic=True."
+    },
+    "statement": "Row R4 shows a gain of 0.23 mm (95% CI: [-0.40, -0.09]) over the round-2 Row A re-run, which is comparable in magnitude to the run-to-run baseline drift of 0.20 mm (95% CI: [0.11, 0.33]) between round-2 Row A and PR #32 Row A; evaluated directly against the PR #32 Row A baseline, the difference is -0.03 mm (95% CI: [-0.14, 0.09]), whose 95% CI includes zero."
+  },
+  "row_R1": {
+    "classification": "FAILED RUN (did not train: val MAE far above a centre baseline or flat)",
+    "mark": "run failed, not a method comparison",
+    "pretrained_weights_loaded": "TIMM HRNet-W32 loaded with unexpected batchnorm tracking keys",
+    "decode_settings": "DARK sub-pixel Taylor-expansion decoding on 384px heatmap",
+    "val_mae_range": [
+      17.0,
+      35.96
+    ],
+    "test_mae": 18.3331
+  },
+  "row_R3": {
+    "classification": "FAILED RUN (did not train: val MAE far above a centre baseline or flat)",
+    "mark": "run failed, not a method comparison",
+    "pretrained_weights_loaded": "EfficientNet-B4 loaded with auxiliary bone-line heatmap head",
+    "decode_settings": "Dual peak detection with bone-line auxiliary loss and minimum distance constraint (min_dist=50px)",
+    "val_mae_range": [
+      27.91,
+      68.21
+    ],
+    "test_mae": 47.5048
+  },
+  "row_B": {
+    "epochs_25_35": [
+      {
+        "seed": 42,
+        "epoch": 25,
+        "loss": 6.113,
+        "val_mae": 9.385
+      },
+      {
+        "seed": 42,
+        "epoch": 26,
+        "loss": 5.8867,
+        "val_mae": 9.737
+      },
+      {
+        "seed": 42,
+        "epoch": 27,
+        "loss": 5.5373,
+        "val_mae": 8.818
+      },
+      {
+        "seed": 42,
+        "epoch": 28,
+        "loss": 5.3954,
+        "val_mae": 7.662
+      },
+      {
+        "seed": 42,
+        "epoch": 29,
+        "loss": 4.831,
+        "val_mae": 7.122
+      },
+      {
+        "seed": 42,
+        "epoch": 30,
+        "loss": 4.7387,
+        "val_mae": 6.864
+      },
+      {
+        "seed": 42,
+        "epoch": 31,
+        "loss": 4.6137,
+        "val_mae": 6.246
+      },
+      {
+        "seed": 42,
+        "epoch": 32,
+        "loss": 4.1938,
+        "val_mae": 6.563
+      },
+      {
+        "seed": 42,
+        "epoch": 33,
+        "loss": 4.1473,
+        "val_mae": 5.89
+      },
+      {
+        "seed": 42,
+        "epoch": 34,
+        "loss": 3.863,
+        "val_mae": 5.765
+      },
+      {
+        "seed": 42,
+        "epoch": 35,
+        "loss": 3.7905,
+        "val_mae": 5.948
+      },
+      {
+        "seed": 43,
+        "epoch": 25,
+        "loss": 6.3463,
+        "val_mae": 9.982
+      },
+      {
+        "seed": 43,
+        "epoch": 26,
+        "loss": 5.9889,
+        "val_mae": 9.657
+      },
+      {
+        "seed": 43,
+        "epoch": 27,
+        "loss": 5.751,
+        "val_mae": 8.331
+      },
+      {
+        "seed": 43,
+        "epoch": 28,
+        "loss": 5.2987,
+        "val_mae": 8.255
+      },
+      {
+        "seed": 43,
+        "epoch": 29,
+        "loss": 5.3324,
+        "val_mae": 8.35
+      },
+      {
+        "seed": 43,
+        "epoch": 30,
+        "loss": 4.9556,
+        "val_mae": 7.13
+      },
+      {
+        "seed": 43,
+        "epoch": 31,
+        "loss": 4.6967,
+        "val_mae": 7.41
+      },
+      {
+        "seed": 43,
+        "epoch": 32,
+        "loss": 4.4398,
+        "val_mae": 6.893
+      },
+      {
+        "seed": 43,
+        "epoch": 33,
+        "loss": 4.338,
+        "val_mae": 6.197
+      },
+      {
+        "seed": 43,
+        "epoch": 34,
+        "loss": 4.0023,
+        "val_mae": 6.121
+      },
+      {
+        "seed": 43,
+        "epoch": 35,
+        "loss": 4.0068,
+        "val_mae": 5.96
+      },
+      {
+        "seed": 44,
+        "epoch": 25,
+        "loss": 5.9912,
+        "val_mae": 9.227
+      },
+      {
+        "seed": 44,
+        "epoch": 26,
+        "loss": 5.7116,
+        "val_mae": 9.348
+      },
+      {
+        "seed": 44,
+        "epoch": 27,
+        "loss": 5.3964,
+        "val_mae": 7.935
+      },
+      {
+        "seed": 44,
+        "epoch": 28,
+        "loss": 5.2184,
+        "val_mae": 7.697
+      },
+      {
+        "seed": 44,
+        "epoch": 29,
+        "loss": 4.9497,
+        "val_mae": 7.817
+      },
+      {
+        "seed": 44,
+        "epoch": 30,
+        "loss": 4.6435,
+        "val_mae": 7.209
+      },
+      {
+        "seed": 44,
+        "epoch": 31,
+        "loss": 4.5003,
+        "val_mae": 5.919
+      },
+      {
+        "seed": 44,
+        "epoch": 32,
+        "loss": 4.2515,
+        "val_mae": 5.981
+      },
+      {
+        "seed": 44,
+        "epoch": 33,
+        "loss": 4.0144,
+        "val_mae": 5.492
+      },
+      {
+        "seed": 44,
+        "epoch": 34,
+        "loss": 3.7676,
+        "val_mae": 5.199
+      },
+      {
+        "seed": 44,
+        "epoch": 35,
+        "loss": 3.7128,
+        "val_mae": 5.15
+      }
+    ],
+    "still_improving_at_cap": true,
+    "mark": "capped at 35 epochs, not converged"
+  },
+  "worst_10_table": [
+    {
+      "rank": 1,
+      "image_name": "005_3FL.jpeg",
+      "source": "UCL",
+      "fl_true_mm": 23.6552,
+      "fl_pred_mm": 80.8493,
+      "fl_err_mm": 57.1941,
+      "sq_err": 3271.1644,
+      "share_all_pct": 75.01,
+      "classification": "visual judgement, not computed",
+      "script_sources": {
+        "image_name": "docs/results/femur_ablation/femur_predictions.csv:image_name (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "source": "docs/results/femur_ablation/femur_predictions.csv:source",
+        "fl_true_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_true (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_pred_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_pred (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_err_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_err (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "sq_err": "scripts/31_femur_round2_checks.py:compute_sq_err_shares (fl_err ** 2)",
+        "share_all_pct": "scripts/31_femur_round2_checks.py:compute_sq_err_shares ((fl_err**2)/sum*100)"
+      }
+    },
+    {
+      "rank": 2,
+      "image_name": "Patient00695_Plane5_1_of_1.png",
+      "source": "FP",
+      "fl_true_mm": 56.2192,
+      "fl_pred_mm": 43.1719,
+      "fl_err_mm": 13.0473,
+      "sq_err": 170.2323,
+      "share_all_pct": 3.9,
+      "classification": "visual judgement, not computed",
+      "script_sources": {
+        "image_name": "docs/results/femur_ablation/femur_predictions.csv:image_name (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "source": "docs/results/femur_ablation/femur_predictions.csv:source",
+        "fl_true_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_true (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_pred_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_pred (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_err_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_err (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "sq_err": "scripts/31_femur_round2_checks.py:compute_sq_err_shares (fl_err ** 2)",
+        "share_all_pct": "scripts/31_femur_round2_checks.py:compute_sq_err_shares ((fl_err**2)/sum*100)"
+      }
+    },
+    {
+      "rank": 3,
+      "image_name": "Patient01427_Plane5_1_of_1.png",
+      "source": "FP",
+      "fl_true_mm": 36.1279,
+      "fl_pred_mm": 49.0245,
+      "fl_err_mm": 12.8966,
+      "sq_err": 166.3221,
+      "share_all_pct": 3.81,
+      "classification": "visual judgement, not computed",
+      "script_sources": {
+        "image_name": "docs/results/femur_ablation/femur_predictions.csv:image_name (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "source": "docs/results/femur_ablation/femur_predictions.csv:source",
+        "fl_true_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_true (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_pred_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_pred (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_err_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_err (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "sq_err": "scripts/31_femur_round2_checks.py:compute_sq_err_shares (fl_err ** 2)",
+        "share_all_pct": "scripts/31_femur_round2_checks.py:compute_sq_err_shares ((fl_err**2)/sum*100)"
+      }
+    },
+    {
+      "rank": 4,
+      "image_name": "Patient01177_Plane5_1_of_2.png",
+      "source": "FP",
+      "fl_true_mm": 42.96,
+      "fl_pred_mm": 32.9318,
+      "fl_err_mm": 10.0282,
+      "sq_err": 100.5645,
+      "share_all_pct": 2.31,
+      "classification": "visual judgement, not computed",
+      "script_sources": {
+        "image_name": "docs/results/femur_ablation/femur_predictions.csv:image_name (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "source": "docs/results/femur_ablation/femur_predictions.csv:source",
+        "fl_true_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_true (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_pred_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_pred (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_err_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_err (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "sq_err": "scripts/31_femur_round2_checks.py:compute_sq_err_shares (fl_err ** 2)",
+        "share_all_pct": "scripts/31_femur_round2_checks.py:compute_sq_err_shares ((fl_err**2)/sum*100)"
+      }
+    },
+    {
+      "rank": 5,
+      "image_name": "Patient01648_Plane5_1_of_5.png",
+      "source": "FP",
+      "fl_true_mm": 30.7269,
+      "fl_pred_mm": 40.671,
+      "fl_err_mm": 9.9441,
+      "sq_err": 98.8851,
+      "share_all_pct": 2.27,
+      "classification": "visual judgement, not computed",
+      "script_sources": {
+        "image_name": "docs/results/femur_ablation/femur_predictions.csv:image_name (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "source": "docs/results/femur_ablation/femur_predictions.csv:source",
+        "fl_true_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_true (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_pred_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_pred (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_err_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_err (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "sq_err": "scripts/31_femur_round2_checks.py:compute_sq_err_shares (fl_err ** 2)",
+        "share_all_pct": "scripts/31_femur_round2_checks.py:compute_sq_err_shares ((fl_err**2)/sum*100)"
+      }
+    },
+    {
+      "rank": 6,
+      "image_name": "Patient00705_Plane5_1_of_2.png",
+      "source": "FP",
+      "fl_true_mm": 64.3437,
+      "fl_pred_mm": 58.0557,
+      "fl_err_mm": 6.288,
+      "sq_err": 39.5394,
+      "share_all_pct": 0.91,
+      "classification": "visual judgement, not computed",
+      "script_sources": {
+        "image_name": "docs/results/femur_ablation/femur_predictions.csv:image_name (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "source": "docs/results/femur_ablation/femur_predictions.csv:source",
+        "fl_true_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_true (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_pred_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_pred (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_err_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_err (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "sq_err": "scripts/31_femur_round2_checks.py:compute_sq_err_shares (fl_err ** 2)",
+        "share_all_pct": "scripts/31_femur_round2_checks.py:compute_sq_err_shares ((fl_err**2)/sum*100)"
+      }
+    },
+    {
+      "rank": 7,
+      "image_name": "Patient00662_Plane5_1_of_1.png",
+      "source": "FP",
+      "fl_true_mm": 59.5416,
+      "fl_pred_mm": 65.17,
+      "fl_err_mm": 5.6284,
+      "sq_err": 31.6785,
+      "share_all_pct": 0.73,
+      "classification": "visual judgement, not computed",
+      "script_sources": {
+        "image_name": "docs/results/femur_ablation/femur_predictions.csv:image_name (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "source": "docs/results/femur_ablation/femur_predictions.csv:source",
+        "fl_true_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_true (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_pred_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_pred (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_err_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_err (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "sq_err": "scripts/31_femur_round2_checks.py:compute_sq_err_shares (fl_err ** 2)",
+        "share_all_pct": "scripts/31_femur_round2_checks.py:compute_sq_err_shares ((fl_err**2)/sum*100)"
+      }
+    },
+    {
+      "rank": 8,
+      "image_name": "Patient00958_Plane5_1_of_1.png",
+      "source": "FP",
+      "fl_true_mm": 72.9355,
+      "fl_pred_mm": 67.3963,
+      "fl_err_mm": 5.5392,
+      "sq_err": 30.6825,
+      "share_all_pct": 0.7,
+      "classification": "visual judgement, not computed",
+      "script_sources": {
+        "image_name": "docs/results/femur_ablation/femur_predictions.csv:image_name (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "source": "docs/results/femur_ablation/femur_predictions.csv:source",
+        "fl_true_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_true (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_pred_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_pred (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_err_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_err (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "sq_err": "scripts/31_femur_round2_checks.py:compute_sq_err_shares (fl_err ** 2)",
+        "share_all_pct": "scripts/31_femur_round2_checks.py:compute_sq_err_shares ((fl_err**2)/sum*100)"
+      }
+    },
+    {
+      "rank": 9,
+      "image_name": "Patient00679_Plane5_1_of_1.png",
+      "source": "FP",
+      "fl_true_mm": 65.5911,
+      "fl_pred_mm": 61.0943,
+      "fl_err_mm": 4.4968,
+      "sq_err": 20.221,
+      "share_all_pct": 0.46,
+      "classification": "visual judgement, not computed",
+      "script_sources": {
+        "image_name": "docs/results/femur_ablation/femur_predictions.csv:image_name (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "source": "docs/results/femur_ablation/femur_predictions.csv:source",
+        "fl_true_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_true (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_pred_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_pred (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_err_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_err (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "sq_err": "scripts/31_femur_round2_checks.py:compute_sq_err_shares (fl_err ** 2)",
+        "share_all_pct": "scripts/31_femur_round2_checks.py:compute_sq_err_shares ((fl_err**2)/sum*100)"
+      }
+    },
+    {
+      "rank": 10,
+      "image_name": "Patient01682_Plane5_2_of_2.png",
+      "source": "FP",
+      "fl_true_mm": 58.2086,
+      "fl_pred_mm": 62.622,
+      "fl_err_mm": 4.4133,
+      "sq_err": 19.4774,
+      "share_all_pct": 0.45,
+      "classification": "visual judgement, not computed",
+      "script_sources": {
+        "image_name": "docs/results/femur_ablation/femur_predictions.csv:image_name (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "source": "docs/results/femur_ablation/femur_predictions.csv:source",
+        "fl_true_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_true (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_pred_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_pred (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "fl_err_mm": "docs/results/femur_ablation/femur_predictions.csv:fl_err (fetal.eval.femur_evaluator:eval_femur_ensemble)",
+        "sq_err": "scripts/31_femur_round2_checks.py:compute_sq_err_shares (fl_err ** 2)",
+        "share_all_pct": "scripts/31_femur_round2_checks.py:compute_sq_err_shares ((fl_err**2)/sum*100)"
+      }
+    }
+  ],
+  "worst_image_005_3FL_shares": {
+    "Row_A_PR32": {
+      "err_mm": 57.1941,
+      "sq_err": 3271.16,
+      "total_sq_err_all": 4361.2,
+      "share_all_pct": 75.01,
+      "total_sq_err_ucl": 3288.74,
+      "share_ucl_pct": 99.47
+    },
+    "Row_A_Round2": {
+      "err_mm": 57.4185,
+      "sq_err": 3296.88,
+      "total_sq_err_all": 4988.04,
+      "share_all_pct": 66.1,
+      "total_sq_err_ucl": 3319.9,
+      "share_ucl_pct": 99.31
+    },
+    "Row_R4": {
+      "err_mm": 57.2415,
+      "sq_err": 3276.59,
+      "total_sq_err_all": 4374.73,
+      "share_all_pct": 74.9,
+      "total_sq_err_ucl": 3294.7,
+      "share_ucl_pct": 99.45
+    },
+    "Row_R2": {
+      "err_mm": 3.8145,
+      "sq_err": 14.55,
+      "total_sq_err_all": 1415.15,
+      "share_all_pct": 1.03,
+      "total_sq_err_ucl": 30.02,
+      "share_ucl_pct": 48.47
+    }
+  }
+}

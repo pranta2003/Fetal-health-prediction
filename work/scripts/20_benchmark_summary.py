@@ -221,7 +221,7 @@ def generate_benchmark_summary(results_dir: Path) -> str:
 
     if femur_r2_path.is_file():
         femur_res = load_json(femur_r2_path)
-        # Row R4 was selected by validation MAE (1.070 mm) and beats Row A with CI excluding zero (diff: -0.232 [-0.398, -0.086])
+        # Row R4 was selected by validation MAE (1.070 mm)
         row_key = "row_R4" if "row_R4" in femur_res else list(femur_res.keys())[0]
         femur_data = femur_res[row_key]
         femur_ens = femur_data["ensemble_all"]
@@ -241,9 +241,27 @@ def generate_benchmark_summary(results_dir: Path) -> str:
             f"• Protocol: {pub_femur['protocol']}"
         )
         femur_comparable = "Partly (same NME formula; test set split sizes not stated in publication)"
+
+        # Baseline drift from baseline_sensitivity.json
+        baseline_sens_path = results_dir / "femur_round2" / "baseline_sensitivity.json"
+        drift_str = ""
+        if baseline_sens_path.is_file():
+            sens_data = load_json(baseline_sens_path)["sensitivity"]
+            drift_val = sens_data["d_Round2_RowA_vs_PR32_RowA_drift"]["mean_diff"]
+            drift_ci = sens_data["d_Round2_RowA_vs_PR32_RowA_drift"]["ci_95"]
+            drift_str = (
+                f"; baseline drift across runs is +{drift_val:.2f} mm [95% CI: {drift_ci[0]:.2f}, {drift_ci[1]:.2f}] "
+                f"(source: `docs/results/femur_round2/baseline_sensitivity.json`, key `sensitivity.d_Round2_RowA_vs_PR32_RowA_drift`)"
+            )
+
+        femur_val_mae = femur_data["seeds_mean_sd"]["val_mae_mean"]
         femur_claim = (
-            f"Claim at most 'on par' (Ours [3-seed median ensemble]: FL NME {femur_nme_str} vs "
-            f"Published: FL NME {pub_femur['fl_nme_mean']:.2f} +- {pub_femur['fl_nme_sd']:.2f}; test set sizes not stated)."
+            f"Row R4 selected on validation (val MAE: {femur_val_mae:.2f} mm [source: `femur_round2_results.json`, key `row_R4.seeds_mean_sd.val_mae_mean`]); "
+            f"test FL MAE: {femur_mae_str} (95% CI: [{femur_ens['fl_mae_ci'][0]:.2f}, {femur_ens['fl_mae_ci'][1]:.2f}]), "
+            f"test FL NME: {femur_nme_str} (source: `femur_round2_results.json`, key `row_R4.ensemble_all`); "
+            f"published paper reports FL NME {pub_femur['fl_nme_mean']:.2f} +- {pub_femur['fl_nme_sd']:.2f} "
+            f"(source: `published_refs.json`, key `femur.fl_nme_mean`); "
+            f"claim only 'close to, not better than'{drift_str}."
         )
         lines.append(
             f"| **Femur (FP+UCL)** | Landmark NME (FL) | {femur_nme_ours} | {femur_nme_pub} | "
