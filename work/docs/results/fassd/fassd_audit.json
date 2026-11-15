@@ -1,0 +1,366 @@
+{
+  "dataset": "FASSD",
+  "total_images": 1588,
+  "total_npy": 1588,
+  "pairwise_agreement": {
+    "max_abs_diff_cv2_imread_unchanged": 0,
+    "npy_shape_counts": {
+      "(768, 1024, 3)": 1507,
+      "(768, 1024)": 81
+    },
+    "explanation": "ARRAY_FORMAT .npy files store 1,507 samples as 3D BGR arrays of shape (768, 1024, 3) and 81 samples as 2D grayscale arrays of shape (768, 1024). Corresponding IMAGES/*.png files match byte-for-byte in pixel values when loaded with cv2.IMREAD_UNCHANGED (max absolute diff = 0). cv2.imread with default IMREAD_COLOR automatically expands the 81 2D images to 3 identical channels."
+  },
+  "patient_id_parsing": {
+    "unique_patients": 169,
+    "patient_id_width_distribution": {
+      "width_3": 9,
+      "width_4": 90,
+      "width_5": 70
+    },
+    "file_id_width_distribution": {
+      "width_3": 71,
+      "width_4": 878,
+      "width_5": 639
+    },
+    "images_per_patient": {
+      "min": 3,
+      "median": 9.0,
+      "max": 17
+    },
+    "zero_padding_collisions": {},
+    "collision_report": "Zero zero-padding collisions exist: each numeric patient index (1..169) maps uniquely to exactly one prefix (P01..P09, P010..P099, P0100..P0169)."
+  },
+  "structure_summary": {
+    "artery": {
+      "non_empty_count": 1572,
+      "empty_count": 16,
+      "area_fraction_mean": 0.0012875954107878266,
+      "area_fraction_median": 0.001129786173502604,
+      "area_fraction_min": 0.0003903706868489583,
+      "area_fraction_max": 0.009151458740234375,
+      "blobs_median": 1.0,
+      "blobs_max": 1
+    },
+    "liver": {
+      "non_empty_count": 1587,
+      "empty_count": 1,
+      "area_fraction_mean": 0.03673280324537296,
+      "area_fraction_median": 0.035046895345052086,
+      "area_fraction_min": 0.0009918212890625,
+      "area_fraction_max": 0.0852801005045573,
+      "blobs_median": 1.0,
+      "blobs_max": 1
+    },
+    "stomach": {
+      "non_empty_count": 1518,
+      "empty_count": 70,
+      "area_fraction_mean": 0.006799028586754948,
+      "area_fraction_median": 0.005695343017578125,
+      "area_fraction_min": 8.7738037109375e-05,
+      "area_fraction_max": 0.05033111572265625,
+      "blobs_median": 1.0,
+      "blobs_max": 2
+    },
+    "vein": {
+      "non_empty_count": 1582,
+      "empty_count": 6,
+      "area_fraction_mean": 0.0051946836938548575,
+      "area_fraction_median": 0.005017598470052084,
+      "area_fraction_min": 0.00022125244140625,
+      "area_fraction_max": 0.014414469401041666,
+      "blobs_median": 1.0,
+      "blobs_max": 3
+    }
+  },
+  "cross_structure_overlap_pixels": {
+    "artery_vs_liver": 25,
+    "artery_vs_stomach": 38,
+    "artery_vs_vein": 0,
+    "liver_vs_stomach": 97,
+    "liver_vs_vein": 125047,
+    "stomach_vs_vein": 76
+  },
+  "duplicate_analysis": {
+    "unique_png_sha256": 1563,
+    "same_patient_duplicate_pairs": 12,
+    "across_patient_duplicate_pairs": 13,
+    "across_patient_duplicates": {
+      "88a5b6ea68ff0ea6ee1a85c3fefac81f5344934e95d91df5c544cc17d75f4fe6": {
+        "patients": [
+          "P0119",
+          "P019"
+        ],
+        "files": [
+          "P0119_IMG1.png",
+          "P019_IMG10.png"
+        ]
+      },
+      "0f9a4532cffcbcb1662d3aa34b77dfdd339a8be781a602805fc6fac2a600c5f7": {
+        "patients": [
+          "P0119",
+          "P019"
+        ],
+        "files": [
+          "P0119_IMG2.png",
+          "P019_IMG11.png"
+        ]
+      },
+      "0464a644c4c0e4c05ee52164fe6dbee319a5c53cf17965d5b090fe572f48873e": {
+        "patients": [
+          "P0119",
+          "P019"
+        ],
+        "files": [
+          "P0119_IMG3.png",
+          "P019_IMG12.png"
+        ]
+      },
+      "98f757ff34e880aa8a3cc01b4a59aa7a5aad5bb54138ed830edefdf82c3376e1": {
+        "patients": [
+          "P0119",
+          "P019"
+        ],
+        "files": [
+          "P0119_IMG4.png",
+          "P019_IMG13.png"
+        ]
+      },
+      "04529673dde60ac095bf0315dab3d4401af78f67efb95e125468df3fe962c357": {
+        "patients": [
+          "P0128",
+          "P058"
+        ],
+        "files": [
+          "P0128_IMG1.png",
+          "P058_IMG1.png"
+        ]
+      },
+      "27c3813bea6fd92bedf0b9f061896ee3c4dfcd52eb4b97e20699ba83ec2da7e0": {
+        "patients": [
+          "P0128",
+          "P058"
+        ],
+        "files": [
+          "P0128_IMG2.png",
+          "P058_IMG2.png"
+        ]
+      },
+      "534dec700f5011ccb60be4a1a66eca983999cff9ce90f07b08e63c8b10fda4ab": {
+        "patients": [
+          "P0128",
+          "P058"
+        ],
+        "files": [
+          "P0128_IMG3.png",
+          "P058_IMG3.png"
+        ]
+      },
+      "380d08cd337c2f5df3ac7be71e5ce3aab105e38d219dd8dd812fac86f3baa7fb": {
+        "patients": [
+          "P0128",
+          "P058"
+        ],
+        "files": [
+          "P0128_IMG4.png",
+          "P058_IMG4.png"
+        ]
+      },
+      "fe3af1da94f7ea1c8b310a537623e87f0b93db9f12419734885d14de56db0ad1": {
+        "patients": [
+          "P0128",
+          "P058"
+        ],
+        "files": [
+          "P0128_IMG5.png",
+          "P058_IMG5.png"
+        ]
+      },
+      "ae71a1b6d5e900aebfc555198288f13dd5928637f4029dbee3db1c03f95caf1f": {
+        "patients": [
+          "P031",
+          "P033"
+        ],
+        "files": [
+          "P031_IMG10.png",
+          "P033_IMG10.png"
+        ]
+      },
+      "0a02922fbf1e1c20451e09e0447782d2c40fa8c914d2f901343e148fe070fc11": {
+        "patients": [
+          "P031",
+          "P033"
+        ],
+        "files": [
+          "P031_IMG7.png",
+          "P033_IMG7.png"
+        ]
+      },
+      "057211125816bc7ce3c8b34fc2b7f35d33bbaf66b79a1348167d80833a0216bf": {
+        "patients": [
+          "P031",
+          "P033"
+        ],
+        "files": [
+          "P031_IMG8.png",
+          "P033_IMG8.png"
+        ]
+      },
+      "f97ae612be0947c2a5f418cb870d5fde73ca9d173c2dc93fb4331d3030782c47": {
+        "patients": [
+          "P031",
+          "P033"
+        ],
+        "files": [
+          "P031_IMG9.png",
+          "P033_IMG9.png"
+        ]
+      }
+    },
+    "data_leak_warning": "Found 13 across-patient duplicate image pairs across 3 patient pairs (P0119 & P019 [4 images], P058 & P0128 [5 images], P031 & P033 [4 images]). These represent identical ultrasound frames labeled under different patient IDs, posing a data leakage risk."
+  },
+  "image_intensity_color_audit": {
+    "fraction_pixels_with_channel_difference": 0.3367832521747682,
+    "images_with_color_difference": 1507,
+    "pure_grayscale_images": 81,
+    "explanation": "Ultrasonic frames in FASSD are primarily grayscale ultrasound sectors; however, 1,507 images contain color content (33.68% of all pixels across the dataset have channel differences > 0). The colored regions correspond to Color Doppler flow velocity mapping (red/orange and blue flow encoding) within major fetal blood vessels, as well as ultrasound machine UI text, calipers, and orientation markers."
+  },
+  "patient_grouped_split": {
+    "seed": 42,
+    "ratios": {
+      "train": 0.7,
+      "val": 0.15,
+      "test": 0.15
+    },
+    "patient_counts": {
+      "train": 118,
+      "val": 25,
+      "test": 26
+    },
+    "image_counts": {
+      "train": 1100,
+      "test": 252,
+      "val": 236
+    },
+    "structure_counts": {
+      "train": {
+        "artery": 1093,
+        "liver": 1100,
+        "stomach": 1061,
+        "vein": 1095
+      },
+      "val": {
+        "artery": 230,
+        "liver": 236,
+        "stomach": 218,
+        "vein": 235
+      },
+      "test": {
+        "artery": 249,
+        "liver": 251,
+        "stomach": 239,
+        "vein": 252
+      }
+    },
+    "zero_patient_overlap": true,
+    "all_structures_ge_20": true,
+    "split_file": "docs/results/fassd/split_v1.csv"
+  },
+  "overlays_generated": [
+    {
+      "structure": "artery",
+      "sample_index": 1,
+      "filename": "P080_IMG1.png",
+      "patient": "P080",
+      "area_pct": 0.1989,
+      "saved_path": "docs/results/fassd/overlays/artery_1_P080_IMG1.png"
+    },
+    {
+      "structure": "artery",
+      "sample_index": 2,
+      "filename": "P0122_IMG1.png",
+      "patient": "P0122",
+      "area_pct": 0.0398,
+      "saved_path": "docs/results/fassd/overlays/artery_2_P0122_IMG1.png"
+    },
+    {
+      "structure": "artery",
+      "sample_index": 3,
+      "filename": "P0104_IMG3.png",
+      "patient": "P0104",
+      "area_pct": 0.2069,
+      "saved_path": "docs/results/fassd/overlays/artery_3_P0104_IMG3.png"
+    },
+    {
+      "structure": "liver",
+      "sample_index": 1,
+      "filename": "P095_IMG3.png",
+      "patient": "P095",
+      "area_pct": 3.9637,
+      "saved_path": "docs/results/fassd/overlays/liver_1_P095_IMG3.png"
+    },
+    {
+      "structure": "liver",
+      "sample_index": 2,
+      "filename": "P0157_IMG11.png",
+      "patient": "P0157",
+      "area_pct": 6.117,
+      "saved_path": "docs/results/fassd/overlays/liver_2_P0157_IMG11.png"
+    },
+    {
+      "structure": "liver",
+      "sample_index": 3,
+      "filename": "P014_IMG4.png",
+      "patient": "P014",
+      "area_pct": 3.5779,
+      "saved_path": "docs/results/fassd/overlays/liver_3_P014_IMG4.png"
+    },
+    {
+      "structure": "stomach",
+      "sample_index": 1,
+      "filename": "P0149_IMG7.png",
+      "patient": "P0149",
+      "area_pct": 2.1743,
+      "saved_path": "docs/results/fassd/overlays/stomach_1_P0149_IMG7.png"
+    },
+    {
+      "structure": "stomach",
+      "sample_index": 2,
+      "filename": "P0128_IMG8.png",
+      "patient": "P0128",
+      "area_pct": 0.1017,
+      "saved_path": "docs/results/fassd/overlays/stomach_2_P0128_IMG8.png"
+    },
+    {
+      "structure": "stomach",
+      "sample_index": 3,
+      "filename": "P099_IMG8.png",
+      "patient": "P099",
+      "area_pct": 0.7239,
+      "saved_path": "docs/results/fassd/overlays/stomach_3_P099_IMG8.png"
+    },
+    {
+      "structure": "vein",
+      "sample_index": 1,
+      "filename": "P011_IMG5.png",
+      "patient": "P011",
+      "area_pct": 0.8113,
+      "saved_path": "docs/results/fassd/overlays/vein_1_P011_IMG5.png"
+    },
+    {
+      "structure": "vein",
+      "sample_index": 2,
+      "filename": "P086_IMG5.png",
+      "patient": "P086",
+      "area_pct": 0.4631,
+      "saved_path": "docs/results/fassd/overlays/vein_2_P086_IMG5.png"
+    },
+    {
+      "structure": "vein",
+      "sample_index": 3,
+      "filename": "P095_IMG6.png",
+      "patient": "P095",
+      "area_pct": 0.4688,
+      "saved_path": "docs/results/fassd/overlays/vein_3_P095_IMG6.png"
+    }
+  ]
+}
