@@ -26,11 +26,6 @@ STATUS_SEED5 = "Seed 5 was planned but never trained (no [s5] lines)"
 
 def parse_full_log_oof(full_log_text: str) -> dict:
     """Parse out-of-fold summary block from full_log.txt."""
-    # Pattern matching the final evaluation block:
-    # n = 789 images
-    # AC  -> MAE 5.18 mm | RMSE 9.07 mm | mean abs % error 2.60%
-    #   FP: n=693, AC MAE 5.08 mm
-    #   UCL: n=96, AC MAE 5.91 mm
     n_match = re.search(r"n\s*=\s*(\d+)\s+images", full_log_text)
     mae_match = re.search(r"AC\s*->\s*MAE\s*([\d.]+)\s*mm\s*\|\s*RMSE\s*([\d.]+)\s*mm\s*\|\s*mean abs % error\s*([\d.]+)%", full_log_text)
     fp_match = re.search(r"FP:\s*n=(\d+),\s*AC\s*MAE\s*([\d.]+)\s*mm", full_log_text)
@@ -52,9 +47,6 @@ def parse_full_log_oof(full_log_text: str) -> dict:
 
 def parse_v3_log_table(v3_log_text: str) -> dict[str, dict]:
     """Parse official test set table from v3_log.txt."""
-    # run         AC MAE   RMSE  median    bias    TAD   APAD     NME  >10mm | FP-only AC MAE
-    # base          5.81   8.87    3.65   -3.26   2.21   2.03  0.0735  16.3% | 5.02
-    # v3_full       4.40   6.16    2.91   -1.55   1.50   1.76  0.0731   8.2% | 4.02
     parsed = {}
     pattern = re.compile(
         r"^(base|v3_full)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([+\-]?[\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)%\s*\|\s*([\d.]+)",
@@ -79,10 +71,6 @@ def parse_v3_log_table(v3_log_text: str) -> dict[str, dict]:
 
 def parse_ens_log_table(ens_log_text: str) -> dict[str, dict]:
     """Parse final official test table from ens_log.txt."""
-    # model        AC MAE   RMSE  median    bias   AC %  >10mm |       TAD NME      APAD NME
-    # s1             4.96   7.33    3.14   +0.96   2.39  12.2% | 0.078+-0.063 0.081+-0.064
-    # ...
-    # ENS_median     4.34   6.03    3.12   -0.60   2.14   6.8% | 0.076+-0.060 0.075+-0.061
     parsed = {}
     pattern = re.compile(
         r"^(s[1-4]|res512|ENS_mean|ENS_median)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([+\-]?[\d.]+)\s+([\d.]+)\s+([\d.]+)%\s*\|\s*([\d.]+)\+-([\d.]+)\s+([\d.]+)\+-([\d.]+)",
@@ -123,6 +111,28 @@ def extract_log_facts(inputs_dir: Path) -> dict:
         resumed_lines = [l for l in lines if "Resumed" in l or "resumed at epoch" in l]
         traceback_lines = [l for l in lines if "Traceback (most recent call last):" in l]
 
+        # Extract last Error line of each traceback block
+        traceback_errors = []
+        i = 0
+        while i < len(lines):
+            if "Traceback (most recent call last):" in lines[i]:
+                err_line = ""
+                j = i + 1
+                while j < len(lines):
+                    line = lines[j]
+                    if re.search(r"^\w+Error:", line):
+                        err_line = line.strip()
+                        break
+                    elif not line.startswith(" ") and line.strip() and "Traceback" not in line:
+                        err_line = line.strip()
+                        break
+                    j += 1
+                if err_line:
+                    traceback_errors.append(err_line)
+                i = j
+            else:
+                i += 1
+
         seeds_found = []
         for l in lines:
             m = re.search(r"seeds=\[([0-9,\s]+)\]", l)
@@ -141,6 +151,7 @@ def extract_log_facts(inputs_dir: Path) -> dict:
             "resumed_count": len(resumed_lines),
             "resumed_lines": resumed_lines,
             "traceback_count": len(traceback_lines),
+            "traceback_errors": traceback_errors,
             "seeds_per_invocation": seeds_found,
             "s5_lines_count": len(s5_lines),
         }
@@ -229,8 +240,6 @@ def generate_history_data(inputs_dir: Path) -> dict:
     # Recompute ensemble MAE from ens_test_predictions.csv
     df_ens_pred = pd.read_csv(inputs_dir / "ens_test_predictions.csv")
     recomputed_ens_mae = float((df_ens_pred["ac_pred"] - df_ens_pred["ac_true"]).abs().mean())
-    # Notice: ac_pred in ens_test_predictions.csv is the 4-seed ensemble mean prediction (ENS_mean).
-    # ens_results.json records ENS_mean AC MAE = 4.469309073727147 and ENS_median AC MAE = 4.3430011256211465.
     assert np.isclose(recomputed_ens_mae, ens_json["ENS_mean"]["ac_mae"]), (
         f"Recomputed ensemble MAE {recomputed_ens_mae:.6f} does not match ENS_mean {ens_json['ENS_mean']['ac_mae']:.6f}"
     )
@@ -369,10 +378,11 @@ def generate_history_data(inputs_dir: Path) -> dict:
         "status": STATUS_ABLATION,
     })
 
+    # smoke_log row: resolution is not stated in smoke_log.txt or ac_dsnt.py (which has IMG_SIZE=384) -> show "-" (None)
     rows.append({
         "run": "smoke_log (code check)",
         "protocol": "160 images smoke subset (fold 1 only)",
-        "resolution": 128,
+        "resolution": None,
         "n": 32,
         "ac_mae": 111.65,
         "ac_rmse": 117.88,
@@ -422,12 +432,13 @@ def render_markdown(data: dict) -> str:
     ]
 
     for r in data["rows"]:
+        res_str = str(r["resolution"]) if r["resolution"] is not None else "-"
         med_str = f"{r['ac_median']:.2f}" if r["ac_median"] is not None else "-"
         bias_str = f"{r['ac_bias']:+.2f}" if r["ac_bias"] is not None else "-"
         pct_str = f"{r['ac_pct']:.2f}%" if r["ac_pct"] is not None else "-"
         over10_str = f"{r['over10']:.1f}%" if r["over10"] is not None else "-"
         lines.append(
-            f"| **{r['run']}** | {r['resolution']} | {r['n']} | {r['ac_mae']:.2f} | {r['ac_rmse']:.2f} | "
+            f"| **{r['run']}** | {res_str} | {r['n']} | {r['ac_mae']:.2f} | {r['ac_rmse']:.2f} | "
             f"{med_str} | {bias_str} | {pct_str} | {over10_str} | {r['status']} |"
         )
 
@@ -452,7 +463,12 @@ def render_markdown(data: dict) -> str:
         elif fname == "smoke_log.txt":
             notes.append(STATUS_SMOKE)
         elif fname == "full_log.txt":
-            notes.append(f"{f['invocations_count']} invocations (`Using device:`), 1 fold resumed, 5 tracebacks handled.")
+            crashes_str = "; ".join(f["traceback_errors"])
+            notes.append(
+                f"{f['invocations_count']} invocations (`Using device:`), 1 fold resumed. "
+                f"{len(f['traceback_errors'])} crashes ({crashes_str}), run resumed; "
+                f"the script refuses to resume with a different CONFIG."
+            )
         elif fname == "v3_log.txt":
             notes.append("1 clean invocation: base + v3_full ablation.")
 

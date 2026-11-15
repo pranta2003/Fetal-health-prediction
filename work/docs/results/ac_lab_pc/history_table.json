@@ -153,7 +153,7 @@
     {
       "run": "smoke_log (code check)",
       "protocol": "160 images smoke subset (fold 1 only)",
-      "resolution": 128,
+      "resolution": null,
       "n": 32,
       "ac_mae": 111.65,
       "ac_rmse": 117.88,
@@ -191,6 +191,7 @@
       "resumed_count": 0,
       "resumed_lines": [],
       "traceback_count": 0,
+      "traceback_errors": [],
       "seeds_per_invocation": [],
       "s5_lines_count": 0
     },
@@ -208,6 +209,9 @@
       "resumed_count": 0,
       "resumed_lines": [],
       "traceback_count": 1,
+      "traceback_errors": [
+        "RuntimeError: PytorchStreamReader failed reading zip archive: failed finding central directory. This is an internal miniz error. If you are seeing this error, there is a high likelihood that your checkpoint file is corrupted. This can happen if the checkpoint was not saved properly, was transferred incorrectly, or the file was modified after saving."
+      ],
       "seeds_per_invocation": [
         [
           1,
@@ -248,6 +252,7 @@
       "resumed_count": 0,
       "resumed_lines": [],
       "traceback_count": 0,
+      "traceback_errors": [],
       "seeds_per_invocation": [],
       "s5_lines_count": 0
     },
@@ -268,6 +273,13 @@
         "  Resumed fold 3 at epoch 1 (best val landmark error 51.12px)"
       ],
       "traceback_count": 5,
+      "traceback_errors": [
+        "RuntimeError: ios_base::badbit set: iostream stream error",
+        "RuntimeError: [enforce fail at inline_container.cc:672] . unexpected pos 92174400 vs 92174288",
+        "ModuleNotFoundError: No module named 'numpy'",
+        "FileNotFoundError: [Errno 2] No such file or directory: 'C:/Users/BITC MEDIA/Documents/nor/fetal-project/data/raw/FETAL_BIOMETRY_ABDOMEN/FP/annotations/Abdomen.csv'",
+        "FileNotFoundError: [Errno 2] No such file or directory: 'PASTE_THE_PATH_HERE/FP/annotations/Abdomen.csv'"
+      ],
       "seeds_per_invocation": [],
       "s5_lines_count": 0
     }

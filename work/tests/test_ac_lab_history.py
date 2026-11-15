@@ -139,3 +139,14 @@ def test_table_json_and_md_integrity():
     data = json.loads(json_path.read_text(encoding="utf-8"))
     assert len(data["rows"]) == 11
     assert data["assertions"]["seed5_never_trained"] is True
+
+    # Check smoke_log resolution is None (displays as '-')
+    smoke_row = [r for r in data["rows"] if "smoke_log" in r["run"]][0]
+    assert smoke_row["resolution"] is None
+
+    # Check full_log crash note: contains error list and wording, no 'handled'
+    md_content = md_path.read_text(encoding="utf-8")
+    assert "handled" not in md_content.lower()
+    full_facts = data["facts"]["full_log.txt"]
+    assert len(full_facts["traceback_errors"]) == 5
+    assert "refuses to resume with a different CONFIG" in md_content
