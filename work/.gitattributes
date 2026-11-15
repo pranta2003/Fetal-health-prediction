@@ -3,6 +3,8 @@ docs/results/** text eol=lf
 *.png binary
 *.jpg binary
 *.jpeg binary
+*.pdf binary
 docs/results/**/*.png binary
 docs/results/**/*.jpg binary
 docs/results/**/*.jpeg binary
+docs/results/**/*.pdf binary
