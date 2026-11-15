@@ -16,7 +16,7 @@ Historical proof benchmarks extracted strictly from the committed lab-PC artifac
 | **v3_ens (res512)** | 512 | 147 | 5.02 | 8.01 | 3.32 | -1.53 | 2.48% | 11.6% | ablation-study rows on the official test (test set was looked at many times) |
 | **v3_ens (4-seed mean)** | 384 | 147 | 4.47 | 6.31 | 3.01 | -0.53 | 2.17% | 9.5% | ablation-study rows on the official test (test set was looked at many times) |
 | **v3_ens (4-seed median)** | 384 | 147 | 4.34 | 6.03 | 3.12 | -0.60 | 2.14% | 6.8% | ablation-study rows on the official test (test set was looked at many times) |
-| **smoke_log (code check)** | 128 | 32 | 111.65 | 117.88 | - | - | 57.72% | - | code check only, not a result |
+| **smoke_log (code check)** | - | 32 | 111.65 | 117.88 | - | - | 57.72% | - | code check only, not a result |
 
 > **Single 384-px seeds summary**: AC MAE 4.58 ± 0.27 mm (min 4.32, max 4.96) across seeds [1, 2, 3, 4].
 
@@ -29,7 +29,7 @@ Automated scan of the 4 committed UTF-16 LE execution logs:
 | `v3_log.txt` | 82 | 1 | 0 | 0 | - | 1 clean invocation: base + v3_full ablation. |
 | `ens_log.txt` | 297 | 4 | 0 | 1 | [[1, 2, 3, 4, 5], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]] | Seeds [1,2,3,4,5] requested in 1st invocation; restart switched to [1,2,3,4]; s5 was never trained. |
 | `smoke_log.txt` | 49 | 1 | 0 | 0 | - | code check only, not a result |
-| `full_log.txt` | 301 | 5 | 1 | 5 | - | 5 invocations (`Using device:`), 1 fold resumed, 5 tracebacks handled. |
+| `full_log.txt` | 301 | 5 | 1 | 5 | - | 5 invocations (`Using device:`), 1 fold resumed. 5 crashes (RuntimeError: ios_base::badbit set: iostream stream error; RuntimeError: [enforce fail at inline_container.cc:672] . unexpected pos 92174400 vs 92174288; ModuleNotFoundError: No module named 'numpy'; FileNotFoundError: [Errno 2] No such file or directory: 'C:/Users/BITC MEDIA/Documents/nor/fetal-project/data/raw/FETAL_BIOMETRY_ABDOMEN/FP/annotations/Abdomen.csv'; FileNotFoundError: [Errno 2] No such file or directory: 'PASTE_THE_PATH_HERE/FP/annotations/Abdomen.csv'), run resumed; the script refuses to resume with a different CONFIG. |
 
 ### Key Verification Assertions
 1. **Seed 5 Status**: `Seed 5 was planned but never trained (no [s5] lines)`. Confirmed: exactly 0 `[s5]` lines across all logs.

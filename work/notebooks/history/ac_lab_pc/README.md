@@ -39,7 +39,7 @@ Original Python scripts executed on the lab PC:
 ## Historical Context & Missing Logs
 
 During active development on the lab PC:
-- Earlier iterative logs for **v1**, **v2**, and preliminary direct-regression experiments were not retained or were overwritten during disk cleanups.
+- For earlier iterative runs (v1, v2, and preliminary direct-regression experiments), no surviving logs were found on the lab PC (searched 2026-11-15).
 - Only the **v3** series and the **DSNT 5-fold cross-validation** logs and checkpoints survived on the lab PC filesystem.
 - In `ens_log.txt`, the initial invocation specified `seeds=[1, 2, 3, 4, 5]`. Due to a process interrupt and corrupt checkpoint recovery, the script was restarted with `seeds=[1, 2, 3, 4]`. Consequently, **Seed 5 was planned but never trained** (confirmed by zero `[s5]` log lines).
 
