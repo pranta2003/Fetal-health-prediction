@@ -1,0 +1,103 @@
+{
+  "dataset": "HC18 Official Grand Challenge Test Set",
+  "n_images": 335,
+  "ensemble_5fold": {
+    "count": 335,
+    "hc_abs_diff_mean": 1.9472175634093212,
+    "hc_abs_diff_std": 1.911419953010746,
+    "hc_abs_diff_median": 1.3777584021042628,
+    "hc_abs_diff_max": 13.691495582356822,
+    "hc_signed_diff_mean": 0.78444247985904,
+    "hc_signed_diff_std": 2.6152136376818715,
+    "dice_mean": 85.59113130554518,
+    "dice_std": 3.10954920404057,
+    "hausdorff_mean": 7.204084986290838,
+    "hausdorff_std": 3.21241420899301,
+    "trimester_1": {
+      "count": 55,
+      "hc_abs_diff_mean": 1.6013217513683038,
+      "hc_abs_diff_std": 1.606342336689398,
+      "dice_mean": 87.9135605306108,
+      "dice_std": 3.28037444337613,
+      "hausdorff_mean": 2.7358470370864407,
+      "hausdorff_std": 0.8264020545476787
+    },
+    "trimester_2": {
+      "count": 233,
+      "hc_abs_diff_mean": 1.811956667406235,
+      "hc_abs_diff_std": 1.6654249800273317,
+      "dice_mean": 85.16552777701492,
+      "dice_std": 2.821980676986454,
+      "hausdorff_mean": 7.204338247367667,
+      "hausdorff_std": 1.8189774812975605
+    },
+    "trimester_3": {
+      "count": 47,
+      "hc_abs_diff_mean": 3.022537955557726,
+      "hc_abs_diff_std": 2.84477035897982,
+      "dice_mean": 84.98330183254389,
+      "dice_std": 3.1091986476738422,
+      "hausdorff_mean": 12.431618547468306,
+      "hausdorff_std": 2.3765084041379962
+    }
+  },
+  "single_fold1": {
+    "count": 335,
+    "hc_abs_diff_mean": 1.9937403448886304,
+    "hc_abs_diff_std": 1.911338008595094,
+    "hc_abs_diff_median": 1.3919089836045373,
+    "hc_abs_diff_max": 13.934812020574725,
+    "hc_signed_diff_mean": 0.6988476362151959,
+    "hc_signed_diff_std": 2.6739978472329557,
+    "dice_mean": 85.66163258648272,
+    "dice_std": 3.0692837430185813,
+    "hausdorff_mean": 7.18486185070264,
+    "hausdorff_std": 3.2003274573271594,
+    "trimester_1": {
+      "count": 55,
+      "hc_abs_diff_mean": 1.6380442252303267,
+      "hc_abs_diff_std": 1.684517005813557,
+      "dice_mean": 87.8848465012677,
+      "dice_std": 3.284924360414762,
+      "hausdorff_mean": 2.7493934164928513,
+      "hausdorff_std": 0.830043083092327
+    },
+    "trimester_2": {
+      "count": 233,
+      "hc_abs_diff_mean": 1.8340380588831307,
+      "hc_abs_diff_std": 1.607402935993759,
+      "dice_mean": 85.25293035092689,
+      "dice_std": 2.7868476058193528,
+      "hausdorff_mean": 7.176607432095645,
+      "hausdorff_std": 1.8047327148614491
+    },
+    "trimester_3": {
+      "count": 47,
+      "hc_abs_diff_mean": 3.2016960729841233,
+      "hc_abs_diff_std": 2.8968972374718596,
+      "dice_mean": 85.08611887523458,
+      "dice_std": 3.07720137546744,
+      "hausdorff_mean": 12.416224476595575,
+      "hausdorff_std": 2.3761016526984573
+    }
+  },
+  "published_references": {
+    "Fiorentino2020": {
+      "name": "Fiorentino2020 (with post-proc)",
+      "hc_mad_mean": 1.9,
+      "hc_mad_sd": 1.77
+    },
+    "Mask_R2CNN": {
+      "name": "Mask-R2CNN",
+      "hc_mad_mean": 1.95,
+      "hc_mad_sd": 1.92
+    },
+    "Sobhaninia2019": {
+      "name": "Sobhaninia2019",
+      "hc_mad_mean": 2.12,
+      "hc_mad_sd": 1.87
+    }
+  },
+  "ensemble_vs_single_abs_diff_diff": 0.046522781479309216,
+  "statement": "same range as the published values listed; no rank is claimed; test labels are hidden so no paired significance test is possible; ensemble vs single difference = 0.05 mm (no test)"
+}

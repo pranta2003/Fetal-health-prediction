@@ -30,11 +30,14 @@ File names tell you the part. The prefix is the part:
 | 5 Report | `scripts/12_hc18_test_inference.py` | Makes the challenge submission files |
 | 5 Report | `scripts/09_hc18_leakage_report.py` | Shows how much the old method leaked |
 | 5 Report | `scripts/19_hc18_ladder.py` | Trains the historical approach ladder on grouped fold 1 |
+| 5 Report | `scripts/29_hc18_official_summary.py` | Generates summary tables and claims for official HC18 challenge test evaluations |
+| 5 Report | `scripts/30_hc18_ellipse_roundtrip.py` | Evaluates ellipse round-trip reconstruction and rasterization conventions on training masks |
 | 5 Report | `scripts/kaggle/run_hc18_close.py` | Runs steps 11 and 12 on a Kaggle GPU |
 | 5 Report | `scripts/kaggle/run_hc18_ladder.py` | Runs the historical approach ladder on a Kaggle GPU |
 | Proof | `notebooks/benchmarks/hc18_ladder.ipynb` | Executed notebook comparing historical ladder and 5-fold Row D vs E |
-| Proof | `tests/test_hc18_*.py`, `tests/test_hc18_ladder.py`, `tests/reference/hc18_original.py` | Tests that the moved code equals the original notebook and tests fold-1 integrity |
-| Results | `docs/results/hc18/`, `docs/results/hc18_ladder/` | The real numbers and the submission files |
+| Proof | `notebooks/benchmarks/hc18_official.ipynb` | Executed notebook presenting official HC18 challenge test evaluation and roundtrip Dice |
+| Proof | `tests/test_hc18_*.py`, `tests/test_hc18_ladder.py`, `tests/test_hc18_official_summary.py`, `tests/test_hc18_roundtrip.py`, `tests/reference/hc18_original.py` | Tests that the moved code equals the original notebook and tests fold-1 integrity |
+| Results | `docs/results/hc18/`, `docs/results/hc18_ladder/`, `docs/results/hc18_official/` | The real numbers, official challenge evaluation JSONs, submission files, and summary tables |
 
 ## HEAD LANDMARK (FP+UCL): all files
 | Step | File | What it does |

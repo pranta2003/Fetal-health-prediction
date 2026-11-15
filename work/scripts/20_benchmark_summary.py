@@ -89,6 +89,42 @@ def generate_benchmark_summary(results_dir: Path) -> str:
         f"| **Head (HC18)** | HC MAE | {hc_ours} | {hc_pub} | {hc_comparable} | {hc_claim} |"
     )
 
+    # Row 1b: HC18 Official Challenge Test Set
+    hc18_off_ens_path = results_dir / "hc18_official" / "metrics_ensemble_5fold.json"
+    hc18_off_sin_path = results_dir / "hc18_official" / "metrics_single_fold1.json"
+    if hc18_off_ens_path.is_file() and hc18_off_sin_path.is_file():
+        off_ens_data = load_json(hc18_off_ens_path)["aggregates"]
+        off_sin_data = load_json(hc18_off_sin_path)["aggregates"]
+        off_ens_abs = off_ens_data["absolute_difference"]
+        off_sin_abs = off_sin_data["absolute_difference"]
+        diff_ens_sin = abs(off_ens_abs["mean"] - off_sin_abs["mean"])
+
+        hc_off_ours = (
+            f"**{off_ens_abs['mean']:.2f} +- {off_ens_abs['std']:.2f} mm** (5-fold ensemble)<br>"
+            f"• Single model: {off_sin_abs['mean']:.2f} +- {off_sin_abs['std']:.2f} mm (Fold 1)<br>"
+            f"• Protocol: {off_ens_abs['count']} official challenge test images<br>"
+            f"• Source: `docs/results/hc18_official/metrics_ensemble_5fold.json`"
+        )
+        hc_off_pub = (
+            f"**{top_hc_model['hc_mad_mean']:.2f} +- {top_hc_model['hc_mad_sd']:.2f} mm** ({top_hc_model['name']})<br>"
+            f"• Mask-R2CNN: {mask_r2cnn['hc_mad_mean']:.2f} +- {mask_r2cnn['hc_mad_sd']:.2f} mm<br>"
+            f"• Range: 1.90–2.80 mm across 6 models<br>"
+            f"• Source: [{pub_hc['source']}]({pub_hc['url']})<br>"
+            f"• Protocol: {pub_hc['protocol']}"
+        )
+        hc_off_comparable = "Yes (identical official challenge test set of 335 images)"
+        hc_off_claim = (
+            f"same range as the published values listed; no rank is claimed; "
+            f"test labels are hidden so no paired significance test is possible; "
+            f"ensemble vs single difference = {diff_ens_sin:.2f} mm (no test)<br>"
+            f"• Source: `docs/results/hc18_official/metrics_ensemble_5fold.json` "
+            f"(key: `aggregates.absolute_difference.mean`) vs `metrics_single_fold1.json` "
+            f"(key: `aggregates.absolute_difference.mean`)"
+        )
+        lines.append(
+            f"| **Head (HC18 Official Test)** | HC Absolute Difference (mm) | {hc_off_ours} | {hc_off_pub} | {hc_off_comparable} | {hc_off_claim} |"
+        )
+
     # Row 1b: Head Landmark (FP+UCL)
     head_res_path = results_dir / "head_landmark" / "head_landmark_results.json"
     if head_res_path.is_file():
@@ -171,8 +207,8 @@ def generate_benchmark_summary(results_dir: Path) -> str:
     )
     ac_mm_comparable = "Partly (different metric: mm vs NME; paper does not report mm)"
     ac_mm_claim = (
-        f"Direct mm comparison unavailable in published baseline; established absolute geometric benchmark "
-        f"(Ours: {ac_mae_str} [4-model median ensemble])."
+        f"Direct mm comparison unavailable in published baseline (Ours: {ac_mae_str} [4-model median ensemble]; "
+        f"published paper reports NME only)."
     )
     lines.append(
         f"| **Abdomen (AC)** | AC MAE (mm) | {ac_mm_ours} | {ac_mm_pub} | "
@@ -279,9 +315,12 @@ def generate_benchmark_summary(results_dir: Path) -> str:
         f"• Protocol: {s3_pub['protocol']} ({s3_pub['data']})"
     )
     s3_e1_comparable = "Partly (random vs temporal split, different years [2013-2016 vs <=2021/>=2022], different outcome definitions)"
+    s3_early_val = s3_pub["auc_cdc_early_stillbirth"]["LightGBM"]
+    s3_late_val = s3_pub["auc_cdc_late_stillbirth"]["LightGBM"]
     s3_e1_claim = (
         f"same order of magnitude; not directly comparable (Ours: {s3_e1_xgb['test_auc']:.4f} "
-        f"[95% CI: {s3_e1_xgb['ci_95_low']:.4f}, {s3_e1_xgb['ci_95_high']:.4f}] vs Published early stillbirth: 0.73–0.75).<br>"
+        f"[95% CI: {s3_e1_xgb['ci_95_low']:.4f}, {s3_e1_xgb['ci_95_high']:.4f}] vs Published: early stillbirth about {s3_early_val:.2f}, "
+        f"late stillbirth about {s3_late_val:.2f} [Koivu & Sairanen 2020 from published_refs.json]).<br>"
         f"Warning: term-band AUC 0.748 must not be compared with their late-stillbirth 0.60; possible source-file artifact."
     )
     lines.append(
