@@ -28,6 +28,37 @@ import numpy as np
 import pandas as pd
 
 STRUCTURE_NAMES = ("artery", "liver", "stomach", "vein")
+STRUCTURE_BITFLAGS = {
+    "artery": 1,
+    "liver": 2,
+    "stomach": 4,
+    "vein": 8,
+}
+
+
+def encode_multilabel_mask(masks: dict[str, np.ndarray]) -> np.ndarray:
+    """Encode dictionary of binary masks into a single uint8 bit-flag mask.
+
+    Bit flags:
+      artery  = 1 (bit 0)
+      liver   = 2 (bit 1)
+      stomach = 4 (bit 2)
+      vein    = 8 (bit 3)
+    """
+    first_mask = next(iter(masks.values()))
+    combined = np.zeros(first_mask.shape[:2], dtype=np.uint8)
+    for name, flag in STRUCTURE_BITFLAGS.items():
+        if name in masks:
+            combined |= (masks[name] > 0).astype(np.uint8) * flag
+    return combined
+
+
+def decode_multilabel_mask(combined_mask: np.ndarray) -> dict[str, np.ndarray]:
+    """Decode a single uint8 bit-flag mask into a dictionary of 4 binary masks."""
+    return {
+        name: ((combined_mask & flag) > 0).astype(np.uint8)
+        for name, flag in STRUCTURE_BITFLAGS.items()
+    }
 
 
 def parse_patient_id(filename: str | Path) -> str:
@@ -142,3 +173,132 @@ def create_patient_grouped_split(
 
     df = pd.DataFrame(rows)
     return df
+
+
+def build_patient_groups_from_hashes(
+    img_dir: Path | str,
+    filenames: Sequence[str] | None = None,
+) -> tuple[dict[str, str], dict[str, list[str]], dict[str, str]]:
+    """Build patient groups using Union-Find over identical raw image SHA-256 hashes.
+
+    Returns:
+        patient_to_group_id: dict mapping each patient ID to its group ID (e.g. 'G001').
+        group_id_to_patients: dict mapping group ID to list of patient IDs.
+        file_to_hash: dict mapping filename to its SHA-256 hash.
+    """
+    import hashlib
+
+    img_path = Path(img_dir)
+    if filenames is None:
+        filenames = sorted([f for f in os.listdir(img_path) if f.lower().endswith(".png")])
+
+    file_to_hash: dict[str, str] = {}
+    hash_to_patients: dict[str, set[str]] = {}
+    all_patients: set[str] = set()
+
+    for f in filenames:
+        pid = parse_patient_id(f)
+        all_patients.add(pid)
+        p_img = img_path / f
+        with open(p_img, "rb") as fp:
+            h = hashlib.sha256(fp.read()).hexdigest()
+        file_to_hash[Path(f).name] = h
+        hash_to_patients.setdefault(h, set()).add(pid)
+
+    # Union-Find
+    parent: dict[str, str] = {p: p for p in all_patients}
+
+    def find(p: str) -> str:
+        if parent[p] != p:
+            parent[p] = find(parent[p])
+        return parent[p]
+
+    def union(p1: str, p2: str) -> None:
+        r1, r2 = find(p1), find(p2)
+        if r1 != r2:
+            parent[r1] = r2
+
+    for h, pats in hash_to_patients.items():
+        if len(pats) > 1:
+            plist = sorted(list(pats))
+            for p in plist[1:]:
+                union(plist[0], p)
+
+    # Group patients by root
+    root_to_patients: dict[str, list[str]] = {}
+    for p in sorted(all_patients):
+        r = find(p)
+        root_to_patients.setdefault(r, []).append(p)
+
+    sorted_roots = sorted(root_to_patients.keys())
+    patient_to_group_id: dict[str, str] = {}
+    group_id_to_patients: dict[str, list[str]] = {}
+
+    for idx, r in enumerate(sorted_roots, 1):
+        gid = f"G{idx:03d}"
+        pats = root_to_patients[r]
+        group_id_to_patients[gid] = pats
+        for p in pats:
+            patient_to_group_id[p] = gid
+
+    return patient_to_group_id, group_id_to_patients, file_to_hash
+
+
+def create_group_split_v2(
+    filenames: Sequence[str],
+    patient_to_group: dict[str, str],
+    seed: int = 42,
+    train_ratio: float = 0.70,
+    val_ratio: float = 0.15,
+    test_ratio: float = 0.15,
+) -> pd.DataFrame:
+    """Split FASSD filenames into train, val, test grouped strictly by patient GROUP.
+
+    Ensures zero patient overlap and zero image-hash overlap between splits.
+    Returns DataFrame with columns ['filename', 'patient', 'group', 'split'].
+    """
+    if abs(train_ratio + val_ratio + test_ratio - 1.0) > 1e-6:
+        raise ValueError(f"Ratios must sum to 1.0, got {train_ratio + val_ratio + test_ratio}")
+
+    unique_groups = sorted(list(set(patient_to_group.values())))
+    rng = random.Random(seed)
+    shuffled_groups = list(unique_groups)
+    rng.shuffle(shuffled_groups)
+
+    n_total = len(shuffled_groups)
+    n_train = int(round(n_total * train_ratio))
+    n_val = int(round(n_total * val_ratio))
+
+    train_groups = set(shuffled_groups[:n_train])
+    val_groups = set(shuffled_groups[n_train : n_train + n_val])
+    test_groups = set(shuffled_groups[n_train + n_val :])
+
+    assert len(train_groups & val_groups) == 0
+    assert len(train_groups & test_groups) == 0
+    assert len(val_groups & test_groups) == 0
+    assert len(train_groups) + len(val_groups) + len(test_groups) == n_total
+
+    group_split_map: dict[str, str] = {}
+    for g in train_groups:
+        group_split_map[g] = "train"
+    for g in val_groups:
+        group_split_map[g] = "val"
+    for g in test_groups:
+        group_split_map[g] = "test"
+
+    rows: list[dict[str, str]] = []
+    for f in sorted(filenames):
+        fname = Path(f).name
+        pid = parse_patient_id(fname)
+        gid = patient_to_group[pid]
+        sp = group_split_map[gid]
+        rows.append({
+            "filename": fname,
+            "patient": pid,
+            "group": gid,
+            "split": sp,
+        })
+
+    df = pd.DataFrame(rows)
+    return df
+
