@@ -1,0 +1,284 @@
+{
+  "rows": [
+    {
+      "run": "DSNT 5-fold OOF",
+      "protocol": "5-fold patient-disjoint cross-validation",
+      "resolution": 384,
+      "n": 789,
+      "ac_mae": 5.18,
+      "ac_rmse": 9.07,
+      "ac_median": null,
+      "ac_bias": null,
+      "ac_pct": 2.6,
+      "over10": null,
+      "fp_mae": 5.08,
+      "ucl_mae": 5.91,
+      "status": "history row, DIFFERENT protocol (789 images incl. the official-test images, out-of-fold), not comparable with the official-test rows"
+    },
+    {
+      "run": "v3 base",
+      "protocol": "Official test set (flip-TTA)",
+      "resolution": 384,
+      "n": 147,
+      "ac_mae": 5.81,
+      "ac_rmse": 8.87,
+      "ac_median": 3.65,
+      "ac_bias": -3.26,
+      "ac_pct": 2.8,
+      "over10": 16.3,
+      "fp_mae": 5.02,
+      "ucl_mae": 10.29,
+      "status": "ablation-study rows on the official test (test set was looked at many times)"
+    },
+    {
+      "run": "v3_full",
+      "protocol": "Official test set (flip-TTA)",
+      "resolution": 384,
+      "n": 147,
+      "ac_mae": 4.4,
+      "ac_rmse": 6.16,
+      "ac_median": 2.91,
+      "ac_bias": -1.55,
+      "ac_pct": 2.14,
+      "over10": 8.2,
+      "fp_mae": 4.02,
+      "ucl_mae": 6.53,
+      "status": "ablation-study rows on the official test (test set was looked at many times)"
+    },
+    {
+      "run": "v3_ens (s1)",
+      "protocol": "Official test set (flip-TTA)",
+      "resolution": 384,
+      "n": 147,
+      "ac_mae": 4.96,
+      "ac_rmse": 7.33,
+      "ac_median": 3.14,
+      "ac_bias": 0.96,
+      "ac_pct": 2.39,
+      "over10": 12.2,
+      "fp_mae": null,
+      "ucl_mae": null,
+      "status": "ablation-study rows on the official test (test set was looked at many times)"
+    },
+    {
+      "run": "v3_ens (s2)",
+      "protocol": "Official test set (flip-TTA)",
+      "resolution": 384,
+      "n": 147,
+      "ac_mae": 4.32,
+      "ac_rmse": 6.05,
+      "ac_median": 2.73,
+      "ac_bias": -0.99,
+      "ac_pct": 2.17,
+      "over10": 8.8,
+      "fp_mae": null,
+      "ucl_mae": null,
+      "status": "ablation-study rows on the official test (test set was looked at many times)"
+    },
+    {
+      "run": "v3_ens (s3)",
+      "protocol": "Official test set (flip-TTA)",
+      "resolution": 384,
+      "n": 147,
+      "ac_mae": 4.54,
+      "ac_rmse": 6.59,
+      "ac_median": 3.37,
+      "ac_bias": -0.74,
+      "ac_pct": 2.2,
+      "over10": 10.2,
+      "fp_mae": null,
+      "ucl_mae": null,
+      "status": "ablation-study rows on the official test (test set was looked at many times)"
+    },
+    {
+      "run": "v3_ens (s4)",
+      "protocol": "Official test set (flip-TTA)",
+      "resolution": 384,
+      "n": 147,
+      "ac_mae": 4.49,
+      "ac_rmse": 6.27,
+      "ac_median": 3.64,
+      "ac_bias": -0.49,
+      "ac_pct": 2.17,
+      "over10": 8.2,
+      "fp_mae": null,
+      "ucl_mae": null,
+      "status": "ablation-study rows on the official test (test set was looked at many times)"
+    },
+    {
+      "run": "v3_ens (res512)",
+      "protocol": "Official test set (flip-TTA)",
+      "resolution": 512,
+      "n": 147,
+      "ac_mae": 5.02,
+      "ac_rmse": 8.01,
+      "ac_median": 3.32,
+      "ac_bias": -1.53,
+      "ac_pct": 2.48,
+      "over10": 11.6,
+      "fp_mae": null,
+      "ucl_mae": null,
+      "status": "ablation-study rows on the official test (test set was looked at many times)"
+    },
+    {
+      "run": "v3_ens (4-seed mean)",
+      "protocol": "Official test set (flip-TTA)",
+      "resolution": 384,
+      "n": 147,
+      "ac_mae": 4.47,
+      "ac_rmse": 6.31,
+      "ac_median": 3.01,
+      "ac_bias": -0.53,
+      "ac_pct": 2.17,
+      "over10": 9.5,
+      "fp_mae": null,
+      "ucl_mae": null,
+      "status": "ablation-study rows on the official test (test set was looked at many times)"
+    },
+    {
+      "run": "v3_ens (4-seed median)",
+      "protocol": "Official test set (flip-TTA)",
+      "resolution": 384,
+      "n": 147,
+      "ac_mae": 4.34,
+      "ac_rmse": 6.03,
+      "ac_median": 3.12,
+      "ac_bias": -0.6,
+      "ac_pct": 2.14,
+      "over10": 6.8,
+      "fp_mae": null,
+      "ucl_mae": null,
+      "status": "ablation-study rows on the official test (test set was looked at many times)"
+    },
+    {
+      "run": "smoke_log (code check)",
+      "protocol": "160 images smoke subset (fold 1 only)",
+      "resolution": 128,
+      "n": 32,
+      "ac_mae": 111.65,
+      "ac_rmse": 117.88,
+      "ac_median": null,
+      "ac_bias": null,
+      "ac_pct": 57.72,
+      "over10": null,
+      "fp_mae": 97.93,
+      "ucl_mae": 141.82,
+      "status": "code check only, not a result"
+    }
+  ],
+  "seeds_summary": {
+    "mean": 4.58,
+    "std": 0.27,
+    "min": 4.32,
+    "max": 4.96,
+    "raw_maes": [
+      4.962216747050383,
+      4.321987385652503,
+      4.543887962289408,
+      4.4915789649600075
+    ]
+  },
+  "recomputed_ens_mean_mae": 4.4693,
+  "facts": {
+    "v3_log.txt": {
+      "total_lines": 82,
+      "invocations_count": 1,
+      "device_equal_count": 1,
+      "using_device_count": 0,
+      "invocation_headers": [
+        "device=cuda torch 2.14.1+cu130 smp 0.5.0 | out=C:/fetal-project/models/ac_v3 | smoke=False"
+      ],
+      "resumed_count": 0,
+      "resumed_lines": [],
+      "traceback_count": 0,
+      "seeds_per_invocation": [],
+      "s5_lines_count": 0
+    },
+    "ens_log.txt": {
+      "total_lines": 297,
+      "invocations_count": 4,
+      "device_equal_count": 4,
+      "using_device_count": 0,
+      "invocation_headers": [
+        "device=cuda | out=C:/fetal-project/models/ac_v3_ens | seeds=[1, 2, 3, 4, 5] | smoke=False",
+        "device=cuda | out=C:/fetal-project/models/ac_v3_ens | seeds=[1, 2, 3, 4] | smoke=False",
+        "device=cuda | out=C:/fetal-project/models/ac_v3_ens | seeds=[1, 2, 3, 4] | smoke=False",
+        "device=cuda | out=C:/fetal-project/models/ac_v3_ens | seeds=[1, 2, 3, 4] | smoke=False"
+      ],
+      "resumed_count": 0,
+      "resumed_lines": [],
+      "traceback_count": 1,
+      "seeds_per_invocation": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "s5_lines_count": 0
+    },
+    "smoke_log.txt": {
+      "total_lines": 49,
+      "invocations_count": 1,
+      "device_equal_count": 0,
+      "using_device_count": 1,
+      "invocation_headers": [
+        "Using device: cuda | SMOKE_TEST=True | checkpoints -> C:/fetal-project/models/ac_dsnt_smoke"
+      ],
+      "resumed_count": 0,
+      "resumed_lines": [],
+      "traceback_count": 0,
+      "seeds_per_invocation": [],
+      "s5_lines_count": 0
+    },
+    "full_log.txt": {
+      "total_lines": 301,
+      "invocations_count": 5,
+      "device_equal_count": 0,
+      "using_device_count": 5,
+      "invocation_headers": [
+        "Using device: cuda | SMOKE_TEST=False | checkpoints -> C:/fetal-project/models/ac_dsnt_full",
+        "Using device: cuda | SMOKE_TEST=False | checkpoints -> C:/fetal-project/models/ac_dsnt_full",
+        "Using device: cuda | SMOKE_TEST=False | checkpoints -> C:/fetal-project/models/ac_dsnt_full",
+        "Using device: cuda | SMOKE_TEST=False | checkpoints -> C:/fetal-project/models/ac_dsnt_full",
+        "Using device: cuda | SMOKE_TEST=False | checkpoints -> C:/fetal-project/models/ac_dsnt_full"
+      ],
+      "resumed_count": 1,
+      "resumed_lines": [
+        "  Resumed fold 3 at epoch 1 (best val landmark error 51.12px)"
+      ],
+      "traceback_count": 5,
+      "seeds_per_invocation": [],
+      "s5_lines_count": 0
+    }
+  },
+  "assertions": {
+    "seed5_never_trained": true,
+    "seed5_note": "Seed 5 was planned but never trained (no [s5] lines)",
+    "dsnt_oof_equals_full_log": true,
+    "v3_base_equals_v3_log": true,
+    "v3_full_equals_v3_log": true,
+    "ens_seeds_equal_ens_log": true,
+    "ens_predictions_csv_matches_ens_mean": true
+  }
+}
