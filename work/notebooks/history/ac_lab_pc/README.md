@@ -38,9 +38,10 @@ Original Python scripts executed on the lab PC:
 
 ## Historical Context & Missing Logs
 
-During active development on the lab PC:
-- For earlier iterative runs (v1, v2, and preliminary direct-regression experiments), no surviving logs were found on the lab PC (searched 2026-11-15).
-- Only the **v3** series and the **DSNT 5-fold cross-validation** logs and checkpoints survived on the lab PC filesystem.
+During active development across Colab and the lab PC:
+- **v1 and v2 Colab Evidence**: Execution evidence for v1 (5-fold heatmap regression landmark detection) and v2 (DSNT CPU smoke test) **EXISTS** in the committed history notebook [`notebooks/history/Capstone_fetalDataset_history.ipynb`](file:///C:/fetal-github-clone/work/notebooks/history/Capstone_fetalDataset_history.ipynb) (cells 51 and 53).
+- **Lab-PC Search**: On the lab PC itself, no surviving logs were found for earlier iterative runs (v1, v2, and preliminary direct-regression experiments; searched 2026-11-15). Only the **v3** series and the **DSNT 5-fold cross-validation** logs and checkpoints survived on the lab PC filesystem.
+- **AC Direct Regression**: No trace was found on either the lab PC or in the history notebook. In the repository benchmark comparisons, HC18 ladder Row A serves as the direct-regression benchmark reference.
 - In `ens_log.txt`, the initial invocation specified `seeds=[1, 2, 3, 4, 5]`. Due to a process interrupt and corrupt checkpoint recovery, the script was restarted with `seeds=[1, 2, 3, 4]`. Consequently, **Seed 5 was planned but never trained** (confirmed by zero `[s5]` log lines).
 
 ---

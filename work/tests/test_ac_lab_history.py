@@ -137,8 +137,28 @@ def test_table_json_and_md_integrity():
     assert md_path.is_file()
 
     data = json.loads(json_path.read_text(encoding="utf-8"))
-    assert len(data["rows"]) == 11
+    assert len(data["rows"]) == 13
     assert data["assertions"]["seed5_never_trained"] is True
+
+    # Check v1 row
+    v1_row = [r for r in data["rows"] if "v1 heatmap" in r["run"]][0]
+    assert v1_row["resolution"] == 384
+    assert v1_row["n"] == 789
+    assert v1_row["ac_mae"] == 182.60
+    assert v1_row["ac_rmse"] == 195.13
+    assert "FAILED/COLLAPSED run" in v1_row["status"]
+
+    # Check v2 colab row
+    v2_row = [r for r in data["rows"] if "v2 DSNT smoke" in r["run"]][0]
+    assert v2_row["status"] == "DSNT smoke on Colab CPU, 1 fold, 5 epochs: code check only; the real v2 run is the lab-PC full_log row"
+
+    # Check Colab history dict
+    colab = data["colab_history"]
+    assert colab["v1"]["dataset_line"] == "Pooled dataset: 789 images from 615 unique patients (586 FP + 29 UCL)"
+    assert colab["v1"]["folds"]["fold_4"]["early_stopping_epoch"] == 97
+    assert colab["v1"]["folds"]["fold_5"]["early_stopping_epoch"] == 89
+    assert colab["v1"]["folds"]["fold_4"]["best_val_loss"] == 0.000344
+    assert colab["v1"]["folds"]["fold_5"]["best_val_loss"] == 0.000351
 
     # Check smoke_log resolution is None (displays as '-')
     smoke_row = [r for r in data["rows"] if "smoke_log" in r["run"]][0]

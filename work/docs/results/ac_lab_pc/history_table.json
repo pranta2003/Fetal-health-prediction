@@ -1,6 +1,21 @@
 {
   "rows": [
     {
+      "run": "v1 heatmap regression (Colab)",
+      "protocol": "5-fold patient-disjoint cross-validation",
+      "resolution": 384,
+      "n": 789,
+      "ac_mae": 182.6,
+      "ac_rmse": 195.13,
+      "ac_median": null,
+      "ac_bias": null,
+      "ac_pct": null,
+      "over10": null,
+      "fp_mae": null,
+      "ucl_mae": null,
+      "status": "v1 heatmap regression, Colab, 5-fold out-of-fold (789 images): FAILED/COLLAPSED run (AC MAE 182.60 mm vs mean-AC baseline), not comparable with official-test rows"
+    },
+    {
       "run": "DSNT 5-fold OOF",
       "protocol": "5-fold patient-disjoint cross-validation",
       "resolution": 384,
@@ -164,8 +179,79 @@
       "fp_mae": 97.93,
       "ucl_mae": 141.82,
       "status": "code check only, not a result"
+    },
+    {
+      "run": "v2 DSNT smoke (Colab CPU)",
+      "protocol": "160 images smoke subset (fold 1, 5 epochs configured)",
+      "resolution": 384,
+      "n": 160,
+      "ac_mae": null,
+      "ac_rmse": null,
+      "ac_median": null,
+      "ac_bias": null,
+      "ac_pct": null,
+      "over10": null,
+      "fp_mae": null,
+      "ucl_mae": null,
+      "status": "DSNT smoke on Colab CPU, 1 fold, 5 epochs: code check only; the real v2 run is the lab-PC full_log row"
     }
   ],
+  "colab_history": {
+    "notebook_path": "notebooks/history/Capstone_fetalDataset_history.ipynb",
+    "v1": {
+      "cell_index": 51,
+      "heading": "AC sub-model: heatmap-regression landmark detection for TAD/APAD (FP + UCL pooled)",
+      "resolution": 384,
+      "dataset_line": "Pooled dataset: 789 images from 615 unique patients (586 FP + 29 UCL)",
+      "n_images": 789,
+      "n_patients": 615,
+      "fp_images": 586,
+      "ucl_images": 29,
+      "folds": {
+        "fold_1": {
+          "train_patients": 493,
+          "val_patients": 122,
+          "status": "Fold 1 already completed in a previous session \u2014 loading saved model, skipping training.",
+          "best_val_loss": null,
+          "early_stopping_epoch": null
+        },
+        "fold_2": {
+          "best_val_loss": 0.000328,
+          "early_stopping_epoch": null,
+          "last_epoch": 100
+        },
+        "fold_3": {
+          "best_val_loss": 0.00033,
+          "early_stopping_epoch": null,
+          "last_epoch": 100
+        },
+        "fold_4": {
+          "best_val_loss": 0.000344,
+          "early_stopping_epoch": 97,
+          "last_epoch": 97
+        },
+        "fold_5": {
+          "best_val_loss": 0.000351,
+          "early_stopping_epoch": 89,
+          "last_epoch": 89
+        }
+      },
+      "tad_mae": 57.98,
+      "tad_rmse": 62.02,
+      "apad_mae": 57.46,
+      "apad_rmse": 61.5,
+      "ac_mae": 182.6,
+      "ac_rmse": 195.13,
+      "status": "v1 heatmap regression, Colab, 5-fold out-of-fold (789 images): FAILED/COLLAPSED run (AC MAE 182.60 mm vs mean-AC baseline), not comparable with official-test rows"
+    },
+    "v2_smoke": {
+      "cell_index": 53,
+      "heading": "AC sub-model v2 - DSNT-style landmark regression for TAD/APAD (FP + UCL pooled)",
+      "resolution": 384,
+      "smoke_subset_images": 160,
+      "status": "DSNT smoke on Colab CPU, 1 fold, 5 epochs: code check only; the real v2 run is the lab-PC full_log row"
+    }
+  },
   "seeds_summary": {
     "mean": 4.58,
     "std": 0.27,

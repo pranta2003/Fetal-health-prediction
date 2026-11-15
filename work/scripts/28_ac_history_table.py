@@ -24,6 +24,133 @@ STATUS_SMOKE = "code check only, not a result"
 STATUS_SEED5 = "Seed 5 was planned but never trained (no [s5] lines)"
 
 
+def parse_colab_history_notebook(notebook_path: Path) -> dict:
+    """Parse v1 heatmap regression and v2 DSNT smoke results from committed Colab history notebook."""
+    assert notebook_path.is_file(), f"Colab history notebook not found: {notebook_path}"
+    with open(notebook_path, "r", encoding="utf-8") as f:
+        nb = json.load(f)
+
+    # Locate cells
+    c51 = None
+    c53 = None
+    c51_idx = None
+    c53_idx = None
+    for idx, cell in enumerate(nb["cells"]):
+        src = "".join(cell.get("source", []))
+        if "AC sub-model: heatmap-regression landmark detection for TAD/APAD (FP + UCL pooled)" in src:
+            c51 = cell
+            c51_idx = idx
+        elif "AC sub-model v2 - DSNT-style landmark regression for TAD/APAD (FP + UCL pooled)" in src:
+            c53 = cell
+            c53_idx = idx
+
+    assert c51 is not None, "Could not find AC sub-model v1 cell in Colab history notebook"
+    assert c53 is not None, "Could not find AC sub-model v2 cell in Colab history notebook"
+
+    # --- Parse Cell 51 (v1 heatmap regression) ---
+    src51 = "".join(c51.get("source", []))
+    out51 = "".join("".join(o.get("text", [])) for o in c51.get("outputs", []))
+
+    m_res51 = re.search(r"IMG_SIZE\s*=\s*(\d+)", src51)
+    res51 = int(m_res51.group(1)) if m_res51 else 384
+
+    m_ds = re.search(
+        r"Pooled dataset:\s*(\d+)\s*images\s*from\s*(\d+)\s*unique\s*patients\s*\((\d+)\s*FP\s*\+\s*(\d+)\s*UCL\)",
+        out51,
+    )
+    assert m_ds, "Failed to parse dataset line from Cell 51 output"
+    n_images = int(m_ds.group(1))
+    n_patients = int(m_ds.group(2))
+    fp_images = int(m_ds.group(3))
+    ucl_images = int(m_ds.group(4))
+
+    # Parse per-fold best val_loss and early-stop / last epochs
+    folds = {}
+    f1_match = re.search(r"===== Fold 1/5 =====\s*\n\s*train patients:\s*(\d+),\s*val patients:\s*(\d+)\s*\n\s*([^\n]+)", out51)
+    if f1_match:
+        folds["fold_1"] = {
+            "train_patients": int(f1_match.group(1)),
+            "val_patients": int(f1_match.group(2)),
+            "status": f1_match.group(3).strip(),
+            "best_val_loss": None,
+            "early_stopping_epoch": None,
+        }
+
+    for f_num in [2, 3, 4, 5]:
+        f_block = re.search(rf"===== Fold {f_num}/5 =====(.*?)(?:===== Fold|==== TRUE|\Z)", out51, re.DOTALL)
+        if f_block:
+            text = f_block.group(1)
+            best_val = re.search(r"Fold \d+: best val_loss = ([\d.]+)", text)
+            early_stop = re.search(r"Early stopping fold \d+ at epoch (\d+)", text)
+            epochs = re.findall(r"Epoch\s+(\d+)/100", text)
+            last_epoch = int(epochs[-1]) if epochs else None
+            folds[f"fold_{f_num}"] = {
+                "best_val_loss": float(best_val.group(1)) if best_val else None,
+                "early_stopping_epoch": int(early_stop.group(1)) if early_stop else None,
+                "last_epoch": last_epoch,
+            }
+
+    m_tad = re.search(r"TAD\s*->\s*MAE:\s*([\d.]+)mm,\s*RMSE:\s*([\d.]+)mm", out51)
+    m_apad = re.search(r"APAD\s*->\s*MAE:\s*([\d.]+)mm,\s*RMSE:\s*([\d.]+)mm", out51)
+    m_ac = re.search(r"AC\s*->\s*MAE:\s*([\d.]+)mm,\s*RMSE:\s*([\d.]+)mm", out51)
+    assert m_tad and m_apad and m_ac, "Failed to parse final OOF block from Cell 51 output"
+
+    tad_mae, tad_rmse = float(m_tad.group(1)), float(m_tad.group(2))
+    apad_mae, apad_rmse = float(m_apad.group(1)), float(m_apad.group(2))
+    ac_mae, ac_rmse = float(m_ac.group(1)), float(m_ac.group(2))
+
+    v1_status = (
+        f"v1 heatmap regression, Colab, 5-fold out-of-fold ({n_images} images): "
+        f"FAILED/COLLAPSED run (AC MAE {ac_mae:.2f} mm vs mean-AC baseline), not comparable with official-test rows"
+    )
+
+    # --- Parse Cell 53 (v2 DSNT smoke) ---
+    src53 = "".join(c53.get("source", []))
+    out53 = "".join("".join(o.get("text", [])) for o in c53.get("outputs", []))
+
+    m_res53 = re.search(r"IMG_SIZE\s*=\s*(\d+)", src53)
+    res53 = int(m_res53.group(1)) if m_res53 else 384
+
+    m_smoke_sub = re.search(r"SMOKE subset:\s*(\d+)\s*images", out53)
+    smoke_sub = int(m_smoke_sub.group(1)) if m_smoke_sub else 160
+
+    v2_status = "DSNT smoke on Colab CPU, 1 fold, 5 epochs: code check only; the real v2 run is the lab-PC full_log row"
+
+    # Clean path string for display
+    nb_disp_path = str(notebook_path).replace("\\", "/")
+    if "notebooks/history" in nb_disp_path:
+        nb_disp_path = "notebooks/history" + nb_disp_path.split("notebooks/history")[-1]
+
+    return {
+        "notebook_path": nb_disp_path,
+        "v1": {
+            "cell_index": c51_idx,
+            "heading": "AC sub-model: heatmap-regression landmark detection for TAD/APAD (FP + UCL pooled)",
+            "resolution": res51,
+            "dataset_line": m_ds.group(0),
+            "n_images": n_images,
+            "n_patients": n_patients,
+            "fp_images": fp_images,
+            "ucl_images": ucl_images,
+            "folds": folds,
+            "tad_mae": tad_mae,
+            "tad_rmse": tad_rmse,
+            "apad_mae": apad_mae,
+            "apad_rmse": apad_rmse,
+            "ac_mae": ac_mae,
+            "ac_rmse": ac_rmse,
+            "status": v1_status,
+        },
+        "v2_smoke": {
+            "cell_index": c53_idx,
+            "heading": "AC sub-model v2 - DSNT-style landmark regression for TAD/APAD (FP + UCL pooled)",
+            "resolution": res53,
+            "smoke_subset_images": smoke_sub,
+            "status": v2_status,
+        },
+    }
+
+
 def parse_full_log_oof(full_log_text: str) -> dict:
     """Parse out-of-fold summary block from full_log.txt."""
     n_match = re.search(r"n\s*=\s*(\d+)\s+images", full_log_text)
@@ -163,8 +290,14 @@ def extract_log_facts(inputs_dir: Path) -> dict:
     return facts
 
 
-def generate_history_data(inputs_dir: Path) -> dict:
+def generate_history_data(inputs_dir: Path, colab_notebook_path: Path | None = None) -> dict:
     """Read committed inputs, verify all checks, and construct full results dict."""
+    if colab_notebook_path is None:
+        work_dir = Path(__file__).resolve().parent.parent
+        colab_notebook_path = work_dir / "notebooks" / "history" / "Capstone_fetalDataset_history.ipynb"
+
+    colab_data = parse_colab_history_notebook(colab_notebook_path)
+
     # 1. DSNT 5-fold OOF from dsnt_full_oof_results.csv
     oof_csv_path = inputs_dir / "dsnt_full_oof_results.csv"
     assert oof_csv_path.exists(), f"Missing {oof_csv_path}"
@@ -262,6 +395,21 @@ def generate_history_data(inputs_dir: Path) -> dict:
 
     # Compile structured rows
     rows = [
+        {
+            "run": "v1 heatmap regression (Colab)",
+            "protocol": "5-fold patient-disjoint cross-validation",
+            "resolution": colab_data["v1"]["resolution"],
+            "n": colab_data["v1"]["n_images"],
+            "ac_mae": colab_data["v1"]["ac_mae"],
+            "ac_rmse": colab_data["v1"]["ac_rmse"],
+            "ac_median": None,
+            "ac_bias": None,
+            "ac_pct": None,
+            "over10": None,
+            "fp_mae": None,
+            "ucl_mae": None,
+            "status": colab_data["v1"]["status"],
+        },
         {
             "run": "DSNT 5-fold OOF",
             "protocol": "5-fold patient-disjoint cross-validation",
@@ -395,8 +543,26 @@ def generate_history_data(inputs_dir: Path) -> dict:
         "status": STATUS_SMOKE,
     })
 
+    # v2 Colab DSNT smoke check
+    rows.append({
+        "run": "v2 DSNT smoke (Colab CPU)",
+        "protocol": "160 images smoke subset (fold 1, 5 epochs configured)",
+        "resolution": colab_data["v2_smoke"]["resolution"],
+        "n": colab_data["v2_smoke"]["smoke_subset_images"],
+        "ac_mae": None,
+        "ac_rmse": None,
+        "ac_median": None,
+        "ac_bias": None,
+        "ac_pct": None,
+        "over10": None,
+        "fp_mae": None,
+        "ucl_mae": None,
+        "status": colab_data["v2_smoke"]["status"],
+    })
+
     return {
         "rows": rows,
+        "colab_history": colab_data,
         "seeds_summary": {
             "mean": round(seeds_mean, 2),
             "std": round(seeds_std, 2),
@@ -433,12 +599,15 @@ def render_markdown(data: dict) -> str:
 
     for r in data["rows"]:
         res_str = str(r["resolution"]) if r["resolution"] is not None else "-"
+        n_str = str(r["n"]) if r["n"] is not None else "-"
+        mae_str = f"{r['ac_mae']:.2f}" if r["ac_mae"] is not None else "-"
+        rmse_str = f"{r['ac_rmse']:.2f}" if r["ac_rmse"] is not None else "-"
         med_str = f"{r['ac_median']:.2f}" if r["ac_median"] is not None else "-"
         bias_str = f"{r['ac_bias']:+.2f}" if r["ac_bias"] is not None else "-"
         pct_str = f"{r['ac_pct']:.2f}%" if r["ac_pct"] is not None else "-"
         over10_str = f"{r['over10']:.1f}%" if r["over10"] is not None else "-"
         lines.append(
-            f"| **{r['run']}** | {res_str} | {r['n']} | {r['ac_mae']:.2f} | {r['ac_rmse']:.2f} | "
+            f"| **{r['run']}** | {res_str} | {n_str} | {mae_str} | {rmse_str} | "
             f"{med_str} | {bias_str} | {pct_str} | {over10_str} | {r['status']} |"
         )
 
@@ -487,6 +656,19 @@ def render_markdown(data: dict) -> str:
         "",
     ])
 
+    colab = data.get("colab_history")
+    if colab:
+        v1 = colab["v1"]
+        v2 = colab["v2_smoke"]
+        lines.extend([
+            "## Colab Historical Development Evidence (v1 & v2)",
+            "",
+            f"Preserved in committed Colab notebook (`{colab['notebook_path']}`):",
+            f"- **v1 Heatmap Regression**: {v1['dataset_line']}. Folds 2–3 completed 100 epochs; Fold 4 early-stopped at epoch {v1['folds']['fold_4']['early_stopping_epoch']} (val_loss {v1['folds']['fold_4']['best_val_loss']:.6f}); Fold 5 early-stopped at epoch {v1['folds']['fold_5']['early_stopping_epoch']} (val_loss {v1['folds']['fold_5']['best_val_loss']:.6f}). Out-of-fold metrics: TAD MAE {v1['tad_mae']:.2f} mm, APAD MAE {v1['apad_mae']:.2f} mm, AC MAE {v1['ac_mae']:.2f} mm (collapsed run).",
+            f"- **v2 DSNT Smoke**: {v2['status']}.",
+            "",
+        ])
+
     return "\n".join(lines) + "\n"
 
 
@@ -499,6 +681,12 @@ def main():
         help="Path to inputs directory",
     )
     parser.add_argument(
+        "--colab-notebook",
+        type=str,
+        default="notebooks/history/Capstone_fetalDataset_history.ipynb",
+        help="Path to Colab history notebook",
+    )
+    parser.add_argument(
         "--out-dir",
         type=str,
         default="docs/results/ac_lab_pc",
@@ -508,10 +696,11 @@ def main():
 
     work_dir = Path(__file__).resolve().parent.parent
     inputs_path = (work_dir / args.inputs_dir).resolve()
+    colab_nb_path = (work_dir / args.colab_notebook).resolve()
     out_path = (work_dir / args.out_dir).resolve()
     out_path.mkdir(parents=True, exist_ok=True)
 
-    data = generate_history_data(inputs_path)
+    data = generate_history_data(inputs_path, colab_notebook_path=colab_nb_path)
 
     json_path = out_path / "history_table.json"
     with open(json_path, "w", encoding="utf-8") as f:
