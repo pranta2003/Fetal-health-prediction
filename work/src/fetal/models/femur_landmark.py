@@ -19,8 +19,8 @@ from fetal import config
 _DEFAULT = object()
 
 
-def build_femur_heatmap_model(encoder_weights: Any = _DEFAULT) -> nn.Module:
-    """Build U-Net with EfficientNet-B4 backbone and 1 heatmap output channel."""
+def build_femur_heatmap_model(encoder_weights: Any = _DEFAULT, classes: int = 1) -> nn.Module:
+    """Build U-Net with EfficientNet-B4 backbone and heatmap output channel(s)."""
     import segmentation_models_pytorch as smp
 
     if encoder_weights is _DEFAULT:
@@ -29,8 +29,36 @@ def build_femur_heatmap_model(encoder_weights: Any = _DEFAULT) -> nn.Module:
         encoder_name="efficientnet-b4",
         encoder_weights=encoder_weights,
         in_channels=3,
-        classes=1,
+        classes=classes,
     )
+
+
+class FemurHRNetHeatmap(nn.Module):
+    """HRNet-W32 model with convolutional heatmap prediction head."""
+
+    def __init__(self, pretrained: bool = True, classes: int = 1) -> None:
+        super().__init__()
+        import timm
+
+        self.backbone = timm.create_model("hrnet_w32", pretrained=pretrained, features_only=True)
+        self.head = nn.Sequential(
+            nn.Conv2d(64, 32, kernel_size=3, padding=1),
+            nn.BatchNorm2d(32),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(32, classes, kernel_size=1),
+        )
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        feats = self.backbone(x)
+        # feat 0 is the highest resolution branch: shape (B, 64, H/2, W/2)
+        h = self.head(feats[0])
+        return F.interpolate(h, size=x.shape[2:], mode="bilinear", align_corners=False)
+
+
+def build_femur_hrnet_model(encoder_weights: Any = _DEFAULT, classes: int = 1) -> nn.Module:
+    """Build HRNet-W32 backbone with heatmap prediction head."""
+    pretrained = (encoder_weights is not None) if encoder_weights is not _DEFAULT else (not config.SMOKE)
+    return FemurHRNetHeatmap(pretrained=pretrained, classes=classes)
 
 
 def build_femur_regression_model(weights: Any = _DEFAULT) -> nn.Module:
@@ -182,6 +210,191 @@ def decode_femur_peaks(
     return torch.stack(batch_pts)
 
 
+def decode_femur_peaks_dark(
+    heatmap: torch.Tensor,
+    S: int | None = None,
+    k: int = 9,
+    min_dist: float = 8.0,
+) -> torch.Tensor:
+    """Decode top-2 peak coordinates using DARK-style (Distribution-Aware Coordinate Representation) 2D Taylor expansion.
+
+    Parameters
+    ----------
+    heatmap : torch.Tensor
+        (B, 1, H, W) heatmap logits or probability map.
+    S : int | None
+        Canvas dimension.
+    k : int
+        Local max pooling kernel size.
+    min_dist : float
+        Minimum spatial separation between the two detected peaks in pixels.
+
+    Returns
+    -------
+    torch.Tensor
+        (B, 2, 2) sub-pixel decoded coordinates in (x, y) space.
+    """
+    B, C, H, W = heatmap.shape
+    assert C == 1, f"Expected 1 channel, got {C}"
+    if S is None:
+        S = H
+
+    if (heatmap < 0).any() or (heatmap > 1.01).any():
+        flat = torch.softmax(heatmap.float().reshape(B, -1), dim=-1)
+        prob = flat.reshape(B, 1, H, W)
+    else:
+        prob = heatmap.float()
+
+    log_p = torch.log(prob + 1e-12)
+    k_blur = torch.tensor([[1, 2, 1], [2, 4, 2], [1, 2, 1]], dtype=torch.float32, device=heatmap.device).view(1, 1, 3, 3) / 16.0
+    log_p_smooth = F.conv2d(log_p, k_blur, padding=1)
+
+    hmax = F.max_pool2d(prob, kernel_size=k, stride=1, padding=k // 2)
+    peaks_mask = (prob == hmax)
+
+    batch_pts = []
+    for b in range(B):
+        p_b = prob[b, 0]
+        lp_b = log_p_smooth[b, 0]
+        mask_b = peaks_mask[b, 0]
+        coords = torch.nonzero(mask_b)
+
+        if len(coords) >= 2:
+            vals = p_b[coords[:, 0], coords[:, 1]]
+            top_count = min(len(coords), 16)
+            top_idx = torch.topk(vals, top_count).indices
+            top_coords = coords[top_idx]
+            p1 = top_coords[0]
+            p2 = None
+            for cand in top_coords[1:]:
+                dist = torch.hypot((cand[0] - p1[0]).float(), (cand[1] - p1[1]).float())
+                if dist >= min_dist:
+                    p2 = cand
+                    break
+            if p2 is None:
+                p2 = top_coords[1]
+            chosen = [p1, p2]
+        else:
+            flat_b = p_b.flatten()
+            idx1 = flat_b.argmax()
+            y1, x1 = idx1 // W, idx1 % W
+            p1 = torch.stack([y1, x1])
+            p_b_masked = p_b.clone()
+            y_min, y_max = max(0, int(y1 - min_dist)), min(H, int(y1 + min_dist + 1))
+            x_min, x_max = max(0, int(x1 - min_dist)), min(W, int(x1 + min_dist + 1))
+            p_b_masked[y_min:y_max, x_min:x_max] = -1.0
+            idx2 = p_b_masked.flatten().argmax()
+            y2, x2 = idx2 // W, idx2 % W
+            p2 = torch.stack([y2, x2])
+            chosen = [p1, p2]
+
+        refined = []
+        for cy, cx in chosen:
+            y, x = int(cy), int(cx)
+            if 1 <= y < H - 1 and 1 <= x < W - 1:
+                # 1st derivatives
+                dx = 0.5 * (lp_b[y, x + 1] - lp_b[y, x - 1])
+                dy = 0.5 * (lp_b[y + 1, x] - lp_b[y - 1, x])
+                # 2nd derivatives (Hessian)
+                dxx = lp_b[y, x + 1] - 2.0 * lp_b[y, x] + lp_b[y, x - 1]
+                dyy = lp_b[y + 1, x] - 2.0 * lp_b[y, x] + lp_b[y - 1, x]
+                dxy = 0.25 * (lp_b[y + 1, x + 1] - lp_b[y + 1, x - 1] - lp_b[y - 1, x + 1] + lp_b[y - 1, x - 1])
+
+                det = dxx * dyy - dxy * dxy
+                if abs(det) > 1e-6 and dxx < 0 and dyy < 0:
+                    shift_x = -(dx * dyy - dy * dxy) / det
+                    shift_y = -(dy * dxx - dx * dxy) / det
+                    shift_x = torch.clamp(shift_x, -0.5, 0.5)
+                    shift_y = torch.clamp(shift_y, -0.5, 0.5)
+                else:
+                    shift_x = -dx / torch.clamp(dxx, max=-1e-4) if dxx < 0 else torch.tensor(0.0, device=lp_b.device)
+                    shift_y = -dy / torch.clamp(dyy, max=-1e-4) if dyy < 0 else torch.tensor(0.0, device=lp_b.device)
+                    shift_x = torch.clamp(shift_x, -0.5, 0.5)
+                    shift_y = torch.clamp(shift_y, -0.5, 0.5)
+                refined.append(torch.stack([float(x) + shift_x, float(y) + shift_y]))
+            else:
+                refined.append(torch.tensor([float(x), float(y)], device=lp_b.device))
+        batch_pts.append(torch.stack(refined))
+
+    return torch.stack(batch_pts)
+
+
+def soft_argmax_2d(logits: torch.Tensor, beta: float = 1.0) -> torch.Tensor:
+    """Compute 2D spatial soft-argmax (integral coordinates) for each channel in logits.
+
+    Parameters
+    ----------
+    logits : torch.Tensor
+        (B, C, H, W) raw model logits.
+    beta : float
+        Softmax temperature parameter.
+
+    Returns
+    -------
+    torch.Tensor
+        (B, C, 2) sub-pixel coordinates in (x, y) space on [0, W-1] x [0, H-1].
+    """
+    B, C, H, W = logits.shape
+    device = logits.device
+    flat = logits.view(B, C, -1)
+    prob = torch.softmax(flat * beta, dim=-1).view(B, C, H, W)
+
+    xs = torch.arange(W, device=device, dtype=torch.float32).view(1, 1, 1, W)
+    ys = torch.arange(H, device=device, dtype=torch.float32).view(1, 1, H, 1)
+
+    pred_x = (prob * xs).sum(dim=(-2, -1))
+    pred_y = (prob * ys).sum(dim=(-2, -1))
+    return torch.stack([pred_x, pred_y], dim=-1)
+
+
+def generate_femur_boneline(pts: torch.Tensor, S: int, sigma: float = 3.0) -> torch.Tensor:
+    """Generate thin Gaussian bone line segment connecting the two femur endpoints.
+
+    Parameters
+    ----------
+    pts : torch.Tensor
+        (B, 2, 2) endpoint coordinates in (x, y) space.
+    S : int
+        Canvas resolution.
+    sigma : float
+        Gaussian falloff width perpendicular to the segment.
+
+    Returns
+    -------
+    torch.Tensor
+        (B, 1, S, S) target bone line heatmap with values in [0, 1].
+    """
+    B = pts.shape[0]
+    device = pts.device
+    xs = torch.arange(S, device=device, dtype=torch.float32).view(1, 1, 1, S)
+    ys = torch.arange(S, device=device, dtype=torch.float32).view(1, 1, S, 1)
+
+    p1_x, p1_y = pts[:, 0, 0:1, None, None], pts[:, 0, 1:2, None, None]
+    p2_x, p2_y = pts[:, 1, 0:1, None, None], pts[:, 1, 1:2, None, None]
+
+    vx = p2_x - p1_x
+    vy = p2_y - p1_y
+    l2 = vx ** 2 + vy ** 2 + 1e-8
+
+    t = torch.clamp(((xs - p1_x) * vx + (ys - p1_y) * vy) / l2, 0.0, 1.0)
+    qx = p1_x + t * vx
+    qy = p1_y + t * vy
+
+    d2 = (xs - qx) ** 2 + (ys - qy) ** 2
+    return torch.exp(-d2 / (2.0 * sigma ** 2))
+
+
+def femur_boneline_loss(
+    logits: torch.Tensor,
+    gt_pts: torch.Tensor,
+    S: int,
+    sigma: float = 3.0,
+) -> torch.Tensor:
+    """Compute binary cross-entropy loss between predicted bone line channel and Gaussian bone line target."""
+    target = generate_femur_boneline(gt_pts, S, sigma=sigma)
+    return F.binary_cross_entropy_with_logits(logits, target)
+
+
 def match_endpoints(pred: torch.Tensor, gt: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
     """Find permutation of pred (B, 2, 2) that minimizes distance to gt (B, 2, 2).
 
@@ -291,6 +504,8 @@ def predict_femur_batch(
     model: nn.Module,
     x: torch.Tensor,
     model_type: str = "heatmap",
+    decode_type: str = "standard",
+    min_dist: float = 8.0,
     tta: bool = True,
     device: str = "cpu",
     S: int = 384,
@@ -300,11 +515,15 @@ def predict_femur_batch(
     Parameters
     ----------
     model : nn.Module
-        Trained model (heatmap U-Net or direct regression).
+        Trained model (heatmap U-Net/HRNet, direct regression, integral, or boneline).
     x : torch.Tensor
         (B, 3, S, S) input image tensor.
     model_type : str
-        'heatmap' or 'regression'.
+        'heatmap', 'regression', 'integral', or 'boneline'.
+    decode_type : str
+        'standard' (local max + center-of-mass) or 'dark' (2D Taylor expansion).
+    min_dist : float
+        Minimum spatial separation between detected peaks in pixels.
     tta : bool
         If True, applies horizontal flip test-time augmentation.
     device : str
@@ -329,7 +548,34 @@ def predict_femur_batch(
                 lo = 0.5 * (lo0 + lo1_back)
             else:
                 lo = lo0
-        return decode_femur_peaks(lo, S=S)
+        if decode_type == "dark":
+            return decode_femur_peaks_dark(lo, S=S, min_dist=min_dist)
+        return decode_femur_peaks(lo, S=S, min_dist=min_dist)
+
+    elif model_type == "boneline":
+        with torch.autocast(device_type=device_type, enabled=(device_type == "cuda")):
+            lo0 = model(x)
+            if tta:
+                lo1 = model(torch.flip(x, dims=[3]))
+                lo1_back = torch.flip(lo1, dims=[3])
+                lo = 0.5 * (lo0 + lo1_back)
+            else:
+                lo = lo0
+        hm0 = lo[:, 0:1]
+        return decode_femur_peaks(hm0, S=S, min_dist=min_dist)
+
+    elif model_type == "integral":
+        with torch.autocast(device_type=device_type, enabled=(device_type == "cuda")):
+            lo0 = model(x)
+            pts0 = soft_argmax_2d(lo0)
+            if not tta:
+                return pts0
+            lo1 = model(torch.flip(x, dims=[3]))
+            pts1 = soft_argmax_2d(lo1)
+            pts1_back = pts1.clone()
+            pts1_back[..., 0] = (x.shape[-1] - 1) - pts1_back[..., 0]
+            matched_1, _ = match_endpoints(pts1_back, pts0)
+            return 0.5 * (pts0 + matched_1)
 
     elif model_type == "regression":
         with torch.autocast(device_type=device_type, enabled=(device_type == "cuda")):

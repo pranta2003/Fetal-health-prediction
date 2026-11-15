@@ -11,11 +11,16 @@ import torch
 from fetal import config
 from fetal.data.femur_dataset import build_femur_data, split_femur_data
 from fetal.models.femur_landmark import (
+    build_femur_hrnet_model,
     decode_femur_peaks,
+    decode_femur_peaks_dark,
+    femur_boneline_loss,
     femur_order_invariant_loss,
+    generate_femur_boneline,
     generate_femur_heatmap,
     match_endpoints,
     predict_femur_batch,
+    soft_argmax_2d,
 )
 from fetal.eval.femur_evaluator import FemurDS, compute_femur_metrics, letterbox_image
 
@@ -164,3 +169,63 @@ def test_split_zero_patient_overlap():
     assert len(dv) == 65, f"Expected 65 validation images, got {len(dv)}"
     assert len(te) == 348, f"Expected 348 test images, got {len(te)}"
     assert len(data) == 864, f"Expected 864 total images, got {len(data)}"
+
+
+def test_dark_decode_subpixel_accuracy():
+    """Verify that DARK Taylor-expansion peak decoder recovers sub-pixel coordinates (< 0.05 px error)."""
+    S = 384
+    gt = torch.tensor([[[120.35, 145.72], [250.81, 280.19]]], dtype=torch.float32)
+    xs = torch.arange(S, dtype=torch.float32).view(1, 1, 1, S)
+    ys = torch.arange(S, dtype=torch.float32).view(1, 1, S, 1)
+
+    g1 = torch.exp(-((xs - gt[:, 0, 0:1, None, None]) ** 2 + (ys - gt[:, 0, 1:2, None, None]) ** 2) / (2.0 * 4.0 ** 2))
+    g2 = torch.exp(-((xs - gt[:, 1, 0:1, None, None]) ** 2 + (ys - gt[:, 1, 1:2, None, None]) ** 2) / (2.0 * 4.0 ** 2))
+    heatmap = g1 + g2
+
+    decoded = decode_femur_peaks_dark(heatmap, S=S, k=9, min_dist=8.0)
+    matched, _ = match_endpoints(decoded, gt)
+    err = (matched - gt).abs().max().item()
+    print(f"DARK subpixel error: {err:.6f} px")
+    assert err < 0.05, f"Expected DARK sub-pixel error < 0.05 px, got {err:.6f} px"
+
+
+def test_soft_argmax_2d_accuracy():
+    """Verify that soft_argmax_2d accurately extracts coordinates from 2-channel logit maps."""
+    S = 384
+    gt = torch.tensor([[[120.35, 145.72], [250.81, 280.19]]], dtype=torch.float32)
+    xs = torch.arange(S, dtype=torch.float32).view(1, 1, 1, S)
+    ys = torch.arange(S, dtype=torch.float32).view(1, 1, S, 1)
+
+    g1 = -((xs - gt[:, 0, 0:1, None, None].squeeze(1)) ** 2 + (ys - gt[:, 0, 1:2, None, None].squeeze(1)) ** 2) / (2.0 * 4.0 ** 2)
+    g2 = -((xs - gt[:, 1, 0:1, None, None].squeeze(1)) ** 2 + (ys - gt[:, 1, 1:2, None, None].squeeze(1)) ** 2) / (2.0 * 4.0 ** 2)
+    logits = torch.cat([g1, g2], dim=1)
+
+    pred = soft_argmax_2d(logits)
+    err = (pred - gt).abs().max().item()
+    print(f"Soft-argmax error: {err:.6f} px")
+    assert err < 0.001, f"Expected soft-argmax error < 0.001 px, got {err:.6f} px"
+
+
+def test_generate_femur_boneline():
+    """Verify that generate_femur_boneline produces valid line segment heatmaps and loss computes correctly."""
+    S = 256
+    pts = torch.tensor([[[50.0, 50.0], [200.0, 200.0]]], dtype=torch.float32)
+    bl = generate_femur_boneline(pts, S=S, sigma=3.0)
+
+    assert bl.shape == (1, 1, S, S)
+    assert bl.min() >= 0.0
+    assert bl.max() <= 1.0
+    # Center of bone segment (125, 125) should have peak response 1.0
+    assert pytest.approx(bl[0, 0, 125, 125].item(), abs=1e-3) == 1.0
+
+    dummy_logits = torch.zeros(1, 1, S, S)
+    loss = femur_boneline_loss(dummy_logits, pts, S=S, sigma=3.0)
+    assert loss.item() > 0.0
+
+
+def test_build_femur_hrnet_model():
+    """Verify HRNet-W32 model creation and forward pass dimensions."""
+    model = build_femur_hrnet_model(encoder_weights=None, classes=1)
+    x = torch.randn(1, 3, 384, 384)
+    out = model(x)
+    assert out.shape == (1, 1, 384, 384)

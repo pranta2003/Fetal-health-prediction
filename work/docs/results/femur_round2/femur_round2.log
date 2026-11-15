@@ -1,0 +1,516 @@
+[{"stream_name":"stdout","time":8.146816794,"data":"Installing segmentation-models-pytorch==0.5.0...\n"}
+,{"stream_name":"stdout","time":8.979837821,"data":"Collecting segmentation-models-pytorch==0.5.0\n"}
+,{"stream_name":"stdout","time":9.059494841,"data":"  Downloading segmentation_models_pytorch-0.5.0-py3-none-any.whl.metadata (17 kB)\n"}
+,{"stream_name":"stdout","time":9.079614733,"data":"Requirement already satisfied: huggingface-hub\u003e=0.24 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (1.33.0)\n"}
+,{"stream_name":"stdout","time":9.080355895,"data":"Requirement already satisfied: numpy\u003e=1.19.3 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (2.1.3)\n"}
+,{"stream_name":"stdout","time":9.081010973,"data":"Requirement already satisfied: pillow\u003e=8 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (13.0.0)\n"}
+,{"stream_name":"stdout","time":9.081632073,"data":"Requirement already satisfied: safetensors\u003e=0.3.1 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (0.8.0)\n"}
+,{"stream_name":"stdout","time":9.08234937,"data":"Requirement already satisfied: timm\u003e=0.9 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (1.0.30)\n"}
+,{"stream_name":"stdout","time":9.083074279,"data":"Requirement already satisfied: torch\u003e=1.8 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (2.11.0+cu130)\n"}
+,{"stream_name":"stdout","time":9.083748025,"data":"Requirement already satisfied: torchvision\u003e=0.9 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (0.26.0+cu130)\n"}
+,{"stream_name":"stdout","time":9.084426436,"data":"Requirement already satisfied: tqdm\u003e=4.42.1 in /usr/local/lib/python3.13/dist-packages (from segmentation-models-pytorch==0.5.0) (4.67.3)\n"}
+,{"stream_name":"stdout","time":9.08703714,"data":"Requirement already satisfied: click\u003c9.0.0,\u003e=8.4.2 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (8.5.0)\n"}
+,{"stream_name":"stdout","time":9.087720935,"data":"Requirement already satisfied: filelock\u003e=3.10.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.2.4)\n"}
+,{"stream_name":"stdout","time":9.088463462,"data":"Requirement already satisfied: fsspec\u003e=2023.5.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (2025.12.0)\n"}
+,{"stream_name":"stdout","time":9.089910952,"data":"Requirement already satisfied: hf-xet\u003c2.0.0,\u003e=1.6.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (1.7.0)\n"}
+,{"stream_name":"stdout","time":9.09063285,"data":"Requirement already satisfied: httpx\u003c1,\u003e=0.23.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (0.28.1)\n"}
+,{"stream_name":"stdout","time":9.091365029,"data":"Requirement already satisfied: packaging\u003e=20.9 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (26.3)\n"}
+,{"stream_name":"stdout","time":9.092118382,"data":"Requirement already satisfied: pyyaml\u003e=5.1 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (6.0.3)\n"}
+,{"stream_name":"stdout","time":9.092996921,"data":"Requirement already satisfied: typing-extensions\u003e=4.1.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.16.0)\n"}
+,{"stream_name":"stdout","time":9.102015231,"data":"Requirement already satisfied: anyio in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (4.15.1)\n"}
+,{"stream_name":"stdout","time":9.102650423,"data":"Requirement already satisfied: certifi in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (2026.10.23)\n"}
+,{"stream_name":"stdout","time":9.103408975,"data":"Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (1.0.9)\n"}
+,{"stream_name":"stdout","time":9.104099637,"data":"Requirement already satisfied: idna in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (3.20)\n"}
+,{"stream_name":"stdout","time":9.106926901,"data":"Requirement already satisfied: h11\u003e=0.16 in /usr/local/lib/python3.13/dist-packages (from httpcore==1.*-\u003ehttpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003e=0.24-\u003esegmentation-models-pytorch==0.5.0) (0.16.0)\n"}
+,{"stream_name":"stdout","time":9.135464598,"data":"Requirement already satisfied: setuptools\u003c82 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (81.0.0)\n"}
+,{"stream_name":"stdout","time":9.136177502,"data":"Requirement already satisfied: sympy\u003e=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.14.0)\n"}
+,{"stream_name":"stdout","time":9.136850327,"data":"Requirement already satisfied: networkx\u003e=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.7)\n"}
+,{"stream_name":"stdout","time":9.137494246,"data":"Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.1.6)\n"}
+,{"stream_name":"stdout","time":9.138797184,"data":"Requirement already satisfied: cuda-toolkit==13.0.2 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.2)\n"}
+,{"stream_name":"stdout","time":9.139857258,"data":"Requirement already satisfied: cuda-bindings\u003c14,\u003e=13.0.3 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.3)\n"}
+,{"stream_name":"stdout","time":9.140701268,"data":"Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (9.19.0.56)\n"}
+,{"stream_name":"stdout","time":9.141574032,"data":"Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (0.8.0)\n"}
+,{"stream_name":"stdout","time":9.142455323,"data":"Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (2.28.9)\n"}
+,{"stream_name":"stdout","time":9.143321454,"data":"Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.4.5)\n"}
+,{"stream_name":"stdout","time":9.144252519,"data":"Requirement already satisfied: triton==3.6.0 in /usr/local/lib/python3.13/dist-packages (from torch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.6.0)\n"}
+,{"stream_name":"stdout","time":9.154816383,"data":"Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.1.0.3)\n"}
+,{"stream_name":"stdout","time":9.155917269,"data":"Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.96)\n"}
+,{"stream_name":"stdout","time":9.157079127,"data":"Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.0.0.61)\n"}
+,{"stream_name":"stdout","time":9.158136094,"data":"Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.15.1.6)\n"}
+,{"stream_name":"stdout","time":9.159274508,"data":"Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.85)\n"}
+,{"stream_name":"stdout","time":9.160339911,"data":"Requirement already satisfied: nvidia-curand==10.4.0.35.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (10.4.0.35)\n"}
+,{"stream_name":"stdout","time":9.161416819,"data":"Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.0.4.66)\n"}
+,{"stream_name":"stdout","time":9.162598291,"data":"Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (12.6.3.3)\n"}
+,{"stream_name":"stdout","time":9.163999365,"data":"Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.88)\n"}
+,{"stream_name":"stdout","time":9.165300555,"data":"Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.88)\n"}
+,{"stream_name":"stdout","time":9.166482661,"data":"Requirement already satisfied: nvidia-nvtx==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (13.0.85)\n"}
+,{"stream_name":"stdout","time":9.175815513,"data":"Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings\u003c14,\u003e=13.0.3-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.8.4)\n"}
+,{"stream_name":"stdout","time":9.201826225,"data":"Requirement already satisfied: mpmath\u003c1.4,\u003e=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy\u003e=1.13.3-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (1.3.0)\n"}
+,{"stream_name":"stdout","time":9.217455144,"data":"Requirement already satisfied: MarkupSafe\u003e=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2-\u003etorch\u003e=1.8-\u003esegmentation-models-pytorch==0.5.0) (3.0.4)\n"}
+,{"stream_name":"stdout","time":9.228460144,"data":"Downloading segmentation_models_pytorch-0.5.0-py3-none-any.whl (154 kB)\n"}
+,{"stream_name":"stdout","time":10.68341034,"data":"Installing collected packages: segmentation-models-pytorch\n"}
+,{"stream_name":"stdout","time":10.894876891,"data":"Successfully installed segmentation-models-pytorch-0.5.0\n"}
+,{"stream_name":"stdout","time":19.5998451,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":19.599890306,"data":"FEMUR ROUND 2: MODERN TECHNIQUES EXPERIMENT (Rows A, R1, R2, R3, R4, R6)\n"}
+,{"stream_name":"stdout","time":19.599965689,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":19.844414393,"data":"Device: cuda\n"}
+,{"stream_name":"stdout","time":19.879209019,"data":"GPU: Tesla T4\n"}
+,{"stream_name":"stdout","time":20.551217712,"data":"Using data directory: /kaggle/input/datasets/prantakumerpandit390/fetal-femur-eval-data\n"}
+,{"stream_name":"stdout","time":20.834242111000002,"data":"Splits: Train = 451 (345 pats), Val = 65 (47 pats), Test = 348 (266 pats)\n"}
+,{"stream_name":"stdout","time":20.83446306,"data":"\n"}
+,{"stream_name":"stdout","time":20.834539376,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":20.834554488,"data":"STARTING Row A (EffNet-B4 1-ch Heatmap, 384px)\n"}
+,{"stream_name":"stdout","time":20.834640237,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":20.834648602,"data":"\n"}
+,{"stream_name":"stdout","time":20.834652381,"data":"\u003e\u003e\u003e Starting row_A (Seed 42, S=384)\n"}
+,{"stream_name":"stderr","time":21.322542985,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":61.933154149,"data":"[row_A s42] Ep 01/35 | loss: 1.0246 | val MAE: 35.799 mm, NME: 1.0623 | 38.4s *\n"}
+,{"stream_name":"stdout","time":78.33750273,"data":"[row_A s42] Ep 02/35 | loss: 0.7027 | val MAE: 1.415 mm, NME: 0.0664 | 16.4s *\n"}
+,{"stream_name":"stdout","time":94.873489056,"data":"[row_A s42] Ep 03/35 | loss: 0.2910 | val MAE: 1.222 mm, NME: 0.0459 | 16.5s *\n"}
+,{"stream_name":"stdout","time":111.398337749,"data":"[row_A s42] Ep 04/35 | loss: 0.2054 | val MAE: 1.556 mm, NME: 0.0645 | 16.5s\n"}
+,{"stream_name":"stdout","time":128.156278627,"data":"[row_A s42] Ep 05/35 | loss: 0.1691 | val MAE: 1.373 mm, NME: 0.0485 | 16.8s\n"}
+,{"stream_name":"stdout","time":145.1533196,"data":"[row_A s42] Ep 06/35 | loss: 0.1506 | val MAE: 2.114 mm, NME: 0.0766 | 17.0s\n"}
+,{"stream_name":"stdout","time":162.441014935,"data":"[row_A s42] Ep 07/35 | loss: 0.1257 | val MAE: 1.300 mm, NME: 0.0559 | 17.3s\n"}
+,{"stream_name":"stdout","time":179.595108178,"data":"[row_A s42] Ep 08/35 | loss: 0.1138 | val MAE: 1.341 mm, NME: 0.0486 | 17.2s\n"}
+,{"stream_name":"stdout","time":196.584013396,"data":"[row_A s42] Ep 09/35 | loss: 0.0980 | val MAE: 1.344 mm, NME: 0.0471 | 17.0s\n"}
+,{"stream_name":"stdout","time":213.605422361,"data":"[row_A s42] Ep 10/35 | loss: 0.0925 | val MAE: 1.344 mm, NME: 0.0472 | 17.0s\n"}
+,{"stream_name":"stdout","time":230.649879126,"data":"[row_A s42] Ep 11/35 | loss: 0.0844 | val MAE: 1.363 mm, NME: 0.0472 | 17.0s\n"}
+,{"stream_name":"stdout","time":230.649940282,"data":"[row_A s42] Early stopping triggered at epoch 11\n"}
+,{"stream_name":"stdout","time":230.64994894,"data":"[row_A s42] Training finished in 207.1s (11 epochs). Best val MAE: 1.222 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":253.986803067,"data":"\n"}
+,{"stream_name":"stdout","time":253.986868617,"data":"\u003e\u003e\u003e Starting row_A (Seed 43, S=384)\n"}
+,{"stream_name":"stdout","time":271.623961298,"data":"[row_A s43] Ep 01/35 | loss: 1.0234 | val MAE: 31.094 mm, NME: 1.0035 | 17.3s *\n"}
+,{"stream_name":"stdout","time":289.063774498,"data":"[row_A s43] Ep 02/35 | loss: 0.5677 | val MAE: 1.817 mm, NME: 0.0770 | 17.4s *\n"}
+,{"stream_name":"stdout","time":306.301877267,"data":"[row_A s43] Ep 03/35 | loss: 0.2751 | val MAE: 1.328 mm, NME: 0.0514 | 17.2s *\n"}
+,{"stream_name":"stdout","time":323.545205402,"data":"[row_A s43] Ep 04/35 | loss: 0.2014 | val MAE: 1.294 mm, NME: 0.0337 | 17.2s *\n"}
+,{"stream_name":"stdout","time":340.778861851,"data":"[row_A s43] Ep 05/35 | loss: 0.1682 | val MAE: 1.261 mm, NME: 0.0402 | 17.2s *\n"}
+,{"stream_name":"stdout","time":357.888040389,"data":"[row_A s43] Ep 06/35 | loss: 0.1446 | val MAE: 1.346 mm, NME: 0.0610 | 17.1s\n"}
+,{"stream_name":"stdout","time":375.099735576,"data":"[row_A s43] Ep 07/35 | loss: 0.1247 | val MAE: 2.800 mm, NME: 0.0556 | 17.2s\n"}
+,{"stream_name":"stdout","time":392.210764788,"data":"[row_A s43] Ep 08/35 | loss: 0.1090 | val MAE: 1.418 mm, NME: 0.0612 | 17.1s\n"}
+,{"stream_name":"stdout","time":409.425143819,"data":"[row_A s43] Ep 09/35 | loss: 0.0953 | val MAE: 1.179 mm, NME: 0.0449 | 17.2s *\n"}
+,{"stream_name":"stdout","time":426.506741918,"data":"[row_A s43] Ep 10/35 | loss: 0.0910 | val MAE: 1.219 mm, NME: 0.0466 | 17.1s\n"}
+,{"stream_name":"stdout","time":443.691295521,"data":"[row_A s43] Ep 11/35 | loss: 0.0813 | val MAE: 1.347 mm, NME: 0.0476 | 17.2s\n"}
+,{"stream_name":"stdout","time":460.814057048,"data":"[row_A s43] Ep 12/35 | loss: 0.0774 | val MAE: 1.242 mm, NME: 0.0459 | 17.1s\n"}
+,{"stream_name":"stdout","time":477.932822962,"data":"[row_A s43] Ep 13/35 | loss: 0.0725 | val MAE: 1.343 mm, NME: 0.0478 | 17.1s\n"}
+,{"stream_name":"stdout","time":495.067582369,"data":"[row_A s43] Ep 14/35 | loss: 0.0648 | val MAE: 1.233 mm, NME: 0.0461 | 17.1s\n"}
+,{"stream_name":"stdout","time":512.200230019,"data":"[row_A s43] Ep 15/35 | loss: 0.0575 | val MAE: 1.270 mm, NME: 0.0459 | 17.1s\n"}
+,{"stream_name":"stdout","time":529.282437153,"data":"[row_A s43] Ep 16/35 | loss: 0.0554 | val MAE: 1.422 mm, NME: 0.0479 | 17.1s\n"}
+,{"stream_name":"stdout","time":546.383148813,"data":"[row_A s43] Ep 17/35 | loss: 0.0520 | val MAE: 1.404 mm, NME: 0.0472 | 17.1s\n"}
+,{"stream_name":"stdout","time":546.383204305,"data":"[row_A s43] Early stopping triggered at epoch 17\n"}
+,{"stream_name":"stdout","time":546.383321453,"data":"[row_A s43] Training finished in 292.1s (17 epochs). Best val MAE: 1.179 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":557.85761905,"data":"\n"}
+,{"stream_name":"stdout","time":557.857671534,"data":"\u003e\u003e\u003e Starting row_A (Seed 44, S=384)\n"}
+,{"stream_name":"stdout","time":575.444940696,"data":"[row_A s44] Ep 01/35 | loss: 0.9968 | val MAE: 2.367 mm, NME: 0.1269 | 17.3s *\n"}
+,{"stream_name":"stdout","time":592.665515897,"data":"[row_A s44] Ep 02/35 | loss: 0.4314 | val MAE: 2.442 mm, NME: 0.0841 | 17.2s\n"}
+,{"stream_name":"stdout","time":609.9939764,"data":"[row_A s44] Ep 03/35 | loss: 0.2813 | val MAE: 1.432 mm, NME: 0.0435 | 17.3s *\n"}
+,{"stream_name":"stdout","time":627.133745031,"data":"[row_A s44] Ep 04/35 | loss: 0.2197 | val MAE: 1.802 mm, NME: 0.0602 | 17.1s\n"}
+,{"stream_name":"stdout","time":644.275048241,"data":"[row_A s44] Ep 05/35 | loss: 0.1806 | val MAE: 1.573 mm, NME: 0.0460 | 17.1s\n"}
+,{"stream_name":"stdout","time":661.371631491,"data":"[row_A s44] Ep 06/35 | loss: 0.1547 | val MAE: 1.452 mm, NME: 0.0622 | 17.1s\n"}
+,{"stream_name":"stdout","time":678.971062513,"data":"[row_A s44] Ep 07/35 | loss: 0.1360 | val MAE: 1.049 mm, NME: 0.0516 | 17.6s *\n"}
+,{"stream_name":"stdout","time":696.161656522,"data":"[row_A s44] Ep 08/35 | loss: 0.1176 | val MAE: 1.500 mm, NME: 0.0463 | 17.2s\n"}
+,{"stream_name":"stdout","time":713.3766329,"data":"[row_A s44] Ep 09/35 | loss: 0.1089 | val MAE: 1.789 mm, NME: 0.0551 | 17.2s\n"}
+,{"stream_name":"stdout","time":730.546128341,"data":"[row_A s44] Ep 10/35 | loss: 0.0977 | val MAE: 1.508 mm, NME: 0.0378 | 17.2s\n"}
+,{"stream_name":"stdout","time":747.683340065,"data":"[row_A s44] Ep 11/35 | loss: 0.0905 | val MAE: 1.362 mm, NME: 0.0420 | 17.1s\n"}
+,{"stream_name":"stdout","time":764.838865995,"data":"[row_A s44] Ep 12/35 | loss: 0.0790 | val MAE: 1.129 mm, NME: 0.0402 | 17.2s\n"}
+,{"stream_name":"stdout","time":781.999117443,"data":"[row_A s44] Ep 13/35 | loss: 0.0731 | val MAE: 1.291 mm, NME: 0.0340 | 17.2s\n"}
+,{"stream_name":"stdout","time":799.117093126,"data":"[row_A s44] Ep 14/35 | loss: 0.0691 | val MAE: 1.289 mm, NME: 0.0332 | 17.1s\n"}
+,{"stream_name":"stdout","time":816.205439861,"data":"[row_A s44] Ep 15/35 | loss: 0.0642 | val MAE: 1.262 mm, NME: 0.0335 | 17.1s\n"}
+,{"stream_name":"stdout","time":816.20547444,"data":"[row_A s44] Early stopping triggered at epoch 15\n"}
+,{"stream_name":"stdout","time":816.205482947,"data":"[row_A s44] Training finished in 258.1s (15 epochs). Best val MAE: 1.049 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":831.518487957,"data":"\n"}
+,{"stream_name":"stdout","time":831.518521196,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":831.519614896,"data":"STARTING Row R1 (HRNet-W32 Heatmap, DARK Decode, 384px)\n"}
+,{"stream_name":"stdout","time":831.519629076,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":831.519634613,"data":"\n"}
+,{"stream_name":"stdout","time":831.519638947,"data":"\u003e\u003e\u003e Starting row_R1 (Seed 42, S=384)\n"}
+,{"stream_name":"stderr","time":834.834257047,"data":"Unexpected keys (downsamp_modules.0.1.num_batches_tracked, downsamp_modules.1.1.num_batches_tracked, downsamp_modules.2.1.num_batches_tracked, final_layer.1.num_batches_tracked, downsamp_modules.0.0.bias, downsamp_modules.0.0.weight, downsamp_modules.0.1.bias, downsamp_modules.0.1.running_mean, downsamp_modules.0.1.running_var, downsamp_modules.0.1.weight, downsamp_modules.1.0.bias, downsamp_modules.1.0.weight, downsamp_modules.1.1.bias, downsamp_modules.1.1.running_mean, downsamp_modules.1.1.running_var, downsamp_modules.1.1.weight, downsamp_modules.2.0.bias, downsamp_modules.2.0.weight, downsamp_modules.2.1.bias, downsamp_modules.2.1.running_mean, downsamp_modules.2.1.running_var, downsamp_modules.2.1.weight, final_layer.0.bias, final_layer.0.weight, final_layer.1.bias, final_layer.1.running_mean, final_layer.1.running_var, final_layer.1.weight, classifier.bias, classifier.weight) found while loading pretrained weights. This may be expected if model is being adapted.\n"}
+,{"stream_name":"stdout","time":845.513745126,"data":"[row_R1 s42] Ep 01/35 | loss: 1.2598 | val MAE: 33.249 mm, NME: 0.8845 | 10.6s *\n"}
+,{"stream_name":"stdout","time":854.94105311,"data":"[row_R1 s42] Ep 02/35 | loss: 1.1428 | val MAE: 33.320 mm, NME: 0.9712 | 9.4s\n"}
+,{"stream_name":"stdout","time":864.546851331,"data":"[row_R1 s42] Ep 03/35 | loss: 1.0730 | val MAE: 35.964 mm, NME: 0.8473 | 9.6s\n"}
+,{"stream_name":"stdout","time":874.04516342,"data":"[row_R1 s42] Ep 04/35 | loss: 1.0162 | val MAE: 34.276 mm, NME: 0.9863 | 9.5s\n"}
+,{"stream_name":"stdout","time":883.912110135,"data":"[row_R1 s42] Ep 05/35 | loss: 0.9716 | val MAE: 28.878 mm, NME: 0.8337 | 9.9s *\n"}
+,{"stream_name":"stdout","time":893.779852778,"data":"[row_R1 s42] Ep 06/35 | loss: 0.9349 | val MAE: 24.701 mm, NME: 0.7378 | 9.9s *\n"}
+,{"stream_name":"stdout","time":903.315120763,"data":"[row_R1 s42] Ep 07/35 | loss: 0.9030 | val MAE: 26.642 mm, NME: 0.7441 | 9.5s\n"}
+,{"stream_name":"stdout","time":912.893650352,"data":"[row_R1 s42] Ep 08/35 | loss: 0.8753 | val MAE: 24.870 mm, NME: 0.6679 | 9.6s\n"}
+,{"stream_name":"stdout","time":922.925638104,"data":"[row_R1 s42] Ep 09/35 | loss: 0.8511 | val MAE: 23.206 mm, NME: 0.6961 | 10.0s *\n"}
+,{"stream_name":"stdout","time":932.622513573,"data":"[row_R1 s42] Ep 10/35 | loss: 0.8292 | val MAE: 23.409 mm, NME: 0.6455 | 9.7s\n"}
+,{"stream_name":"stdout","time":942.4215964,"data":"[row_R1 s42] Ep 11/35 | loss: 0.8082 | val MAE: 22.817 mm, NME: 0.6321 | 9.8s *\n"}
+,{"stream_name":"stdout","time":951.872082346,"data":"[row_R1 s42] Ep 12/35 | loss: 0.7905 | val MAE: 24.332 mm, NME: 0.6076 | 9.5s\n"}
+,{"stream_name":"stdout","time":961.389863969,"data":"[row_R1 s42] Ep 13/35 | loss: 0.7761 | val MAE: 23.361 mm, NME: 0.6423 | 9.5s\n"}
+,{"stream_name":"stdout","time":971.191722619,"data":"[row_R1 s42] Ep 14/35 | loss: 0.7601 | val MAE: 20.421 mm, NME: 0.5964 | 9.8s *\n"}
+,{"stream_name":"stdout","time":980.734660795,"data":"[row_R1 s42] Ep 15/35 | loss: 0.7476 | val MAE: 22.681 mm, NME: 0.6272 | 9.5s\n"}
+,{"stream_name":"stdout","time":990.621030593,"data":"[row_R1 s42] Ep 16/35 | loss: 0.7350 | val MAE: 19.722 mm, NME: 0.6036 | 9.9s *\n"}
+,{"stream_name":"stdout","time":1000.315274468,"data":"[row_R1 s42] Ep 17/35 | loss: 0.7231 | val MAE: 28.003 mm, NME: 0.6651 | 9.7s\n"}
+,{"stream_name":"stdout","time":1009.786096544,"data":"[row_R1 s42] Ep 18/35 | loss: 0.7088 | val MAE: 22.677 mm, NME: 0.6539 | 9.5s\n"}
+,{"stream_name":"stdout","time":1019.212114042,"data":"[row_R1 s42] Ep 19/35 | loss: 0.6887 | val MAE: 20.055 mm, NME: 0.6232 | 9.4s\n"}
+,{"stream_name":"stdout","time":1028.821509879,"data":"[row_R1 s42] Ep 20/35 | loss: 0.6674 | val MAE: 20.011 mm, NME: 0.6070 | 9.6s\n"}
+,{"stream_name":"stdout","time":1038.461475217,"data":"[row_R1 s42] Ep 21/35 | loss: 0.6501 | val MAE: 24.973 mm, NME: 0.6042 | 9.6s\n"}
+,{"stream_name":"stdout","time":1048.191736205,"data":"[row_R1 s42] Ep 22/35 | loss: 0.6358 | val MAE: 21.261 mm, NME: 0.5829 | 9.7s\n"}
+,{"stream_name":"stdout","time":1058.311202203,"data":"[row_R1 s42] Ep 23/35 | loss: 0.6303 | val MAE: 18.424 mm, NME: 0.5373 | 10.1s *\n"}
+,{"stream_name":"stdout","time":1068.11578784,"data":"[row_R1 s42] Ep 24/35 | loss: 0.6213 | val MAE: 21.120 mm, NME: 0.5580 | 9.8s\n"}
+,{"stream_name":"stdout","time":1077.827589181,"data":"[row_R1 s42] Ep 25/35 | loss: 0.6193 | val MAE: 21.710 mm, NME: 0.5675 | 9.7s\n"}
+,{"stream_name":"stdout","time":1087.597409755,"data":"[row_R1 s42] Ep 26/35 | loss: 0.6124 | val MAE: 19.511 mm, NME: 0.5608 | 9.8s\n"}
+,{"stream_name":"stdout","time":1097.340599814,"data":"[row_R1 s42] Ep 27/35 | loss: 0.6100 | val MAE: 21.066 mm, NME: 0.5260 | 9.7s\n"}
+,{"stream_name":"stdout","time":1107.060029038,"data":"[row_R1 s42] Ep 28/35 | loss: 0.6053 | val MAE: 20.630 mm, NME: 0.5167 | 9.7s\n"}
+,{"stream_name":"stdout","time":1116.918333314,"data":"[row_R1 s42] Ep 29/35 | loss: 0.5988 | val MAE: 20.515 mm, NME: 0.5313 | 9.9s\n"}
+,{"stream_name":"stdout","time":1126.843568056,"data":"[row_R1 s42] Ep 30/35 | loss: 0.5972 | val MAE: 20.761 mm, NME: 0.5166 | 9.9s\n"}
+,{"stream_name":"stdout","time":1136.586844394,"data":"[row_R1 s42] Ep 31/35 | loss: 0.5944 | val MAE: 20.910 mm, NME: 0.4846 | 9.7s\n"}
+,{"stream_name":"stdout","time":1136.58689415,"data":"[row_R1 s42] Early stopping triggered at epoch 31\n"}
+,{"stream_name":"stdout","time":1136.587011426,"data":"[row_R1 s42] Training finished in 301.7s (31 epochs). Best val MAE: 18.424 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":1149.148929246,"data":"\n"}
+,{"stream_name":"stdout","time":1149.149071643,"data":"\u003e\u003e\u003e Starting row_R1 (Seed 43, S=384)\n"}
+,{"stream_name":"stderr","time":1149.891227996,"data":"Unexpected keys (downsamp_modules.0.1.num_batches_tracked, downsamp_modules.1.1.num_batches_tracked, downsamp_modules.2.1.num_batches_tracked, final_layer.1.num_batches_tracked, downsamp_modules.0.0.bias, downsamp_modules.0.0.weight, downsamp_modules.0.1.bias, downsamp_modules.0.1.running_mean, downsamp_modules.0.1.running_var, downsamp_modules.0.1.weight, downsamp_modules.1.0.bias, downsamp_modules.1.0.weight, downsamp_modules.1.1.bias, downsamp_modules.1.1.running_mean, downsamp_modules.1.1.running_var, downsamp_modules.1.1.weight, downsamp_modules.2.0.bias, downsamp_modules.2.0.weight, downsamp_modules.2.1.bias, downsamp_modules.2.1.running_mean, downsamp_modules.2.1.running_var, downsamp_modules.2.1.weight, final_layer.0.bias, final_layer.0.weight, final_layer.1.bias, final_layer.1.running_mean, final_layer.1.running_var, final_layer.1.weight, classifier.bias, classifier.weight) found while loading pretrained weights. This may be expected if model is being adapted.\n"}
+,{"stream_name":"stdout","time":1160.019420564,"data":"[row_R1 s43] Ep 01/35 | loss: 1.2249 | val MAE: 29.995 mm, NME: 0.8929 | 10.0s *\n"}
+,{"stream_name":"stdout","time":1169.798867967,"data":"[row_R1 s43] Ep 02/35 | loss: 1.1129 | val MAE: 32.746 mm, NME: 0.8716 | 9.8s\n"}
+,{"stream_name":"stdout","time":1179.664787821,"data":"[row_R1 s43] Ep 03/35 | loss: 1.0407 | val MAE: 30.606 mm, NME: 0.8473 | 9.9s\n"}
+,{"stream_name":"stdout","time":1189.362596084,"data":"[row_R1 s43] Ep 04/35 | loss: 0.9820 | val MAE: 30.628 mm, NME: 0.8166 | 9.7s\n"}
+,{"stream_name":"stdout","time":1199.550363748,"data":"[row_R1 s43] Ep 05/35 | loss: 0.9348 | val MAE: 26.820 mm, NME: 0.6857 | 10.2s *\n"}
+,{"stream_name":"stdout","time":1209.718202762,"data":"[row_R1 s43] Ep 06/35 | loss: 0.8972 | val MAE: 26.070 mm, NME: 0.6438 | 10.2s *\n"}
+,{"stream_name":"stdout","time":1220.020405612,"data":"[row_R1 s43] Ep 07/35 | loss: 0.8646 | val MAE: 21.821 mm, NME: 0.5824 | 10.3s *\n"}
+,{"stream_name":"stdout","time":1230.13399358,"data":"[row_R1 s43] Ep 08/35 | loss: 0.8379 | val MAE: 24.664 mm, NME: 0.7002 | 10.1s\n"}
+,{"stream_name":"stdout","time":1240.25997475,"data":"[row_R1 s43] Ep 09/35 | loss: 0.8132 | val MAE: 24.629 mm, NME: 0.6943 | 10.1s\n"}
+,{"stream_name":"stdout","time":1250.328029158,"data":"[row_R1 s43] Ep 10/35 | loss: 0.7937 | val MAE: 22.924 mm, NME: 0.6274 | 10.1s\n"}
+,{"stream_name":"stdout","time":1260.388536207,"data":"[row_R1 s43] Ep 11/35 | loss: 0.7758 | val MAE: 22.909 mm, NME: 0.6752 | 10.1s\n"}
+,{"stream_name":"stdout","time":1270.795530022,"data":"[row_R1 s43] Ep 12/35 | loss: 0.7599 | val MAE: 20.957 mm, NME: 0.6890 | 10.4s *\n"}
+,{"stream_name":"stdout","time":1280.774017662,"data":"[row_R1 s43] Ep 13/35 | loss: 0.7458 | val MAE: 22.344 mm, NME: 0.6787 | 10.0s\n"}
+,{"stream_name":"stdout","time":1290.720740275,"data":"[row_R1 s43] Ep 14/35 | loss: 0.7330 | val MAE: 21.506 mm, NME: 0.6816 | 9.9s\n"}
+,{"stream_name":"stdout","time":1300.913487138,"data":"[row_R1 s43] Ep 15/35 | loss: 0.7207 | val MAE: 27.719 mm, NME: 0.6847 | 10.2s\n"}
+,{"stream_name":"stdout","time":1311.494658604,"data":"[row_R1 s43] Ep 16/35 | loss: 0.7087 | val MAE: 19.917 mm, NME: 0.6115 | 10.6s *\n"}
+,{"stream_name":"stdout","time":1321.572881313,"data":"[row_R1 s43] Ep 17/35 | loss: 0.6932 | val MAE: 21.740 mm, NME: 0.5621 | 10.1s\n"}
+,{"stream_name":"stdout","time":1331.579322542,"data":"[row_R1 s43] Ep 18/35 | loss: 0.6695 | val MAE: 20.834 mm, NME: 0.5758 | 10.0s\n"}
+,{"stream_name":"stdout","time":1341.619663813,"data":"[row_R1 s43] Ep 19/35 | loss: 0.6451 | val MAE: 19.986 mm, NME: 0.5434 | 10.0s\n"}
+,{"stream_name":"stdout","time":1351.471577342,"data":"[row_R1 s43] Ep 20/35 | loss: 0.6282 | val MAE: 22.621 mm, NME: 0.5826 | 9.9s\n"}
+,{"stream_name":"stdout","time":1361.458348019,"data":"[row_R1 s43] Ep 21/35 | loss: 0.6197 | val MAE: 20.892 mm, NME: 0.5586 | 10.0s\n"}
+,{"stream_name":"stdout","time":1371.747734088,"data":"[row_R1 s43] Ep 22/35 | loss: 0.6136 | val MAE: 19.091 mm, NME: 0.5719 | 10.3s *\n"}
+,{"stream_name":"stdout","time":1382.135181473,"data":"[row_R1 s43] Ep 23/35 | loss: 0.6057 | val MAE: 18.885 mm, NME: 0.5330 | 10.4s *\n"}
+,{"stream_name":"stdout","time":1392.409725242,"data":"[row_R1 s43] Ep 24/35 | loss: 0.6019 | val MAE: 17.685 mm, NME: 0.5361 | 10.3s *\n"}
+,{"stream_name":"stdout","time":1402.48816227,"data":"[row_R1 s43] Ep 25/35 | loss: 0.5984 | val MAE: 20.044 mm, NME: 0.5479 | 10.1s\n"}
+,{"stream_name":"stdout","time":1412.346449798,"data":"[row_R1 s43] Ep 26/35 | loss: 0.5930 | val MAE: 20.384 mm, NME: 0.5382 | 9.9s\n"}
+,{"stream_name":"stdout","time":1422.427692807,"data":"[row_R1 s43] Ep 27/35 | loss: 0.5921 | val MAE: 18.348 mm, NME: 0.5247 | 10.1s\n"}
+,{"stream_name":"stdout","time":1432.48566577,"data":"[row_R1 s43] Ep 28/35 | loss: 0.5873 | val MAE: 18.461 mm, NME: 0.5179 | 10.1s\n"}
+,{"stream_name":"stdout","time":1442.822451947,"data":"[row_R1 s43] Ep 29/35 | loss: 0.5813 | val MAE: 15.163 mm, NME: 0.4686 | 10.3s *\n"}
+,{"stream_name":"stdout","time":1452.723817297,"data":"[row_R1 s43] Ep 30/35 | loss: 0.5821 | val MAE: 19.182 mm, NME: 0.5198 | 9.9s\n"}
+,{"stream_name":"stdout","time":1462.920382468,"data":"[row_R1 s43] Ep 31/35 | loss: 0.5766 | val MAE: 17.786 mm, NME: 0.5204 | 10.2s\n"}
+,{"stream_name":"stdout","time":1472.88308703,"data":"[row_R1 s43] Ep 32/35 | loss: 0.5752 | val MAE: 18.379 mm, NME: 0.5026 | 10.0s\n"}
+,{"stream_name":"stdout","time":1482.989237577,"data":"[row_R1 s43] Ep 33/35 | loss: 0.5699 | val MAE: 18.500 mm, NME: 0.5038 | 10.1s\n"}
+,{"stream_name":"stdout","time":1492.887073375,"data":"[row_R1 s43] Ep 34/35 | loss: 0.5704 | val MAE: 16.969 mm, NME: 0.5451 | 9.9s\n"}
+,{"stream_name":"stdout","time":1503.046009248,"data":"[row_R1 s43] Ep 35/35 | loss: 0.5655 | val MAE: 16.959 mm, NME: 0.5108 | 10.2s\n"}
+,{"stream_name":"stdout","time":1503.046063759,"data":"[row_R1 s43] Training finished in 353.1s (35 epochs). Best val MAE: 15.163 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":1515.818353881,"data":"\n"}
+,{"stream_name":"stdout","time":1515.818399567,"data":"\u003e\u003e\u003e Starting row_R1 (Seed 44, S=384)\n"}
+,{"stream_name":"stderr","time":1516.543176642,"data":"Unexpected keys (downsamp_modules.0.1.num_batches_tracked, downsamp_modules.1.1.num_batches_tracked, downsamp_modules.2.1.num_batches_tracked, final_layer.1.num_batches_tracked, downsamp_modules.0.0.bias, downsamp_modules.0.0.weight, downsamp_modules.0.1.bias, downsamp_modules.0.1.running_mean, downsamp_modules.0.1.running_var, downsamp_modules.0.1.weight, downsamp_modules.1.0.bias, downsamp_modules.1.0.weight, downsamp_modules.1.1.bias, downsamp_modules.1.1.running_mean, downsamp_modules.1.1.running_var, downsamp_modules.1.1.weight, downsamp_modules.2.0.bias, downsamp_modules.2.0.weight, downsamp_modules.2.1.bias, downsamp_modules.2.1.running_mean, downsamp_modules.2.1.running_var, downsamp_modules.2.1.weight, final_layer.0.bias, final_layer.0.weight, final_layer.1.bias, final_layer.1.running_mean, final_layer.1.running_var, final_layer.1.weight, classifier.bias, classifier.weight) found while loading pretrained weights. This may be expected if model is being adapted.\n"}
+,{"stream_name":"stdout","time":1526.835803598,"data":"[row_R1 s44] Ep 01/35 | loss: 1.3312 | val MAE: 38.363 mm, NME: 1.0375 | 10.2s *\n"}
+,{"stream_name":"stdout","time":1536.924344589,"data":"[row_R1 s44] Ep 02/35 | loss: 1.2020 | val MAE: 40.681 mm, NME: 1.0504 | 10.1s\n"}
+,{"stream_name":"stdout","time":1547.42704982,"data":"[row_R1 s44] Ep 03/35 | loss: 1.1301 | val MAE: 34.190 mm, NME: 1.2411 | 10.5s *\n"}
+,{"stream_name":"stdout","time":1557.64271094,"data":"[row_R1 s44] Ep 04/35 | loss: 1.0704 | val MAE: 47.192 mm, NME: 1.1185 | 10.2s\n"}
+,{"stream_name":"stdout","time":1567.873973183,"data":"[row_R1 s44] Ep 05/35 | loss: 1.0180 | val MAE: 44.610 mm, NME: 1.0429 | 10.2s\n"}
+,{"stream_name":"stdout","time":1578.479429526,"data":"[row_R1 s44] Ep 06/35 | loss: 0.9736 | val MAE: 33.901 mm, NME: 0.9343 | 10.6s *\n"}
+,{"stream_name":"stdout","time":1588.741411666,"data":"[row_R1 s44] Ep 07/35 | loss: 0.9373 | val MAE: 35.995 mm, NME: 0.8953 | 10.3s\n"}
+,{"stream_name":"stdout","time":1598.937276856,"data":"[row_R1 s44] Ep 08/35 | loss: 0.9071 | val MAE: 35.155 mm, NME: 0.8994 | 10.2s\n"}
+,{"stream_name":"stdout","time":1609.486043764,"data":"[row_R1 s44] Ep 09/35 | loss: 0.8784 | val MAE: 30.552 mm, NME: 0.8417 | 10.5s *\n"}
+,{"stream_name":"stdout","time":1620.114677321,"data":"[row_R1 s44] Ep 10/35 | loss: 0.8537 | val MAE: 27.276 mm, NME: 0.7638 | 10.6s *\n"}
+,{"stream_name":"stdout","time":1630.454870734,"data":"[row_R1 s44] Ep 11/35 | loss: 0.8325 | val MAE: 30.714 mm, NME: 0.8284 | 10.3s\n"}
+,{"stream_name":"stdout","time":1640.859451531,"data":"[row_R1 s44] Ep 12/35 | loss: 0.8151 | val MAE: 27.211 mm, NME: 0.7338 | 10.4s *\n"}
+,{"stream_name":"stdout","time":1651.485656713,"data":"[row_R1 s44] Ep 13/35 | loss: 0.7977 | val MAE: 25.077 mm, NME: 0.7089 | 10.6s *\n"}
+,{"stream_name":"stdout","time":1661.680805368,"data":"[row_R1 s44] Ep 14/35 | loss: 0.7817 | val MAE: 25.320 mm, NME: 0.6868 | 10.2s\n"}
+,{"stream_name":"stdout","time":1671.845671792,"data":"[row_R1 s44] Ep 15/35 | loss: 0.7662 | val MAE: 25.463 mm, NME: 0.7442 | 10.2s\n"}
+,{"stream_name":"stdout","time":1682.3410226,"data":"[row_R1 s44] Ep 16/35 | loss: 0.7515 | val MAE: 21.298 mm, NME: 0.6386 | 10.5s *\n"}
+,{"stream_name":"stdout","time":1692.567147288,"data":"[row_R1 s44] Ep 17/35 | loss: 0.7385 | val MAE: 23.337 mm, NME: 0.6332 | 10.2s\n"}
+,{"stream_name":"stdout","time":1702.68450405,"data":"[row_R1 s44] Ep 18/35 | loss: 0.7236 | val MAE: 21.651 mm, NME: 0.6484 | 10.1s\n"}
+,{"stream_name":"stdout","time":1712.85367225,"data":"[row_R1 s44] Ep 19/35 | loss: 0.7096 | val MAE: 25.052 mm, NME: 0.6363 | 10.2s\n"}
+,{"stream_name":"stdout","time":1723.093449314,"data":"[row_R1 s44] Ep 20/35 | loss: 0.6895 | val MAE: 25.601 mm, NME: 0.6583 | 10.2s\n"}
+,{"stream_name":"stdout","time":1733.640719461,"data":"[row_R1 s44] Ep 21/35 | loss: 0.6704 | val MAE: 20.420 mm, NME: 0.5871 | 10.5s *\n"}
+,{"stream_name":"stdout","time":1743.866839905,"data":"[row_R1 s44] Ep 22/35 | loss: 0.6473 | val MAE: 21.115 mm, NME: 0.5950 | 10.2s\n"}
+,{"stream_name":"stdout","time":1754.44926603,"data":"[row_R1 s44] Ep 23/35 | loss: 0.6355 | val MAE: 19.419 mm, NME: 0.5477 | 10.6s *\n"}
+,{"stream_name":"stdout","time":1764.782593631,"data":"[row_R1 s44] Ep 24/35 | loss: 0.6216 | val MAE: 18.865 mm, NME: 0.5144 | 10.3s *\n"}
+,{"stream_name":"stdout","time":1775.048359449,"data":"[row_R1 s44] Ep 25/35 | loss: 0.6125 | val MAE: 19.285 mm, NME: 0.5338 | 10.3s\n"}
+,{"stream_name":"stdout","time":1785.343177958,"data":"[row_R1 s44] Ep 26/35 | loss: 0.6077 | val MAE: 19.679 mm, NME: 0.5225 | 10.3s\n"}
+,{"stream_name":"stdout","time":1795.627276883,"data":"[row_R1 s44] Ep 27/35 | loss: 0.5973 | val MAE: 20.289 mm, NME: 0.5317 | 10.3s\n"}
+,{"stream_name":"stdout","time":1805.865123987,"data":"[row_R1 s44] Ep 28/35 | loss: 0.5924 | val MAE: 20.263 mm, NME: 0.5078 | 10.2s\n"}
+,{"stream_name":"stdout","time":1816.415883779,"data":"[row_R1 s44] Ep 29/35 | loss: 0.5862 | val MAE: 17.280 mm, NME: 0.4815 | 10.6s *\n"}
+,{"stream_name":"stdout","time":1826.629286645,"data":"[row_R1 s44] Ep 30/35 | loss: 0.5824 | val MAE: 18.202 mm, NME: 0.5003 | 10.2s\n"}
+,{"stream_name":"stdout","time":1836.959711585,"data":"[row_R1 s44] Ep 31/35 | loss: 0.5732 | val MAE: 17.938 mm, NME: 0.5178 | 10.3s\n"}
+,{"stream_name":"stdout","time":1847.598395756,"data":"[row_R1 s44] Ep 32/35 | loss: 0.5703 | val MAE: 17.000 mm, NME: 0.5268 | 10.6s *\n"}
+,{"stream_name":"stdout","time":1857.985184446,"data":"[row_R1 s44] Ep 33/35 | loss: 0.5672 | val MAE: 17.944 mm, NME: 0.5187 | 10.4s\n"}
+,{"stream_name":"stdout","time":1868.232569946,"data":"[row_R1 s44] Ep 34/35 | loss: 0.5599 | val MAE: 17.355 mm, NME: 0.5073 | 10.2s\n"}
+,{"stream_name":"stdout","time":1878.412645831,"data":"[row_R1 s44] Ep 35/35 | loss: 0.5561 | val MAE: 17.419 mm, NME: 0.5150 | 10.2s\n"}
+,{"stream_name":"stdout","time":1878.412705306,"data":"[row_R1 s44] Training finished in 361.8s (35 epochs). Best val MAE: 17.000 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":1895.533613821,"data":"\n"}
+,{"stream_name":"stdout","time":1895.533661879,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":1895.53368502,"data":"STARTING Row R2 (Row-A Net, Integral Soft-Argmax, 384px)\n"}
+,{"stream_name":"stdout","time":1895.53374468,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":1895.534004931,"data":"\n"}
+,{"stream_name":"stdout","time":1895.53401666,"data":"\u003e\u003e\u003e Starting row_R2 (Seed 42, S=384)\n"}
+,{"stream_name":"stdout","time":1913.214640185,"data":"[row_R2 s42] Ep 01/35 | loss: 3.3152 | val MAE: 16.428 mm, NME: 0.4917 | 17.4s *\n"}
+,{"stream_name":"stdout","time":1930.680916599,"data":"[row_R2 s42] Ep 02/35 | loss: 2.3326 | val MAE: 10.879 mm, NME: 0.3082 | 17.5s *\n"}
+,{"stream_name":"stdout","time":1948.092049533,"data":"[row_R2 s42] Ep 03/35 | loss: 1.6361 | val MAE: 6.114 mm, NME: 0.2338 | 17.4s *\n"}
+,{"stream_name":"stdout","time":1965.152259831,"data":"[row_R2 s42] Ep 04/35 | loss: 1.0744 | val MAE: 6.399 mm, NME: 0.1700 | 17.1s\n"}
+,{"stream_name":"stdout","time":1982.421467643,"data":"[row_R2 s42] Ep 05/35 | loss: 0.7845 | val MAE: 3.746 mm, NME: 0.1196 | 17.3s *\n"}
+,{"stream_name":"stdout","time":1999.489946652,"data":"[row_R2 s42] Ep 06/35 | loss: 0.5466 | val MAE: 3.906 mm, NME: 0.1014 | 17.1s\n"}
+,{"stream_name":"stdout","time":2016.639978436,"data":"[row_R2 s42] Ep 07/35 | loss: 0.4644 | val MAE: 3.897 mm, NME: 0.1009 | 17.1s\n"}
+,{"stream_name":"stdout","time":2033.908094688,"data":"[row_R2 s42] Ep 08/35 | loss: 0.3641 | val MAE: 2.057 mm, NME: 0.0771 | 17.3s *\n"}
+,{"stream_name":"stdout","time":2051.110258751,"data":"[row_R2 s42] Ep 09/35 | loss: 0.3285 | val MAE: 1.795 mm, NME: 0.0776 | 17.2s *\n"}
+,{"stream_name":"stdout","time":2068.192674551,"data":"[row_R2 s42] Ep 10/35 | loss: 0.2906 | val MAE: 2.156 mm, NME: 0.0727 | 17.1s\n"}
+,{"stream_name":"stdout","time":2085.286324632,"data":"[row_R2 s42] Ep 11/35 | loss: 0.2552 | val MAE: 6.667 mm, NME: 0.1308 | 17.1s\n"}
+,{"stream_name":"stdout","time":2102.432753195,"data":"[row_R2 s42] Ep 12/35 | loss: 0.2702 | val MAE: 3.366 mm, NME: 0.0801 | 17.1s\n"}
+,{"stream_name":"stdout","time":2119.427539717,"data":"[row_R2 s42] Ep 13/35 | loss: 0.2825 | val MAE: 2.734 mm, NME: 0.0704 | 17.0s\n"}
+,{"stream_name":"stdout","time":2136.48020208,"data":"[row_R2 s42] Ep 14/35 | loss: 0.2121 | val MAE: 2.180 mm, NME: 0.0645 | 17.1s\n"}
+,{"stream_name":"stdout","time":2153.638221144,"data":"[row_R2 s42] Ep 15/35 | loss: 0.1872 | val MAE: 2.069 mm, NME: 0.0564 | 17.2s\n"}
+,{"stream_name":"stdout","time":2170.706507636,"data":"[row_R2 s42] Ep 16/35 | loss: 0.1678 | val MAE: 2.645 mm, NME: 0.0603 | 17.1s\n"}
+,{"stream_name":"stdout","time":2187.956043894,"data":"[row_R2 s42] Ep 17/35 | loss: 0.1469 | val MAE: 1.607 mm, NME: 0.0460 | 17.2s *\n"}
+,{"stream_name":"stdout","time":2204.976463429,"data":"[row_R2 s42] Ep 18/35 | loss: 0.1460 | val MAE: 1.823 mm, NME: 0.0474 | 17.0s\n"}
+,{"stream_name":"stdout","time":2222.134330778,"data":"[row_R2 s42] Ep 19/35 | loss: 0.1415 | val MAE: 2.116 mm, NME: 0.0575 | 17.2s\n"}
+,{"stream_name":"stdout","time":2239.354068076,"data":"[row_R2 s42] Ep 20/35 | loss: 0.1460 | val MAE: 1.469 mm, NME: 0.0415 | 17.2s *\n"}
+,{"stream_name":"stdout","time":2256.351041417,"data":"[row_R2 s42] Ep 21/35 | loss: 0.1568 | val MAE: 1.924 mm, NME: 0.0525 | 17.0s\n"}
+,{"stream_name":"stdout","time":2273.423070325,"data":"[row_R2 s42] Ep 22/35 | loss: 0.2041 | val MAE: 3.634 mm, NME: 0.0685 | 17.1s\n"}
+,{"stream_name":"stdout","time":2290.485959701,"data":"[row_R2 s42] Ep 23/35 | loss: 0.1637 | val MAE: 2.421 mm, NME: 0.0596 | 17.1s\n"}
+,{"stream_name":"stdout","time":2307.479181917,"data":"[row_R2 s42] Ep 24/35 | loss: 0.1389 | val MAE: 2.033 mm, NME: 0.0537 | 17.0s\n"}
+,{"stream_name":"stdout","time":2324.558472003,"data":"[row_R2 s42] Ep 25/35 | loss: 0.1423 | val MAE: 2.235 mm, NME: 0.0534 | 17.1s\n"}
+,{"stream_name":"stdout","time":2341.577349615,"data":"[row_R2 s42] Ep 26/35 | loss: 0.1322 | val MAE: 1.530 mm, NME: 0.0480 | 17.0s\n"}
+,{"stream_name":"stdout","time":2358.597943104,"data":"[row_R2 s42] Ep 27/35 | loss: 0.1144 | val MAE: 1.666 mm, NME: 0.0467 | 17.0s\n"}
+,{"stream_name":"stdout","time":2375.810019629,"data":"[row_R2 s42] Ep 28/35 | loss: 0.1064 | val MAE: 1.322 mm, NME: 0.0406 | 17.2s *\n"}
+,{"stream_name":"stdout","time":2392.82750421,"data":"[row_R2 s42] Ep 29/35 | loss: 0.1086 | val MAE: 1.841 mm, NME: 0.0462 | 17.0s\n"}
+,{"stream_name":"stdout","time":2409.842529075,"data":"[row_R2 s42] Ep 30/35 | loss: 0.1110 | val MAE: 1.381 mm, NME: 0.0398 | 17.0s\n"}
+,{"stream_name":"stdout","time":2426.77408836,"data":"[row_R2 s42] Ep 31/35 | loss: 0.0991 | val MAE: 1.411 mm, NME: 0.0412 | 16.9s\n"}
+,{"stream_name":"stdout","time":2443.720427391,"data":"[row_R2 s42] Ep 32/35 | loss: 0.1000 | val MAE: 1.756 mm, NME: 0.0470 | 16.9s\n"}
+,{"stream_name":"stdout","time":2460.64708279,"data":"[row_R2 s42] Ep 33/35 | loss: 0.0963 | val MAE: 1.890 mm, NME: 0.0455 | 16.9s\n"}
+,{"stream_name":"stdout","time":2477.613484491,"data":"[row_R2 s42] Ep 34/35 | loss: 0.0934 | val MAE: 1.613 mm, NME: 0.0428 | 17.0s\n"}
+,{"stream_name":"stdout","time":2494.517987341,"data":"[row_R2 s42] Ep 35/35 | loss: 0.0978 | val MAE: 1.643 mm, NME: 0.0453 | 16.9s\n"}
+,{"stream_name":"stdout","time":2494.519022951,"data":"[row_R2 s42] Training finished in 598.7s (35 epochs). Best val MAE: 1.322 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":2505.766571554,"data":"\n"}
+,{"stream_name":"stdout","time":2505.766615798,"data":"\u003e\u003e\u003e Starting row_R2 (Seed 43, S=384)\n"}
+,{"stream_name":"stdout","time":2523.084955992,"data":"[row_R2 s43] Ep 01/35 | loss: 3.2935 | val MAE: 38.880 mm, NME: 0.5626 | 17.0s *\n"}
+,{"stream_name":"stdout","time":2540.392328565,"data":"[row_R2 s43] Ep 02/35 | loss: 2.4983 | val MAE: 17.761 mm, NME: 0.4425 | 17.3s *\n"}
+,{"stream_name":"stdout","time":2557.622996717,"data":"[row_R2 s43] Ep 03/35 | loss: 1.8674 | val MAE: 15.383 mm, NME: 0.3364 | 17.2s *\n"}
+,{"stream_name":"stdout","time":2574.736041102,"data":"[row_R2 s43] Ep 04/35 | loss: 1.3411 | val MAE: 6.108 mm, NME: 0.1896 | 17.1s *\n"}
+,{"stream_name":"stdout","time":2591.830639037,"data":"[row_R2 s43] Ep 05/35 | loss: 0.8056 | val MAE: 5.628 mm, NME: 0.1586 | 17.1s *\n"}
+,{"stream_name":"stdout","time":2608.849158622,"data":"[row_R2 s43] Ep 06/35 | loss: 0.6742 | val MAE: 7.415 mm, NME: 0.1525 | 17.0s\n"}
+,{"stream_name":"stdout","time":2626.002404981,"data":"[row_R2 s43] Ep 07/35 | loss: 0.4908 | val MAE: 2.867 mm, NME: 0.1054 | 17.2s *\n"}
+,{"stream_name":"stdout","time":2642.984698577,"data":"[row_R2 s43] Ep 08/35 | loss: 0.3797 | val MAE: 4.545 mm, NME: 0.1005 | 17.0s\n"}
+,{"stream_name":"stdout","time":2660.14204169,"data":"[row_R2 s43] Ep 09/35 | loss: 0.2643 | val MAE: 2.402 mm, NME: 0.0743 | 17.2s *\n"}
+,{"stream_name":"stdout","time":2677.28561046,"data":"[row_R2 s43] Ep 10/35 | loss: 0.2279 | val MAE: 1.607 mm, NME: 0.0476 | 17.1s *\n"}
+,{"stream_name":"stdout","time":2694.228962349,"data":"[row_R2 s43] Ep 11/35 | loss: 0.2007 | val MAE: 1.986 mm, NME: 0.0621 | 16.9s\n"}
+,{"stream_name":"stdout","time":2711.232883645,"data":"[row_R2 s43] Ep 12/35 | loss: 0.1757 | val MAE: 2.052 mm, NME: 0.0747 | 17.0s\n"}
+,{"stream_name":"stdout","time":2728.411001239,"data":"[row_R2 s43] Ep 13/35 | loss: 0.1497 | val MAE: 1.597 mm, NME: 0.0492 | 17.2s *\n"}
+,{"stream_name":"stdout","time":2745.539037606,"data":"[row_R2 s43] Ep 14/35 | loss: 0.1445 | val MAE: 1.492 mm, NME: 0.0536 | 17.1s *\n"}
+,{"stream_name":"stdout","time":2762.682702457,"data":"[row_R2 s43] Ep 15/35 | loss: 0.1238 | val MAE: 1.383 mm, NME: 0.0440 | 17.1s *\n"}
+,{"stream_name":"stdout","time":2779.577185969,"data":"[row_R2 s43] Ep 16/35 | loss: 0.1213 | val MAE: 1.464 mm, NME: 0.0410 | 16.9s\n"}
+,{"stream_name":"stdout","time":2796.493559217,"data":"[row_R2 s43] Ep 17/35 | loss: 0.1105 | val MAE: 1.402 mm, NME: 0.0524 | 16.9s\n"}
+,{"stream_name":"stdout","time":2813.481313994,"data":"[row_R2 s43] Ep 18/35 | loss: 0.1085 | val MAE: 1.395 mm, NME: 0.0507 | 17.0s\n"}
+,{"stream_name":"stdout","time":2830.572657553,"data":"[row_R2 s43] Ep 19/35 | loss: 0.0947 | val MAE: 1.273 mm, NME: 0.0509 | 17.1s *\n"}
+,{"stream_name":"stdout","time":2847.594506572,"data":"[row_R2 s43] Ep 20/35 | loss: 0.1130 | val MAE: 2.129 mm, NME: 0.0622 | 17.0s\n"}
+,{"stream_name":"stdout","time":2864.752128956,"data":"[row_R2 s43] Ep 21/35 | loss: 0.1073 | val MAE: 1.203 mm, NME: 0.0383 | 17.2s *\n"}
+,{"stream_name":"stdout","time":2881.733140651,"data":"[row_R2 s43] Ep 22/35 | loss: 0.1197 | val MAE: 1.416 mm, NME: 0.0547 | 17.0s\n"}
+,{"stream_name":"stdout","time":2898.705957045,"data":"[row_R2 s43] Ep 23/35 | loss: 0.0961 | val MAE: 1.647 mm, NME: 0.0529 | 17.0s\n"}
+,{"stream_name":"stdout","time":2915.702072136,"data":"[row_R2 s43] Ep 24/35 | loss: 0.0884 | val MAE: 1.486 mm, NME: 0.0507 | 17.0s\n"}
+,{"stream_name":"stdout","time":2932.659709017,"data":"[row_R2 s43] Ep 25/35 | loss: 0.0820 | val MAE: 1.452 mm, NME: 0.0506 | 17.0s\n"}
+,{"stream_name":"stdout","time":2949.46874514,"data":"[row_R2 s43] Ep 26/35 | loss: 0.0788 | val MAE: 1.524 mm, NME: 0.0525 | 16.8s\n"}
+,{"stream_name":"stdout","time":2966.369156695,"data":"[row_R2 s43] Ep 27/35 | loss: 0.0782 | val MAE: 1.458 mm, NME: 0.0522 | 16.9s\n"}
+,{"stream_name":"stdout","time":2983.417239553,"data":"[row_R2 s43] Ep 28/35 | loss: 0.0768 | val MAE: 1.588 mm, NME: 0.0501 | 17.0s\n"}
+,{"stream_name":"stdout","time":3000.443795699,"data":"[row_R2 s43] Ep 29/35 | loss: 0.0729 | val MAE: 1.602 mm, NME: 0.0499 | 17.0s\n"}
+,{"stream_name":"stdout","time":3000.443855688,"data":"[row_R2 s43] Early stopping triggered at epoch 29\n"}
+,{"stream_name":"stdout","time":3000.443870295,"data":"[row_R2 s43] Training finished in 494.4s (29 epochs). Best val MAE: 1.203 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":3011.762570701,"data":"\n"}
+,{"stream_name":"stdout","time":3011.762652114,"data":"\u003e\u003e\u003e Starting row_R2 (Seed 44, S=384)\n"}
+,{"stream_name":"stdout","time":3029.259128272,"data":"[row_R2 s44] Ep 01/35 | loss: 3.9947 | val MAE: 40.027 mm, NME: 0.6060 | 17.2s *\n"}
+,{"stream_name":"stdout","time":3046.567553595,"data":"[row_R2 s44] Ep 02/35 | loss: 3.1280 | val MAE: 35.653 mm, NME: 0.5479 | 17.3s *\n"}
+,{"stream_name":"stdout","time":3063.848673523,"data":"[row_R2 s44] Ep 03/35 | loss: 2.3677 | val MAE: 12.690 mm, NME: 0.2951 | 17.3s *\n"}
+,{"stream_name":"stdout","time":3081.047148899,"data":"[row_R2 s44] Ep 04/35 | loss: 1.2306 | val MAE: 7.448 mm, NME: 0.1924 | 17.2s *\n"}
+,{"stream_name":"stdout","time":3098.294050809,"data":"[row_R2 s44] Ep 05/35 | loss: 0.6849 | val MAE: 4.198 mm, NME: 0.1161 | 17.2s *\n"}
+,{"stream_name":"stdout","time":3115.537038651,"data":"[row_R2 s44] Ep 06/35 | loss: 0.4515 | val MAE: 2.685 mm, NME: 0.0725 | 17.2s *\n"}
+,{"stream_name":"stdout","time":3132.680946993,"data":"[row_R2 s44] Ep 07/35 | loss: 0.3410 | val MAE: 4.047 mm, NME: 0.0785 | 17.1s\n"}
+,{"stream_name":"stdout","time":3149.854291411,"data":"[row_R2 s44] Ep 08/35 | loss: 0.2461 | val MAE: 2.599 mm, NME: 0.0784 | 17.2s *\n"}
+,{"stream_name":"stdout","time":3167.079955555,"data":"[row_R2 s44] Ep 09/35 | loss: 0.2043 | val MAE: 1.920 mm, NME: 0.0598 | 17.2s *\n"}
+,{"stream_name":"stdout","time":3184.339891753,"data":"[row_R2 s44] Ep 10/35 | loss: 0.1815 | val MAE: 1.705 mm, NME: 0.0589 | 17.3s *\n"}
+,{"stream_name":"stdout","time":3201.628025335,"data":"[row_R2 s44] Ep 11/35 | loss: 0.1718 | val MAE: 1.198 mm, NME: 0.0473 | 17.3s *\n"}
+,{"stream_name":"stdout","time":3218.683057973,"data":"[row_R2 s44] Ep 12/35 | loss: 0.1555 | val MAE: 1.845 mm, NME: 0.0623 | 17.1s\n"}
+,{"stream_name":"stdout","time":3235.701992043,"data":"[row_R2 s44] Ep 13/35 | loss: 0.1312 | val MAE: 1.271 mm, NME: 0.0368 | 17.0s\n"}
+,{"stream_name":"stdout","time":3252.730748537,"data":"[row_R2 s44] Ep 14/35 | loss: 0.1315 | val MAE: 1.410 mm, NME: 0.0431 | 17.0s\n"}
+,{"stream_name":"stdout","time":3269.713793591,"data":"[row_R2 s44] Ep 15/35 | loss: 0.1250 | val MAE: 1.205 mm, NME: 0.0500 | 17.0s\n"}
+,{"stream_name":"stdout","time":3286.678740412,"data":"[row_R2 s44] Ep 16/35 | loss: 0.1161 | val MAE: 1.285 mm, NME: 0.0340 | 17.0s\n"}
+,{"stream_name":"stdout","time":3303.726021212,"data":"[row_R2 s44] Ep 17/35 | loss: 0.1037 | val MAE: 1.435 mm, NME: 0.0397 | 17.0s\n"}
+,{"stream_name":"stdout","time":3320.898793272,"data":"[row_R2 s44] Ep 18/35 | loss: 0.1012 | val MAE: 1.134 mm, NME: 0.0391 | 17.2s *\n"}
+,{"stream_name":"stdout","time":3337.951381279,"data":"[row_R2 s44] Ep 19/35 | loss: 0.0984 | val MAE: 1.213 mm, NME: 0.0339 | 17.1s\n"}
+,{"stream_name":"stdout","time":3355.007875356,"data":"[row_R2 s44] Ep 20/35 | loss: 0.1018 | val MAE: 1.330 mm, NME: 0.0423 | 17.1s\n"}
+,{"stream_name":"stdout","time":3372.103332609,"data":"[row_R2 s44] Ep 21/35 | loss: 0.0949 | val MAE: 1.307 mm, NME: 0.0370 | 17.1s\n"}
+,{"stream_name":"stdout","time":3389.07854672,"data":"[row_R2 s44] Ep 22/35 | loss: 0.0901 | val MAE: 1.315 mm, NME: 0.0390 | 17.0s\n"}
+,{"stream_name":"stdout","time":3406.051124745,"data":"[row_R2 s44] Ep 23/35 | loss: 0.0891 | val MAE: 1.175 mm, NME: 0.0389 | 17.0s\n"}
+,{"stream_name":"stdout","time":3423.064297933,"data":"[row_R2 s44] Ep 24/35 | loss: 0.0872 | val MAE: 1.137 mm, NME: 0.0382 | 17.0s\n"}
+,{"stream_name":"stdout","time":3440.076277835,"data":"[row_R2 s44] Ep 25/35 | loss: 0.0840 | val MAE: 1.180 mm, NME: 0.0382 | 17.0s\n"}
+,{"stream_name":"stdout","time":3457.168684265,"data":"[row_R2 s44] Ep 26/35 | loss: 0.0844 | val MAE: 1.270 mm, NME: 0.0381 | 17.1s\n"}
+,{"stream_name":"stdout","time":3457.168752662,"data":"[row_R2 s44] Early stopping triggered at epoch 26\n"}
+,{"stream_name":"stdout","time":3457.168814335,"data":"[row_R2 s44] Training finished in 445.1s (26 epochs). Best val MAE: 1.134 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":3472.519100405,"data":"\n"}
+,{"stream_name":"stdout","time":3472.519207252,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":3472.519267182,"data":"STARTING Row R3 (Row-A Net, Bone Line + Length Loss, 384px)\n"}
+,{"stream_name":"stdout","time":3472.519282055,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":3472.519472585,"data":"\n"}
+,{"stream_name":"stdout","time":3472.519490841,"data":"\u003e\u003e\u003e Starting row_R3 (Seed 42, S=384)\n"}
+,{"stream_name":"stdout","time":3490.095410937,"data":"[row_R3 s42] Ep 01/35 | loss: 132.8073 | val MAE: 41.638 mm, NME: 0.9489 | 17.3s *\n"}
+,{"stream_name":"stdout","time":3507.627058777,"data":"[row_R3 s42] Ep 02/35 | loss: 65.5505 | val MAE: 39.096 mm, NME: 1.0285 | 17.5s *\n"}
+,{"stream_name":"stdout","time":3525.01231668,"data":"[row_R3 s42] Ep 03/35 | loss: 29.8994 | val MAE: 31.265 mm, NME: 1.3345 | 17.4s *\n"}
+,{"stream_name":"stdout","time":3542.20998678,"data":"[row_R3 s42] Ep 04/35 | loss: 11.8779 | val MAE: 39.421 mm, NME: 1.5106 | 17.2s\n"}
+,{"stream_name":"stdout","time":3559.523346389,"data":"[row_R3 s42] Ep 05/35 | loss: 3.6160 | val MAE: 27.912 mm, NME: 1.4227 | 17.3s *\n"}
+,{"stream_name":"stdout","time":3576.596147141,"data":"[row_R3 s42] Ep 06/35 | loss: 1.3986 | val MAE: 76.761 mm, NME: 1.3771 | 17.1s\n"}
+,{"stream_name":"stdout","time":3593.776197924,"data":"[row_R3 s42] Ep 07/35 | loss: 1.2408 | val MAE: 39.187 mm, NME: 1.4087 | 17.2s\n"}
+,{"stream_name":"stdout","time":3610.905961945,"data":"[row_R3 s42] Ep 08/35 | loss: 1.1908 | val MAE: 97.612 mm, NME: 1.5313 | 17.1s\n"}
+,{"stream_name":"stdout","time":3628.099503792,"data":"[row_R3 s42] Ep 09/35 | loss: 1.1227 | val MAE: 96.575 mm, NME: 1.5209 | 17.2s\n"}
+,{"stream_name":"stdout","time":3645.215153471,"data":"[row_R3 s42] Ep 10/35 | loss: 1.0715 | val MAE: 98.342 mm, NME: 1.5285 | 17.1s\n"}
+,{"stream_name":"stdout","time":3662.419807263,"data":"[row_R3 s42] Ep 11/35 | loss: 1.0034 | val MAE: 76.762 mm, NME: 1.3398 | 17.2s\n"}
+,{"stream_name":"stdout","time":3679.525975025,"data":"[row_R3 s42] Ep 12/35 | loss: 0.9536 | val MAE: 54.911 mm, NME: 1.1150 | 17.1s\n"}
+,{"stream_name":"stdout","time":3696.672940231,"data":"[row_R3 s42] Ep 13/35 | loss: 0.9215 | val MAE: 59.180 mm, NME: 1.0711 | 17.1s\n"}
+,{"stream_name":"stdout","time":3696.673029487,"data":"[row_R3 s42] Early stopping triggered at epoch 13\n"}
+,{"stream_name":"stdout","time":3696.673034521,"data":"[row_R3 s42] Training finished in 223.9s (13 epochs). Best val MAE: 27.912 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":3708.300650721,"data":"\n"}
+,{"stream_name":"stdout","time":3708.300998574,"data":"\u003e\u003e\u003e Starting row_R3 (Seed 43, S=384)\n"}
+,{"stream_name":"stdout","time":3725.932779428,"data":"[row_R3 s43] Ep 01/35 | loss: 148.6260 | val MAE: 22.469 mm, NME: 0.7199 | 17.3s *\n"}
+,{"stream_name":"stdout","time":3743.210676436,"data":"[row_R3 s43] Ep 02/35 | loss: 73.8991 | val MAE: 37.535 mm, NME: 1.3184 | 17.3s\n"}
+,{"stream_name":"stdout","time":3760.43596454,"data":"[row_R3 s43] Ep 03/35 | loss: 39.9963 | val MAE: 34.437 mm, NME: 1.3404 | 17.2s\n"}
+,{"stream_name":"stdout","time":3777.557260556,"data":"[row_R3 s43] Ep 04/35 | loss: 20.4754 | val MAE: 26.693 mm, NME: 1.5384 | 17.1s\n"}
+,{"stream_name":"stdout","time":3794.735692223,"data":"[row_R3 s43] Ep 05/35 | loss: 8.4917 | val MAE: 50.988 mm, NME: 1.3221 | 17.2s\n"}
+,{"stream_name":"stdout","time":3811.905541806,"data":"[row_R3 s43] Ep 06/35 | loss: 2.1145 | val MAE: 56.192 mm, NME: 1.2986 | 17.2s\n"}
+,{"stream_name":"stdout","time":3829.100702167,"data":"[row_R3 s43] Ep 07/35 | loss: 1.2323 | val MAE: 56.595 mm, NME: 1.3061 | 17.2s\n"}
+,{"stream_name":"stdout","time":3846.262506148,"data":"[row_R3 s43] Ep 08/35 | loss: 1.1547 | val MAE: 56.406 mm, NME: 1.3026 | 17.2s\n"}
+,{"stream_name":"stdout","time":3863.485179639,"data":"[row_R3 s43] Ep 09/35 | loss: 1.1296 | val MAE: 53.846 mm, NME: 1.3368 | 17.2s\n"}
+,{"stream_name":"stdout","time":3863.485224343,"data":"[row_R3 s43] Early stopping triggered at epoch 9\n"}
+,{"stream_name":"stdout","time":3863.485413817,"data":"[row_R3 s43] Training finished in 154.9s (9 epochs). Best val MAE: 22.469 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":3875.17135354,"data":"\n"}
+,{"stream_name":"stdout","time":3875.171400067,"data":"\u003e\u003e\u003e Starting row_R3 (Seed 44, S=384)\n"}
+,{"stream_name":"stdout","time":3892.863744265,"data":"[row_R3 s44] Ep 01/35 | loss: 173.7208 | val MAE: 39.324 mm, NME: 1.0000 | 17.4s *\n"}
+,{"stream_name":"stdout","time":3910.286232863,"data":"[row_R3 s44] Ep 02/35 | loss: 91.6453 | val MAE: 34.500 mm, NME: 1.2544 | 17.4s *\n"}
+,{"stream_name":"stdout","time":3927.407883537,"data":"[row_R3 s44] Ep 03/35 | loss: 47.2438 | val MAE: 40.498 mm, NME: 1.6251 | 17.1s\n"}
+,{"stream_name":"stdout","time":3944.508379478,"data":"[row_R3 s44] Ep 04/35 | loss: 26.2737 | val MAE: 46.853 mm, NME: 1.5010 | 17.1s\n"}
+,{"stream_name":"stdout","time":3961.592164106,"data":"[row_R3 s44] Ep 05/35 | loss: 13.8190 | val MAE: 51.333 mm, NME: 1.6475 | 17.1s\n"}
+,{"stream_name":"stdout","time":3978.662111203,"data":"[row_R3 s44] Ep 06/35 | loss: 6.8214 | val MAE: 74.568 mm, NME: 1.5507 | 17.1s\n"}
+,{"stream_name":"stdout","time":3995.662089071,"data":"[row_R3 s44] Ep 07/35 | loss: 2.5213 | val MAE: 53.370 mm, NME: 1.7188 | 17.0s\n"}
+,{"stream_name":"stdout","time":4012.755736724,"data":"[row_R3 s44] Ep 08/35 | loss: 1.3853 | val MAE: 68.208 mm, NME: 1.6706 | 17.1s\n"}
+,{"stream_name":"stdout","time":4029.814026109,"data":"[row_R3 s44] Ep 09/35 | loss: 1.2648 | val MAE: 54.543 mm, NME: 1.6776 | 17.1s\n"}
+,{"stream_name":"stdout","time":4046.967820119,"data":"[row_R3 s44] Ep 10/35 | loss: 1.1851 | val MAE: 50.378 mm, NME: 1.7086 | 17.2s\n"}
+,{"stream_name":"stdout","time":4046.967885834,"data":"[row_R3 s44] Early stopping triggered at epoch 10\n"}
+,{"stream_name":"stdout","time":4046.967924782,"data":"[row_R3 s44] Training finished in 171.5s (10 epochs). Best val MAE: 34.500 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":4062.664985919,"data":"\n"}
+,{"stream_name":"stdout","time":4062.665042465,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":4062.665048646,"data":"STARTING Row R4 (Row-A Net + Strong Ultrasound Aug, 384px)\n"}
+,{"stream_name":"stdout","time":4062.66505658,"data":"######################################################################\n"}
+,{"stream_name":"stdout","time":4062.665237862,"data":"\n"}
+,{"stream_name":"stdout","time":4062.665255291,"data":"\u003e\u003e\u003e Starting row_R4 (Seed 42, S=384)\n"}
+,{"stream_name":"stdout","time":4080.556070056,"data":"[row_R4 s42] Ep 01/35 | loss: 1.0480 | val MAE: 22.555 mm, NME: 0.4230 | 17.6s *\n"}
+,{"stream_name":"stdout","time":4098.339213106,"data":"[row_R4 s42] Ep 02/35 | loss: 0.6127 | val MAE: 2.341 mm, NME: 0.0808 | 17.8s *\n"}
+,{"stream_name":"stdout","time":4115.951377265,"data":"[row_R4 s42] Ep 03/35 | loss: 0.3186 | val MAE: 1.614 mm, NME: 0.0686 | 17.6s *\n"}
+,{"stream_name":"stdout","time":4133.466212149,"data":"[row_R4 s42] Ep 04/35 | loss: 0.2437 | val MAE: 1.482 mm, NME: 0.0594 | 17.5s *\n"}
+,{"stream_name":"stdout","time":4150.820688992,"data":"[row_R4 s42] Ep 05/35 | loss: 0.2107 | val MAE: 1.513 mm, NME: 0.0520 | 17.4s\n"}
+,{"stream_name":"stdout","time":4168.477198525,"data":"[row_R4 s42] Ep 06/35 | loss: 0.1862 | val MAE: 1.116 mm, NME: 0.0327 | 17.7s *\n"}
+,{"stream_name":"stdout","time":4185.896953738,"data":"[row_R4 s42] Ep 07/35 | loss: 0.1664 | val MAE: 1.339 mm, NME: 0.0411 | 17.4s\n"}
+,{"stream_name":"stdout","time":4203.328239292,"data":"[row_R4 s42] Ep 08/35 | loss: 0.1572 | val MAE: 1.401 mm, NME: 0.0353 | 17.4s\n"}
+,{"stream_name":"stdout","time":4220.70777047,"data":"[row_R4 s42] Ep 09/35 | loss: 0.1443 | val MAE: 1.469 mm, NME: 0.0362 | 17.4s\n"}
+,{"stream_name":"stdout","time":4238.06805571,"data":"[row_R4 s42] Ep 10/35 | loss: 0.1324 | val MAE: 1.361 mm, NME: 0.0347 | 17.4s\n"}
+,{"stream_name":"stdout","time":4255.467717614,"data":"[row_R4 s42] Ep 11/35 | loss: 0.1252 | val MAE: 1.406 mm, NME: 0.0499 | 17.4s\n"}
+,{"stream_name":"stdout","time":4272.881520343,"data":"[row_R4 s42] Ep 12/35 | loss: 0.1182 | val MAE: 1.342 mm, NME: 0.0480 | 17.4s\n"}
+,{"stream_name":"stdout","time":4290.258832052,"data":"[row_R4 s42] Ep 13/35 | loss: 0.1138 | val MAE: 1.347 mm, NME: 0.0482 | 17.4s\n"}
+,{"stream_name":"stdout","time":4307.589355867,"data":"[row_R4 s42] Ep 14/35 | loss: 0.1085 | val MAE: 1.345 mm, NME: 0.0479 | 17.3s\n"}
+,{"stream_name":"stdout","time":4307.589399322,"data":"[row_R4 s42] Early stopping triggered at epoch 14\n"}
+,{"stream_name":"stdout","time":4307.589459781,"data":"[row_R4 s42] Training finished in 244.6s (14 epochs). Best val MAE: 1.116 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":4319.13547203,"data":"\n"}
+,{"stream_name":"stdout","time":4319.135512973,"data":"\u003e\u003e\u003e Starting row_R4 (Seed 43, S=384)\n"}
+,{"stream_name":"stdout","time":4336.882799018,"data":"[row_R4 s43] Ep 01/35 | loss: 1.0352 | val MAE: 3.461 mm, NME: 0.1231 | 17.4s *\n"}
+,{"stream_name":"stdout","time":4354.574981401,"data":"[row_R4 s43] Ep 02/35 | loss: 0.4901 | val MAE: 1.701 mm, NME: 0.0848 | 17.7s *\n"}
+,{"stream_name":"stdout","time":4372.185586007,"data":"[row_R4 s43] Ep 03/35 | loss: 0.3311 | val MAE: 1.631 mm, NME: 0.0625 | 17.6s *\n"}
+,{"stream_name":"stdout","time":4389.748637347,"data":"[row_R4 s43] Ep 04/35 | loss: 0.2555 | val MAE: 1.196 mm, NME: 0.0551 | 17.6s *\n"}
+,{"stream_name":"stdout","time":4407.229065246,"data":"[row_R4 s43] Ep 05/35 | loss: 0.2156 | val MAE: 1.020 mm, NME: 0.0329 | 17.5s *\n"}
+,{"stream_name":"stdout","time":4424.594082094,"data":"[row_R4 s43] Ep 06/35 | loss: 0.2016 | val MAE: 1.205 mm, NME: 0.0355 | 17.4s\n"}
+,{"stream_name":"stdout","time":4442.107635264,"data":"[row_R4 s43] Ep 07/35 | loss: 0.1712 | val MAE: 1.307 mm, NME: 0.0430 | 17.5s\n"}
+,{"stream_name":"stdout","time":4459.729445854,"data":"[row_R4 s43] Ep 08/35 | loss: 0.1581 | val MAE: 1.001 mm, NME: 0.0321 | 17.6s *\n"}
+,{"stream_name":"stdout","time":4477.120154711,"data":"[row_R4 s43] Ep 09/35 | loss: 0.1481 | val MAE: 1.601 mm, NME: 0.0519 | 17.4s\n"}
+,{"stream_name":"stdout","time":4494.522769741,"data":"[row_R4 s43] Ep 10/35 | loss: 0.1350 | val MAE: 1.330 mm, NME: 0.0551 | 17.4s\n"}
+,{"stream_name":"stdout","time":4512.01200833,"data":"[row_R4 s43] Ep 11/35 | loss: 0.1314 | val MAE: 1.497 mm, NME: 0.0456 | 17.5s\n"}
+,{"stream_name":"stdout","time":4529.433703531,"data":"[row_R4 s43] Ep 12/35 | loss: 0.1239 | val MAE: 1.349 mm, NME: 0.0525 | 17.4s\n"}
+,{"stream_name":"stdout","time":4546.928772307,"data":"[row_R4 s43] Ep 13/35 | loss: 0.1228 | val MAE: 1.057 mm, NME: 0.0289 | 17.5s\n"}
+,{"stream_name":"stdout","time":4564.59278844,"data":"[row_R4 s43] Ep 14/35 | loss: 0.1069 | val MAE: 0.972 mm, NME: 0.0346 | 17.7s *\n"}
+,{"stream_name":"stdout","time":4582.054509963,"data":"[row_R4 s43] Ep 15/35 | loss: 0.1064 | val MAE: 1.076 mm, NME: 0.0273 | 17.5s\n"}
+,{"stream_name":"stdout","time":4599.697812525,"data":"[row_R4 s43] Ep 16/35 | loss: 0.1052 | val MAE: 0.936 mm, NME: 0.0336 | 17.6s *\n"}
+,{"stream_name":"stdout","time":4617.19126858,"data":"[row_R4 s43] Ep 17/35 | loss: 0.0993 | val MAE: 1.307 mm, NME: 0.0505 | 17.5s\n"}
+,{"stream_name":"stdout","time":4634.629188551,"data":"[row_R4 s43] Ep 18/35 | loss: 0.0966 | val MAE: 0.979 mm, NME: 0.0338 | 17.4s\n"}
+,{"stream_name":"stdout","time":4652.116944571,"data":"[row_R4 s43] Ep 19/35 | loss: 0.0910 | val MAE: 0.994 mm, NME: 0.0327 | 17.5s\n"}
+,{"stream_name":"stdout","time":4669.647309805,"data":"[row_R4 s43] Ep 20/35 | loss: 0.0898 | val MAE: 0.926 mm, NME: 0.0335 | 17.5s *\n"}
+,{"stream_name":"stdout","time":4687.092361614,"data":"[row_R4 s43] Ep 21/35 | loss: 0.0896 | val MAE: 1.070 mm, NME: 0.0349 | 17.4s\n"}
+,{"stream_name":"stdout","time":4704.54627034,"data":"[row_R4 s43] Ep 22/35 | loss: 0.0873 | val MAE: 1.261 mm, NME: 0.0287 | 17.5s\n"}
+,{"stream_name":"stdout","time":4722.06080346,"data":"[row_R4 s43] Ep 23/35 | loss: 0.0866 | val MAE: 1.247 mm, NME: 0.0290 | 17.5s\n"}
+,{"stream_name":"stdout","time":4739.513893056,"data":"[row_R4 s43] Ep 24/35 | loss: 0.0873 | val MAE: 1.116 mm, NME: 0.0355 | 17.5s\n"}
+,{"stream_name":"stdout","time":4756.992488916,"data":"[row_R4 s43] Ep 25/35 | loss: 0.0800 | val MAE: 1.067 mm, NME: 0.0342 | 17.5s\n"}
+,{"stream_name":"stdout","time":4774.409848784,"data":"[row_R4 s43] Ep 26/35 | loss: 0.0774 | val MAE: 1.193 mm, NME: 0.0277 | 17.4s\n"}
+,{"stream_name":"stdout","time":4791.842795529,"data":"[row_R4 s43] Ep 27/35 | loss: 0.0711 | val MAE: 1.082 mm, NME: 0.0343 | 17.4s\n"}
+,{"stream_name":"stdout","time":4809.296366851,"data":"[row_R4 s43] Ep 28/35 | loss: 0.0713 | val MAE: 1.079 mm, NME: 0.0342 | 17.5s\n"}
+,{"stream_name":"stdout","time":4809.296431045,"data":"[row_R4 s43] Early stopping triggered at epoch 28\n"}
+,{"stream_name":"stdout","time":4809.297024622,"data":"[row_R4 s43] Training finished in 489.9s (28 epochs). Best val MAE: 0.926 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":4820.917993846,"data":"\n"}
+,{"stream_name":"stdout","time":4820.918045975,"data":"\u003e\u003e\u003e Starting row_R4 (Seed 44, S=384)\n"}
+,{"stream_name":"stdout","time":4838.860043373,"data":"[row_R4 s44] Ep 01/35 | loss: 1.0672 | val MAE: 3.539 mm, NME: 0.1317 | 17.7s *\n"}
+,{"stream_name":"stdout","time":4856.532244269,"data":"[row_R4 s44] Ep 02/35 | loss: 0.5048 | val MAE: 1.684 mm, NME: 0.0853 | 17.7s *\n"}
+,{"stream_name":"stdout","time":4874.142316851,"data":"[row_R4 s44] Ep 03/35 | loss: 0.3491 | val MAE: 1.657 mm, NME: 0.0749 | 17.6s *\n"}
+,{"stream_name":"stdout","time":4891.692512234,"data":"[row_R4 s44] Ep 04/35 | loss: 0.2772 | val MAE: 1.181 mm, NME: 0.0567 | 17.5s *\n"}
+,{"stream_name":"stdout","time":4909.171073148,"data":"[row_R4 s44] Ep 05/35 | loss: 0.2284 | val MAE: 1.234 mm, NME: 0.0560 | 17.5s\n"}
+,{"stream_name":"stdout","time":4926.623625516,"data":"[row_R4 s44] Ep 06/35 | loss: 0.2028 | val MAE: 1.250 mm, NME: 0.0583 | 17.5s\n"}
+,{"stream_name":"stdout","time":4944.147755115,"data":"[row_R4 s44] Ep 07/35 | loss: 0.1839 | val MAE: 1.294 mm, NME: 0.0522 | 17.5s\n"}
+,{"stream_name":"stdout","time":4961.625731826,"data":"[row_R4 s44] Ep 08/35 | loss: 0.1681 | val MAE: 1.266 mm, NME: 0.0443 | 17.5s\n"}
+,{"stream_name":"stdout","time":4979.131254201,"data":"[row_R4 s44] Ep 09/35 | loss: 0.1520 | val MAE: 1.387 mm, NME: 0.0422 | 17.5s\n"}
+,{"stream_name":"stdout","time":4996.59083026,"data":"[row_R4 s44] Ep 10/35 | loss: 0.1391 | val MAE: 1.203 mm, NME: 0.0461 | 17.5s\n"}
+,{"stream_name":"stdout","time":5014.07913869,"data":"[row_R4 s44] Ep 11/35 | loss: 0.1359 | val MAE: 1.193 mm, NME: 0.0460 | 17.5s\n"}
+,{"stream_name":"stdout","time":5031.996428232,"data":"[row_R4 s44] Ep 12/35 | loss: 0.1268 | val MAE: 1.177 mm, NME: 0.0456 | 17.9s *\n"}
+,{"stream_name":"stdout","time":5049.624057837,"data":"[row_R4 s44] Ep 13/35 | loss: 0.1270 | val MAE: 1.168 mm, NME: 0.0465 | 17.6s *\n"}
+,{"stream_name":"stdout","time":5067.085320299,"data":"[row_R4 s44] Ep 14/35 | loss: 0.1195 | val MAE: 1.203 mm, NME: 0.0460 | 17.5s\n"}
+,{"stream_name":"stdout","time":5084.532350919,"data":"[row_R4 s44] Ep 15/35 | loss: 0.1174 | val MAE: 1.195 mm, NME: 0.0463 | 17.4s\n"}
+,{"stream_name":"stdout","time":5101.983228771,"data":"[row_R4 s44] Ep 16/35 | loss: 0.1108 | val MAE: 1.202 mm, NME: 0.0454 | 17.5s\n"}
+,{"stream_name":"stdout","time":5119.378778212,"data":"[row_R4 s44] Ep 17/35 | loss: 0.1074 | val MAE: 1.202 mm, NME: 0.0459 | 17.4s\n"}
+,{"stream_name":"stdout","time":5136.861764728,"data":"[row_R4 s44] Ep 18/35 | loss: 0.1071 | val MAE: 1.199 mm, NME: 0.0630 | 17.5s\n"}
+,{"stream_name":"stdout","time":5154.318359698,"data":"[row_R4 s44] Ep 19/35 | loss: 0.0997 | val MAE: 1.305 mm, NME: 0.0550 | 17.5s\n"}
+,{"stream_name":"stdout","time":5171.796978462,"data":"[row_R4 s44] Ep 20/35 | loss: 0.0993 | val MAE: 1.212 mm, NME: 0.0453 | 17.5s\n"}
+,{"stream_name":"stdout","time":5189.236460236,"data":"[row_R4 s44] Ep 21/35 | loss: 0.0943 | val MAE: 1.306 mm, NME: 0.0551 | 17.4s\n"}
+,{"stream_name":"stdout","time":5189.236546382,"data":"[row_R4 s44] Early stopping triggered at epoch 21\n"}
+,{"stream_name":"stdout","time":5189.236662055,"data":"[row_R4 s44] Training finished in 368.0s (21 epochs). Best val MAE: 1.168 mm. Loading best ckpt...\n"}
+,{"stream_name":"stdout","time":5204.640826608,"data":"\n"}
+,{"stream_name":"stdout","time":5204.640871682,"data":"Selection by validation MAE only: Best 1 = row_R4 (1.070 mm), Best 2 = row_R2 (1.220 mm)\n"}
+,{"stream_name":"stdout","time":5204.640877902,"data":"\n"}
+,{"stream_name":"stdout","time":5204.640883038,"data":"Forming R6 Ensemble (Row A + row_R4 + row_R2)...\n"}
+,{"stream_name":"stdout","time":5209.511134852,"data":"\n"}
+,{"stream_name":"stdout","time":5209.511181428,"data":"Final Femur Recipe selected by validation MAE only: row_R4 (1.070 mm)\n"}
+,{"stream_name":"stdout","time":5209.511550027,"data":"\n"}
+,{"stream_name":"stdout","time":5209.511562505,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":5209.51167102,"data":"FINAL ROUND 2 TABLE:\n"}
+,{"stream_name":"stdout","time":5209.511680413,"data":"================================================================================\n"}
+,{"stream_name":"stdout","time":5209.511785892,"data":"# Femur Round 2: Modern Techniques (FP + UCL Femur Test Set, N=348 images / 266 patients)\n"}
+,{"stream_name":"stdout","time":5209.511793681,"data":"\n"}
+,{"stream_name":"stdout","time":5209.511932472,"data":"\u003e Reference FL: Euclidean distance between annotated endpoints * px_to_mm_rate.\n"}
+,{"stream_name":"stdout","time":5209.511983421,"data":"\u003e Protocol: Train on 451 images, early stop on 65 validation images (0 patient overlap).\n"}
+,{"stream_name":"stdout","time":5209.511991136,"data":"\u003e Evaluation: 348 official test images (323 FP / 261 patients, 25 UCL / 5 patients [tiny]).\n"}
+,{"stream_name":"stdout","time":5209.512012295,"data":"\u003e Paired Diff: Patient-level bootstrap with 1,000 resamples of difference in FL MAE vs Row A.\n"}
+,{"stream_name":"stdout","time":5209.512016767,"data":"\u003e Selection: Best recipe chosen strictly by validation MAE only.\n"}
+,{"stream_name":"stdout","time":5209.512023244,"data":"\n"}
+,{"stream_name":"stdout","time":5209.512033757,"data":"| Approach | Row / Model | Resolution | Val MAE (mm) | Epochs | Train Time (s) | FL MAE [95% CI] (mm) | Paired Diff vs Row A [95% CI] (mm) | FL RMSE [95% CI] (mm) | FL Median [95% CI] (mm) | % Error [95% CI] | FL NME (mean+-SD) | Top-10 SqErr Share (%) | FP MAE (mm) | UCL MAE (mm, tiny) |\n"}
+,{"stream_name":"stdout","time":5209.512073384,"data":"| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"}
+,{"stream_name":"stdout","time":5209.512078609,"data":"| Row A (Baseline EffNet-B4 1-ch Heatmap, flip TTA) | *Seeds Mean +- SD* | 384 px | 1.150 | 14.3 +- 2.5 | 252.4 +- 34.9 | 1.314 +- 0.162 | - | 3.256 +- 0.777 | 0.704 +- 0.137 | 3.29% +- 0.51% | 0.039 +- 0.003 | 81.8% +- 7.9% | 1.230 | 2.397 |\n"}
+,{"stream_name":"stdout","time":5209.512084798,"data":"| Row A (Baseline EffNet-B4 1-ch Heatmap, flip TTA) | **3-Seed Median Ens** | 384 px | 1.150 | - | - | **1.350** [1.065, 1.692] | Reference | **3.786** [1.799, 5.723] | **0.667** [0.597, 0.786] | **3.46%** [2.48%, 4.85%] | **0.038 +- 0.151** | **88.7%** | **1.227** | **2.937** |\n"}
+,{"stream_name":"stdout","time":5209.51209072,"data":"| Row R1 (HRNet-W32 Heatmap, DARK Sub-pixel) | *Seeds Mean +- SD* | 384 px | 16.863 | 33.7 +- 1.9 | 338.8 +- 26.5 | 18.213 +- 0.898 | - | 25.911 +- 0.706 | 12.946 +- 1.875 | 40.31% +- 2.55% | 0.424 +- 0.009 | 18.4% +- 0.8% | 18.453 | 15.117 |\n"}
+,{"stream_name":"stdout","time":5209.512097094,"data":"| Row R1 (HRNet-W32 Heatmap, DARK Sub-pixel) | **3-Seed Median Ens** | 384 px | 16.863 | - | - | **18.333** [16.119, 20.535] | **16.983** [14.770, 19.191] | **26.143** [23.712, 28.328] | **13.618** [9.349, 16.827] | **40.20%** [36.07%, 44.04%] | **0.415 +- 0.389** | **17.8%** | **18.863** | **11.489** |\n"}
+,{"stream_name":"stdout","time":5209.512105758,"data":"| Row R2 (Row-A Net, Integral Soft-Argmax Loss) | *Seeds Mean +- SD* | 384 px | 1.220 | 30.0 +- 3.7 | 512.7 +- 64.0 | 1.223 +- 0.079 | - | 2.351 +- 0.347 | 0.645 +- 0.049 | 2.91% +- 0.26% | 0.043 +- 0.001 | 63.3% +- 6.5% | 1.179 | 1.794 |\n"}
+,{"stream_name":"stdout","time":5209.512110805,"data":"| Row R2 (Row-A Net, Integral Soft-Argmax Loss) | **3-Seed Median Ens** | 384 px | 1.220 | - | - | **1.071** [0.911, 1.262] | **-0.279** [-0.640, 0.007] *(no measurable difference)* | **2.017** [1.522, 2.540] | **0.550** [0.493, 0.685] | **2.49%** [2.10%, 2.96%] | **0.040 +- 0.167** | **63.6%** | **1.097** | **0.742** |\n"}
+,{"stream_name":"stdout","time":5209.512116044,"data":"| Row R3 (Row-A Net, Bone Line + Length Loss, MinDist=50px) | *Seeds Mean +- SD* | 384 px | 28.293 | 10.7 +- 1.7 | 183.4 +- 29.4 | 43.204 +- 15.958 | - | 50.121 +- 17.762 | 41.482 +- 16.670 | 104.88% +- 39.20% | 1.159 +- 0.304 | 15.9% +- 0.1% | 43.073 | 44.894 |\n"}
+,{"stream_name":"stdout","time":5209.512121078,"data":"| Row R3 (Row-A Net, Bone Line + Length Loss, MinDist=50px) | **3-Seed Median Ens** | 384 px | 28.293 | - | - | **47.505** [44.820, 50.539] | **46.155** [43.247, 49.214] | **54.760** [51.881, 57.986] | **46.231** [40.249, 49.928] | **118.92%** [110.00%, 128.88%] | **1.062 +- 0.505** | **15.6%** | **47.713** | **44.809** |\n"}
+,{"stream_name":"stdout","time":5209.512126381,"data":"| ★ Row R4 (Row-A Net + Strong Ultrasound Aug) | *Seeds Mean +- SD* | 384 px | 1.070 | 21.0 +- 5.7 | 367.5 +- 100.1 | 1.129 +- 0.090 | - | 3.577 +- 0.197 | 0.553 +- 0.038 | 2.93% +- 0.25% | 0.037 +- 0.003 | 91.0% +- 0.4% | 0.995 | 2.869 |\n"}
+,{"stream_name":"stdout","time":5209.512150963,"data":"| ★ Row R4 (Row-A Net + Strong Ultrasound Aug) | **3-Seed Median Ens** | 384 px | 1.070 | - | - | **1.118** [0.856, 1.459] | **-0.232** [-0.398, -0.086] | **3.546** [1.471, 5.507] | **0.538** [0.459, 0.604] | **2.90%** [1.96%, 4.23%] | **0.033 +- 0.141** | **91.1%** | **0.980** | **2.901** |\n"}
+,{"stream_name":"stdout","time":5209.512162613,"data":"| Row R6 (Ensemble of Row A + Best 2 Val Rows) | **9-Model Multi-Row Ens** | 384 px | 1.147 | - | - | **1.196** [0.919, 1.537] | **-0.154** [-0.272, -0.038] | **3.590** [1.600, 5.522] | **0.578** [0.500, 0.654] | **3.08%** [2.12%, 4.42%] | **0.036 +- 0.147** | **89.8%** | **1.065** | **2.883** |\n"}
+,{"stream_name":"stdout","time":5209.512200114,"data":"\n"}
+,{"stream_name":"stdout","time":5209.512208271,"data":"### Pretrained Encoder Check (Row R5):\n"}
+,{"stream_name":"stdout","time":5209.512214673,"data":"- **DINOv2 ViT-S/14**: Apache 2.0 license, publicly downloadable weights from Facebook Research hub. Incompatible with standard 384px resolution because patch size is 14 (`384 % 14 != 0`), violating the standardized letterbox resolution protocol. Skipped.\n"}
+,{"stream_name":"stdout","time":5209.512221458,"data":"- **UltraSam (arXiv 2411.16222)**: Derivative of SAM requiring external heavy checkpoint hosting and 1024px architecture. Skipped due to lack of standard PyTorch distribution.\n"}
+,{"stream_name":"stdout","time":5209.512226795,"data":"\n"}
+,{"stream_name":"stdout","time":5209.512387206,"data":"Saved /kaggle/working/out/femur_round2_table.md\n"}
+,{"stream_name":"stdout","time":5209.517306199,"data":"Saved /kaggle/working/out/femur_round2_results.json\n"}
+,{"stream_name":"stdout","time":5209.53811812,"data":"Saved /kaggle/working/out/femur_round2_predictions.csv\n"}
+,{"stream_name":"stdout","time":5210.992857497,"data":"Created notebook at /kaggle/working/femur_round2.ipynb. Executing via nbconvert...\n"}
+,{"stream_name":"stdout","time":5210.992894519,"data":"Running jupyter nbconvert --to notebook --execute --inplace /kaggle/working/femur_round2.ipynb...\n"}
+,{"stream_name":"stdout","time":5217.333940347,"data":"nbconvert executed successfully!\n"}
+,{"stream_name":"stdout","time":5217.333978761,"data":"\n"}
+,{"stream_name":"stdout","time":5217.333983388,"data":"Experiment complete!\n"}
+,{"stream_name":"stderr","time":5224.788107859,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":5225.584528833,"data":"[NbConvertApp] Writing 612700 bytes to __results__.html\n"}
+]

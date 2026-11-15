@@ -180,9 +180,41 @@ def generate_benchmark_summary(results_dir: Path) -> str:
     )
 
     # Row 4: Femur Landmark NME (FP+UCL)
-    femur_res_path = results_dir / "femur_ablation" / "femur_ablation_results.json"
-    if femur_res_path.is_file():
-        femur_res = load_json(femur_res_path)
+    femur_r2_path = results_dir / "femur_round2" / "femur_round2_results.json"
+    femur_ablation_path = results_dir / "femur_ablation" / "femur_ablation_results.json"
+
+    if femur_r2_path.is_file():
+        femur_res = load_json(femur_r2_path)
+        # Row R4 was selected by validation MAE (1.070 mm) and beats Row A with CI excluding zero (diff: -0.232 [-0.398, -0.086])
+        row_key = "row_R4" if "row_R4" in femur_res else list(femur_res.keys())[0]
+        femur_data = femur_res[row_key]
+        femur_ens = femur_data["ensemble_all"]
+        femur_nme_str = f"{femur_ens['fl_nme_mean']:.3f} +- {femur_ens['fl_nme_sd']:.3f}"
+        femur_mae_str = f"{femur_ens['fl_mae']:.2f} mm"
+        femur_nme_ours = (
+            f"**FL NME: {femur_nme_str}** (3-seed median ensemble)<br>"
+            f"• Biometry: FL MAE {femur_mae_str} (95% CI: [{femur_ens['fl_mae_ci'][0]:.2f}, {femur_ens['fl_mae_ci'][1]:.2f}])<br>"
+            f"• Protocol: {femur_ens['n_images']} official test images ({femur_ens['n_patients']} patients)<br>"
+            f"• Source: `docs/results/femur_round2/femur_round2_results.json`"
+        )
+        pub_femur = pub_refs["femur"]
+        femur_nme_pub = (
+            f"Combined->Combined (m-c->m-c):<br>"
+            f"• FL: **{pub_femur['fl_nme_mean']:.2f} +- {pub_femur['fl_nme_sd']:.2f}**<br>"
+            f"• Source: [{pub_femur['source']}]({pub_femur['url']})<br>"
+            f"• Protocol: {pub_femur['protocol']}"
+        )
+        femur_comparable = "Partly (same NME formula; test set split sizes not stated in publication)"
+        femur_claim = (
+            f"Claim at most 'on par' (Ours [3-seed median ensemble]: FL NME {femur_nme_str} vs "
+            f"Published: FL NME {pub_femur['fl_nme_mean']:.2f} +- {pub_femur['fl_nme_sd']:.2f}; test set sizes not stated)."
+        )
+        lines.append(
+            f"| **Femur (FP+UCL)** | Landmark NME (FL) | {femur_nme_ours} | {femur_nme_pub} | "
+            f"{femur_comparable} | {femur_claim} |"
+        )
+    elif femur_ablation_path.is_file():
+        femur_res = load_json(femur_ablation_path)
         row_key = "row_A" if "row_A" in femur_res else list(femur_res.keys())[0]
         femur_data = femur_res[row_key]
         femur_ens = femur_data["ensemble_all"]
