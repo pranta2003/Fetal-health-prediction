@@ -200,3 +200,30 @@ def test_patient_bootstrap_ci():
 
     assert ci_low <= mean <= ci_high
     assert 0.75 <= mean <= 0.95
+
+
+def test_build_fassd_model_architectures_and_encoders():
+    # 1. Unet with resnet34
+    m_unet = build_fassd_model(arch="unet", encoder_name="resnet34", encoder_weights=None)
+    assert isinstance(m_unet, torch.nn.Module)
+
+    # 2. UnetPlusPlus with efficientnet-b4
+    m_plus = build_fassd_model(arch="unetplusplus", encoder_name="efficientnet-b4", encoder_weights=None)
+    assert isinstance(m_plus, torch.nn.Module)
+
+    # 3. FPN with convnext_tiny (mapped to tu-convnext_tiny)
+    m_fpn = build_fassd_model(arch="fpn", encoder_name="convnext_tiny", encoder_weights=None)
+    assert isinstance(m_fpn, torch.nn.Module)
+
+
+def test_fassd_dataset_cache_in_memory(synthetic_dataset_dir):
+    images_dir, masks_dir, df = synthetic_dataset_dir
+    ds_cached = FASSDKaggleDataset(
+        images_dir, masks_dir, df, input_mode="gray", is_train=False, cache_in_memory=True
+    )
+    assert len(ds_cached.cached_images) == len(df)
+    assert len(ds_cached.cached_masks) == len(df)
+    sample = ds_cached[0]
+    assert sample["image"].shape == (3, 384, 512)
+    assert sample["mask"].shape == (4, 384, 512)
+

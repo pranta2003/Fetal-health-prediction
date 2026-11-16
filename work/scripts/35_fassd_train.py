@@ -80,10 +80,17 @@ def parse_args() -> argparse.Namespace:
         help="Input mode: 'rgb' or 'gray' (grayscale replicated to 3 channels)",
     )
     parser.add_argument(
+        "--arch",
+        type=str,
+        choices=["unet", "unetplusplus", "fpn"],
+        default="unet",
+        help="Model architecture ('unet', 'unetplusplus', 'fpn')",
+    )
+    parser.add_argument(
         "--encoder",
         type=str,
         default="efficientnet-b4",
-        help="Encoder architecture name for smp.Unet",
+        help="Encoder architecture name for smp (e.g. 'efficientnet-b4', 'resnet34', 'convnext_tiny')",
     )
     parser.add_argument(
         "--encoder-weights",
@@ -94,8 +101,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--epochs",
         type=int,
-        default=60,
-        help="Number of training epochs (default: 60)",
+        default=40,
+        help="Number of training epochs (default: 40)",
+    )
+    parser.add_argument(
+        "--patience",
+        type=int,
+        default=10,
+        help="Early stopping patience epochs on val macro Dice (default: 10)",
     )
     parser.add_argument(
         "--batch-size",
@@ -110,7 +123,9 @@ def parse_args() -> argparse.Namespace:
         help="Initial learning rate for AdamW (default: 3e-4)",
     )
     parser.add_argument(
+        "--wd",
         "--weight-decay",
+        dest="weight_decay",
         type=float,
         default=1e-2,
         help="Weight decay for AdamW (default: 1e-2)",
@@ -120,6 +135,24 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=42,
         help="Random seed for reproducibility (default: 42)",
+    )
+    parser.add_argument(
+        "--cache-in-memory",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Cache resized 384x512 images and masks in RAM (default: True)",
+    )
+    parser.add_argument(
+        "--batch-gpu-aug",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Apply fast GPU batch augmentations (default: True)",
+    )
+    parser.add_argument(
+        "--channels-last",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Use channels_last memory format on GPU (default: True)",
     )
     parser.add_argument(
         "--smoke",
@@ -145,11 +178,16 @@ def main() -> None:
     print(f"Split CSV:       {args.split_csv}")
     print(f"Output Dir:      {args.output_dir}")
     print(f"Input Mode:      {args.input}")
+    print(f"Arch:            {args.arch}")
     print(f"Encoder:         {args.encoder} (weights={args.encoder_weights})")
-    print(f"Epochs:          {args.epochs}")
+    print(f"Epochs:          {args.epochs} (patience={args.patience})")
     print(f"Batch Size:      {args.batch_size}")
     print(f"Learning Rate:   {args.lr}")
+    print(f"Weight Decay:    {args.weight_decay}")
     print(f"Seed:            {args.seed}")
+    print(f"Cache RAM:       {args.cache_in_memory}")
+    print(f"GPU Aug:         {args.batch_gpu_aug}")
+    print(f"Channels Last:   {args.channels_last}")
     print(f"Smoke Mode:      {args.smoke}")
     print("==================================================================")
 
@@ -160,15 +198,20 @@ def main() -> None:
         output_dir=args.output_dir,
         split_csv=args.split_csv,
         input_mode=args.input,
+        arch=args.arch,
         encoder_name="resnet18" if args.smoke else args.encoder,
         encoder_weights=enc_weights,
         epochs=args.epochs,
+        patience=args.patience,
         batch_size=args.batch_size,
         lr=args.lr,
         weight_decay=args.weight_decay,
         seed=args.seed,
         device=args.device,
         smoke=args.smoke,
+        cache_in_memory=args.cache_in_memory,
+        batch_gpu_aug=args.batch_gpu_aug,
+        channels_last=args.channels_last,
     )
 
     git_hash = get_git_commit_hash()
