@@ -1,0 +1,390 @@
+{
+  "study": "fassd_ensemble_study",
+  "timestamp": "2026-11-16 20:04:47",
+  "models_evaluated": [
+    "Run 1 Gray Seed 42 (UNet EffB4)",
+    "Run 2 UNet EffB4",
+    "Run 2 UNet++ EffB4",
+    "Run 2 UNet ResNet34",
+    "Run 2 FPN EffB4"
+  ],
+  "rgb_exclusion_reason": "Run 1 RGB skipped from ensemble to maintain single-channel grayscale preprocessing uniformity.",
+  "val_single_models": {
+    "fassd_gray_seed42": {
+      "name": "Run 1 Gray Seed 42 (UNet EffB4)",
+      "arch": "unet",
+      "encoder": "efficientnet-b4",
+      "val_macro_dice": 0.7805868860971148
+    },
+    "run2_unet_effb4": {
+      "name": "Run 2 UNet EffB4",
+      "arch": "unet",
+      "encoder": "efficientnet-b4",
+      "val_macro_dice": 0.7781274451105769
+    },
+    "run2_unetplusplus_effb4": {
+      "name": "Run 2 UNet++ EffB4",
+      "arch": "unetplusplus",
+      "encoder": "efficientnet-b4",
+      "val_macro_dice": 0.7754813485273828
+    },
+    "run2_unet_resnet34": {
+      "name": "Run 2 UNet ResNet34",
+      "arch": "unet",
+      "encoder": "resnet34",
+      "val_macro_dice": 0.7798988699904856
+    },
+    "run2_fpn_effb4": {
+      "name": "Run 2 FPN EffB4",
+      "arch": "fpn",
+      "encoder": "efficientnet-b4",
+      "val_macro_dice": 0.7708918917858754
+    }
+  },
+  "best_single_model_by_val": {
+    "tag": "fassd_gray_seed42",
+    "name": "Run 1 Gray Seed 42 (UNet EffB4)",
+    "val_macro_dice": 0.7805868860971148
+  },
+  "candidate_ensembles_val": {
+    "all_gray": {
+      "name": "All 5 Gray Models",
+      "models": [
+        "fassd_gray_seed42",
+        "run2_unet_effb4",
+        "run2_unetplusplus_effb4",
+        "run2_unet_resnet34",
+        "run2_fpn_effb4"
+      ],
+      "val_macro_dice": 0.7840934598167908
+    },
+    "top3_val": {
+      "name": "Top-3 by VAL Dice",
+      "models": [
+        "fassd_gray_seed42",
+        "run2_unet_resnet34",
+        "run2_unet_effb4"
+      ],
+      "val_macro_dice": 0.784478043280124
+    },
+    "top2_val": {
+      "name": "Top-2 by VAL Dice",
+      "models": [
+        "fassd_gray_seed42",
+        "run2_unet_resnet34"
+      ],
+      "val_macro_dice": 0.7847879151281946
+    }
+  },
+  "chosen_ensemble": {
+    "key": "top2_val",
+    "name": "Top-2 by VAL Dice",
+    "models": [
+      "fassd_gray_seed42",
+      "run2_unet_resnet34"
+    ],
+    "val_macro_dice": 0.7847879151281946
+  },
+  "test_results": {
+    "best_single_model": {
+      "structure_mean_macro_dice": 0.7874334629581464,
+      "structure_mean_macro_hd95": 20.206886816038292,
+      "by_structure": {
+        "artery": {
+          "n_non_empty": 270,
+          "n_empty_gt": 1,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 0.0,
+          "empty_gt_fp_rate": 1.0,
+          "dice_mean": 0.7591769100109308,
+          "dice_std": 0.18068399343489897,
+          "iou_mean": 0.6387433246872911,
+          "iou_std": 0.18857041867717178,
+          "hd95_mean": 10.406442940854005,
+          "hd95_std": 15.565343871419403
+        },
+        "liver": {
+          "n_non_empty": 271,
+          "n_empty_gt": 0,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 1.0,
+          "empty_gt_fp_rate": 0.0,
+          "dice_mean": 0.8776712932468539,
+          "dice_std": 0.07018077482302025,
+          "iou_mean": 0.7871407816878685,
+          "iou_std": 0.08518849825086276,
+          "hd95_mean": 24.588716811295683,
+          "hd95_std": 14.445886939070231
+        },
+        "stomach": {
+          "n_non_empty": 263,
+          "n_empty_gt": 8,
+          "empty_gt_detected_count": 1,
+          "empty_gt_detection_rate": 0.125,
+          "empty_gt_fp_rate": 0.875,
+          "dice_mean": 0.740024423516274,
+          "dice_std": 0.25106386361656513,
+          "iou_mean": 0.636585965909723,
+          "iou_std": 0.2514935426962172,
+          "hd95_mean": 21.543671830175565,
+          "hd95_std": 24.333592085986826
+        },
+        "vein": {
+          "n_non_empty": 270,
+          "n_empty_gt": 1,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 0.0,
+          "empty_gt_fp_rate": 1.0,
+          "dice_mean": 0.7728612250585273,
+          "dice_std": 0.13974515232195955,
+          "iou_mean": 0.6462557382665746,
+          "iou_std": 0.14720465302966818,
+          "hd95_mean": 24.288715681827917,
+          "hd95_std": 79.84533378697319
+        }
+      }
+    },
+    "chosen_ensemble_raw": {
+      "structure_mean_macro_dice": 0.7927097466766742,
+      "structure_mean_macro_hd95": 21.32753430827587,
+      "by_structure": {
+        "artery": {
+          "n_non_empty": 270,
+          "n_empty_gt": 1,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 0.0,
+          "empty_gt_fp_rate": 1.0,
+          "dice_mean": 0.7698336724851994,
+          "dice_std": 0.17435442910145016,
+          "iou_mean": 0.6512882522400528,
+          "iou_std": 0.1836123357245119,
+          "hd95_mean": 9.052056509742888,
+          "hd95_std": 8.100021892428854
+        },
+        "liver": {
+          "n_non_empty": 271,
+          "n_empty_gt": 0,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 1.0,
+          "empty_gt_fp_rate": 0.0,
+          "dice_mean": 0.8814173656062155,
+          "dice_std": 0.0687931744137769,
+          "iou_mean": 0.7928845086159776,
+          "iou_std": 0.08294181361362142,
+          "hd95_mean": 23.81764540784276,
+          "hd95_std": 14.011973880079125
+        },
+        "stomach": {
+          "n_non_empty": 263,
+          "n_empty_gt": 8,
+          "empty_gt_detected_count": 1,
+          "empty_gt_detection_rate": 0.125,
+          "empty_gt_fp_rate": 0.875,
+          "dice_mean": 0.7444658602095239,
+          "dice_std": 0.24717762677856453,
+          "iou_mean": 0.6412626611368194,
+          "iou_std": 0.2497422585122262,
+          "hd95_mean": 20.939409341401173,
+          "hd95_std": 23.55337271390822
+        },
+        "vein": {
+          "n_non_empty": 270,
+          "n_empty_gt": 1,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 0.0,
+          "empty_gt_fp_rate": 1.0,
+          "dice_mean": 0.7751220884057578,
+          "dice_std": 0.14788731365640473,
+          "iou_mean": 0.6507291078064535,
+          "iou_std": 0.1512966838646187,
+          "hd95_mean": 31.501025974116647,
+          "hd95_std": 133.93748559974694
+        }
+      }
+    },
+    "chosen_ensemble_largest_component": {
+      "structure_mean_macro_dice": 0.7905194568343604,
+      "structure_mean_macro_hd95": 21.689699335309697,
+      "by_structure": {
+        "artery": {
+          "n_non_empty": 270,
+          "n_empty_gt": 1,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 0.0,
+          "empty_gt_fp_rate": 1.0,
+          "dice_mean": 0.7678707941014863,
+          "dice_std": 0.1816377069234447,
+          "iou_mean": 0.6502696383866509,
+          "iou_std": 0.18752764321492804,
+          "hd95_mean": 8.900010645419409,
+          "hd95_std": 7.863462827778385
+        },
+        "liver": {
+          "n_non_empty": 271,
+          "n_empty_gt": 0,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 1.0,
+          "empty_gt_fp_rate": 0.0,
+          "dice_mean": 0.8814173656062155,
+          "dice_std": 0.0687931744137769,
+          "iou_mean": 0.7928845086159776,
+          "iou_std": 0.08294181361362142,
+          "hd95_mean": 23.81764540784276,
+          "hd95_std": 14.011973880079125
+        },
+        "stomach": {
+          "n_non_empty": 263,
+          "n_empty_gt": 8,
+          "empty_gt_detected_count": 1,
+          "empty_gt_detection_rate": 0.125,
+          "empty_gt_fp_rate": 0.875,
+          "dice_mean": 0.7437064918956787,
+          "dice_std": 0.2476365175694425,
+          "iou_mean": 0.6404727095058248,
+          "iou_std": 0.2503044458427169,
+          "hd95_mean": 21.31429725639832,
+          "hd95_std": 23.957927650815776
+        },
+        "vein": {
+          "n_non_empty": 270,
+          "n_empty_gt": 1,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 0.0,
+          "empty_gt_fp_rate": 1.0,
+          "dice_mean": 0.7690831757340614,
+          "dice_std": 0.16320095421917957,
+          "iou_mean": 0.645679127017424,
+          "iou_std": 0.16070747414229383,
+          "hd95_mean": 32.7268440315783,
+          "hd95_std": 134.19021168693712
+        }
+      }
+    },
+    "chosen_ensemble_parta_settings": {
+      "structure_mean_macro_dice": 0.791364921701509,
+      "structure_mean_macro_hd95": 22.311767427640277,
+      "by_structure": {
+        "artery": {
+          "n_non_empty": 270,
+          "n_empty_gt": 1,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 0.0,
+          "empty_gt_fp_rate": 1.0,
+          "dice_mean": 0.7660053127479239,
+          "dice_std": 0.18515634008013504,
+          "iou_mean": 0.648735326747637,
+          "iou_std": 0.1906334675151499,
+          "hd95_mean": 8.850706830450765,
+          "hd95_std": 7.9990433184295675
+        },
+        "liver": {
+          "n_non_empty": 271,
+          "n_empty_gt": 0,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 1.0,
+          "empty_gt_fp_rate": 0.0,
+          "dice_mean": 0.879970617593073,
+          "dice_std": 0.055295214345498785,
+          "iou_mean": 0.7896166567253171,
+          "iou_std": 0.08059778821999423,
+          "hd95_mean": 26.372882450959917,
+          "hd95_std": 22.33700789455822
+        },
+        "stomach": {
+          "n_non_empty": 263,
+          "n_empty_gt": 8,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 0.0,
+          "empty_gt_fp_rate": 1.0,
+          "dice_mean": 0.7504005807309775,
+          "dice_std": 0.241154089399165,
+          "iou_mean": 0.6469676149709793,
+          "iou_std": 0.24500315341329507,
+          "hd95_mean": 21.296636397572122,
+          "hd95_std": 23.98848121681833
+        },
+        "vein": {
+          "n_non_empty": 270,
+          "n_empty_gt": 1,
+          "empty_gt_detected_count": 0,
+          "empty_gt_detection_rate": 0.0,
+          "empty_gt_fp_rate": 1.0,
+          "dice_mean": 0.7690831757340614,
+          "dice_std": 0.16320095421917957,
+          "iou_mean": 0.645679127017424,
+          "iou_std": 0.16070747414229383,
+          "hd95_mean": 32.7268440315783,
+          "hd95_std": 134.19021168693712
+        }
+      }
+    },
+    "bootstrap_paired_diff_ensemble_minus_best_single": {
+      "macro_dice": {
+        "obs_mean": 0.005686026027953784,
+        "ci_lower_95": 0.0021739624936875216,
+        "ci_upper_95": 0.009362882927637678
+      },
+      "macro_hd95": {
+        "obs_mean": 0.8742882958988935,
+        "ci_lower_95": -1.3168095267800226,
+        "ci_upper_95": 3.788824696465912
+      },
+      "by_structure_dice": {
+        "artery": {
+          "obs_mean": 0.010920679654275445,
+          "ci_lower_95": 0.003737780171430013,
+          "ci_upper_95": 0.01880185293414646
+        },
+        "liver": {
+          "obs_mean": 0.003766233943271806,
+          "ci_lower_95": 0.0018252674239006307,
+          "ci_upper_95": 0.005932029842390536
+        },
+        "stomach": {
+          "obs_mean": 0.00438638389975101,
+          "ci_lower_95": -0.00047536464812062486,
+          "ci_upper_95": 0.009696924913780918
+        },
+        "vein": {
+          "obs_mean": 0.003734048616124794,
+          "ci_lower_95": -0.0032923423659903493,
+          "ci_upper_95": 0.009418586165206222
+        }
+      },
+      "by_structure_hd95": {
+        "artery": {
+          "obs_mean": -1.22615522076979,
+          "ci_lower_95": -2.623028004060054,
+          "ci_upper_95": -0.26734340075879903
+        },
+        "liver": {
+          "obs_mean": -0.7576010086384913,
+          "ci_lower_95": -1.3673542087308204,
+          "ci_upper_95": -0.18302450866843825
+        },
+        "stomach": {
+          "obs_mean": -0.6565877771239579,
+          "ci_lower_95": -1.9039015219772846,
+          "ci_upper_95": 0.3463104563358265
+        },
+        "vein": {
+          "obs_mean": 6.105655517514024,
+          "ci_lower_95": -2.284576003413443,
+          "ci_upper_95": 18.019342758776297
+        }
+      }
+    },
+    "bootstrap_paired_diff_ensemble_largest_minus_best_single": {
+      "macro_dice": {
+        "obs_mean": 0.0038202638106522003,
+        "ci_lower_95": 0.00010601139930824073,
+        "ci_upper_95": 0.0077373337545423885
+      },
+      "macro_hd95": {
+        "obs_mean": 1.2174965900329697,
+        "ci_lower_95": -1.0714228212222383,
+        "ci_upper_95": 4.154133755372383
+      }
+    }
+  }
+}
