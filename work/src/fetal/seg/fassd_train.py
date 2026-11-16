@@ -86,6 +86,53 @@ def apply_color_jitter(
     return jittered
 
 
+def apply_gpu_batch_augmentations(
+    imgs: torch.Tensor,
+    masks: torch.Tensor,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Fast batch GPU augmentations: horizontal flip, affine, brightness/contrast, gaussian noise."""
+    b, _, _, _ = imgs.shape
+    device = imgs.device
+
+    # 1. Random horizontal flip (p=0.5)
+    flips = torch.rand(b, 1, 1, 1, device=device) < 0.5
+    imgs = torch.where(flips, torch.flip(imgs, dims=[3]), imgs)
+    masks = torch.where(flips, torch.flip(masks, dims=[3]), masks)
+
+    # 2. Random Affine: rotation (-10 to 10 deg), scale (0.95 to 1.05), translate (-0.05 to 0.05)
+    angles = (torch.rand(b, device=device) * 20.0 - 10.0) * (math.pi / 180.0)
+    scales = torch.rand(b, device=device) * 0.10 + 0.95
+    tx = torch.rand(b, device=device) * 0.10 - 0.05
+    ty = torch.rand(b, device=device) * 0.10 - 0.05
+
+    cos_a = torch.cos(angles) * scales
+    sin_a = torch.sin(angles) * scales
+
+    theta = torch.zeros(b, 2, 3, device=device)
+    theta[:, 0, 0] = cos_a
+    theta[:, 0, 1] = -sin_a
+    theta[:, 0, 2] = tx
+    theta[:, 1, 0] = sin_a
+    theta[:, 1, 1] = cos_a
+    theta[:, 1, 2] = ty
+
+    grid = F.affine_grid(theta, imgs.size(), align_corners=False)
+    imgs = F.grid_sample(imgs, grid, mode="bilinear", padding_mode="zeros", align_corners=False)
+    masks = F.grid_sample(masks, grid, mode="nearest", padding_mode="zeros", align_corners=False)
+
+    # 3. Brightness & contrast jitter
+    alpha = torch.empty(b, 1, 1, 1, device=device).uniform_(0.85, 1.15)
+    beta = torch.empty(b, 1, 1, 1, device=device).uniform_(-0.08, 0.08)
+    imgs = imgs * alpha + beta
+
+    # 4. Mild Gaussian noise (p=0.3)
+    if torch.rand(1, device=device).item() < 0.3:
+        noise = torch.randn_like(imgs) * 0.02
+        imgs = imgs + noise
+
+    return imgs, masks
+
+
 class FASSDKaggleDataset(Dataset):
     """Dataset for FASSD compact Kaggle format with bit-flag masks."""
 
@@ -98,6 +145,8 @@ class FASSDKaggleDataset(Dataset):
         target_size: tuple[int, int] = (384, 512),
         is_train: bool = True,
         seed: int | None = None,
+        cache_in_memory: bool = False,
+        batch_gpu_aug: bool = False,
     ):
         self.images_dir = Path(images_dir)
         self.masks_dir = Path(masks_dir)
@@ -107,7 +156,54 @@ class FASSDKaggleDataset(Dataset):
             raise ValueError(f"input_mode must be 'rgb' or 'gray', got '{input_mode}'")
         self.target_size = target_size  # (H, W)
         self.is_train = is_train
+        self.seed = seed
         self.rng = np.random.default_rng(seed)
+        self.cache_in_memory = cache_in_memory
+        self.batch_gpu_aug = batch_gpu_aug
+
+        self.cached_images: list[np.ndarray] = []
+        self.cached_masks: list[np.ndarray] = []
+
+        if self.cache_in_memory:
+            th, tw = self.target_size
+            for idx in range(len(self.df)):
+                row = self.df.iloc[idx]
+                fname = str(row["filename"])
+                stem = Path(fname).stem
+
+                img_path = self.images_dir / fname
+                if not img_path.exists():
+                    img_path = self.images_dir / f"{stem}.png"
+                img_bgr = cv2.imread(str(img_path), cv2.IMREAD_COLOR)
+                if img_bgr is None:
+                    raise FileNotFoundError(f"Failed to read image at {img_path}")
+
+                if self.input_mode == "gray":
+                    gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
+                    img_rgb = cv2.cvtColor(gray, cv2.COLOR_GRAY2RGB)
+                else:
+                    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+
+                mask_path = self.masks_dir / f"{stem}.png"
+                if not mask_path.exists():
+                    mask_path = self.masks_dir / fname
+                mask_raw = cv2.imread(str(mask_path), cv2.IMREAD_UNCHANGED)
+                if mask_raw is None:
+                    raise FileNotFoundError(f"Failed to read mask at {mask_path}")
+
+                c_masks = []
+                for name in STRUCTURE_NAMES:
+                    flag = STRUCTURE_BITFLAGS[name]
+                    c_masks.append(((mask_raw & flag) > 0).astype(np.uint8))
+                multi_mask = np.stack(c_masks, axis=-1)
+
+                img_resized = cv2.resize(img_rgb, (tw, th), interpolation=cv2.INTER_LINEAR)
+                mask_resized = cv2.resize(multi_mask, (tw, th), interpolation=cv2.INTER_NEAREST)
+                if mask_resized.ndim == 2:
+                    mask_resized = mask_resized[:, :, None]
+
+                self.cached_images.append(img_resized)
+                self.cached_masks.append(mask_resized)
 
     def __len__(self) -> int:
         return len(self.df)
@@ -118,6 +214,31 @@ class FASSDKaggleDataset(Dataset):
         stem = Path(fname).stem
         patient = str(row["patient"])
         group = str(row.get("group", patient))
+
+        if self.cache_in_memory:
+            img_rgb = self.cached_images[idx]
+            mask_resized = self.cached_masks[idx]
+
+            if self.is_train and not self.batch_gpu_aug:
+                if self.rng.random() < 0.5:
+                    img_rgb = np.fliplr(img_rgb).copy()
+                    mask_resized = np.fliplr(mask_resized).copy()
+                img_rgb, mask_resized = apply_affine_augmentation(img_rgb, mask_resized, rng=self.rng)
+                img_rgb = apply_color_jitter(img_rgb, rng=self.rng)
+
+            img_float = img_rgb.astype(np.float32) / 255.0
+            img_norm = (img_float - IMAGENET_MEAN) / IMAGENET_STD
+            img_tensor = torch.from_numpy(img_norm.transpose(2, 0, 1)).float()
+            mask_tensor = torch.from_numpy(mask_resized.transpose(2, 0, 1)).float()
+
+            return {
+                "image": img_tensor,
+                "mask": mask_tensor,
+                "filename": fname,
+                "patient": patient,
+                "group": group,
+                "native_size": (768, 1024),
+            }
 
         img_path = self.images_dir / fname
         if not img_path.exists():
@@ -140,7 +261,7 @@ class FASSDKaggleDataset(Dataset):
             raise FileNotFoundError(f"Failed to read mask at {mask_path}")
 
         # Augmentation on native resolution
-        if self.is_train:
+        if self.is_train and not self.batch_gpu_aug:
             # Horizontal flip
             if self.rng.random() < 0.5:
                 img_rgb = np.fliplr(img_rgb).copy()
@@ -231,14 +352,37 @@ def build_fassd_model(
     encoder_weights: str | None = "imagenet",
     in_channels: int = 3,
     classes: int = 4,
+    arch: str = "unet",
 ) -> nn.Module:
-    """Build U-Net segmentation network with smp."""
-    return smp.Unet(
-        encoder_name=encoder_name,
-        encoder_weights=encoder_weights,
-        in_channels=in_channels,
-        classes=classes,
-    )
+    """Build segmentation network with smp supporting unet, unetplusplus, and fpn backbones."""
+    arch_norm = arch.lower().replace("-", "").replace("_", "")
+    enc_name = encoder_name.lower()
+    if enc_name == "convnext_tiny":
+        enc_name = "tu-convnext_tiny"
+
+    if arch_norm == "unet":
+        return smp.Unet(
+            encoder_name=enc_name,
+            encoder_weights=encoder_weights,
+            in_channels=in_channels,
+            classes=classes,
+        )
+    elif arch_norm in ("unetplusplus", "unet++"):
+        return smp.UnetPlusPlus(
+            encoder_name=enc_name,
+            encoder_weights=encoder_weights,
+            in_channels=in_channels,
+            classes=classes,
+        )
+    elif arch_norm == "fpn":
+        return smp.FPN(
+            encoder_name=enc_name,
+            encoder_weights=encoder_weights,
+            in_channels=in_channels,
+            classes=classes,
+        )
+    else:
+        raise ValueError(f"Unsupported arch: '{arch}'. Choose from: 'unet', 'unetplusplus', 'fpn'.")
 
 
 class ModelEMA:
@@ -281,14 +425,20 @@ def compute_hd95(pred_binary: np.ndarray, gt_binary: np.ndarray) -> float:
     if p_sum == 0 or g_sum == 0:
         return diag
 
-    # Surface contour extraction
-    p_border = pred_binary ^ binary_erosion(pred_binary)
-    g_border = gt_binary ^ binary_erosion(gt_binary)
+    # Surface contour extraction with explicit boolean masks
+    p_bool = (pred_binary > 0)
+    g_bool = (gt_binary > 0)
+
+    p_border = p_bool ^ binary_erosion(p_bool)
+    g_border = g_bool ^ binary_erosion(g_bool)
 
     if not np.any(p_border):
-        p_border = pred_binary
+        p_border = p_bool
     if not np.any(g_border):
-        g_border = gt_binary
+        g_border = g_bool
+
+    p_border = (p_border > 0)
+    g_border = (g_border > 0)
 
     dt_gt = distance_transform_edt(~g_border)
     dt_pred = distance_transform_edt(~p_border)
@@ -527,9 +677,11 @@ def train_fassd(
     output_dir: str | Path,
     split_csv: str | Path,
     input_mode: str = "rgb",
+    arch: str = "unet",
     encoder_name: str = "efficientnet-b4",
     encoder_weights: str | None = "imagenet",
-    epochs: int = 60,
+    epochs: int = 40,
+    patience: int = 10,
     batch_size: int = 8,
     lr: float = 3e-4,
     weight_decay: float = 1e-2,
@@ -537,8 +689,11 @@ def train_fassd(
     device: str | None = None,
     smoke: bool = False,
     ema_decay: float = 0.999,
+    cache_in_memory: bool = True,
+    batch_gpu_aug: bool = True,
+    channels_last: bool = True,
 ) -> dict[str, Any]:
-    """Train FASSD multilabel segmentation model with AMP and EMA."""
+    """Train FASSD multilabel segmentation model with AMP, EMA, caching, and batch GPU aug."""
     # Determinism
     random.seed(seed)
     np.random.seed(seed)
@@ -571,22 +726,63 @@ def train_fassd(
         batch_size = min(batch_size, 2)
         encoder_name = "resnet18"
         encoder_weights = None
+        arch = "unet"
+        cache_in_memory = False
+        batch_gpu_aug = False
     else:
         train_df = df_splits[df_splits["split"] == "train"]
         val_df = df_splits[df_splits["split"] == "val"]
         test_df = df_splits[df_splits["split"] == "test"]
 
-    train_ds = FASSDKaggleDataset(img_dir, mask_dir, train_df, input_mode=input_mode, is_train=True, seed=seed)
-    val_ds = FASSDKaggleDataset(img_dir, mask_dir, val_df, input_mode=input_mode, is_train=False, seed=seed)
-    test_ds = FASSDKaggleDataset(img_dir, mask_dir, test_df, input_mode=input_mode, is_train=False, seed=seed)
+    train_ds = FASSDKaggleDataset(
+        img_dir,
+        mask_dir,
+        train_df,
+        input_mode=input_mode,
+        is_train=True,
+        seed=seed,
+        cache_in_memory=cache_in_memory,
+        batch_gpu_aug=batch_gpu_aug,
+    )
+    val_ds = FASSDKaggleDataset(
+        img_dir,
+        mask_dir,
+        val_df,
+        input_mode=input_mode,
+        is_train=False,
+        seed=seed,
+        cache_in_memory=cache_in_memory,
+        batch_gpu_aug=False,
+    )
+    test_ds = FASSDKaggleDataset(
+        img_dir,
+        mask_dir,
+        test_df,
+        input_mode=input_mode,
+        is_train=False,
+        seed=seed,
+        cache_in_memory=cache_in_memory,
+        batch_gpu_aug=False,
+    )
 
     num_workers = 0 if os.name == "nt" or smoke else 2
-    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers, drop_last=False)
-    val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
-    test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+    pin_memory = (device_obj.type == "cuda")
+    train_loader = DataLoader(
+        train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers, pin_memory=pin_memory, drop_last=False
+    )
+    val_loader = DataLoader(
+        val_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=pin_memory
+    )
+    test_loader = DataLoader(
+        test_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=pin_memory
+    )
 
-    model = build_fassd_model(encoder_name=encoder_name, encoder_weights=encoder_weights, in_channels=3, classes=4)
+    model = build_fassd_model(
+        arch=arch, encoder_name=encoder_name, encoder_weights=encoder_weights, in_channels=3, classes=4
+    )
     model = model.to(device_obj)
+    if channels_last and device_obj.type == "cuda":
+        model = model.to(memory_format=torch.channels_last)
 
     ema = ModelEMA(model, decay=ema_decay)
 
@@ -599,9 +795,10 @@ def train_fassd(
 
     best_val_dice = -1.0
     best_epoch = -1
+    no_improve_epochs = 0
     log_rows: list[dict[str, Any]] = []
 
-    print(f"Starting training on {device_obj}: {epochs} epochs, input={input_mode}, encoder={encoder_name}, weights={encoder_weights}")
+    print(f"Starting training on {device_obj}: {epochs} epochs, patience={patience}, arch={arch}, input={input_mode}, encoder={encoder_name}, weights={encoder_weights}, wd={weight_decay}")
     start_time = time.time()
 
     for epoch in range(1, epochs + 1):
@@ -614,6 +811,12 @@ def train_fassd(
         for batch in train_loader:
             imgs = batch["image"].to(device_obj)
             masks = batch["mask"].to(device_obj)
+
+            if batch_gpu_aug and device_obj.type == "cuda":
+                imgs, masks = apply_gpu_batch_augmentations(imgs, masks)
+
+            if channels_last and device_obj.type == "cuda":
+                imgs = imgs.to(memory_format=torch.channels_last)
 
             optimizer.zero_grad()
             if use_amp:
@@ -665,21 +868,30 @@ def train_fassd(
         if val_dice > best_val_dice:
             best_val_dice = val_dice
             best_epoch = epoch
+            no_improve_epochs = 0
             torch.save({
                 "epoch": epoch,
                 "model_state_dict": ema.module.state_dict(),
                 "val_macro_dice": val_dice,
                 "val_eval": val_eval,
+                "arch": arch,
                 "encoder_name": encoder_name,
                 "input_mode": input_mode,
             }, str(best_model_path))
+        else:
+            no_improve_epochs += 1
+            if patience > 0 and no_improve_epochs >= patience:
+                print(f"Early stopping triggered at epoch {epoch}: no improvement for {patience} epochs.")
+                break
 
     pd.DataFrame(log_rows).to_csv(csv_log_path, index=False)
     print(f"Training completed in {time.time() - start_time:.2f}s. Best epoch: {best_epoch} (Val Dice: {best_val_dice:.4f})")
 
     # Evaluate TEST set once at the end with the best-val checkpoint
     checkpoint = torch.load(str(best_model_path), map_location=device_obj)
-    best_model = build_fassd_model(encoder_name=encoder_name, encoder_weights=None, in_channels=3, classes=4)
+    best_model = build_fassd_model(
+        arch=arch, encoder_name=encoder_name, encoder_weights=None, in_channels=3, classes=4
+    )
     best_model.load_state_dict(checkpoint["model_state_dict"])
     best_model = best_model.to(device_obj)
 
@@ -693,15 +905,20 @@ def train_fassd(
             "data_root": str(data_root),
             "split_csv": str(split_csv),
             "input_mode": input_mode,
+            "arch": arch,
             "encoder_name": encoder_name,
             "encoder_weights": encoder_weights,
             "epochs": epochs,
+            "patience": patience,
             "batch_size": batch_size,
             "lr": lr,
             "weight_decay": weight_decay,
             "seed": seed,
             "smoke": smoke,
             "ema_decay": ema_decay,
+            "cache_in_memory": cache_in_memory,
+            "batch_gpu_aug": batch_gpu_aug,
+            "channels_last": channels_last,
         },
         "best_epoch": best_epoch,
         "best_val_macro_dice": best_val_dice,

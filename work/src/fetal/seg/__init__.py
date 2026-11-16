@@ -1,6 +1,6 @@
 """FASSD fetal abdominal structures segmentation module."""
 
-from fetal.seg.fassd_train import (
+from .fassd_train import (
     FASSDKaggleDataset,
     FASSDMultiLabelLoss,
     ModelEMA,
