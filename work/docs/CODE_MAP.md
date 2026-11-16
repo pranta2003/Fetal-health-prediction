@@ -129,10 +129,13 @@ Fetal Abdominal Structures Segmentation Dataset (artery, liver, stomach, vein). 
 | 2 Proof | `scripts/make_fassd_audit_notebook.py` | Generates benchmark notebook for FASSD audit |
 | 3 Train / Model | `src/fetal/seg/fassd_train.py` | 4-channel sigmoid multilabel segmentation dataset, U-Net architecture, combined BCE+Dice loss, Model EMA, surface HD95, and patient bootstrap |
 | 3 Training Script | `scripts/35_fassd_train.py` | CLI training runner on Kaggle T4 GPU or CPU smoke mode with cosine annealing, AMP, and JSON/CSV logging |
-| 4 Kaggle Kernel | `scripts/make_fassd_kaggle_notebook.py` | Generates `notebooks/kaggle/fassd_train_kernel.ipynb` for multi-seed RGB and Gray experiments |
-| Proof | `notebooks/benchmarks/fassd_audit.ipynb` | Executed notebook rendering FASSD audit tables, split integrity, and overlay paths |
+| 4 Kaggle Kernel | `scripts/make_fassd_kaggle_notebook.py`, `scripts/make_fassd_kaggle_notebook_round2.py` | Generates `notebooks/kaggle/fassd_train_kernel.ipynb` and Round 2 training orchestration |
+| 5 Post-processing | `src/fetal/seg/fassd_postproc.py` | Connected components, area filtering, threshold tuning, and post-processing evaluation |
+| 5 Post-processing Runner | `scripts/36_fassd_postproc.py` | Executes validation hyperparameter tuning, test set evaluation, and paired bootstrap CIs |
+| 5 Proof | `scripts/make_fassd_postproc_notebook.py` | Generates benchmark notebook for FASSD post-processing |
+| Proof | `notebooks/benchmarks/fassd_audit.ipynb`, `notebooks/benchmarks/fassd_postproc.ipynb` | Executed notebooks rendering FASSD audit tables, split integrity, overlays, and post-processing results |
 | Proof | `notebooks/kaggle/fassd_train_kernel.ipynb` | Kaggle GPU training orchestration notebook |
-| Proof | `tests/test_fassd_audit.py`, `tests/test_fassd_train.py` | Unit tests for patient ID parsing, array loading, synthetic segmentation dataset, loss functions, EMA, and metric edge cases |
+| Proof | `tests/test_fassd_audit.py`, `tests/test_fassd_train.py`, `tests/test_fassd_postproc.py` | Unit tests for patient ID parsing, array loading, synthetic segmentation dataset, loss functions, EMA, metric edge cases, morphology, and post-processing |
 | Results | `docs/results/fassd/` | Audit JSON, markdown report, patient-grouped split_v1.csv, group-partitioned split_v2.csv, 12 sample overlays, and SHA256SUMS |
 
 ## SHARED HELPERS
@@ -140,7 +143,7 @@ Fetal Abdominal Structures Segmentation Dataset (artery, liver, stomach, vein). 
 |---|---|
 | `src/fetal/config.py` + `configs/paths.yaml` | Where the data and weights live (one place) |
 | `src/fetal/train/checkpoint.py` | Saves and loads model weights |
-| `scripts/08_make_manifest.py`, `scripts/14_hash_results.py`, `scripts/16_extract_notebook_results.py`, `scripts/make_bench_notebooks.py`, `scripts/20_benchmark_summary.py` | Make and check file fingerprints, extract historical metrics from notebooks, construct benchmark notebooks, and generate supervisor summary |
+| `scripts/08_make_manifest.py`, `scripts/14_hash_results.py`, `scripts/16_extract_notebook_results.py`, `scripts/make_bench_notebooks.py`, `scripts/20_benchmark_summary.py`, `scripts/check_secrets.py` | Make and check file fingerprints, extract historical metrics from notebooks, construct benchmark notebooks, generate supervisor summary, and pre-commit secret scans |
 | `notebooks/benchmarks/benchmark_summary.ipynb` | Executed notebook synthesizing multi-modal benchmark summary |
 | `docs/results/published_refs.json`, `docs/results/benchmark_summary.md` | Published reference numbers with URLs/protocols, and synthesized executive summary table |
 | `tests/test_benchmark_summary.py` | Unit tests ensuring AC Ours/Claim consistency, published references, and dynamic ladder notes |

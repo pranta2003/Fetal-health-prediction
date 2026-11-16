@@ -425,14 +425,20 @@ def compute_hd95(pred_binary: np.ndarray, gt_binary: np.ndarray) -> float:
     if p_sum == 0 or g_sum == 0:
         return diag
 
-    # Surface contour extraction
-    p_border = pred_binary ^ binary_erosion(pred_binary)
-    g_border = gt_binary ^ binary_erosion(gt_binary)
+    # Surface contour extraction with explicit boolean masks
+    p_bool = (pred_binary > 0)
+    g_bool = (gt_binary > 0)
+
+    p_border = p_bool ^ binary_erosion(p_bool)
+    g_border = g_bool ^ binary_erosion(g_bool)
 
     if not np.any(p_border):
-        p_border = pred_binary
+        p_border = p_bool
     if not np.any(g_border):
-        g_border = gt_binary
+        g_border = g_bool
+
+    p_border = (p_border > 0)
+    g_border = (g_border > 0)
 
     dt_gt = distance_transform_edt(~g_border)
     dt_pred = distance_transform_edt(~p_border)

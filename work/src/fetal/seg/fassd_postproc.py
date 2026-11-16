@@ -62,10 +62,9 @@ def apply_morphology(bin_mask: np.ndarray, morph_type: str, min_area: int = 0) -
         return out
 
     if morph_type == "min_area":
-        for lbl in range(1, num_labels):
-            if stats[lbl, cv2.CC_STAT_AREA] >= min_area:
-                out[labels == lbl] = 1
-        return out
+        lookup = (stats[:, cv2.CC_STAT_AREA] >= min_area).astype(np.uint8)
+        lookup[0] = 0
+        return lookup[labels]
 
     raise ValueError(f"Unknown morph_type '{morph_type}'. Expected 'none', 'largest', or 'min_area'.")
 
@@ -121,6 +120,7 @@ def evaluate_structure_predictions(
     threshold: float,
     morph_type: str,
     min_area: int,
+    compute_hd: bool = True,
 ) -> dict[str, Any]:
     """Evaluate a single structure across a list of images under given postproc settings."""
     dices = []
@@ -145,11 +145,12 @@ def evaluate_structure_predictions(
             union = int(np.logical_or(p_bin, g_bin).sum())
             dice = float((2.0 * intersection) / (p_sum + g_sum))
             iou = float(intersection / union) if union > 0 else 0.0
-            hd = compute_hd95(p_bin, g_bin)
+            hd = compute_hd95(p_bin, g_bin) if compute_hd else 0.0
 
             dices.append(dice)
             ious.append(iou)
-            hd95s.append(hd)
+            if compute_hd:
+                hd95s.append(hd)
 
     empty_rate = float(empty_gt_detected / empty_gt_total) if empty_gt_total > 0 else 1.0
     non_empty_pred_rate = 1.0 - empty_rate if empty_gt_total > 0 else 0.0
@@ -183,6 +184,7 @@ def tune_val_grid(
         morph_candidates.append(("min_area", a, f"min_area_{a}"))
 
     for struct in STRUCTURE_NAMES:
+        print(f"  Tuning structure: {struct}...", flush=True)
         probs = val_probs_by_struct[struct]
         gts = val_gts_by_struct[struct]
 
@@ -193,7 +195,7 @@ def tune_val_grid(
         for t in threshold_grid:
             for m_type, m_area, m_name in morph_candidates:
                 res = evaluate_structure_predictions(
-                    probs, gts, threshold=t, morph_type=m_type, min_area=m_area
+                    probs, gts, threshold=t, morph_type=m_type, min_area=m_area, compute_hd=False
                 )
                 dice = res["dice_mean"]
                 candidate_record = {

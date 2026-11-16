@@ -1,0 +1,17 @@
+{
+  "id": "prantakumerpandit390/fassd-train-round2",
+  "title": "fassd-train-round2",
+  "code_file": "fassd_train_kernel_round2.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "prantakumerpandit390/fassd-fetal-abdomen-v2",
+    "prantakumerpandit390/fetal-code-snapshot"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
