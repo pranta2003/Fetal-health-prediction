@@ -132,10 +132,12 @@ Fetal Abdominal Structures Segmentation Dataset (artery, liver, stomach, vein). 
 | 4 Kaggle Kernel | `scripts/make_fassd_kaggle_notebook.py`, `scripts/make_fassd_kaggle_notebook_round2.py` | Generates `notebooks/kaggle/fassd_train_kernel.ipynb` and Round 2 training orchestration |
 | 5 Post-processing | `src/fetal/seg/fassd_postproc.py` | Connected components, area filtering, threshold tuning, and post-processing evaluation |
 | 5 Post-processing Runner | `scripts/36_fassd_postproc.py` | Executes validation hyperparameter tuning, test set evaluation, and paired bootstrap CIs |
-| 5 Proof | `scripts/make_fassd_postproc_notebook.py` | Generates benchmark notebook for FASSD post-processing |
-| Proof | `notebooks/benchmarks/fassd_audit.ipynb`, `notebooks/benchmarks/fassd_postproc.ipynb` | Executed notebooks rendering FASSD audit tables, split integrity, overlays, and post-processing results |
+| 5 Proof | `scripts/make_fassd_postproc_notebook.py`, `scripts/make_fassd_ensemble_notebook.py` | Generates benchmark notebooks for FASSD post-processing and ensembling |
+| 6 Ensembling | `src/fetal/seg/fassd_ensemble.py` | Probability map averaging, validation ensemble candidate selection, and test bootstrap evaluation |
+| 6 Ensembling Runner | `scripts/37_fassd_ensemble.py` | Executes multi-model probability ensembling study, candidate selection, test evaluation, and CIs |
+| Proof | `notebooks/benchmarks/fassd_audit.ipynb`, `notebooks/benchmarks/fassd_postproc.ipynb`, `notebooks/benchmarks/fassd_ensemble.ipynb` | Executed notebooks rendering FASSD audit tables, split integrity, overlays, post-processing, and ensembling |
 | Proof | `notebooks/kaggle/fassd_train_kernel.ipynb` | Kaggle GPU training orchestration notebook |
-| Proof | `tests/test_fassd_audit.py`, `tests/test_fassd_train.py`, `tests/test_fassd_postproc.py` | Unit tests for patient ID parsing, array loading, synthetic segmentation dataset, loss functions, EMA, metric edge cases, morphology, and post-processing |
+| Proof | `tests/test_fassd_audit.py`, `tests/test_fassd_train.py`, `tests/test_fassd_postproc.py`, `tests/test_fassd_ensemble.py` | Unit tests for patient ID parsing, array loading, synthetic segmentation dataset, loss functions, EMA, metric edge cases, morphology, post-processing, and ensembling |
 | Results | `docs/results/fassd/` | Audit JSON, markdown report, patient-grouped split_v1.csv, group-partitioned split_v2.csv, 12 sample overlays, and SHA256SUMS |
 
 ## SHARED HELPERS
