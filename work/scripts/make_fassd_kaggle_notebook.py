@@ -1,10 +1,10 @@
 """make_fassd_kaggle_notebook.py: Generate notebooks/kaggle/fassd_train_kernel.ipynb.
 
 Creates the training notebook for Kaggle (T4 GPU), orchestrating experiments across:
-- seeds: 42, 43, 44
-- input modes: rgb and gray
-- model: smp.Unet (efficientnet-b4, ImageNet weights)
-- outputs saved to /kaggle/working
+- Code snapshot mounted from private dataset: prantakumerpandit390/fetal-code-snapshot
+- Data mounted from private dataset: prantakumerpandit390/fassd-fetal-abdomen-v2
+- Configurable RUNS list: executes (seed 42, rgb) and (seed 42, gray) now
+- Outputs saved to /kaggle/working
 """
 
 from __future__ import annotations
@@ -40,34 +40,81 @@ def build_notebook() -> dict:
     add_markdown("""# FASSD Multilabel Segmentation Training Kernel
 **Fetal Abdominal Structures Segmentation (artery, liver, stomach, vein)**
 - Architecture: U-Net with `efficientnet-b4` encoder (ImageNet weights)
-- Target size: $384 \\times 512$ (native aspect-ratio of $768 \\times 1024$)
+- Input Resolution: $384 \\times 512$ (native aspect-ratio of $768 \\times 1024$)
 - Loss: Combined BCE + Soft-Dice multilabel loss (sigmoid activation)
 - Optimization: AdamW, cosine annealing, AMP, Model EMA
-- Runs: 3 seeds (42, 43, 44) $\\times$ 2 input modes (`rgb` vs `gray`)
-- Metrics: Native resolution ($768 \\times 1024$) Dice, IoU, surface HD95, patient bootstrap 95% CI
+- Evaluation: Native resolution ($768 \\times 1024$) Dice, IoU, surface HD95, patient bootstrap 95% CI
+- Codebase: Mounted from private snapshot dataset `prantakumerpandit390/fetal-code-snapshot`
+- Data: Mounted from private dataset `prantakumerpandit390/fassd-fetal-abdomen-v2`
 """)
 
-    # Setup
-    add_markdown("## 1. Setup & Environment")
-    add_code("""# Clone repository using Kaggle Secret GITHUB_TOKEN
-from kaggle_secrets import UserSecretsClient
+    # Run configuration
+    add_markdown("## 1. Run Configuration")
+    add_code("""# Select active experiment runs (seed 42 RGB and Gray active; remaining runs commented)
+RUNS = [
+    {"mode": "rgb", "seed": 42},
+    {"mode": "gray", "seed": 42},
+    # Future planned runs:
+    # {"mode": "rgb", "seed": 43},
+    # {"mode": "rgb", "seed": 44},
+    # {"mode": "gray", "seed": 43},
+    # {"mode": "gray", "seed": 44},
+]
+
+print(f"Active runs to execute ({len(RUNS)}):")
+for r in RUNS:
+    print(f"  - mode: {r['mode']}, seed: {r['seed']}")
+""")
+
+    # Environment setup
+    add_markdown("## 2. Environment & Codebase Setup")
+    add_code("""# Setup codebase from private snapshot dataset (no GitHub PAT / clone required)
 import os
-import subprocess
+import shutil
+import sys
+from pathlib import Path
 
-user_secrets = UserSecretsClient()
-github_pat = user_secrets.get_secret("GITHUB_TOKEN")
+print("Scanning /kaggle/input...")
+if Path("/kaggle/input").exists():
+    for p in Path("/kaggle/input").glob("*"):
+        print(" ", p)
 
-repo_url = f"https://{github_pat}@github.com/pranta2003/fetal-health-multimodal.git"
-repo_dir = "/kaggle/working/repo"
+code_input = None
+candidates = [
+    Path("/kaggle/input/fetal-code-snapshot"),
+    Path("/kaggle/input/datasets/prantakumerpandit390/fetal-code-snapshot"),
+]
+for c in candidates:
+    if c.exists() and (c / "COMMIT.txt").exists():
+        code_input = c
+        break
 
-if not os.path.exists(repo_dir):
-    subprocess.run(["git", "clone", "--depth", "1", repo_url, repo_dir], check=True)
-os.chdir(os.path.join(repo_dir, "work"))
-print("Current working directory:", os.getcwd())
+if code_input is None and Path("/kaggle/input").exists():
+    for p in Path("/kaggle/input").rglob("COMMIT.txt"):
+        code_input = p.parent
+        break
+
+if code_input is None:
+    raise FileNotFoundError("Could not find fetal-code-snapshot in /kaggle/input")
+
+print(f"Found code snapshot at: {code_input}")
+work_dir = Path("/kaggle/working/code")
+
+if not work_dir.exists():
+    shutil.copytree(code_input, work_dir)
+
+commit_file = work_dir / "COMMIT.txt"
+if commit_file.exists():
+    print("Code Snapshot Commit:", commit_file.read_text().strip())
+
+os.chdir(work_dir)
+if str(work_dir / "src") not in sys.path:
+    sys.path.insert(0, str(work_dir / "src"))
+print("Current Working Directory:", os.getcwd())
 """)
 
     add_code("""# Install required dependencies
-!pip install --quiet segmentation-models-pytorch opencv-python-headless
+!pip install --quiet segmentation-models-pytorch
 """)
 
     add_code("""# Verify GPU and Dataset
@@ -77,95 +124,74 @@ from pathlib import Path
 print("CUDA available:", torch.cuda.is_available())
 if torch.cuda.is_available():
     print("Device name:", torch.cuda.get_device_name(0))
+    !nvidia-smi
 
-data_root = Path("/kaggle/input/fassd-fetal-abdomen-v2")
-print("Dataset directory exists:", data_root.exists())
-if data_root.exists():
-    n_imgs = len(list((data_root / "images").glob("*.png")))
-    n_masks = len(list((data_root / "masks").glob("*.png")))
-    print(f"Dataset images: {n_imgs}, masks: {n_masks}")
+data_root = None
+data_candidates = [
+    Path("/kaggle/input/fassd-fetal-abdomen-v2"),
+    Path("/kaggle/input/datasets/prantakumerpandit390/fassd-fetal-abdomen-v2"),
+]
+for c in data_candidates:
+    if c.exists() and (c / "meta.csv").exists():
+        data_root = c
+        break
+
+if data_root is None and Path("/kaggle/input").exists():
+    for p in Path("/kaggle/input").rglob("meta.csv"):
+        if (p.parent / "images").is_dir() and (p.parent / "masks").is_dir():
+            data_root = p.parent
+            break
+
+if data_root is None:
+    raise FileNotFoundError("Could not find fassd-fetal-abdomen-v2 in /kaggle/input")
+
+print("Dataset directory:", data_root)
+n_imgs = len(list((data_root / "images").glob("*.png")))
+n_masks = len(list((data_root / "masks").glob("*.png")))
+meta_exists = (data_root / "meta.csv").exists()
+print(f"Dataset images: {n_imgs}, masks: {n_masks}, meta.csv: {meta_exists}")
 """)
 
-    # RGB experiments
-    add_markdown("## 2. Experiments: RGB Input Mode (Seeds 42, 43, 44)")
-    add_code("""# --- RGB Mode: Seed 42 ---
-!python scripts/35_fassd_train.py \\
-    --data-root /kaggle/input/fassd-fetal-abdomen-v2 \\
-    --output-dir /kaggle/working/fassd_rgb_seed42 \\
-    --input rgb \\
-    --encoder efficientnet-b4 \\
-    --encoder-weights imagenet \\
-    --epochs 60 \\
-    --batch-size 8 \\
-    --lr 3e-4 \\
-    --seed 42
-""")
+    # Execution loop
+    add_markdown("## 3. Training Execution")
+    add_code("""# Execute configured runs sequentially
+import subprocess
+import sys
 
-    add_code("""# --- RGB Mode: Seed 43 ---
-!python scripts/35_fassd_train.py \\
-    --data-root /kaggle/input/fassd-fetal-abdomen-v2 \\
-    --output-dir /kaggle/working/fassd_rgb_seed43 \\
-    --input rgb \\
-    --encoder efficientnet-b4 \\
-    --encoder-weights imagenet \\
-    --epochs 60 \\
-    --batch-size 8 \\
-    --lr 3e-4 \\
-    --seed 43
-""")
+for run_cfg in RUNS:
+    mode = run_cfg["mode"]
+    seed = run_cfg["seed"]
+    out_dir = f"/kaggle/working/fassd_{mode}_seed{seed}"
+    print(f"\\n{'='*70}\\nSTARTING RUN: mode={mode}, seed={seed}\\nOutput: {out_dir}\\n{'='*70}")
 
-    add_code("""# --- RGB Mode: Seed 44 ---
-!python scripts/35_fassd_train.py \\
-    --data-root /kaggle/input/fassd-fetal-abdomen-v2 \\
-    --output-dir /kaggle/working/fassd_rgb_seed44 \\
-    --input rgb \\
-    --encoder efficientnet-b4 \\
-    --encoder-weights imagenet \\
-    --epochs 60 \\
-    --batch-size 8 \\
-    --lr 3e-4 \\
-    --seed 44
-""")
+    cmd = [
+        sys.executable,
+        "scripts/35_fassd_train.py",
+        "--data-root",
+        str(data_root),
+        "--split-csv",
+        str(work_dir / "docs/results/fassd/split_v2.csv"),
+        "--output-dir",
+        out_dir,
+        "--input",
+        mode,
+        "--encoder",
+        "efficientnet-b4",
+        "--encoder-weights",
+        "imagenet",
+        "--epochs",
+        "60",
+        "--batch-size",
+        "8",
+        "--lr",
+        "3e-4",
+        "--seed",
+        str(seed),
+    ]
 
-    # Gray experiments
-    add_markdown("## 3. Experiments: Grayscale Input Mode (Seeds 42, 43, 44)")
-    add_code("""# --- Gray Mode: Seed 42 ---
-!python scripts/35_fassd_train.py \\
-    --data-root /kaggle/input/fassd-fetal-abdomen-v2 \\
-    --output-dir /kaggle/working/fassd_gray_seed42 \\
-    --input gray \\
-    --encoder efficientnet-b4 \\
-    --encoder-weights imagenet \\
-    --epochs 60 \\
-    --batch-size 8 \\
-    --lr 3e-4 \\
-    --seed 42
-""")
-
-    add_code("""# --- Gray Mode: Seed 43 ---
-!python scripts/35_fassd_train.py \\
-    --data-root /kaggle/input/fassd-fetal-abdomen-v2 \\
-    --output-dir /kaggle/working/fassd_gray_seed43 \\
-    --input gray \\
-    --encoder efficientnet-b4 \\
-    --encoder-weights imagenet \\
-    --epochs 60 \\
-    --batch-size 8 \\
-    --lr 3e-4 \\
-    --seed 43
-""")
-
-    add_code("""# --- Gray Mode: Seed 44 ---
-!python scripts/35_fassd_train.py \\
-    --data-root /kaggle/input/fassd-fetal-abdomen-v2 \\
-    --output-dir /kaggle/working/fassd_gray_seed44 \\
-    --input gray \\
-    --encoder efficientnet-b4 \\
-    --encoder-weights imagenet \\
-    --epochs 60 \\
-    --batch-size 8 \\
-    --lr 3e-4 \\
-    --seed 44
+    ret = subprocess.run(cmd)
+    if ret.returncode != 0:
+        raise RuntimeError(f"Run failed with return code {ret.returncode} for mode={mode}, seed={seed}")
 """)
 
     # Summary
@@ -175,17 +201,11 @@ import json
 from pathlib import Path
 import pandas as pd
 
-runs = [
-    ("rgb", 42, "/kaggle/working/fassd_rgb_seed42/train_summary.json"),
-    ("rgb", 43, "/kaggle/working/fassd_rgb_seed43/train_summary.json"),
-    ("rgb", 44, "/kaggle/working/fassd_rgb_seed44/train_summary.json"),
-    ("gray", 42, "/kaggle/working/fassd_gray_seed42/train_summary.json"),
-    ("gray", 43, "/kaggle/working/fassd_gray_seed43/train_summary.json"),
-    ("gray", 44, "/kaggle/working/fassd_gray_seed44/train_summary.json"),
-]
-
 rows = []
-for mode, seed, path_str in runs:
+for run_cfg in RUNS:
+    mode = run_cfg["mode"]
+    seed = run_cfg["seed"]
+    path_str = f"/kaggle/working/fassd_{mode}_seed{seed}/train_summary.json"
     p = Path(path_str)
     if p.exists():
         with open(p) as f:
