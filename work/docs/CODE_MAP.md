@@ -73,6 +73,9 @@ File names tell you the part. The prefix is the part:
 | History Proof | `notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | Executed notebook displaying AC lab-PC history proof tables, log excerpts, and assertions |
 | History Proof | `tests/test_ac_lab_history.py` | Unit tests checking all AC lab-PC history proof assertions pass on committed inputs |
 | History Results | `docs/results/ac_lab_pc/history_table.json`, `docs/results/ac_lab_pc/history_table.md` | AC lab-PC history tables and fact check audit |
+| Campaign Step 0 | `scripts/38_ac_step0_audit.py` | Read-only dataset audit, SHA-256 duplicate image verification, timing parser, and campaign planning |
+| Campaign Proof | `tests/test_ac_step0.py` | Unit tests for AC Step 0 audit integrity, timing logs, and duplicate hash verification |
+| Campaign Results | `docs/results/ac_campaign/STEP0.md`, `docs/results/ac_campaign/SHA256SUMS` | Comprehensive AC Step 0 audit report, candidate recipes, and checksums |
 
 ## FEMUR (FL)
 | Step | File | What it does |
