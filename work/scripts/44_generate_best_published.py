@@ -18,7 +18,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 def load_committed_metrics() -> dict:
     metrics = {}
 
-    # 1. HC18 Official Test Set Results
+    # 1. HC18 Official Test Set Results (submission 1 - angle bug)
     hc18_official_json = REPO_ROOT / "docs" / "results" / "hc18_official" / "metrics_ensemble_5fold.json"
     if hc18_official_json.exists():
         with open(hc18_official_json, "r") as f:
@@ -29,6 +29,27 @@ def load_committed_metrics() -> dict:
                 "mad_std": round(float(agg.get("absolute_difference", {}).get("std", 1.91)), 4),
                 "dice_mean": round(float(agg.get("DICE", {}).get("mean", 85.59)), 2),
                 "hd_mean": round(float(agg.get("hausdorff_distance", {}).get("mean", 7.20)), 2),
+            }
+
+    # 1b. HC18 Official Test Set Results (submission 2 - corrected angle)
+    hc18_corr_json = REPO_ROOT / "docs" / "results" / "hc18_official" / "metrics_ensemble_5fold_corrected.json"
+    if hc18_corr_json.exists():
+        with open(hc18_corr_json, "r") as f:
+            raw_hc18_corr = json.load(f)
+            agg_corr = raw_hc18_corr.get("aggregates", {})
+            metrics["hc18_official_ens_corrected"] = {
+                "mad_mean": round(float(agg_corr.get("absolute_difference", {}).get("mean", 1.9472)), 4),
+                "mad_std": round(float(agg_corr.get("absolute_difference", {}).get("std", 1.9114)), 4),
+                "dice_mean": round(float(agg_corr.get("DICE", {}).get("mean", 97.977)), 2),
+                "hd_mean": round(float(agg_corr.get("hausdorff_distance", {}).get("mean", 1.2144)), 4),
+                "signed_diff_mean": round(float(agg_corr.get("difference", {}).get("mean", 0.7844)), 4),
+                "signed_diff_std": round(float(agg_corr.get("difference", {}).get("std", 2.6152)), 4),
+                "mad_t1": round(float(agg_corr.get("absolute_difference_trimester_1", {}).get("mean", 1.6013)), 2),
+                "mad_t2": round(float(agg_corr.get("absolute_difference_trimester_2", {}).get("mean", 1.8120)), 2),
+                "mad_t3": round(float(agg_corr.get("absolute_difference_trimester_3", {}).get("mean", 3.0225)), 2),
+                "dice_t1": round(float(agg_corr.get("DICE_trimester_1", {}).get("mean", 96.9239)), 2),
+                "dice_t2": round(float(agg_corr.get("DICE_trimester_2", {}).get("mean", 98.2056)), 2),
+                "dice_t3": round(float(agg_corr.get("DICE_trimester_3", {}).get("mean", 98.0771)), 2),
             }
 
     # 2. HC18 OOF Results
@@ -101,6 +122,20 @@ def build_markdown(m: dict) -> str:
     hc_official_dice = m.get("hc18_official_ens", {}).get("dice_mean", 85.59)
     hc_official_hd = m.get("hc18_official_ens", {}).get("hd_mean", 7.20)
 
+    corr = m.get("hc18_official_ens_corrected", {})
+    hc_corr_mad = corr.get("mad_mean", 1.9472)
+    hc_corr_mad_std = corr.get("mad_std", 1.9114)
+    hc_corr_dice = corr.get("dice_mean", 97.98)
+    hc_corr_hd = corr.get("hd_mean", 1.21)
+    hc_corr_diff = corr.get("signed_diff_mean", 0.7844)
+    hc_corr_diff_std = corr.get("signed_diff_std", 2.6152)
+    hc_corr_mad_t1 = corr.get("mad_t1", 1.60)
+    hc_corr_mad_t2 = corr.get("mad_t2", 1.81)
+    hc_corr_mad_t3 = corr.get("mad_t3", 3.02)
+    hc_corr_dice_t1 = corr.get("dice_t1", 96.92)
+    hc_corr_dice_t2 = corr.get("dice_t2", 98.21)
+    hc_corr_dice_t3 = corr.get("dice_t3", 98.08)
+
     hc_oof_mae_raw = m.get("hc18_candidates", {}).get("strengths", {}).get("alpha_0.00", {}).get("nested_oof_mae", 2.3019)
     hc_oof_mae_cal50 = m.get("hc18_candidates", {}).get("strengths", {}).get("alpha_0.50", {}).get("nested_oof_mae", 2.0599)
     hc_oof_mae_cal100 = m.get("hc18_candidates", {}).get("strengths", {}).get("alpha_1.00", {}).get("nested_oof_mae", 1.9846)
@@ -140,7 +175,7 @@ This document aggregates verified published literature benchmarks, official chal
 
 | Task & Anatomical Region | Method / Team | Metric & Published Value | Dataset & Split Protocol | Same Protocol as Ours? | Source URL / Attribution | Exact Quote from Source | Our Result (Committed Code & Checkpoints) |
 | :--- | :--- | :--- | :--- | :---: | :--- | :--- | :--- |
-| **HC18 Head Circumference** | `karanchand2525` (HC18 Leaderboard #1) | **0.74 +- 0.73 mm** (Mean Abs Diff) | HC18 official test set (335 images) | Yes (Official test set) | source: HC18 leaderboard screenshot provided by the user on 2026-11-18, transcribed by hand, not machine-fetched | `"nnU-Net - 1 Fold 1000 Epochs"` (8 June 2023, 0.74 +- 0.73) | **{hc_official_mad:.2f} +- {hc_official_mad_std:.2f} mm** (Official test 5-fold ensemble, `metrics_ensemble_5fold.json`). OOF MAE: **{hc_oof_mae_raw:.4f} mm** (raw), **{hc_oof_mae_cal100:.4f} mm** (post-hoc calibrated). |
+| **HC18 Head Circumference** | `karanchand2525` (HC18 Leaderboard #1) | **0.74 +- 0.73 mm** (Mean Abs Diff) | HC18 official test set (335 images) | Yes (Official test set) | source: HC18 leaderboard screenshot provided by the user on 2026-11-18, transcribed by hand, not machine-fetched | `"nnU-Net - 1 Fold 1000 Epochs"` (8 June 2023, 0.74 +- 0.73) | **{hc_corr_mad:.2f} +- {hc_corr_mad_std:.2f} mm** (Official test 5-fold ensemble corrected, Dice: **{hc_corr_dice:.2f}%**, HD: **{hc_corr_hd:.2f} mm**, `metrics_ensemble_5fold_corrected.json`; submission 1 angle bug was **{hc_official_mad:.2f} mm** / **{hc_official_dice:.2f}%** Dice). OOF MAE: **{hc_oof_mae_raw:.4f} mm** (raw), **{hc_oof_mae_cal100:.4f} mm** (post-hoc calibrated). |
 | **HC18 Head Circumference** | `shubham25` (HC18 Leaderboard #4) | **1.69 +- 1.60 mm** (Mean Abs Diff) | HC18 official test set (335 images) | Yes (Official test set) | source: HC18 leaderboard screenshot provided by the user on 2026-11-18, transcribed by hand, not machine-fetched | `"25-model segmentation ensemble (EfficientNet-B4/B5 + UNet++/DeepLabV3+/FPN/MANet), mean-mask averaging, OpenCV ellipse fit"` (5 June 2026) | Same as above (**{hc_official_mad:.2f} +- {hc_official_mad_std:.2f} mm**). |
 | **HC18 Head Circumference** | `sora.` (HC18 Leaderboard #5) | **1.71 +- 1.63 mm** (Mean Abs Diff) | HC18 official test set (335 images) | Yes (Official test set) | source: HC18 leaderboard screenshot provided by the user on 2026-11-18, transcribed by hand, not machine-fetched | `"10-model U-Net/EfficientNet-B4 ensemble (5 folds x 2 seeds), TTA, ellipse fit"` (30 Oct 2026) | Same as above. |
 | **HC18 Head Circumference** | **SonoBase** (arXiv:2609.19230) | **1.81 mm** (HC contour error), **1.20 days** GA MAE | HC18 dataset (335 test images) | Yes (HC18 benchmark) | [arXiv:2609.19230](https://arxiv.org/abs/2609.19230) | `"reaching low millimeter/day errors like an 1.81 mm HC error and 1.20 days MAE for gestational age"` | Our 5-fold ensemble achieves **{hc_official_mad:.2f} mm** MAD on the same 335 test set. |
@@ -167,7 +202,8 @@ This document aggregates verified published literature benchmarks, official chal
 | **sora.** | 30 Oct 2026 | **1.71 +- 1.63** | NOT FOUND | NOT FOUND | `10-model U-Net/EfficientNet-B4 ensemble (5 folds x 2 seeds), TTA, ellipse fit` | source: HC18 leaderboard screenshot provided by the user on 2026-11-18, transcribed by hand, not machine-fetched |
 | **Linpengwei** | 30 March 2021 | **1.72 +- 1.60** | NOT FOUND | NOT FOUND | `RevATUNet3p_40ep_025x` | source: HC18 leaderboard screenshot provided by the user on 2026-11-18, transcribed by hand, not machine-fetched |
 | **THU_XBSJ** | 8 Aug 2019 | **1.72 +- 1.55** | NOT FOUND | NOT FOUND | `attention unet` | source: HC18 leaderboard screenshot provided by the user on 2026-11-18, transcribed by hand, not machine-fetched |
-| *Our 5-Fold Ensemble* | *Committed Repo* | **{hc_official_mad:.2f} +- {hc_official_mad_std:.2f}** | **{hc_official_dice:.2f}%** | **{hc_official_hd:.2f}** | `5-fold U-Net EfficientNet-B4, patient-grouped split, TTA, ellipse fit` | `docs/results/hc18_official/metrics_ensemble_5fold.json` |
+| *Our 5-Fold Ensemble (submission 1, angle bug)* | *Committed Repo* | **{hc_official_mad:.2f} +- {hc_official_mad_std:.2f}** | **{hc_official_dice:.2f}%** | **{hc_official_hd:.2f}** | `5-fold U-Net EfficientNet-B4, patient-grouped split, TTA, ellipse fit (submission 1, angle bug)` | `docs/results/hc18_official/metrics_ensemble_5fold.json` |
+| *Our 5-Fold Ensemble (submission 2, corrected)* | *Committed Repo* | **{hc_corr_mad:.2f} +- {hc_corr_mad_std:.2f}** | **{hc_corr_dice:.2f}%** | **{hc_corr_hd:.2f}** | `5-fold U-Net EfficientNet-B4, patient-grouped split, TTA, ellipse fit (corrected angle); Signed Diff: {hc_corr_diff:+.2f} +- {hc_corr_diff_std:.2f} mm; Trimester MAD: T1 {hc_corr_mad_t1:.2f}, T2 {hc_corr_mad_t2:.2f}, T3 {hc_corr_mad_t3:.2f} mm; Dice: T1 {hc_corr_dice_t1:.2f}%, T2 {hc_corr_dice_t2:.2f}%, T3 {hc_corr_dice_t3:.2f}%` | `docs/results/hc18_official/metrics_ensemble_5fold_corrected.json` |
 
 ---
 

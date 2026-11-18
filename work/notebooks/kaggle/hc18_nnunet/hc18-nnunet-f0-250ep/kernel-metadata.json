@@ -1,0 +1,16 @@
+{
+  "id": "prantakumerpandit390/hc18-nnunet-f0-250ep",
+  "title": "hc18-nnunet-f0-250ep",
+  "code_file": "hc18-nnunet-f0-250ep.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "prantakumerpandit390/dataset501-hc18"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

@@ -36,6 +36,7 @@ File names tell you the part. The prefix is the part:
 | 5 Report | `scripts/34_hc18_oof_calibration.py` | Evaluates nested cross-validation post-hoc calibration on single-fold out-of-fold predictions |
 | 5 Report | `scripts/43_hc18_calibration_candidates.py` | Evaluates nested damped multiplicative post-hoc calibration and generates exploratory submission CSVs |
 | 5 Report | `scripts/46_eval_nnunet_hc18.py` | Evaluates nnU-Net predicted masks on fold 1 with submission ellipse fitting, Dice, Hausdorff, and paired bootstrap vs existing model |
+| 5 Report | `scripts/47_make_nnunet_kaggle_kernel.py` | Generates Kaggle training notebook and metadata for HC18 nnU-Net v2 (2D, Fold 0, 250 epochs) |
 | 5 Report | `scripts/make_hc18_calibration_notebook.py` | Generates benchmark notebook for HC18 OOF calibration study |
 | 5 Report | `scripts/kaggle/run_hc18_close.py` | Runs steps 11 and 12 on a Kaggle GPU |
 | 5 Report | `scripts/kaggle/run_hc18_ladder.py` | Runs the historical approach ladder on a Kaggle GPU |
@@ -43,7 +44,7 @@ File names tell you the part. The prefix is the part:
 | Proof | `notebooks/benchmarks/hc18_official.ipynb` | Executed notebook presenting official HC18 challenge test evaluation and roundtrip Dice |
 | Proof | `notebooks/benchmarks/hc18_oof_calibration.ipynb` | Executed notebook presenting calibration comparison, bias analysis, and patient bootstrap CIs |
 | Proof | `tests/test_hc18_*.py`, `tests/test_hc18_ladder.py`, `tests/test_hc18_official_summary.py`, `tests/test_hc18_roundtrip.py`, `tests/test_hc18_calibration.py`, `tests/test_lit_benchmark.py`, `tests/test_hc18_nnunet.py`, `tests/reference/hc18_original.py` | Tests that the moved code equals the original notebook and tests fold-1 integrity |
-| Results | `docs/results/hc18/`, `docs/results/hc18_ladder/`, `docs/results/hc18_official/`, `docs/results/hc18_calibration/`, `docs/results/hc18_calibration/candidates/` | The real numbers, official challenge evaluation JSONs, submission files, calibration results, exploratory candidates, and summary tables |
+| Results | `docs/results/hc18/`, `docs/results/hc18_ladder/`, `docs/results/hc18_official/`, `docs/results/hc18_calibration/`, `docs/results/hc18_calibration/candidates/`, `docs/results/hc18_nnunet/` | The real numbers, official challenge evaluation JSONs, submission files, calibration results, exploratory candidates, and summary tables |
 
 ## HEAD LANDMARK (FP+UCL): all files
 | Step | File | What it does |
