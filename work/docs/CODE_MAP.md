@@ -33,14 +33,15 @@ File names tell you the part. The prefix is the part:
 | 5 Report | `scripts/29_hc18_official_summary.py` | Generates summary tables and claims for official HC18 challenge test evaluations |
 | 5 Report | `scripts/30_hc18_ellipse_roundtrip.py` | Evaluates ellipse round-trip reconstruction and rasterization conventions on training masks |
 | 5 Report | `scripts/34_hc18_oof_calibration.py` | Evaluates nested cross-validation post-hoc calibration on single-fold out-of-fold predictions |
+| 5 Report | `scripts/43_hc18_calibration_candidates.py` | Evaluates nested damped multiplicative post-hoc calibration and generates exploratory submission CSVs |
 | 5 Report | `scripts/make_hc18_calibration_notebook.py` | Generates benchmark notebook for HC18 OOF calibration study |
 | 5 Report | `scripts/kaggle/run_hc18_close.py` | Runs steps 11 and 12 on a Kaggle GPU |
 | 5 Report | `scripts/kaggle/run_hc18_ladder.py` | Runs the historical approach ladder on a Kaggle GPU |
 | Proof | `notebooks/benchmarks/hc18_ladder.ipynb` | Executed notebook comparing historical ladder and 5-fold Row D vs E |
 | Proof | `notebooks/benchmarks/hc18_official.ipynb` | Executed notebook presenting official HC18 challenge test evaluation and roundtrip Dice |
 | Proof | `notebooks/benchmarks/hc18_oof_calibration.ipynb` | Executed notebook presenting calibration comparison, bias analysis, and patient bootstrap CIs |
-| Proof | `tests/test_hc18_*.py`, `tests/test_hc18_ladder.py`, `tests/test_hc18_official_summary.py`, `tests/test_hc18_roundtrip.py`, `tests/test_hc18_calibration.py`, `tests/reference/hc18_original.py` | Tests that the moved code equals the original notebook and tests fold-1 integrity |
-| Results | `docs/results/hc18/`, `docs/results/hc18_ladder/`, `docs/results/hc18_official/`, `docs/results/hc18_calibration/` | The real numbers, official challenge evaluation JSONs, submission files, calibration results, and summary tables |
+| Proof | `tests/test_hc18_*.py`, `tests/test_hc18_ladder.py`, `tests/test_hc18_official_summary.py`, `tests/test_hc18_roundtrip.py`, `tests/test_hc18_calibration.py`, `tests/test_lit_benchmark.py`, `tests/reference/hc18_original.py` | Tests that the moved code equals the original notebook and tests fold-1 integrity |
+| Results | `docs/results/hc18/`, `docs/results/hc18_ladder/`, `docs/results/hc18_official/`, `docs/results/hc18_calibration/`, `docs/results/hc18_calibration/candidates/` | The real numbers, official challenge evaluation JSONs, submission files, calibration results, exploratory candidates, and summary tables |
 
 ## HEAD LANDMARK (FP+UCL): all files
 | Step | File | What it does |
@@ -154,10 +155,10 @@ Fetal Abdominal Structures Segmentation Dataset (artery, liver, stomach, vein). 
 |---|---|
 | `src/fetal/config.py` + `configs/paths.yaml` | Where the data and weights live (one place) |
 | `src/fetal/train/checkpoint.py` | Saves and loads model weights |
-| `scripts/08_make_manifest.py`, `scripts/14_hash_results.py`, `scripts/16_extract_notebook_results.py`, `scripts/make_bench_notebooks.py`, `scripts/20_benchmark_summary.py`, `scripts/check_secrets.py` | Make and check file fingerprints, extract historical metrics from notebooks, construct benchmark notebooks, generate supervisor summary, and pre-commit secret scans |
+| `scripts/08_make_manifest.py`, `scripts/14_hash_results.py`, `scripts/16_extract_notebook_results.py`, `scripts/make_bench_notebooks.py`, `scripts/20_benchmark_summary.py`, `scripts/44_generate_best_published.py`, `scripts/check_secrets.py` | Make and check file fingerprints, extract historical metrics from notebooks, construct benchmark notebooks, generate supervisor summary, synthesize published benchmarks (BEST_PUBLISHED.md), and pre-commit secret scans |
 | `notebooks/benchmarks/benchmark_summary.ipynb` | Executed notebook synthesizing multi-modal benchmark summary |
-| `docs/results/published_refs.json`, `docs/results/benchmark_summary.md` | Published reference numbers with URLs/protocols, and synthesized executive summary table |
-| `tests/test_benchmark_summary.py` | Unit tests ensuring AC Ours/Claim consistency, published references, and dynamic ladder notes |
+| `docs/results/published_refs.json`, `docs/results/benchmark_summary.md`, `docs/results/literature/BEST_PUBLISHED.md` | Published reference numbers with URLs/protocols, synthesized executive summary table, and detailed best published literature benchmarks & modern methods scan |
+| `tests/test_benchmark_summary.py`, `tests/test_lit_benchmark.py` | Unit tests ensuring AC Ours/Claim consistency, published references, dynamic ladder notes, literature benchmark generation, and calibration candidate integrity |
 | `scripts/run_all.ps1` | One command to run groups of the buttons above |
 
 ## How the whole system fits (the flow)

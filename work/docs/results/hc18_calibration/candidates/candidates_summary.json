@@ -1,0 +1,70 @@
+{
+  "dataset": "HC18",
+  "n_oof_images": 999,
+  "n_oof_patients": 806,
+  "full_median_ratio": 1.008129,
+  "delta_full": 0.008129,
+  "strengths": {
+    "alpha_0.00": {
+      "alpha": 0.0,
+      "r_test": 1.0,
+      "nested_oof_mae": 2.3019,
+      "nested_oof_rmse": 3.5797,
+      "nested_oof_median_ae": 1.7603,
+      "signed_bias_convention_a_mean": 1.2576,
+      "signed_bias_convention_b_mean": -1.2576
+    },
+    "alpha_0.25": {
+      "alpha": 0.25,
+      "r_test": 1.002032,
+      "nested_oof_mae": 2.1623,
+      "nested_oof_rmse": 3.4584,
+      "nested_oof_median_ae": 1.5792,
+      "signed_bias_convention_a_mean": 0.8987,
+      "signed_bias_convention_b_mean": -0.8987
+    },
+    "alpha_0.50": {
+      "alpha": 0.5,
+      "r_test": 1.004065,
+      "nested_oof_mae": 2.0599,
+      "nested_oof_rmse": 3.3766,
+      "nested_oof_median_ae": 1.461,
+      "signed_bias_convention_a_mean": 0.5398,
+      "signed_bias_convention_b_mean": -0.5398
+    },
+    "alpha_0.75": {
+      "alpha": 0.75,
+      "r_test": 1.006097,
+      "nested_oof_mae": 1.9994,
+      "nested_oof_rmse": 3.3372,
+      "nested_oof_median_ae": 1.4534,
+      "signed_bias_convention_a_mean": 0.1809,
+      "signed_bias_convention_b_mean": -0.1809
+    },
+    "alpha_1.00": {
+      "alpha": 1.0,
+      "r_test": 1.008129,
+      "nested_oof_mae": 1.9846,
+      "nested_oof_rmse": 3.3418,
+      "nested_oof_median_ae": 1.4258,
+      "signed_bias_convention_a_mean": -0.1779,
+      "signed_bias_convention_b_mean": 0.1779
+    }
+  },
+  "generated_csvs": {
+    "submission_ensemble_5fold_corrected_mult050_EXPLORATORY.csv": {
+      "path": "C:\\fetal-github-clone\\work\\docs\\results\\hc18_calibration\\candidates\\submission_ensemble_5fold_corrected_mult050_EXPLORATORY.csv",
+      "alpha": 0.5,
+      "scale_factor_R": 1.004065,
+      "sha256": "2af8cfde5767e1b76e6619bc35f3e961f6e6811f09236c1b16a8dd5e73197ebe",
+      "rows": 335
+    },
+    "submission_ensemble_5fold_corrected_mult100_EXPLORATORY.csv": {
+      "path": "C:\\fetal-github-clone\\work\\docs\\results\\hc18_calibration\\candidates\\submission_ensemble_5fold_corrected_mult100_EXPLORATORY.csv",
+      "alpha": 1.0,
+      "scale_factor_R": 1.008129,
+      "sha256": "ef13a81820c88dedd4e92b8c1ddb43f83c745566eedcf770439bdecb5e096bef",
+      "rows": 335
+    }
+  }
+}
