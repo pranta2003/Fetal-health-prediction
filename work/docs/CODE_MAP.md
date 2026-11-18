@@ -76,6 +76,12 @@ File names tell you the part. The prefix is the part:
 | Campaign Step 0 | `scripts/38_ac_step0_audit.py` | Read-only dataset audit, SHA-256 duplicate image verification, timing parser, and campaign planning |
 | Campaign Proof | `tests/test_ac_step0.py` | Unit tests for AC Step 0 audit integrity, timing logs, and duplicate hash verification |
 | Campaign Results | `docs/results/ac_campaign/STEP0.md`, `docs/results/ac_campaign/SHA256SUMS` | Comprehensive AC Step 0 audit report, candidate recipes, and checksums |
+| Campaign Folds | `scripts/39_make_ac_folds.py`, `docs/results/ac_campaign/folds_v1.csv` | Fixed leak-free patient-grouped 5-fold cross-validation partition on official train set (642 images, 501 patients) |
+| Campaign Options | `src/fetal/train/ema.py`, `src/fetal/models/losses.py`, `src/fetal/models/ac_landmark.py` | Model EMA, wing loss coordinate term, and strict FASSD pretrained encoder loading (704 keys) |
+| Campaign Compare | `scripts/40_ac_compare_recipes.py` | Patient-level cluster paired bootstrap (5,000 resamples, seed 42) comparing candidate recipes |
+| Campaign Kaggle | `scripts/41_prepare_ac_kaggle_dataset.py`, `scripts/42_make_ac_kaggle_kernels.py`, `notebooks/kaggle/ac_campaign/` | Packages `prantakumerpandit390/ac-fetal-v1` dataset and generates 5 Kaggle cross-validation kernels |
+| Campaign Proof | `tests/test_ac_campaign_options.py` | Unit tests for 5-fold integrity, coordinate loss variants, ModelEMA, pretrained encoder loading, and paired bootstrap |
+| Campaign Results | `docs/results/ac_campaign/AC_CAMPAIGN_NOTES.md` | Full documentation of fold distribution, numerical discrepancy analysis (4.3956 vs 4.3951 mm), candidate recipe matrix, and push commands |
 
 ## FEMUR (FL)
 | Step | File | What it does |
