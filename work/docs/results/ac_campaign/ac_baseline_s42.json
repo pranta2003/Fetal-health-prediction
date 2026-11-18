@@ -1,0 +1,50 @@
+{
+  "name_a": "ac-baseline-s42",
+  "name_b": "ac-baseline-s42",
+  "metrics_a": {
+    "n_samples": 642,
+    "mae": 4.7744,
+    "rmse": 7.6074,
+    "median": 2.8474,
+    "nme": 0.0242,
+    "gt10_rate_pct": 12.15,
+    "gt10_count": 78
+  },
+  "metrics_b": {
+    "n_samples": 642,
+    "mae": 4.7744,
+    "rmse": 7.6074,
+    "median": 2.8474,
+    "nme": 0.0242,
+    "gt10_rate_pct": 12.15,
+    "gt10_count": 78
+  },
+  "bootstrap_comparison": {
+    "n_patients": 501,
+    "n_images": 642,
+    "delta_mae": 0.0,
+    "ci95_delta_mae": [
+      0.0,
+      0.0
+    ],
+    "p_val_mae": 1.0,
+    "delta_rmse": 0.0,
+    "ci95_delta_rmse": [
+      0.0,
+      0.0
+    ],
+    "p_val_rmse": 1.0
+  },
+  "oof_summary": {
+    "n": 642,
+    "ac_mae": 4.774351541869737,
+    "ac_rmse": 7.6074409338877,
+    "ac_median": 2.847381591796875,
+    "ac_bias": -0.08260334763571484,
+    "tad_mae": 1.7331175789283444,
+    "apad_mae": 2.079325188728879,
+    "lm_mm": 4.819502615668692,
+    "nme": 0.08084896193872379,
+    "over10": 0.12149532710280374
+  }
+}
