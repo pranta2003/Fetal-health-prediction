@@ -139,3 +139,19 @@ def test_bootstrap_paired_comparison():
     assert boot["n_images"] == 100
     assert boot["delta_mae"] < 0.0  # B has lower error than A
     assert boot["ci95_delta_mae"][0] < boot["ci95_delta_mae"][1]
+
+
+def test_train_ac_args_support_data_dir(monkeypatch):
+    import importlib.util
+    train_ac_path = REPO_ROOT / "scripts" / "04_train_ac.py"
+    spec = importlib.util.spec_from_file_location("train_ac_script", str(train_ac_path))
+    train_ac_mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(train_ac_mod)
+
+    test_args = ["04_train_ac.py", "--data-dir", "/kaggle/working/data", "--fold", "1", "--smoke"]
+    monkeypatch.setattr(sys, "argv", test_args)
+    parsed = train_ac_mod.parse_args()
+    assert parsed.data_dir == "/kaggle/working/data"
+    assert parsed.fold == "1"
+    assert parsed.smoke is True
+
