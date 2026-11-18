@@ -74,6 +74,70 @@ def split_data(data, dev_fraction=DEV_FRACTION):
     return tr, dv, te
 
 
+def load_ac_folds(folds_csv=None, base=None):
+    """
+    Load the fixed 5-fold assignment and merge with dataset annotations.
+
+    Returns DataFrame with official train images (642 rows), patient, fold (1..5),
+    pixel-to-mm rate, and landmark coordinate columns.
+    """
+    if folds_csv is None:
+        folds_csv = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))),
+            "docs",
+            "results",
+            "ac_campaign",
+            "folds_v1.csv",
+        )
+    if not os.path.isfile(folds_csv):
+        raise FileNotFoundError(f"Folds CSV not found: {folds_csv}")
+
+    folds_df = pd.read_csv(folds_csv)
+    data = build_data(base=base)
+    train_data = data[data.official_split == "train"].copy()
+
+    merged = pd.merge(
+        train_data,
+        folds_df[["filename", "fold"]],
+        left_on="image_name",
+        right_on="filename",
+        how="inner",
+    )
+    assert len(merged) == len(folds_df), (
+        f"Mismatch after merging folds: expected {len(folds_df)}, got {len(merged)}"
+    )
+    return merged
+
+
+def get_fold_data(df, fold, inner_val_fraction=DEV_FRACTION, seed=42):
+    """
+    Partition 5-fold training set for fold K cross-validation.
+
+    - te: Fold K images (out-of-fold validation/test)
+    - tr: Remaining 4 folds minus a patient-grouped inner validation holdout
+    - dv: Patient-grouped inner validation holdout from the 4 training folds (used for epoch selection)
+
+    Asserts zero patient leakage between tr, dv, and te.
+    """
+    te = df[df.fold == fold].reset_index(drop=True)
+    remaining = df[df.fold != fold].reset_index(drop=True)
+
+    pats = np.array(sorted(remaining.patient.unique()))
+    rng = np.random.RandomState(seed + fold)
+    n_dev_pats = max(1, int(round(inner_val_fraction * len(pats))))
+    dev_p = set(rng.permutation(pats)[:n_dev_pats])
+
+    tr = remaining[~remaining.patient.isin(dev_p)].reset_index(drop=True)
+    dv = remaining[remaining.patient.isin(dev_p)].reset_index(drop=True)
+
+    # Strict leakage checks
+    assert not (set(tr.patient) & set(dv.patient)), "Leakage between inner-train and inner-val!"
+    assert not (set(tr.patient) & set(te.patient)), "Leakage between inner-train and outer-fold!"
+    assert not (set(dv.patient) & set(te.patient)), "Leakage between inner-val and outer-fold!"
+
+    return tr, dv, te
+
+
 class AbdomenDS(Dataset):
     def __init__(self, df, S, train, strong, inpaint):
         self.df, self.S, self.train, self.strong, self.inpaint = df.reset_index(drop=True), S, train, strong, inpaint

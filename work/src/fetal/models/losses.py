@@ -1,8 +1,34 @@
+import math
 import torch
 from fetal.models.ac_landmark import decode
 from fetal.eval.ac_geometry import match, lengths_mm, ac_t
 
 SIGMA = 4.0  # heatmap regulariser width (px at 384; scaled with image size)
+
+
+def coord_loss_term(matched, gt, loss_type="default"):
+    """
+    Compute coordinate loss term on matched predicted points vs ground truth.
+    loss_type options:
+      - 'default': Euclidean distance / 10.0 (verbatim v3_full behavior)
+      - 'smooth_l1': Smooth L1 / Huber loss on Euclidean offset (beta=1.0) / 10.0
+      - 'wing': Wing loss (w=10.0, eps=2.0) on Euclidean offset / 10.0
+    """
+    diff = (matched - gt).norm(dim=-1)
+    if loss_type == "default" or loss_type == "l2":
+        return diff.mean() / 10.0
+    elif loss_type in ("smooth_l1", "smooth-l1"):
+        beta = 1.0
+        smooth = torch.where(diff < beta, 0.5 * (diff ** 2) / beta, diff - 0.5 * beta)
+        return smooth.mean() / 10.0
+    elif loss_type == "wing":
+        w = 10.0
+        eps = 2.0
+        c = w - w * math.log(1.0 + w / eps)
+        wing = torch.where(diff < w, w * torch.log(1.0 + diff / eps), diff - c)
+        return wing.mean() / 10.0
+    else:
+        raise ValueError(f"Unknown loss_type: {loss_type}. Choose from 'default', 'smooth_l1', 'wing'.")
 
 
 def js_loss(p, order, gt, S, sigma):
@@ -19,10 +45,10 @@ def js_loss(p, order, gt, S, sigma):
     return (0.5 * kl(p, m) + 0.5 * kl(q, m)).mean()
 
 
-def compute_loss(logits, gt, mmpp, S, diam_w, sigma=SIGMA):
+def compute_loss(logits, gt, mmpp, S, diam_w, sigma=SIGMA, loss_type="default"):
     pts, p = decode(logits)
     matched, order = match(pts, gt)
-    coord = (matched - gt).norm(dim=-1).mean() / 10.0
+    coord = coord_loss_term(matched, gt, loss_type=loss_type)
     js = js_loss(p, order, gt, S, sigma * S / 384.0)
     loss = coord + js
     if diam_w > 0:
