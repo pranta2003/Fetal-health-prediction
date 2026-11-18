@@ -8,25 +8,33 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 
 from fetal import config
-from fetal.models.ac_landmark import build_model
+from fetal.models.ac_landmark import build_model, load_pretrained_encoder
 from fetal.models.losses import compute_loss
 from fetal.data.ac_dataset import AbdomenDS
 from fetal.eval.ac_evaluator import run_eval, summarize
 from fetal.train.checkpoint import atomic_save
 from fetal.train.constants import BATCH, LR, MAX_EPOCHS, PATIENCE
+from fetal.train.ema import ModelEMA
 
 
-def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None):
+def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None, patience=None):
     """
     Train a single AC landmark regression model based on config recipe.
-    Verbatim training logic from original ac_v3.py.
+    Supports optional --ema, --loss {default, wing, smooth_l1}, --init-encoder PATH,
+    --epochs, --patience, and --seed while preserving default v3_full behavior.
     """
     if out_dir is None:
         out_dir = config.AC_V3_DIR
     if max_epochs is None:
         max_epochs = cfg.get("max_epochs", 2 if config.SMOKE else MAX_EPOCHS)
+    if patience is None:
+        patience = cfg.get("patience", PATIENCE)
 
     is_smoke = config.SMOKE or cfg.get("smoke", False)
+    seed = cfg.get("seed", 0)
+    use_ema = cfg.get("ema", False)
+    loss_type = cfg.get("loss_type", "default")
+    init_encoder_path = cfg.get("init_encoder", None)
 
     d = os.path.join(out_dir, cfg["name"])
     os.makedirs(d, exist_ok=True)
@@ -36,10 +44,16 @@ def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None):
         with open(res_path, "r", encoding="utf-8") as f:
             return json.load(f)
     S = cfg["img"]
-    random.seed(0)
-    np.random.seed(0)
-    torch.manual_seed(0)
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
     model = build_model().to(config.DEVICE)
+
+    if init_encoder_path:
+        load_pretrained_encoder(model, init_encoder_path, verbose=True)
+
+    ema = ModelEMA(model, decay=0.999).to(config.DEVICE) if use_ema else None
+
     opt = torch.optim.AdamW(model.parameters(), lr=LR, weight_decay=0.01)
     sched = torch.optim.lr_scheduler.ReduceLROnPlateau(opt, mode="min", factor=0.5, patience=4)
     scaler = torch.amp.GradScaler(config.DEVICE, enabled=(config.DEVICE == "cuda"))
@@ -49,6 +63,8 @@ def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None):
         ck = torch.load(last, map_location=config.DEVICE, weights_only=False)
         assert ck["cfg"] == cfg, f"checkpoint config differs from {cfg} - delete {d} to start over"
         model.load_state_dict(ck["model"])
+        if use_ema and "ema_model" in ck:
+            ema.load_state_dict(ck["ema_model"])
         opt.load_state_dict(ck["opt"])
         sched.load_state_dict(ck["sched"])
         scaler.load_state_dict(ck["scaler"])
@@ -71,15 +87,19 @@ def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None):
             opt.zero_grad(set_to_none=True)
             with torch.autocast(device_type=config.DEVICE, enabled=(config.DEVICE == "cuda")):
                 logits = model(x)
-            loss, _ = compute_loss(logits, gt, mmpp, S, cfg["diam_w"])
+            loss, _ = compute_loss(logits, gt, mmpp, S, cfg["diam_w"], loss_type=loss_type)
             scaler.scale(loss).backward()
             scaler.unscale_(opt)
             nn.utils.clip_grad_norm_(model.parameters(), 5.0)
             scaler.step(opt)
             scaler.update()
+            if use_ema:
+                ema.update(model)
             tl += loss.item()
+
+        eval_model = ema.ema_model if use_ema else model
         r = run_eval(
-            model,
+            eval_model,
             dv.head(16) if is_smoke else dv,
             cfg,
             tta=False,
@@ -92,7 +112,7 @@ def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None):
         improved = score < best
         if improved:
             best, bad = score, 0
-            atomic_save(model.state_dict(), os.path.join(d, "best.pt"))
+            atomic_save(eval_model.state_dict(), os.path.join(d, "best.pt"))
         else:
             bad += 1
         print(
@@ -101,23 +121,25 @@ def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None):
             f"lr {opt.param_groups[0]['lr']:.1e} | {time.time()-t0:.0f}s | bad={bad}",
             flush=True,
         )
-        atomic_save(
-            dict(
-                cfg=cfg,
-                model=model.state_dict(),
-                opt=opt.state_dict(),
-                sched=sched.state_dict(),
-                scaler=scaler.state_dict(),
-                epoch=ep,
-                best=best,
-                bad=bad,
-            ),
-            last,
+        last_ckpt = dict(
+            cfg=cfg,
+            model=model.state_dict(),
+            opt=opt.state_dict(),
+            sched=sched.state_dict(),
+            scaler=scaler.state_dict(),
+            epoch=ep,
+            best=best,
+            bad=bad,
         )
-        if bad >= PATIENCE:
+        if use_ema:
+            last_ckpt["ema_model"] = ema.state_dict()
+        atomic_save(last_ckpt, last)
+        if bad >= patience:
             print(f"[{cfg['name']}] early stop")
             break
-    model.load_state_dict(torch.load(os.path.join(d, "best.pt"), map_location=config.DEVICE))
+
+    best_ckpt = torch.load(os.path.join(d, "best.pt"), map_location=config.DEVICE, weights_only=False)
+    model.load_state_dict(best_ckpt)
     out = {"cfg": cfg}
     te_use = te.head(16) if is_smoke else te
     for tta in (False, True):
@@ -131,9 +153,12 @@ def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None):
         )
         out["test_tta" if tta else "test"] = summarize(r)
         if tta:
-            r.to_csv(os.path.join(d, "test_predictions.csv"), index=False)
-            out["test_tta_FP_only"] = summarize(r[r.source == "FP"]) if (r.source == "FP").any() else None
-            out["test_tta_UCL_only"] = summarize(r[r.source == "UCL"]) if (r.source == "UCL").any() else None
+            # Save test predictions (or fold OOF predictions)
+            pred_csv_name = "oof_predictions.csv" if cfg.get("fold") is not None else "test_predictions.csv"
+            r.to_csv(os.path.join(d, pred_csv_name), index=False)
+            if "source" in r.columns:
+                out["test_tta_FP_only"] = summarize(r[r.source == "FP"]) if (r.source == "FP").any() else None
+                out["test_tta_UCL_only"] = summarize(r[r.source == "UCL"]) if (r.source == "UCL").any() else None
     out["dev"] = summarize(
         run_eval(
             model,

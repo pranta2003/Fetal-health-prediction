@@ -62,3 +62,109 @@ def summarize(r):
                 ac_bias=r.ac_signed.mean(), tad_mae=r.tad_err.mean(), apad_mae=r.apad_err.mean(),
                 lm_mm=r.lm_mm.mean(), nme=r.nme.mean(), over10=float((r.ac_err > 10).mean()))
 
+
+def compute_metrics(y_true, y_pred):
+    import numpy as np
+    y_true = np.asarray(y_true, dtype=np.float64)
+    y_pred = np.asarray(y_pred, dtype=np.float64)
+    err = np.abs(y_pred - y_true)
+    sq_err = (y_pred - y_true) ** 2
+    mae = float(np.mean(err))
+    rmse = float(np.sqrt(np.mean(sq_err)))
+    med = float(np.median(err))
+    nme = float(np.mean(err / np.maximum(y_true, 1e-6)))
+    gt10_rate = float(np.mean(err > 10.0) * 100.0)
+    gt10_count = int(np.sum(err > 10.0))
+    return {
+        "n_samples": len(y_true),
+        "mae": round(mae, 4),
+        "rmse": round(rmse, 4),
+        "median": round(med, 4),
+        "nme": round(nme, 4),
+        "gt10_rate_pct": round(gt10_rate, 2),
+        "gt10_count": gt10_count,
+    }
+
+
+def patient_level_paired_bootstrap(
+    merged: pd.DataFrame,
+    n_bootstraps: int = 5000,
+    seed: int = 42,
+) -> dict:
+    """Compute patient-level cluster paired bootstrap for metric deltas (B - A).
+
+    Args:
+        merged: DataFrame with ['patient', 'ac_true', 'ac_pred_a', 'ac_pred_b']
+        n_bootstraps: Number of bootstrap resamples.
+        seed: Random seed.
+
+    Returns:
+        dict with point differences, 95% CIs, and empirical p-values.
+    """
+    import numpy as np
+
+    patients = np.array(sorted(merged["patient"].unique()))
+    n_patients = len(patients)
+
+    patient_data = {}
+    for p, g in merged.groupby("patient"):
+        yt = g["ac_true"].to_numpy(dtype=np.float64)
+        ya = g["ac_pred_a"].to_numpy(dtype=np.float64)
+        yb = g["ac_pred_b"].to_numpy(dtype=np.float64)
+        patient_data[str(p)] = {
+            "yt": yt,
+            "err_a": np.abs(ya - yt),
+            "err_b": np.abs(yb - yt),
+            "sq_a": (ya - yt) ** 2,
+            "sq_b": (yb - yt) ** 2,
+        }
+
+    obs_mae_a = np.mean(np.concatenate([patient_data[p]["err_a"] for p in patients]))
+    obs_mae_b = np.mean(np.concatenate([patient_data[p]["err_b"] for p in patients]))
+    obs_delta_mae = float(obs_mae_b - obs_mae_a)
+
+    obs_rmse_a = np.sqrt(np.mean(np.concatenate([patient_data[p]["sq_a"] for p in patients])))
+    obs_rmse_b = np.sqrt(np.mean(np.concatenate([patient_data[p]["sq_b"] for p in patients])))
+    obs_delta_rmse = float(obs_rmse_b - obs_rmse_a)
+
+    rng = np.random.default_rng(seed)
+    boot_delta_mae = np.empty(n_bootstraps, dtype=np.float64)
+    boot_delta_rmse = np.empty(n_bootstraps, dtype=np.float64)
+
+    for b in range(n_bootstraps):
+        sampled_p = rng.choice(patients, size=n_patients, replace=True)
+        err_a_concat = np.concatenate([patient_data[p]["err_a"] for p in sampled_p])
+        err_b_concat = np.concatenate([patient_data[p]["err_b"] for p in sampled_p])
+        sq_a_concat = np.concatenate([patient_data[p]["sq_a"] for p in sampled_p])
+        sq_b_concat = np.concatenate([patient_data[p]["sq_b"] for p in sampled_p])
+
+        b_mae_a = np.mean(err_a_concat)
+        b_mae_b = np.mean(err_b_concat)
+        boot_delta_mae[b] = b_mae_b - b_mae_a
+
+        b_rmse_a = np.sqrt(np.mean(sq_a_concat))
+        b_rmse_b = np.sqrt(np.mean(sq_b_concat))
+        boot_delta_rmse[b] = b_rmse_b - b_rmse_a
+
+    ci_mae_low = float(np.percentile(boot_delta_mae, 2.5))
+    ci_mae_high = float(np.percentile(boot_delta_mae, 97.5))
+    ci_rmse_low = float(np.percentile(boot_delta_rmse, 2.5))
+    ci_rmse_high = float(np.percentile(boot_delta_rmse, 97.5))
+
+    p_mae = float(2.0 * min(np.mean(boot_delta_mae <= 0.0), np.mean(boot_delta_mae >= 0.0)))
+    p_mae = min(1.0, p_mae)
+    p_rmse = float(2.0 * min(np.mean(boot_delta_rmse <= 0.0), np.mean(boot_delta_rmse >= 0.0)))
+    p_rmse = min(1.0, p_rmse)
+
+    return {
+        "n_patients": int(n_patients),
+        "n_images": int(len(merged)),
+        "delta_mae": round(obs_delta_mae, 4),
+        "ci95_delta_mae": [round(ci_mae_low, 4), round(ci_mae_high, 4)],
+        "p_val_mae": round(p_mae, 4),
+        "delta_rmse": round(obs_delta_rmse, 4),
+        "ci95_delta_rmse": [round(ci_rmse_low, 4), round(ci_rmse_high, 4)],
+        "p_val_rmse": round(p_rmse, 4),
+    }
+
+
