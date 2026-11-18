@@ -33,28 +33,34 @@ def make_notebook_dict(cells: list[dict]) -> dict:
     }
 
 
-def make_code_cell(source: str) -> dict:
+def make_code_cell(source: str, cell_id: str | None = None) -> dict:
     lines = [line + "\n" for line in source.strip().split("\n")]
     if lines:
         lines[-1] = lines[-1].rstrip("\n")
-    return {
+    cell = {
         "cell_type": "code",
         "execution_count": None,
         "metadata": {},
         "outputs": [],
         "source": lines,
     }
+    if cell_id:
+        cell["id"] = cell_id
+    return cell
 
 
-def make_markdown_cell(source: str) -> dict:
+def make_markdown_cell(source: str, cell_id: str | None = None) -> dict:
     lines = [line + "\n" for line in source.strip().split("\n")]
     if lines:
         lines[-1] = lines[-1].rstrip("\n")
-    return {
+    cell = {
         "cell_type": "markdown",
         "metadata": {},
         "source": lines,
     }
+    if cell_id:
+        cell["id"] = cell_id
+    return cell
 
 
 def build_kernel_files() -> tuple[dict, dict]:
@@ -88,7 +94,8 @@ def build_kernel_files() -> tuple[dict, dict]:
 - Configuration: 2D (`nnUNetPlans__2d`)
 - Trainer: `nnUNetTrainer_250epochs`
 - Output: Preserves validation masks, `summary.json`, `progress.png`, and execution metrics.
-"""
+""",
+            cell_id="cell_1_intro",
         )
     )
 
@@ -98,7 +105,8 @@ def build_kernel_files() -> tuple[dict, dict]:
             """!nvidia-smi
 !pip install --upgrade pip
 !pip install nnunetv2
-"""
+""",
+            cell_id="cell_2_install",
         )
     )
 
@@ -124,34 +132,39 @@ prep_dir.mkdir(parents=True, exist_ok=True)
 res_dir.mkdir(parents=True, exist_ok=True)
 out_dir.mkdir(parents=True, exist_ok=True)
 print("nnU-Net v2 directories created successfully.")
-"""
+""",
+            cell_id="cell_3_env",
         )
     )
 
     # Cell 4: Unpack dataset
     cells.append(
         make_code_cell(
-            """import zipfile
+            """import os
+import shutil
+import zipfile
+from pathlib import Path
 
 dataset_dir = raw_dir / "Dataset501_HC18"
-input_root = Path("/kaggle/input/dataset501-hc18")
 
-zip_path = input_root / "Dataset501_HC18.zip"
-if not zip_path.exists():
-    zips = list(input_root.glob("*.zip"))
+print("Locating dataset in /kaggle/input...")
+# Check for dataset.json anywhere in /kaggle/input
+dataset_jsons = list(Path("/kaggle/input").rglob("dataset.json"))
+if dataset_jsons:
+    src_dir = dataset_jsons[0].parent
+    print(f"Found dataset directory at: {src_dir}")
+    shutil.copytree(src_dir, dataset_dir, dirs_exist_ok=True)
+else:
+    # Check for zip archive anywhere in /kaggle/input
+    zips = list(Path("/kaggle/input").rglob("*.zip"))
     if zips:
-        zip_path = zips[0]
-
-if zip_path.exists():
-    print(f"Extracting {zip_path} into {raw_dir}...")
-    with zipfile.ZipFile(zip_path, "r") as zf:
-        zf.extractall(raw_dir)
-elif (input_root / "Dataset501_HC18").is_dir():
-    print(f"Copying pre-extracted dataset from {input_root / 'Dataset501_HC18'} to {dataset_dir}...")
-    shutil.copytree(input_root / "Dataset501_HC18", dataset_dir, dirs_exist_ok=True)
-elif (input_root / "imagesTr").is_dir():
-    print(f"Copying dataset from {input_root} to {dataset_dir}...")
-    shutil.copytree(input_root, dataset_dir, dirs_exist_ok=True)
+        print(f"Extracting {zips[0]} to {raw_dir}...")
+        with zipfile.ZipFile(zips[0], "r") as zf:
+            zf.extractall(raw_dir)
+    else:
+        print("Directory listing of /kaggle/input:")
+        for root, dirs, files in os.walk("/kaggle/input"):
+            print(f"  {root}: dirs={dirs[:5]}, files={files[:5]}")
 
 assert (dataset_dir / "dataset.json").is_file(), f"Missing dataset.json in {dataset_dir}"
 assert (dataset_dir / "imagesTr").is_dir(), f"Missing imagesTr in {dataset_dir}"
@@ -161,7 +174,8 @@ n_labels = len(list((dataset_dir / "labelsTr").glob("*.png")))
 print(f"Dataset unpacked successfully: {n_images} imagesTr, {n_labels} labelsTr.")
 assert n_images == 999, f"Expected 999 imagesTr, found {n_images}"
 assert n_labels == 999, f"Expected 999 labelsTr, found {n_labels}"
-"""
+""",
+            cell_id="cell_4_unpack",
         )
     )
 
@@ -169,7 +183,8 @@ assert n_labels == 999, f"Expected 999 labelsTr, found {n_labels}"
     cells.append(
         make_code_cell(
             """!nnUNetv2_plan_and_preprocess -d 501 -c 2d --verify_dataset_integrity
-"""
+""",
+            cell_id="cell_5_plan",
         )
     )
 
@@ -202,7 +217,8 @@ assert n_val == 206, f"Expected 206 val cases, got {n_val}"
 overlap = set(fold0["train"]).intersection(set(fold0["val"]))
 assert len(overlap) == 0, f"Patient leakage detected: {overlap}"
 print("Diff check passed: exactly 793 train / 206 val cases with zero overlap.")
-"""
+""",
+            cell_id="cell_6_splits",
         )
     )
 
@@ -220,7 +236,8 @@ print("=" * 70)
 
 elapsed = time.time() - start_train
 print(f"nnU-Net training finished in {elapsed:.1f} s ({elapsed / 60:.1f} min)")
-"""
+""",
+            cell_id="cell_7_train",
         )
     )
 
@@ -257,7 +274,8 @@ if trainer_dir.exists():
     print("Summary manifest saved to", out_dir / "nnunet_run_summary.json")
 else:
     print(f"WARNING: trainer directory {trainer_dir} does not exist!")
-"""
+""",
+            cell_id="cell_8_preserve",
         )
     )
 
