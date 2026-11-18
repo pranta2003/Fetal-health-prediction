@@ -30,6 +30,7 @@ build_markdown = gen_mod.build_markdown
 def test_committed_metrics_loading():
     metrics = load_committed_metrics()
     assert "hc18_official_ens" in metrics
+    assert "hc18_official_ens_corrected" in metrics
     assert "hc18_candidates" in metrics
     assert "ac_v3_full" in metrics
     assert "femur" in metrics
@@ -37,6 +38,10 @@ def test_committed_metrics_loading():
 
     # Verify key values are valid numbers
     assert metrics["hc18_official_ens"]["mad_mean"] == pytest.approx(1.95, rel=1e-2)
+    assert metrics["hc18_official_ens_corrected"]["mad_mean"] == pytest.approx(1.9472, rel=1e-3)
+    assert metrics["hc18_official_ens_corrected"]["dice_mean"] == pytest.approx(97.977, rel=1e-3)
+    assert metrics["hc18_official_ens_corrected"]["hd_mean"] == pytest.approx(1.2144, rel=1e-3)
+    assert metrics["hc18_official_ens_corrected"]["signed_diff_mean"] == pytest.approx(0.7844, rel=1e-3)
     assert metrics["ac_v3_full"]["ac_mae"] == pytest.approx(4.3956, rel=1e-3)
     assert metrics["femur"]["row_R4"]["ensemble_all"]["fl_mae"] == pytest.approx(1.12, rel=1e-2)
     assert metrics["stream3"]["Our XGBoost"] == pytest.approx(0.7381, rel=1e-3)
@@ -48,6 +53,8 @@ def test_best_published_markdown_generation(tmp_path):
     assert "# Best Published Literature Benchmarks & Modern Methods Scan" in md
     assert "karanchand2525" in md
     assert "arXiv:2512.16710" in md
+    assert "metrics_ensemble_5fold_corrected.json" in md
+    assert "submission 1, angle bug" in md
     assert "arXiv:2609.19230" in md
     assert "BiometryNet" in md
     assert "SonoBase" in md

@@ -144,3 +144,27 @@ def test_eval_paired_bootstrap_logic():
     assert res["nnunet_fold1_mae"] == pytest.approx(1.0, rel=1e-3)
     assert res["delta_mae"] == pytest.approx(-1.0, rel=1e-3)
     assert res["ci95_delta_mae"][0] <= -1.0 <= res["ci95_delta_mae"][1]
+
+
+def test_make_nnunet_kaggle_kernel_builder():
+    """Verify scripts/47_make_nnunet_kaggle_kernel.py generates valid notebook & metadata."""
+    import importlib.util
+    builder_path = REPO_ROOT / "scripts" / "47_make_nnunet_kaggle_kernel.py"
+    spec = importlib.util.spec_from_file_location("builder_mod", str(builder_path))
+    builder_mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(builder_mod)
+
+    meta, nb = builder_mod.build_kernel_files()
+    assert meta["id"] == "prantakumerpandit390/hc18-nnunet-f0-250ep"
+    assert meta["enable_gpu"] is True
+    assert meta["enable_internet"] is True
+    assert "prantakumerpandit390/dataset501-hc18" in meta["dataset_sources"]
+
+    # Verify key notebook cells
+    cell_sources = ["".join(c["source"]) for c in nb["cells"]]
+    joined_code = "\n".join(cell_sources)
+    assert "nnUNetTrainer_250epochs" in joined_code
+    assert "splits_final.json" in joined_code
+    assert "793" in joined_code
+    assert "206" in joined_code
+
