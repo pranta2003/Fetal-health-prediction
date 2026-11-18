@@ -87,6 +87,12 @@ def parse_args():
         help=f"Directory to save outputs and checkpoints (default: {config.AC_V3_DIR})",
     )
     parser.add_argument(
+        "--data-dir",
+        type=str,
+        default=None,
+        help="Path to fetal data root directory containing FP and UCL (default: config.DATA_DIR)",
+    )
+    parser.add_argument(
         "--smoke",
         action="store_true",
         default=config.SMOKE,
@@ -156,10 +162,12 @@ def main():
     args = parse_args()
     os.makedirs(args.out_dir, exist_ok=True)
 
+    data_dir = args.data_dir if args.data_dir is not None else config.DATA_DIR
+
     # 1. Standard Legacy Mode (No --fold specified)
     if args.fold is None:
-        print(f"[04_train_ac] device={config.DEVICE} | out_dir={args.out_dir} | smoke={args.smoke}")
-        data = build_data(config.DATA_DIR)
+        print(f"[04_train_ac] device={config.DEVICE} | out_dir={args.out_dir} | smoke={args.smoke} | data_dir={data_dir}")
+        data = build_data(data_dir)
         tr, dv, te = split_data(data)
         print(
             f"[04_train_ac] images: train {len(tr)} ({tr.patient.nunique()} pts) | "
@@ -192,7 +200,7 @@ def main():
 
     # 2. 5-Fold Cross Validation Mode (--fold 1..5 or 'all')
     seed = 42 if args.seed is None else args.seed
-    folds_df = load_ac_folds(args.folds_csv, base=config.DATA_DIR)
+    folds_df = load_ac_folds(args.folds_csv, base=data_dir)
     print(f"[04_train_ac] Loaded folds ({len(folds_df)} images, {folds_df.patient.nunique()} patients, seed={seed})")
 
     if args.fold.lower() == "all":

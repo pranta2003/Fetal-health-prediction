@@ -174,6 +174,7 @@ print("Found AC dataset at:", data_candidate)
 # Setup target data directory
 data_dir = Path("/kaggle/working/data")
 data_dir.mkdir(parents=True, exist_ok=True)
+os.environ["FETAL_DATA_DIR"] = str(data_dir)
 
 # Unpack FP and UCL if zipped, or symlink/copy if directory
 for src_name in ["FP", "UCL"]:
