@@ -73,7 +73,7 @@ def test_coord_loss_types():
 
 def test_model_ema():
     model = nn.Sequential(nn.Linear(10, 5), nn.ReLU(), nn.Linear(5, 2))
-    ema = ModelEMA(model, decay=0.9)
+    ema = ModelEMA(model, decay=0.9, warmup=False)
 
     # Save original weights
     orig_w = model[0].weight.data.clone()
@@ -95,6 +95,24 @@ def test_model_ema():
 
     ema.restore(model)
     assert torch.allclose(model[0].weight.data, orig_w + 1.0, atol=1e-5)
+
+
+def test_model_ema_warmup_and_buffers():
+    # Test that BatchNorm buffers are copied directly and warmup decay progresses
+    conv = nn.BatchNorm2d(4)
+    conv.running_mean.fill_(0.0)
+    conv.running_var.fill_(1.0)
+    ema = ModelEMA(conv, decay=0.99, warmup=True)
+
+    # Update BN stats in source model
+    conv.running_mean.fill_(5.0)
+    conv.running_var.fill_(2.5)
+    ema.update(conv)
+
+    # Buffer should be copied directly (not smoothed with decay)
+    assert torch.allclose(ema.ema_model.running_mean, conv.running_mean)
+    assert torch.allclose(ema.ema_model.running_var, conv.running_var)
+    assert ema.step == 1
 
 
 def test_load_pretrained_encoder_synthetic(tmp_path):

@@ -332,8 +332,8 @@ def main() -> None:
         },
         {
             "slug": "ac-ema-s42",
-            "title": "Recipe (c) Model EMA + Longer Schedule 40 ep (Seed 42)",
-            "extra_train_args": "--seed 42 --recipe v3_full --ema --epochs 40 --patience 12",
+            "title": "Recipe (c) Model EMA + Schedule 80 ep (Seed 42)",
+            "extra_train_args": "--seed 42 --recipe v3_full --ema --epochs 80 --patience 20",
             "extra_datasets": None,
             "extra_kernels": None,
         },

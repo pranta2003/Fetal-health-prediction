@@ -52,7 +52,7 @@ def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None, patience=None):
     if init_encoder_path:
         load_pretrained_encoder(model, init_encoder_path, verbose=True)
 
-    ema = ModelEMA(model, decay=0.999).to(config.DEVICE) if use_ema else None
+    ema = ModelEMA(model, decay=0.99, warmup=True).to(config.DEVICE) if use_ema else None
 
     opt = torch.optim.AdamW(model.parameters(), lr=LR, weight_decay=0.01)
     sched = torch.optim.lr_scheduler.ReduceLROnPlateau(opt, mode="min", factor=0.5, patience=4)
