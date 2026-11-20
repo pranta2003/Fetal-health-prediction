@@ -173,6 +173,35 @@ def build_numbers():
             "source_sha256": hc18_probe_sha,
         })
 
+    hc18_mf_path = "docs/results/hc18_official/metrics_ensemble_5fold_measfix.json"
+    hc18_mf_data = load_json(hc18_mf_path)
+    hc18_mf_sha = get_sha256(hc18_mf_path)
+    mf_agg = hc18_mf_data["aggregates"]
+
+    mf_metrics = [
+        ("hc18_submission_measfix_mae", "HC MAE [Abs Diff]", round(float(mf_agg["absolute_difference"]["mean"]), 4)),
+        ("hc18_submission_measfix_bias_pred_true", "Signed Bias [pred-true]", round(float(mf_agg["difference"]["mean"]), 4)),
+        ("hc18_submission_measfix_bias_true_pred", "Signed Bias [true-pred]", round(-float(mf_agg["difference"]["mean"]), 4)),
+        ("hc18_submission_measfix_dice", "Dice (%)", round(float(mf_agg["DICE"]["mean"]), 2)),
+        ("hc18_submission_measfix_hd", "HD", round(float(mf_agg["hausdorff_distance"]["mean"]), 4)),
+    ]
+    for row_id, metric, val in mf_metrics:
+        rows.append({
+            "id": row_id,
+            "field": "HC18",
+            "system": 1,
+            "approach": "5-fold ensemble + measfix (delta_r=0.1134mm)",
+            "protocol": "HC18 Grand Challenge Official Test Set, 335 images, reference: official ground truth ellipse",
+            "metric": metric,
+            "value": val,
+            "ci": None,
+            "source_file": hc18_mf_path,
+            "script": "scripts/34_eval_hc18_submission.py",
+            "notebook": "notebooks/benchmarks/hc18_official.ipynb",
+            "pr_commit": "7c75db9",
+            "source_sha256": hc18_mf_sha,
+        })
+
     # -------------------------------------------------------------------------
     # 3. HC18 nnU-Net Validation & Measurement Fix Study
     # -------------------------------------------------------------------------

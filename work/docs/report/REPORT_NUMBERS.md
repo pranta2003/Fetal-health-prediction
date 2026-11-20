@@ -1,12 +1,12 @@
 # Master Evidence & Numbers Ledger for Dissertation Report
 
-Total verified numbers: **117**
+Total verified numbers: **122**
 
 > [!IMPORTANT]
 > Every number in this ledger is programmatically extracted and cryptographically linked
 > to an immutable committed artifact on disk. Zero values are hand-typed.
 
-## HC18 (38 metrics)
+## HC18 (43 metrics)
 
 | ID | System | Approach | Protocol | Metric | Value | CI (95%) | Source File | Script / Notebook | Source SHA-256 |
 |:---|:---:|:---|:---|:---|:---:|:---:|:---|:---|:---:|
@@ -20,6 +20,11 @@ Total verified numbers: **117**
 | `hc18_probe_mult050_bias_true_pred` | Ours (1) | 5-fold ensemble + scale 1.004065 probe (mult050) | HC18 Grand Challenge Official Test Set, 335 images, reference: official ground truth ellipse | **Signed Bias [true-pred]** | **-1.4999** | - | `docs/results/hc18_calibration/metrics_probe_mult050.json` | `scripts/43_probe_hc18_calibration.py`<br>`notebooks/benchmarks/hc18_oof_calibration.ipynb` | `682672a906d6...` |
 | `hc18_probe_mult050_dice` | Ours (1) | 5-fold ensemble + scale 1.004065 probe (mult050) | HC18 Grand Challenge Official Test Set, 335 images, reference: official ground truth ellipse | **Dice (%)** | **97.88** | - | `docs/results/hc18_calibration/metrics_probe_mult050.json` | `scripts/43_probe_hc18_calibration.py`<br>`notebooks/benchmarks/hc18_oof_calibration.ipynb` | `682672a906d6...` |
 | `hc18_probe_mult050_hd` | Ours (1) | 5-fold ensemble + scale 1.004065 probe (mult050) | HC18 Grand Challenge Official Test Set, 335 images, reference: official ground truth ellipse | **HD** | **1.258** | - | `docs/results/hc18_calibration/metrics_probe_mult050.json` | `scripts/43_probe_hc18_calibration.py`<br>`notebooks/benchmarks/hc18_oof_calibration.ipynb` | `682672a906d6...` |
+| `hc18_submission_measfix_mae` | Ours (1) | 5-fold ensemble + measfix (delta_r=0.1134mm) | HC18 Grand Challenge Official Test Set, 335 images, reference: official ground truth ellipse | **HC MAE [Abs Diff]** | **1.835** | - | `docs/results/hc18_official/metrics_ensemble_5fold_measfix.json` | `scripts/34_eval_hc18_submission.py`<br>`notebooks/benchmarks/hc18_official.ipynb` | `e051fda4415c...` |
+| `hc18_submission_measfix_bias_pred_true` | Ours (1) | 5-fold ensemble + measfix (delta_r=0.1134mm) | HC18 Grand Challenge Official Test Set, 335 images, reference: official ground truth ellipse | **Signed Bias [pred-true]** | **0.0743** | - | `docs/results/hc18_official/metrics_ensemble_5fold_measfix.json` | `scripts/34_eval_hc18_submission.py`<br>`notebooks/benchmarks/hc18_official.ipynb` | `e051fda4415c...` |
+| `hc18_submission_measfix_bias_true_pred` | Ours (1) | 5-fold ensemble + measfix (delta_r=0.1134mm) | HC18 Grand Challenge Official Test Set, 335 images, reference: official ground truth ellipse | **Signed Bias [true-pred]** | **-0.0743** | - | `docs/results/hc18_official/metrics_ensemble_5fold_measfix.json` | `scripts/34_eval_hc18_submission.py`<br>`notebooks/benchmarks/hc18_official.ipynb` | `e051fda4415c...` |
+| `hc18_submission_measfix_dice` | Ours (1) | 5-fold ensemble + measfix (delta_r=0.1134mm) | HC18 Grand Challenge Official Test Set, 335 images, reference: official ground truth ellipse | **Dice (%)** | **98.02** | - | `docs/results/hc18_official/metrics_ensemble_5fold_measfix.json` | `scripts/34_eval_hc18_submission.py`<br>`notebooks/benchmarks/hc18_official.ipynb` | `e051fda4415c...` |
+| `hc18_submission_measfix_hd` | Ours (1) | 5-fold ensemble + measfix (delta_r=0.1134mm) | HC18 Grand Challenge Official Test Set, 335 images, reference: official ground truth ellipse | **HD** | **1.199** | - | `docs/results/hc18_official/metrics_ensemble_5fold_measfix.json` | `scripts/34_eval_hc18_submission.py`<br>`notebooks/benchmarks/hc18_official.ipynb` | `e051fda4415c...` |
 | `hc18_nnunet_f0_raw_vs_mask_mae` | Ours (1) | nnU-Net 250ep fold 0 (raw) | Fold 0 validation, 206 images, reference: inflated annotation mask ellipse | **HC MAE [Abs Diff]** | **1.9267** | - | `docs/results/hc18_nnunet/f0_eval.json` | `scripts/46_eval_nnunet_hc18.py`<br>`notebooks/kaggle/hc18_nnunet/hc18-nnunet-f0-250ep/hc18-nnunet-f0-250ep.ipynb` | `b62968b65f91...` |
 | `hc18_nnunet_f0_raw_vs_csv_mae` | Ours (1) | nnU-Net 250ep fold 0 (raw) | Fold 0 validation, 206 images, reference: official CSV ground truth ellipse | **HC MAE [Abs Diff]** | **1.8879** | - | `docs/results/hc18_official/measfix_study.json` | `scripts/47_fit_measfix_transform.py`<br>`notebooks/benchmarks/hc18_official.ipynb` | `9b5a3b53d47a...` |
 | `hc18_nnunet_f0_raw_vs_csv_bias_pred_true` | Ours (1) | nnU-Net 250ep fold 0 (raw) | Fold 0 validation, 206 images, reference: official CSV ground truth ellipse | **Signed Bias [pred-true]** | **0.4256** | - | `docs/results/hc18_official/measfix_study.json` | `scripts/47_fit_measfix_transform.py`<br>`notebooks/benchmarks/hc18_official.ipynb` | `9b5a3b53d47a...` |
