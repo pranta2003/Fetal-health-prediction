@@ -204,6 +204,7 @@ print("folds_v1.csv exists:", (data_dir / "folds_v1.csv").exists())
     # Cell 6: Extra setup if FASSD pretrained encoder required
     if "init-encoder" in extra_train_args:
         cells.append(make_code_cell("""# Locate FASSD Pretrained Checkpoint
+import os
 from pathlib import Path
 
 fassd_ckpt = None
@@ -227,11 +228,23 @@ if fassd_ckpt is None:
 
 print("Found FASSD checkpoint at:", fassd_ckpt)
 FASSD_CKPT_PATH = str(fassd_ckpt)
+os.environ["FASSD_CKPT_PATH"] = FASSD_CKPT_PATH
 """))
 
     # Cell 7: Execute 5-fold training
-    run_cmd = f"python scripts/04_train_ac.py --fold all --data-dir /kaggle/working/data --folds-csv /kaggle/working/data/folds_v1.csv --out-dir /kaggle/working/{slug} {extra_train_args}"
-    cells.append(make_code_cell(f"""# Run 5-fold AC Cross-Validation
+    if slug == "ac-fassd-s42":
+        cell7_code = f"""# Run 5-fold AC Cross-Validation
+import subprocess
+
+cmd = f"python scripts/04_train_ac.py --fold all --data-dir /kaggle/working/data --folds-csv /kaggle/working/data/folds_v1.csv --out-dir /kaggle/working/{slug} --seed 42 --recipe v3_full --init-encoder \\"{{FASSD_CKPT_PATH}}\\""
+print("Running command:\\n", cmd)
+ret = subprocess.run(cmd, shell=True)
+if ret.returncode != 0:
+    raise RuntimeError(f"Training failed with return code {{ret.returncode}}")
+"""
+    else:
+        run_cmd = f"python scripts/04_train_ac.py --fold all --data-dir /kaggle/working/data --folds-csv /kaggle/working/data/folds_v1.csv --out-dir /kaggle/working/{slug} {extra_train_args}"
+        cell7_code = f"""# Run 5-fold AC Cross-Validation
 import subprocess
 
 cmd = \"\"\"{run_cmd}\"\"\"
@@ -239,7 +252,8 @@ print("Running command:\\n", cmd)
 ret = subprocess.run(cmd, shell=True)
 if ret.returncode != 0:
     raise RuntimeError(f"Training failed with return code {{ret.returncode}}")
-"""))
+"""
+    cells.append(make_code_cell(cell7_code))
 
     # Cell 8: Print and verify summary JSON
     cells.append(make_code_cell(f"""# Display Final OOF Summary

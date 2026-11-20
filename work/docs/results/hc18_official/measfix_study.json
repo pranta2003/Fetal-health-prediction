@@ -1,0 +1,128 @@
+{
+  "raw_training_annotation_discrepancy": {
+    "n": 999,
+    "mean_diff_mm": 0.7126484734017645,
+    "std_diff_mm": 0.2738428562843786,
+    "median_diff_mm": 0.6554864898395749,
+    "delta_r_mm": 0.11342152722878392
+  },
+  "model_comparison_cv": {
+    "none": {
+      "mae": 0.7126493367781284,
+      "std": 0.2738406071723321,
+      "median": 0.6554864898395749
+    },
+    "constant_hc_offset": {
+      "mae": 0.2029805062534832,
+      "std": 0.18393370660978248,
+      "median": 0.1427868271658781
+    },
+    "constant_radius_shrink": {
+      "mae": 0.20230177046518566,
+      "std": 0.18468537968428245,
+      "median": 0.1399993917097504
+    },
+    "ratio_scale": {
+      "mae": 0.13273008586954574,
+      "std": 0.11691508573030324,
+      "median": 0.11475009231619993
+    },
+    "linear_regression": {
+      "mae": 0.11506415092942555,
+      "std": 0.11767658257384701,
+      "median": 0.0875719720764323
+    }
+  },
+  "trimester_breakdown": {
+    "trimester_1": {
+      "n": 205,
+      "mean_hc": 80.70521951219511,
+      "diff_mean": 0.4390983233733225,
+      "diff_std": 0.11664232948910008,
+      "diff_median": 0.4231698096512275,
+      "thickness_px_mean": 2.4000855543394986,
+      "pixel_size_mean": 0.08635370136204976
+    },
+    "trimester_2": {
+      "n": 655,
+      "mean_hc": 178.34109923664118,
+      "diff_mean": 0.7037492835845481,
+      "diff_std": 0.1852111071653368,
+      "diff_median": 0.6677239024192261,
+      "thickness_px_mean": 2.3916172673197647,
+      "pixel_size_mean": 0.13784302732300932
+    },
+    "trimester_3": {
+      "n": 139,
+      "mean_hc": 293.89007194244607,
+      "diff_mean": 1.1580207761795152,
+      "diff_std": 0.21979319389207777,
+      "diff_median": 1.127065863684436,
+      "thickness_px_mean": 2.3906997387383138,
+      "pixel_size_mean": 0.22817856891068344
+    }
+  },
+  "validation_application": {
+    "single_model_oof_999": {
+      "n": 999,
+      "raw_vs_csv": {
+        "mae": 2.3019423423423424,
+        "std": 2.742788954658837,
+        "signed_bias_pred_minus_true": -1.257585585585586,
+        "signed_bias_true_minus_pred": 1.257585585585586
+      },
+      "measfix_vs_csv": {
+        "mae": 2.6887806643276484,
+        "std": 2.809441139663212,
+        "signed_bias_pred_minus_true": -1.9702340589873568,
+        "signed_bias_true_minus_pred": 1.9702340589873568
+      },
+      "paired_bootstrap_delta_mae": {
+        "mean_delta": 0.3868383219853061,
+        "ci_95": [
+          0.3523715641541667,
+          0.4221437160100817
+        ],
+        "p_value": 0.0
+      }
+    },
+    "nnunet_fold0_206": {
+      "n": 206,
+      "raw_vs_csv": {
+        "mae": 1.8878769354740628,
+        "std": 1.6563392282790628,
+        "signed_bias_pred_minus_true": 0.4255956442427063,
+        "signed_bias_true_minus_pred": -0.4255956442427063
+      },
+      "measfix_vs_csv": {
+        "mae": 1.8685837891252401,
+        "std": 1.648036794980735,
+        "signed_bias_pred_minus_true": -0.2846298556249898,
+        "signed_bias_true_minus_pred": 0.2846298556249898
+      },
+      "paired_bootstrap_delta_mae": {
+        "mean_delta": -0.019293146348822454,
+        "ci_95": [
+          -0.11290619522256493,
+          0.07168723107174446
+        ],
+        "p_value": 0.6672
+      }
+    }
+  },
+  "submission_measfix": {
+    "file": "C:\\fetal-github-clone\\work\\candidates\\submission_ensemble_5fold_corrected_measfix.csv",
+    "n_rows": 335,
+    "columns": [
+      "filename",
+      "center_x_mm",
+      "center_y_mm",
+      "semi_axes_a_mm",
+      "semi_axes_b_mm",
+      "angle_rad"
+    ],
+    "delta_r_mm": 0.11342152722878392,
+    "mean_hc_change_test_mm": -0.7101751567413446,
+    "sha256": "93cbf78d98404545dbe0cc78dd58399f73bedc7065b2cfd01e9d0627dd25ab81"
+  }
+}
