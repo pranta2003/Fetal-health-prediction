@@ -16,6 +16,7 @@ ENV/
 
 # Data and log file extensions
 *.csv
+!candidates/*.csv
 *.npy
 *.log
 
