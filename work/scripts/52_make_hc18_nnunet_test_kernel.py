@@ -74,39 +74,36 @@ def main():
 - Generates `submission_nnunet_f0_raw.csv` and `submission_nnunet_f0_measfix.csv`.
 """, cell_id="cell_1_intro"))
 
-    # Cell 2: Fail-Fast Dataset Discovery & Assertion (No glob, exact subpath)
+    # Cell 2: Fail-Fast Dataset Discovery & Assertion (Hard-coded path with print of input root)
     cells.append(make_code_cell("""import os
 from pathlib import Path
 
 print("=" * 60)
-print("KERNEL STARTUP: Inspecting /kaggle/input/* and verifying test set")
+print("KERNEL STARTUP: Inspecting /kaggle/input and verifying test set")
 print("=" * 60)
 
-entries = []
-for p in Path("/kaggle/input").iterdir():
-    if p.is_dir():
-        for sub in list(p.iterdir())[:10]:
-            entries.append(str(sub))
-    else:
-        entries.append(str(p))
+input_root = Path("/kaggle/input")
+if input_root.exists():
+    print("os.listdir('/kaggle/input'):", os.listdir("/kaggle/input"))
+    for sub in input_root.iterdir():
+        if sub.is_dir():
+            try:
+                print(f"os.listdir('{sub}'):", os.listdir(sub)[:10])
+            except Exception as e:
+                print(f"Could not list {sub}: {e}")
 
-print(f"Total top-level / second-level entries found: {len(entries)}")
-print("First 20 entries under /kaggle/input/*:")
-for e in entries[:20]:
-    print(" ", e)
+# Hard-coded dataset path
+hardcoded_path = Path("/kaggle/input/datasets/prantakumerpandit390/hc18-ultrasound/test_set/test_set")
+if not hardcoded_path.is_dir():
+    fallback_path = Path("/kaggle/input/hc18-ultrasound/test_set/test_set")
+    if fallback_path.is_dir():
+        hardcoded_path = fallback_path
 
-# Exact subpath from kaggle datasets files prantakumerpandit390/hc18-ultrasound
-exact_subpath = Path("test_set/test_set")
-test_src_dir = None
-for base in Path("/kaggle/input").iterdir():
-    candidate = base / exact_subpath
-    if candidate.is_dir():
-        test_src_dir = candidate
-        break
+test_src_dir = hardcoded_path
+print(f"Target test_src_dir: {test_src_dir}")
+assert test_src_dir.is_dir(), f"Test set directory not found at {test_src_dir}"
 
-assert test_src_dir is not None, f"Could not find exact subpath {exact_subpath} under any folder in /kaggle/input"
 test_pngs = sorted([p for p in test_src_dir.iterdir() if p.name.endswith(".png") and not p.name.endswith("_Annotation.png")])
-print(f"Discovered test directory: {test_src_dir}")
 print(f"Test PNG count: {len(test_pngs)}")
 assert len(test_pngs) == 335, f"Expected exactly 335 test PNGs, got {len(test_pngs)}"
 print("FAIL-FAST CHECK PASSED: Exactly 335 test images verified before proceeding.")
