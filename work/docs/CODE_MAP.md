@@ -36,6 +36,9 @@ File names tell you the part. The prefix is the part:
 | 5 Report | `scripts/34_hc18_oof_calibration.py` | Evaluates nested cross-validation post-hoc calibration on single-fold out-of-fold predictions |
 | 5 Report | `scripts/43_hc18_calibration_candidates.py` | Evaluates nested damped multiplicative post-hoc calibration and generates exploratory submission CSVs |
 | 5 Report | `scripts/46_eval_nnunet_hc18.py` | Evaluates nnU-Net predicted masks on fold 1 with submission ellipse fitting, Dice, Hausdorff, and paired bootstrap vs existing model |
+| 5 Report | `scripts/47_audit_bias_direction.py` | Audits signed bias convention (PRED-TRUE vs TRUE-PRED) and dual references |
+| 5 Report | `scripts/50_measurement_fix_study.py`, `scripts/54_eval_linear_fit_followup.py` | Evaluates measurement-fix transformation on GT annotation masks, validation folds, and linear fit followup |
+| 5 Inference | `scripts/51_test_nnunet_test_script.py`, `scripts/52_make_hc18_nnunet_test_kernel.py`, `scripts/53_test_discovery_mock.py`, `scripts/55_make_hc18_nnunet_parallel_kernels.py`, `scripts/download_hc18_nnunet_artifacts.py` | Generates Kaggle kernels for nnU-Net test inference and parallel training, tests inference and discovery mock locally, and downloads artifacts |
 | 5 Report | `scripts/47_make_nnunet_kaggle_kernel.py` | Generates Kaggle training notebook and metadata for HC18 nnU-Net v2 (2D, Fold 0, 250 epochs) |
 | 5 Report | `scripts/make_hc18_calibration_notebook.py` | Generates benchmark notebook for HC18 OOF calibration study |
 | 5 Report | `scripts/kaggle/run_hc18_close.py` | Runs steps 11 and 12 on a Kaggle GPU |
@@ -83,6 +86,7 @@ File names tell you the part. The prefix is the part:
 | Campaign Folds | `scripts/39_make_ac_folds.py`, `docs/results/ac_campaign/folds_v1.csv` | Fixed leak-free patient-grouped 5-fold cross-validation partition on official train set (642 images, 501 patients) |
 | Campaign Options | `src/fetal/train/ema.py`, `src/fetal/models/losses.py`, `src/fetal/models/ac_landmark.py` | Model EMA, wing loss coordinate term, and strict FASSD pretrained encoder loading (704 keys) |
 | Campaign Compare | `scripts/40_ac_compare_recipes.py` | Patient-level cluster paired bootstrap (5,000 resamples, seed 42) comparing candidate recipes |
+| Campaign Diagnostics | `scripts/48_make_worst8_contact_sheet.py`, `scripts/diagnose_worst8.py`, `scripts/analyze_worst_and_calipers.py` | Visual contact sheets and deep-dive error diagnostic reports for top worst outliers |
 | Campaign Kaggle | `scripts/41_prepare_ac_kaggle_dataset.py`, `scripts/42_make_ac_kaggle_kernels.py`, `notebooks/kaggle/ac_campaign/` | Packages `prantakumerpandit390/ac-fetal-v1` dataset and generates 5 Kaggle cross-validation kernels |
 | Campaign Proof | `tests/test_ac_campaign_options.py` | Unit tests for 5-fold integrity, coordinate loss variants, ModelEMA, pretrained encoder loading, and paired bootstrap |
 | Campaign Results | `docs/results/ac_campaign/AC_CAMPAIGN_NOTES.md` | Full documentation of fold distribution, numerical discrepancy analysis (4.3956 vs 4.3951 mm), candidate recipe matrix, and push commands |
@@ -120,6 +124,7 @@ Fetal Abdominal Structures Segmentation Dataset (artery, liver, stomach, vein). 
 | `src/fetal/clinical/audit.py` | The 14 audit rows that prove where the old 0.97 came from |
 | `scripts/07_audit_clinical.py` | The button that runs the audit |
 | `scripts/18_bench_stream3.py` | Benchmarks XGBoost against Logistic Regression, Random Forest, and LightGBM |
+| `scripts/53_make_stream3_modern_kernel.py` | Generates modern Optuna tuning kernel for CatBoost, LightGBM, and XGBoost on Kaggle CPU |
 | `notebooks/S3_clinical_audit.ipynb` | The same audit as a notebook |
 | `notebooks/benchmarks/stream3_bench.ipynb` | Executed notebook comparing Stream 3 tabular risk models and reproducing XGBoost |
 | `tests/test_clinical_*.py`, `tests/test_stream3_*.py` | Tests, including the guard against forbidden features and row consistency |
@@ -129,6 +134,7 @@ Fetal Abdominal Structures Segmentation Dataset (artery, liver, stomach, vein). 
 `src/fetal/explain/hadlock.py` turns HC, AC and FL into an estimated weight and a growth percentile. Tests: `tests/test_hadlock.py`.
 `scripts/23_three_plane_check.py` audits multi-plane subject overlap, metadata columns, and cross-plane split leakage between FP and UCL cohorts. Results: `docs/results/three_plane/three_plane_check.json`. Tests: `tests/test_three_plane.py`.
 `scripts/24_hadlock_demo_step1.py` audits usable 3-plane subjects and runs HC18 5-fold ensemble external validation on FP and UCL head ultrasound images. Results: `docs/results/hadlock_demo/hadlock_demo_step1.json`, `docs/results/hadlock_demo/head_external_table.md`, `docs/results/hadlock_demo/head_predictions.csv`. Tests: `tests/test_hadlock_demo.py`.
+`scripts/54_reconstruct_head_landmarks.py` reconstructs landmark coordinates and evaluates NME metrics for head ultrasound.
 `scripts/26_hadlock_demo_step2.py` evaluates 4-parameter EFW estimation on the strictly held-out 3-plane test cohort (22 subjects), computes bootstrap CIs, one-at-a-time replacement, outlier audit, and sensitivity. Results: `docs/results/hadlock_demo/step2_per_subject.csv`, `docs/results/hadlock_demo/step2_summary.json`, `docs/results/hadlock_demo/step2_summary.md`. Tests: `tests/test_hadlock_step2.py`.
 `notebooks/benchmarks/head_external.ipynb` displays external validation metrics and worst outlier predictions (generated by `scripts/make_head_external_notebook.py`).
 `notebooks/benchmarks/hadlock_step2.ipynb` displays multi-plane EFW predictions, replacement analysis, and predicted-vs-annotated scatter plot (generated by `scripts/make_hadlock_step2_notebook.py`).
@@ -158,10 +164,10 @@ Fetal Abdominal Structures Segmentation Dataset (artery, liver, stomach, vein). 
 |---|---|
 | `src/fetal/config.py` + `configs/paths.yaml` | Where the data and weights live (one place) |
 | `src/fetal/train/checkpoint.py` | Saves and loads model weights |
-| `scripts/08_make_manifest.py`, `scripts/14_hash_results.py`, `scripts/16_extract_notebook_results.py`, `scripts/make_bench_notebooks.py`, `scripts/20_benchmark_summary.py`, `scripts/44_generate_best_published.py`, `scripts/check_secrets.py` | Make and check file fingerprints, extract historical metrics from notebooks, construct benchmark notebooks, generate supervisor summary, synthesize published benchmarks (BEST_PUBLISHED.md), and pre-commit secret scans |
+| `scripts/08_make_manifest.py`, `scripts/14_hash_results.py`, `scripts/16_extract_notebook_results.py`, `scripts/make_bench_notebooks.py`, `scripts/20_benchmark_summary.py`, `scripts/44_generate_best_published.py`, `scripts/check_secrets.py`, `scripts/49_update_results_ledger.py`, `scripts/56_build_report_numbers.py`, `scripts/57_verify_report_numbers.py`, `scripts/58_audit_notebooks.py` | Make and check file fingerprints, extract historical metrics from notebooks, construct benchmark notebooks, generate supervisor summary, synthesize published benchmarks (BEST_PUBLISHED.md), pre-commit secret scans, update results ledger, build report numbers ledger, cryptographically verify numbers, and audit notebooks |
 | `notebooks/benchmarks/benchmark_summary.ipynb` | Executed notebook synthesizing multi-modal benchmark summary |
-| `docs/results/published_refs.json`, `docs/results/benchmark_summary.md`, `docs/results/literature/BEST_PUBLISHED.md` | Published reference numbers with URLs/protocols, synthesized executive summary table, and detailed best published literature benchmarks & modern methods scan |
-| `tests/test_benchmark_summary.py`, `tests/test_lit_benchmark.py` | Unit tests ensuring AC Ours/Claim consistency, published references, dynamic ladder notes, literature benchmark generation, and calibration candidate integrity |
+| `docs/results/published_refs.json`, `docs/results/benchmark_summary.md`, `docs/results/literature/BEST_PUBLISHED.md`, `docs/report/REPORT_NUMBERS.json`, `docs/report/REPORT_NUMBERS.md` | Published reference numbers with URLs/protocols, synthesized executive summary table, detailed best published literature benchmarks & modern methods scan, and verified report numbers ledger |
+| `tests/test_benchmark_summary.py`, `tests/test_lit_benchmark.py`, `tests/test_report_numbers.py` | Unit tests ensuring AC Ours/Claim consistency, published references, dynamic ladder notes, literature benchmark generation, calibration candidate integrity, and report numbers verification |
 | `scripts/run_all.ps1` | One command to run groups of the buttons above |
 
 ## How the whole system fits (the flow)
