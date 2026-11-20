@@ -23,36 +23,36 @@
   "n_test_stillbirths": 2001,
   "models": {
     "tuned_xgboost": {
-      "test_auc": 0.7233,
+      "test_auc": 0.7226,
       "ci_95": [
-        0.7094,
-        0.7328
+        0.7084,
+        0.732
       ],
       "params": {
-        "max_depth": 4,
-        "learning_rate": 0.06743750332677033,
-        "n_estimators": 26,
-        "subsample": 0.9239997094497797,
-        "colsample_bytree": 0.6750785174895224,
-        "scale_pos_weight": 5.418648532786486,
+        "max_depth": 6,
+        "learning_rate": 0.033783775887632476,
+        "n_estimators": 16,
+        "subsample": 0.8960877063686141,
+        "colsample_bytree": 0.8689903978346452,
+        "scale_pos_weight": 7.041434225248775,
         "random_state": 42,
         "eval_metric": "auc",
         "n_jobs": -1
       }
     },
     "tuned_lightgbm": {
-      "test_auc": 0.7289,
+      "test_auc": 0.7301,
       "ci_95": [
-        0.7163,
-        0.7375
+        0.7169,
+        0.7396
       ],
       "params": {
-        "max_depth": 7,
-        "num_leaves": 43,
-        "learning_rate": 0.03515339668283384,
-        "n_estimators": 13,
-        "subsample": 0.8644005181092616,
-        "colsample_bytree": 0.9062752642037533,
+        "max_depth": 5,
+        "num_leaves": 28,
+        "learning_rate": 0.07906889374947286,
+        "n_estimators": 26,
+        "subsample": 0.8337821291514859,
+        "colsample_bytree": 0.8296415047470888,
         "class_weight": "balanced",
         "random_state": 42,
         "n_jobs": -1,
@@ -60,10 +60,10 @@
       }
     },
     "tuned_catboost": {
-      "test_auc": 0.7153,
+      "test_auc": 0.7296,
       "ci_95": [
-        0.7013,
-        0.7256
+        0.7172,
+        0.7381
       ]
     },
     "tuned_logistic_regression": {
@@ -75,15 +75,15 @@
       "best_C": 0.05
     },
     "calibrated_gbm_lr_blend": {
-      "test_auc": 0.7309,
-      "calibrated_auc": 0.7298,
+      "test_auc": 0.7318,
+      "calibrated_auc": 0.7301,
       "ci_95": [
-        0.7168,
-        0.7378
+        0.7173,
+        0.7389
       ],
-      "blend_formula": "0.90 * lightgbm + 0.10 * LR",
-      "brier_score_raw": 0.22378,
-      "brier_score_calibrated": 0.17382
+      "blend_formula": "0.85 * lightgbm + 0.15 * LR",
+      "brier_score_raw": 0.20439,
+      "brier_score_calibrated": 0.17325
     }
   }
 }

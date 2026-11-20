@@ -93,9 +93,11 @@ print(f"Using clinical dataset: {csv_path}")
 
     # Cell 4: Read and embed runner script execution
     runner_code = (REPO_ROOT / "scripts" / "62_train_stream3_modern.py").read_text(encoding="utf-8")
-    cells.append(make_code_cell(f"""import subprocess
+    escaped_code = json.dumps(runner_code)
+    run_cell_text = f"""import json
+import subprocess
 
-script_code = '''{runner_code}'''
+script_code = json.loads({escaped_code})
 with open("/kaggle/working/train_modern.py", "w", encoding="utf-8") as f:
     f.write(script_code)
 
@@ -104,7 +106,8 @@ print("Executing command:\\n", cmd)
 ret = subprocess.run(cmd, shell=True)
 if ret.returncode != 0:
     raise RuntimeError(f"Stream 3 modern training failed with return code {{ret.returncode}}")
-""", cell_id="cell_4_run"))
+"""
+    cells.append(make_code_cell(run_cell_text, cell_id="cell_4_run"))
 
     nb = {
         "cells": cells,

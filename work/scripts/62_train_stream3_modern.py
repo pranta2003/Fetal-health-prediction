@@ -26,14 +26,52 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-# Repo setup
+# Repo setup & standalone fallbacks
 repo_root = Path(__file__).resolve().parent.parent
 if str(repo_root / "src") not in sys.path:
     sys.path.insert(0, str(repo_root / "src"))
 
-from fetal.clinical.constants import FEATURE_SETS, OUTCOME_TIME_VARS
-from fetal.clinical.data import load_clean
-from fetal.clinical.eval import bootstrap_auc_ci
+try:
+    from fetal.clinical.constants import FEATURE_SETS, OUTCOME_TIME_VARS
+    from fetal.clinical.data import load_clean
+    from fetal.clinical.eval import bootstrap_auc_ci
+except ImportError:
+    NUM_FEATURES = ["MAGER", "BMI", "PRECARE", "PRIORDEAD", "PRIORLIVE", "MEDUC"]
+    CAT_FEATURES = [
+        "RF_GDIAB", "RF_GHYPE", "RF_EHYPE", "RF_CESAR", "RF_ARTEC", "RF_INFTR",
+        "RF_FEDRG", "CIG_REC", "WIC", "DPLURAL", "SEX", "MRACE6", "MBSTATE_REC"
+    ]
+    UNKNOWN_CODES = ["U", "9", "99", "Unknown"]
+    OUTCOME_TIME_VARS = ["COMBGEST", "OEGest_Comb", "OBGEST_FLG", "DBWT", "BWTR4"]
+    FEATURE_SETS = {
+        "primary": {
+            "num": [c for c in NUM_FEATURES if c != "MEDUC"],
+            "cat": [c for c in CAT_FEATURES if c not in ("WIC", "MBSTATE_REC", "MRACE6")],
+        }
+    }
+
+    def load_clean(csv_path):
+        raw = pd.read_csv(csv_path, low_memory=False)
+        for c in CAT_FEATURES:
+            if c in raw.columns:
+                raw[c] = raw[c].replace(UNKNOWN_CODES, np.nan)
+        if "COMBGEST" in raw.columns:
+            raw["COMBGEST"] = raw["COMBGEST"].replace([99], np.nan)
+        df = raw.drop_duplicates().reset_index(drop=True)
+        return raw, df
+
+    def bootstrap_auc_ci(y, p, n_boot=200, seed=0):
+        y = np.asarray(y)
+        p = np.asarray(p)
+        rng = np.random.RandomState(seed)
+        boots = []
+        for _ in range(n_boot):
+            i = rng.randint(0, len(y), len(y))
+            if y[i].min() != y[i].max():
+                boots.append(roc_auc_score(y[i], p[i]))
+        if not boots:
+            return float("nan"), float("nan")
+        return float(np.percentile(boots, 2.5)), float(np.percentile(boots, 97.5))
 
 
 def build_preprocessors(num_cols: list[str], cat_cols: list[str]):
