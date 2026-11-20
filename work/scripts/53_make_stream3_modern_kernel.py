@@ -91,13 +91,14 @@ csv_path = csv_candidates[0]
 print(f"Using clinical dataset: {csv_path}")
 """, cell_id="cell_3_discovery"))
 
-    # Cell 4: Read and embed runner script execution
+    # Cell 4: Read and embed runner script execution via base64 for zero-escaping safety
+    import base64
     runner_code = (REPO_ROOT / "scripts" / "62_train_stream3_modern.py").read_text(encoding="utf-8")
-    escaped_code = json.dumps(runner_code)
-    run_cell_text = f"""import json
+    b64_code = base64.b64encode(runner_code.encode("utf-8")).decode("ascii")
+    run_cell_text = f"""import base64
 import subprocess
 
-script_code = json.loads({escaped_code})
+script_code = base64.b64decode({repr(b64_code)}).decode("utf-8")
 with open("/kaggle/working/train_modern.py", "w", encoding="utf-8") as f:
     f.write(script_code)
 
