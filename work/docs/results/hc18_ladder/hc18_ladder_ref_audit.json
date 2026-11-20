@@ -1,0 +1,141 @@
+{
+  "reference_difference_context": {
+    "mask_ellipse_vs_csv_mean_difference_mm": 0.7134,
+    "mask_ellipse_vs_csv_std_mm": 0.2768,
+    "reason": "Official training annotations are binary boundary rings. An OpenCV fitEllipse on the full ring mask traces the outer perimeter of the painted contour rather than the midline, inflating radius by ~0.1134 mm and circumference by ~0.7134 mm compared to the clinician-curated CSV reference."
+  },
+  "rows": {
+    "row_A": {
+      "name": "Row A: Direct Regression",
+      "split": "Fold 1 (N=206)",
+      "status": "verified and recomputed",
+      "n_images": 206,
+      "reference_used_in_file": "Official CSV HC",
+      "mean_abs_diff_between_references_mm": 0.0,
+      "against_original_file_reference": {
+        "hc_mae_mm": 10.6728,
+        "hc_rmse_mm": 15.9672,
+        "signed_bias_pred_minus_true_mm": 5.3052
+      },
+      "against_official_csv_reference": {
+        "hc_mae_mm": 10.6728,
+        "hc_rmse_mm": 15.9672,
+        "signed_bias_pred_minus_true_mm": 5.3052
+      }
+    },
+    "row_B": {
+      "name": "Row B: Geometry Approach v3",
+      "split": "Fold 1 (N=206)",
+      "status": "verified and recomputed",
+      "n_images": 206,
+      "reference_used_in_file": "Official CSV HC",
+      "mean_abs_diff_between_references_mm": 0.0,
+      "against_original_file_reference": {
+        "hc_mae_mm": 11.5964,
+        "hc_rmse_mm": 16.1775,
+        "signed_bias_pred_minus_true_mm": 5.6149
+      },
+      "against_official_csv_reference": {
+        "hc_mae_mm": 11.5964,
+        "hc_rmse_mm": 16.1775,
+        "signed_bias_pred_minus_true_mm": 5.6149
+      }
+    },
+    "row_C": {
+      "name": "Row C: Multi-Task U-Net",
+      "split": "Fold 1 (N=206)",
+      "status": "verified and recomputed",
+      "n_images": 206,
+      "reference_used_in_file": "Official CSV HC",
+      "mean_abs_diff_between_references_mm": 0.0,
+      "against_original_file_reference": {
+        "hc_mae_mm": 10.5104,
+        "hc_rmse_mm": 15.5098,
+        "signed_bias_pred_minus_true_mm": 3.5311
+      },
+      "against_official_csv_reference": {
+        "hc_mae_mm": 10.5104,
+        "hc_rmse_mm": 15.5098,
+        "signed_bias_pred_minus_true_mm": 3.5311
+      }
+    },
+    "row_D_fold1": {
+      "name": "Row D: ResNet-34 U-Net (Fold 1)",
+      "split": "Fold 1 (N=206)",
+      "status": "verified and recomputed",
+      "n_images": 206,
+      "reference_used_in_file": "Official CSV HC",
+      "mean_abs_diff_between_references_mm": 0.0,
+      "against_original_file_reference": {
+        "hc_mae_mm": 1.9246,
+        "hc_rmse_mm": 2.4351,
+        "signed_bias_pred_minus_true_mm": -0.2607
+      },
+      "against_official_csv_reference": {
+        "hc_mae_mm": 1.9246,
+        "hc_rmse_mm": 2.4351,
+        "signed_bias_pred_minus_true_mm": -0.2607
+      }
+    },
+    "row_D_5fold": {
+      "name": "Row D: ResNet-34 U-Net (5-Fold Pooled)",
+      "split": "5-Fold CV (N=999)",
+      "status": "verified and recomputed",
+      "n_images": 999,
+      "reference_used_in_file": "Official CSV HC",
+      "mean_abs_diff_between_references_mm": 0.0,
+      "against_original_file_reference": {
+        "hc_mae_mm": 2.2688,
+        "hc_rmse_mm": 3.9175,
+        "signed_bias_pred_minus_true_mm": 0.5435
+      },
+      "against_official_csv_reference": {
+        "hc_mae_mm": 2.2688,
+        "hc_rmse_mm": 3.9175,
+        "signed_bias_pred_minus_true_mm": 0.5435
+      }
+    },
+    "row_D_tta_5fold": {
+      "name": "Row D: ResNet-34 U-Net + TTA (5-Fold Pooled)",
+      "split": "5-Fold CV with TTA (N=999)",
+      "status": "verified and recomputed",
+      "n_images": 999,
+      "reference_used_in_file": "Official CSV HC",
+      "mean_abs_diff_between_references_mm": 0.0,
+      "against_original_file_reference": {
+        "hc_mae_mm": 2.2323,
+        "hc_rmse_mm": 3.97,
+        "signed_bias_pred_minus_true_mm": 0.5395
+      },
+      "against_official_csv_reference": {
+        "hc_mae_mm": 2.2323,
+        "hc_rmse_mm": 3.97,
+        "signed_bias_pred_minus_true_mm": 0.5395
+      }
+    },
+    "row_E_oof": {
+      "name": "Row E: EfficientNet-B4 U-Net 384 (Stream 1 Final)",
+      "split": "999 Pooled OOF",
+      "status": "verified and recomputed",
+      "n_images": 999,
+      "reference_used_in_file": "Mask-Ellipse HC",
+      "mean_abs_diff_between_references_mm": 1.4751,
+      "against_original_file_reference": {
+        "hc_mae_mm": 2.3019,
+        "hc_rmse_mm": 3.5797,
+        "signed_bias_pred_minus_true_mm": -1.2576
+      },
+      "against_official_csv_reference": {
+        "hc_mae_mm": 1.9933,
+        "hc_rmse_mm": 3.3581,
+        "signed_bias_pred_minus_true_mm": 0.2171
+      }
+    },
+    "historical_row_d_run1": {
+      "name": "Row D Historical Single Run (Cell 31 original)",
+      "split": "Fold 1 (N=206)",
+      "status": "cannot recompute against CSV HC (prediction CSV not on disk)",
+      "pred_file": "docs\\results\\hc18_ladder\\historical_run1_predictions.csv"
+    }
+  }
+}
