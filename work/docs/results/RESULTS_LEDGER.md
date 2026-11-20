@@ -28,6 +28,20 @@
 | 2026-11-20 | `hc18-nnunet-f0-250ep` (measfix) | Fold 0 Val vs CSV Ground Truth | 206 | 1.8686 | -0.2846 | +0.2846 | 97.96% | 1.2711 | Shrunk by $\delta_r=0.1134$ mm; bias reduced +0.426 -> -0.285 mm | `9b5a3b53d47a376a3af0040debec6f68d07dc4d8396854f950e3634676cb1086` |
 | 2026-11-20 | Single-model Fold 1 OOF (raw) | 999 OOF vs CSV Ground Truth | 999 | 2.3019 | -1.2576 | +1.2576 | - | - | Single model raw prediction against CSV reference | `9b5a3b53d47a376a3af0040debec6f68d07dc4d8396854f950e3634676cb1086` |
 
+### HC18 Ladder Benchmark Reference Dual-Scoring (Rows A – E)
+Audit of ground-truth reference definitions across ladder rows from `docs/results/hc18_ladder/hc18_ladder_ref_audit.json`:
+
+| Row ID | Approach / Model | Split | N | Reference in Original Run | Original Ref MAE (mm) | **Official CSV Ref MAE (mm)** | Orig Signed Bias [pred-true] (mm) | **CSV Signed Bias [pred-true] (mm)** | Status / Action |
+|---|---|---|:---:|---|:---:|:---:|:---:|:---:|---|
+| **Row A** | Direct Regression (Cell 22) | Fold 1 | 206 | Official CSV HC | 10.6728 | **10.6728** | +5.3052 | **+5.3052** | Recomputed from `row_A_predictions.csv` |
+| **Row B** | Geometry Approach v3 (Cell 27) | Fold 1 | 206 | Official CSV HC | 11.5964 | **11.5964** | +5.6149 | **+5.6149** | Recomputed from `row_B_predictions.csv` |
+| **Row C** | Multi-Task U-Net (Cell 25) | Fold 1 | 206 | Official CSV HC | 10.5104 | **10.5104** | +3.5311 | **+3.5311** | Recomputed from `row_C_predictions.csv` |
+| **Row D** | ResNet-34 U-Net (Cell 31) | Fold 1 | 206 | Official CSV HC | 1.9246 | **1.9246** | -0.2607 | **-0.2607** | Recomputed from `row_D_predictions.csv` |
+| **Row D 5-fold** | ResNet-34 U-Net (5-fold pooled) | 5-Fold CV | 999 | Official CSV HC | 2.2688 | **2.2688** | +0.5435 | **+0.5435** | Recomputed from `row_D_5fold_predictions.csv` |
+| **Row D TTA 5-fold** | ResNet-34 U-Net + TTA | 5-Fold CV | 999 | Official CSV HC | 2.2323 | **2.2323** | +0.5395 | **+0.5395** | Recomputed from `row_D_tta_5fold_predictions.csv` |
+| **Row E** | EfficientNet-B4 U-Net 384 | 999 OOF | 999 | Mask-Ellipse HC | 2.3019 | **1.9933** | -1.2576 | **+0.2171** | Recomputed from `docs/results/hc18/oof_predictions.csv` |
+| *Row D Run 1* | Historical single-run (Cell 31) | Fold 1 | 206 | — | — | — | — | — | *cannot recompute against CSV HC (prediction CSV not preserved)* |
+
 ---
 
 ## 3. Candidate Submissions (Exploratory / Unsubmitted)

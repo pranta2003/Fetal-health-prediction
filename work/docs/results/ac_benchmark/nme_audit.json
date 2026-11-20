@@ -1,0 +1,136 @@
+{
+  "repo_citations": {
+    "ac_evaluator": "src/fetal/eval/ac_evaluator.py#L31-L38",
+    "ensemble_evaluator": "src/fetal/eval/ensemble_evaluator.py#L33-L36",
+    "head_evaluator": "src/fetal/eval/head_evaluator.py#L67-L83",
+    "femur_evaluator": "src/fetal/eval/femur_evaluator.py#L131-L147"
+  },
+  "paper_citation": {
+    "arxiv_id": "arXiv:2512.16710",
+    "title": "A multi-centre, multi-device benchmark dataset for landmark-based comprehensive fetal biometry",
+    "table": "Table 2",
+    "caption_quote": "measurement error normalised by inter-landmark distance",
+    "published_values_multicentre": {
+      "tad_nme": "0.08 +- 0.08",
+      "apad_nme": "0.07 +- 0.08",
+      "bpd_nme": "0.04 +- 0.07",
+      "ofd_nme": "0.03 +- 0.06",
+      "fl_nme": "0.03 +- 0.09"
+    }
+  },
+  "evaluations": {
+    "v3_full_single_test_147": {
+      "n_images": 147,
+      "reported_metric": {
+        "formula": "0.5 * ( ||d_TAD|| / L_TAD_gt + ||d_APAD|| / L_APAD_gt )",
+        "mean": 0.0731,
+        "std": 0.0532
+      },
+      "definition_1_landmark_distance_over_gt_distance": {
+        "tad": {
+          "mean": "not_saved_per_diameter",
+          "std": "not_saved_per_diameter"
+        },
+        "apad": {
+          "mean": "not_saved_per_diameter",
+          "std": "not_saved_per_diameter"
+        },
+        "mean_combined": 0.0731
+      },
+      "definition_2_caliper_length_error_over_gt_length": {
+        "tad": {
+          "mean": 0.0234,
+          "std": 0.019
+        },
+        "apad": {
+          "mean": 0.0259,
+          "std": 0.0222
+        },
+        "average": {
+          "mean": 0.0247,
+          "std": 0.0156
+        }
+      },
+      "tad_mae_mm": 1.5038,
+      "apad_mae_mm": 1.7626,
+      "ac_mae_mm": 4.3956
+    },
+    "ens_4seed_test_147": {
+      "n_images": 147,
+      "reported_metric": {
+        "formula": "0.5 * ( ||d_TAD|| / L_TAD_gt + ||d_APAD|| / L_APAD_gt )",
+        "mean": 0.0751,
+        "std": 0.0581
+      },
+      "definition_1_landmark_distance_over_gt_distance": {
+        "tad": {
+          "mean": 0.0749,
+          "std": 0.0597
+        },
+        "apad": {
+          "mean": 0.0753,
+          "std": 0.062
+        },
+        "mean_combined": 0.0751
+      },
+      "definition_2_caliper_length_error_over_gt_length": {
+        "tad": {
+          "mean": 0.025,
+          "std": 0.0207
+        },
+        "apad": {
+          "mean": 0.0254,
+          "std": 0.0233
+        },
+        "average": {
+          "mean": 0.0252,
+          "std": 0.017
+        }
+      },
+      "tad_mae_mm": 1.5994,
+      "apad_mae_mm": 1.7223,
+      "ac_mae_mm": 4.4693
+    },
+    "ac_baseline_s42_oof_642": {
+      "n_images": 642,
+      "reported_metric": {
+        "formula": "0.5 * ( ||d_TAD|| / L_TAD_gt + ||d_APAD|| / L_APAD_gt )",
+        "mean": 0.0808,
+        "std": 0.0647
+      },
+      "definition_1_landmark_distance_over_gt_distance": {
+        "tad": {
+          "mean": "not_saved_per_diameter",
+          "std": "not_saved_per_diameter"
+        },
+        "apad": {
+          "mean": "not_saved_per_diameter",
+          "std": "not_saved_per_diameter"
+        },
+        "mean_combined": 0.0808
+      },
+      "definition_2_caliper_length_error_over_gt_length": {
+        "tad": {
+          "mean": 0.0282,
+          "std": 0.0363
+        },
+        "apad": {
+          "mean": 0.0341,
+          "std": 0.0498
+        },
+        "average": {
+          "mean": 0.0311,
+          "std": 0.032
+        }
+      },
+      "tad_mae_mm": 1.7331,
+      "apad_mae_mm": 2.0793,
+      "ac_mae_mm": 4.7744
+    }
+  },
+  "analysis": {
+    "identity_of_reported_numbers": "Our reported numbers (0.0731 on v3_full test and 0.0808 on OOF 642) correspond strictly to Definition (i): Landmark Euclidean Coordinate Error normalized by GT inter-landmark distance. Specifically: 0.5 * (mean(||p_tad - g_tad||) / L_tad + mean(||p_apad - g_apad||) / L_apad).",
+    "explanation_of_0_0163_0_0242": "Under Definition (ii) (|measured length error| / GT length), caliper relative errors are 0.0234 +- 0.0190 (TAD) and 0.0259 +- 0.0222 (APAD) on test, averaging 0.0247. When endpoints deviate in opposite perpendicular directions, their coordinate distance errors add up under Euclidean vector distance (giving ~0.073 - 0.080), but caliper length errors largely cancel, yielding relative caliper errors around 0.016 - 0.025. arXiv:2512.16710 Table 2 presents landmark NME around ~0.07-0.08 for BiometryNet, but relative length errors in other tables/benchmarks fall in the 0.0163 - 0.0242 regime.",
+    "direct_comparability": "Our reported NME (0.0731 test, 0.0808 OOF) is directly comparable to BiometryNet's landmark NME (Table 2 M-C -> M-C: TAD 0.08 +- 0.08, APAD 0.07 +- 0.08). It is NOT directly comparable to scalar relative caliper measurement errors (0.016 - 0.024), which represent 1D length discrepancies rather than 2D coordinate localization."
+  }
+}
