@@ -39,5 +39,6 @@ credentials.json
 *token*
 *secret*
 *password*
+catboost_info/
 .DS_Store
 Thumbs.db
