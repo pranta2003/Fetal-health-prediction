@@ -213,14 +213,20 @@ nnunet_test_out = Path("/kaggle/working/test_predicted_masks")
 nnunet_test_out.mkdir(parents=True, exist_ok=True)
 
 fold0_dir = res_dir / "Dataset501_HC18" / trainer_src.name / "fold_0"
-if (fold0_dir / "checkpoint_final.pth").exists():
+if (fold0_dir / "checkpoint_final.pth").exists() and (fold0_dir / "checkpoint_final.pth").stat().st_size > 1000:
     chk_flag = "-chk checkpoint_final.pth"
-elif (fold0_dir / "checkpoint_best.pth").exists():
+elif (fold0_dir / "checkpoint_best.pth").exists() and (fold0_dir / "checkpoint_best.pth").stat().st_size > 1000:
     chk_flag = "-chk checkpoint_best.pth"
 else:
-    raise FileNotFoundError(f"No checkpoint found in {fold0_dir}")
+    raise FileNotFoundError(f"No non-empty checkpoint found in {fold0_dir}")
 
-cmd = f"nnUNetv2_predict -i {nnunet_test_in} -o {nnunet_test_out} -d 501 -c 2d -f 0 -tr {trainer_src.name} {chk_flag}"
+# In nnU-Net, folder layout is {trainer}__{plans}__{config}
+parts = trainer_src.name.split("__")
+trainer_name = parts[0]
+plans_name = parts[1] if len(parts) > 1 else "nnUNetPlans"
+config_name = parts[2] if len(parts) > 2 else "2d"
+
+cmd = f"nnUNetv2_predict -i {nnunet_test_in} -o {nnunet_test_out} -d 501 -c {config_name} -f 0 -tr {trainer_name} -p {plans_name} {chk_flag}"
 print("Executing nnUNetv2_predict command:\\n", cmd)
 ret = subprocess.run(cmd, shell=True)
 if ret.returncode != 0:
