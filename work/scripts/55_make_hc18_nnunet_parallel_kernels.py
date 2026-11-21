@@ -47,8 +47,7 @@ def generate_kernel(slug: str, title: str, fold_a: int, fold_b: int):
         "kernel_type": "notebook",
         "is_private": True,
         "enable_gpu": True,
-        "enable_internet": False,
-        "accelerator": "nvidiaTeslaT4",
+        "enable_internet": True,
         "machine_shape": "NvidiaTeslaT4",
         "dataset_sources": [
             "prantakumerpandit390/dataset501-hc18"

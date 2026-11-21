@@ -6,8 +6,7 @@
   "kernel_type": "notebook",
   "is_private": true,
   "enable_gpu": true,
-  "enable_internet": false,
-  "accelerator": "nvidiaTeslaT4",
+  "enable_internet": true,
   "machine_shape": "NvidiaTeslaT4",
   "dataset_sources": [
     "prantakumerpandit390/dataset501-hc18"
