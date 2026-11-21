@@ -2,11 +2,11 @@
 
 This document maps every empirical claim and metric across the thesis/report to its exact on-disk artifact, producing script or notebook, and git commit provenance.
 
-**Total Numbers Mapped**: 128 | **Verified Files on Disk**: 128 | **Missing Files**: 0
+**Total Numbers Mapped**: 144 | **Verified Files on Disk**: 144 | **Missing Files**: 0
 
 ---
 
-## HC18 Domain Claims (43 metrics)
+## HC18 Domain Claims (51 metrics)
 
 | ID | Report Claim | Value | Result File Path | Producing Script / Notebook | Git Commit | File Status |
 |---|---|:---:|---|---|:---:|:---:|
@@ -30,6 +30,14 @@ This document maps every empirical claim and metric across the thesis/report to 
 | `hc18_nnunet_f0_raw_vs_csv_bias_pred_true` | nnU-Net 250ep fold 0 (raw) - Signed Bias [pred-true] | **0.4256** | `docs/results/hc18_official/measfix_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `01879db` | EXISTS |
 | `hc18_nnunet_f0_measfix_vs_csv_mae` | nnU-Net 250ep fold 0 (measfix: delta_r=0.1134mm) - HC MAE [Abs Diff] | **1.8686** | `docs/results/hc18_official/measfix_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `01879db` | EXISTS |
 | `hc18_nnunet_f0_measfix_vs_csv_bias_pred_true` | nnU-Net 250ep fold 0 (measfix: delta_r=0.1134mm) - Signed Bias [pred-true] | **-0.2846** | `docs/results/hc18_official/measfix_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `01879db` | EXISTS |
+| `hc18_nnunet_f1_raw_vs_csv_mae` | nnU-Net 100ep fold 1 (raw) - HC MAE [Abs Diff] | **1.9582** | `docs/results/hc18_nnunet/f1_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `67bfbf6` | EXISTS |
+| `hc18_nnunet_f1_raw_vs_csv_bias_pred_true` | nnU-Net 100ep fold 1 (raw) - Signed Bias [pred-true] | **0.791** | `docs/results/hc18_nnunet/f1_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `67bfbf6` | EXISTS |
+| `hc18_nnunet_f1_measfix_vs_csv_mae` | nnU-Net 100ep fold 1 (measfix: delta_r=0.1134mm) - HC MAE [Abs Diff] | **1.8767** | `docs/results/hc18_nnunet/f1_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `67bfbf6` | EXISTS |
+| `hc18_nnunet_f1_measfix_vs_csv_bias_pred_true` | nnU-Net 100ep fold 1 (measfix: delta_r=0.1134mm) - Signed Bias [pred-true] | **0.0806** | `docs/results/hc18_nnunet/f1_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `67bfbf6` | EXISTS |
+| `hc18_nnunet_f2_raw_vs_csv_mae` | nnU-Net 100ep fold 2 (raw) - HC MAE [Abs Diff] | **2.1076** | `docs/results/hc18_nnunet/f2_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `67bfbf6` | EXISTS |
+| `hc18_nnunet_f2_raw_vs_csv_bias_pred_true` | nnU-Net 100ep fold 2 (raw) - Signed Bias [pred-true] | **0.447** | `docs/results/hc18_nnunet/f2_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `67bfbf6` | EXISTS |
+| `hc18_nnunet_f2_measfix_vs_csv_mae` | nnU-Net 100ep fold 2 (measfix: delta_r=0.1134mm) - HC MAE [Abs Diff] | **2.0993** | `docs/results/hc18_nnunet/f2_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `67bfbf6` | EXISTS |
+| `hc18_nnunet_f2_measfix_vs_csv_bias_pred_true` | nnU-Net 100ep fold 2 (measfix: delta_r=0.1134mm) - Signed Bias [pred-true] | **-0.2633** | `docs/results/hc18_nnunet/f2_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `67bfbf6` | EXISTS |
 | `hc18_single_oof_999_raw_vs_csv_mae` | EfficientNet-B4 U-Net 384 (single model OOF) - HC MAE [Abs Diff] | **2.3019** | `docs/results/hc18_official/measfix_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `01879db` | EXISTS |
 | `hc18_single_oof_999_raw_vs_csv_bias_pred_true` | EfficientNet-B4 U-Net 384 (single model OOF) - Signed Bias [pred-true] | **-1.2576** | `docs/results/hc18_official/measfix_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `01879db` | EXISTS |
 | `hc18_annotation_mask_vs_csv_diff_mean` | OpenCV fitEllipse on Ground Truth Training Annotations - Signed Bias [pred-true] | **0.7126** | `docs/results/hc18_official/measfix_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `01879db` | EXISTS |
@@ -56,7 +64,7 @@ This document maps every empirical claim and metric across the thesis/report to 
 
 ---
 
-## AC Domain Claims (44 metrics)
+## AC Domain Claims (52 metrics)
 
 | ID | Report Claim | Value | Result File Path | Producing Script / Notebook | Git Commit | File Status |
 |---|---|:---:|---|---|:---:|:---:|
@@ -76,6 +84,14 @@ This document maps every empirical claim and metric across the thesis/report to 
 | `ac_ema_s42_apad_mae` | v3_full + EMA decay 0.99 (seed 42) - APAD MAE | **2.0389** | `docs/results/ac_campaign/ac_ema_s42.json` | `notebooks/kaggle/ac_campaign/ac-ema-s42/ac-ema-s42.ipynb` | `e913ba7` | EXISTS |
 | `ac_ema_s42_nme` | v3_full + EMA decay 0.99 (seed 42) - NME | **0.0793** | `docs/results/ac_campaign/ac_ema_s42.json` | `notebooks/kaggle/ac_campaign/ac-ema-s42/ac-ema-s42.ipynb` | `e913ba7` | EXISTS |
 | `ac_ema_s42_over10_pct` | v3_full + EMA decay 0.99 (seed 42) - >10mm (%) | **11.84** | `docs/results/ac_campaign/ac_ema_s42.json` | `notebooks/kaggle/ac_campaign/ac-ema-s42/ac-ema-s42.ipynb` | `e913ba7` | EXISTS |
+| `ac_fassd_s42_ac_mae` | v3_full + FASSD pretraining (seed 42) - AC MAE | **4.9459** | `docs/results/ac_campaign/ac_fassd_s42.json` | `notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb` | `67bfbf6` | EXISTS |
+| `ac_fassd_s42_ac_rmse` | v3_full + FASSD pretraining (seed 42) - AC RMSE | **8.3335** | `docs/results/ac_campaign/ac_fassd_s42.json` | `notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb` | `67bfbf6` | EXISTS |
+| `ac_fassd_s42_ac_median` | v3_full + FASSD pretraining (seed 42) - AC Median | **2.9702** | `docs/results/ac_campaign/ac_fassd_s42.json` | `notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb` | `67bfbf6` | EXISTS |
+| `ac_fassd_s42_ac_bias` | v3_full + FASSD pretraining (seed 42) - AC Bias [pred-true] | **-0.4653** | `docs/results/ac_campaign/ac_fassd_s42.json` | `notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb` | `67bfbf6` | EXISTS |
+| `ac_fassd_s42_tad_mae` | v3_full + FASSD pretraining (seed 42) - TAD MAE | **1.7911** | `docs/results/ac_campaign/ac_fassd_s42.json` | `notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb` | `67bfbf6` | EXISTS |
+| `ac_fassd_s42_apad_mae` | v3_full + FASSD pretraining (seed 42) - APAD MAE | **2.1315** | `docs/results/ac_campaign/ac_fassd_s42.json` | `notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb` | `67bfbf6` | EXISTS |
+| `ac_fassd_s42_nme` | v3_full + FASSD pretraining (seed 42) - NME | **0.082** | `docs/results/ac_campaign/ac_fassd_s42.json` | `notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb` | `67bfbf6` | EXISTS |
+| `ac_fassd_s42_over10_pct` | v3_full + FASSD pretraining (seed 42) - >10mm (%) | **12.62** | `docs/results/ac_campaign/ac_fassd_s42.json` | `notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb` | `67bfbf6` | EXISTS |
 | `ac_hist_v1_heatmap_regression_colab_mae` | Historical AC: v1 heatmap regression (Colab) - AC MAE | **182.6** | `docs/results/ac_lab_pc/history_table.json` | `notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `52119c8` | EXISTS |
 | `ac_hist_v1_heatmap_regression_colab_rmse` | Historical AC: v1 heatmap regression (Colab) - AC RMSE | **195.13** | `docs/results/ac_lab_pc/history_table.json` | `notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `52119c8` | EXISTS |
 | `ac_hist_dsnt_5_fold_oof_mae` | Historical AC: DSNT 5-fold OOF - AC MAE | **5.18** | `docs/results/ac_lab_pc/history_table.json` | `notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `52119c8` | EXISTS |

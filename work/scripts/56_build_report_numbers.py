@@ -112,6 +112,37 @@ def build_numbers():
             "source_sha256": ac_ema_sha,
         })
 
+    ac_fassd_path = "docs/results/ac_campaign/ac_fassd_s42.json"
+    ac_fassd_data = load_json(ac_fassd_path)
+    ac_fassd_sha = get_sha256(ac_fassd_path)
+
+    ac_fassd_metrics = [
+        ("ac_fassd_s42_ac_mae", "AC MAE", round(float(ac_fassd_data["ac_mae"]), 4), "mm"),
+        ("ac_fassd_s42_ac_rmse", "AC RMSE", round(float(ac_fassd_data["ac_rmse"]), 4), "mm"),
+        ("ac_fassd_s42_ac_median", "AC Median", round(float(ac_fassd_data["ac_median"]), 4), "mm"),
+        ("ac_fassd_s42_ac_bias", "AC Bias [pred-true]", round(float(ac_fassd_data["ac_bias"]), 4), "mm"),
+        ("ac_fassd_s42_tad_mae", "TAD MAE", round(float(ac_fassd_data["tad_mae"]), 4), "mm"),
+        ("ac_fassd_s42_apad_mae", "APAD MAE", round(float(ac_fassd_data["apad_mae"]), 4), "mm"),
+        ("ac_fassd_s42_nme", "NME", round(float(ac_fassd_data["nme"]), 4), None),
+        ("ac_fassd_s42_over10_pct", ">10mm (%)", round(float(ac_fassd_data["over10"]) * 100, 2), "%"),
+    ]
+    for row_id, metric, val, unit in ac_fassd_metrics:
+        rows.append({
+            "id": row_id,
+            "field": "AC",
+            "system": 1,
+            "approach": "v3_full + FASSD pretraining (seed 42)",
+            "protocol": "5-fold patient-grouped CV (folds_v1.csv), 642 images, 501 patients, out-of-fold",
+            "metric": metric,
+            "value": val,
+            "ci": None,
+            "source_file": ac_fassd_path,
+            "script": "scripts/40_ac_compare_recipes.py",
+            "notebook": "notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb",
+            "pr_commit": "67bfbf6",
+            "source_sha256": ac_fassd_sha,
+        })
+
     # -------------------------------------------------------------------------
     # 2. HC18 Grand Challenge Submissions & Bias Probe
     # -------------------------------------------------------------------------
@@ -294,6 +325,141 @@ def build_numbers():
         "notebook": "notebooks/benchmarks/hc18_official.ipynb",
         "pr_commit": "01879db",
         "source_sha256": measfix_sha,
+    })
+
+    # nnU-Net Fold 1 & Fold 2
+    f1_eval_path = "docs/results/hc18_nnunet/f1_eval.json"
+    f1_eval_data = load_json(f1_eval_path)
+    f1_eval_sha = get_sha256(f1_eval_path)
+    f1_raw = f1_eval_data["raw_vs_csv"]
+    f1_fix = f1_eval_data["measfix_vs_csv"]
+
+    rows.append({
+        "id": "hc18_nnunet_f1_raw_vs_csv_mae",
+        "field": "HC18",
+        "system": 1,
+        "approach": "nnU-Net 100ep fold 1 (raw)",
+        "protocol": "Fold 1 validation, 199 images, reference: official CSV ground truth ellipse",
+        "metric": "HC MAE [Abs Diff]",
+        "value": round(float(f1_raw["mae"]), 4),
+        "ci": None,
+        "source_file": f1_eval_path,
+        "script": "scripts/68_eval_nnunet_f1_f2.py",
+        "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
+        "pr_commit": "67bfbf6",
+        "source_sha256": f1_eval_sha,
+    })
+    rows.append({
+        "id": "hc18_nnunet_f1_raw_vs_csv_bias_pred_true",
+        "field": "HC18",
+        "system": 1,
+        "approach": "nnU-Net 100ep fold 1 (raw)",
+        "protocol": "Fold 1 validation, 199 images, reference: official CSV ground truth ellipse",
+        "metric": "Signed Bias [pred-true]",
+        "value": round(float(f1_raw["signed_bias_pred_minus_true_mean"]), 4),
+        "ci": None,
+        "source_file": f1_eval_path,
+        "script": "scripts/68_eval_nnunet_f1_f2.py",
+        "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
+        "pr_commit": "67bfbf6",
+        "source_sha256": f1_eval_sha,
+    })
+    rows.append({
+        "id": "hc18_nnunet_f1_measfix_vs_csv_mae",
+        "field": "HC18",
+        "system": 1,
+        "approach": "nnU-Net 100ep fold 1 (measfix: delta_r=0.1134mm)",
+        "protocol": "Fold 1 validation, 199 images, reference: official CSV ground truth ellipse",
+        "metric": "HC MAE [Abs Diff]",
+        "value": round(float(f1_fix["mae"]), 4),
+        "ci": None,
+        "source_file": f1_eval_path,
+        "script": "scripts/68_eval_nnunet_f1_f2.py",
+        "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
+        "pr_commit": "67bfbf6",
+        "source_sha256": f1_eval_sha,
+    })
+    rows.append({
+        "id": "hc18_nnunet_f1_measfix_vs_csv_bias_pred_true",
+        "field": "HC18",
+        "system": 1,
+        "approach": "nnU-Net 100ep fold 1 (measfix: delta_r=0.1134mm)",
+        "protocol": "Fold 1 validation, 199 images, reference: official CSV ground truth ellipse",
+        "metric": "Signed Bias [pred-true]",
+        "value": round(float(f1_fix["signed_bias_pred_minus_true_mean"]), 4),
+        "ci": None,
+        "source_file": f1_eval_path,
+        "script": "scripts/68_eval_nnunet_f1_f2.py",
+        "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
+        "pr_commit": "67bfbf6",
+        "source_sha256": f1_eval_sha,
+    })
+
+    f2_eval_path = "docs/results/hc18_nnunet/f2_eval.json"
+    f2_eval_data = load_json(f2_eval_path)
+    f2_eval_sha = get_sha256(f2_eval_path)
+    f2_raw = f2_eval_data["raw_vs_csv"]
+    f2_fix = f2_eval_data["measfix_vs_csv"]
+
+    rows.append({
+        "id": "hc18_nnunet_f2_raw_vs_csv_mae",
+        "field": "HC18",
+        "system": 1,
+        "approach": "nnU-Net 100ep fold 2 (raw)",
+        "protocol": "Fold 2 validation, 208 images, reference: official CSV ground truth ellipse",
+        "metric": "HC MAE [Abs Diff]",
+        "value": round(float(f2_raw["mae"]), 4),
+        "ci": None,
+        "source_file": f2_eval_path,
+        "script": "scripts/68_eval_nnunet_f1_f2.py",
+        "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
+        "pr_commit": "67bfbf6",
+        "source_sha256": f2_eval_sha,
+    })
+    rows.append({
+        "id": "hc18_nnunet_f2_raw_vs_csv_bias_pred_true",
+        "field": "HC18",
+        "system": 1,
+        "approach": "nnU-Net 100ep fold 2 (raw)",
+        "protocol": "Fold 2 validation, 208 images, reference: official CSV ground truth ellipse",
+        "metric": "Signed Bias [pred-true]",
+        "value": round(float(f2_raw["signed_bias_pred_minus_true_mean"]), 4),
+        "ci": None,
+        "source_file": f2_eval_path,
+        "script": "scripts/68_eval_nnunet_f1_f2.py",
+        "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
+        "pr_commit": "67bfbf6",
+        "source_sha256": f2_eval_sha,
+    })
+    rows.append({
+        "id": "hc18_nnunet_f2_measfix_vs_csv_mae",
+        "field": "HC18",
+        "system": 1,
+        "approach": "nnU-Net 100ep fold 2 (measfix: delta_r=0.1134mm)",
+        "protocol": "Fold 2 validation, 208 images, reference: official CSV ground truth ellipse",
+        "metric": "HC MAE [Abs Diff]",
+        "value": round(float(f2_fix["mae"]), 4),
+        "ci": None,
+        "source_file": f2_eval_path,
+        "script": "scripts/68_eval_nnunet_f1_f2.py",
+        "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
+        "pr_commit": "67bfbf6",
+        "source_sha256": f2_eval_sha,
+    })
+    rows.append({
+        "id": "hc18_nnunet_f2_measfix_vs_csv_bias_pred_true",
+        "field": "HC18",
+        "system": 1,
+        "approach": "nnU-Net 100ep fold 2 (measfix: delta_r=0.1134mm)",
+        "protocol": "Fold 2 validation, 208 images, reference: official CSV ground truth ellipse",
+        "metric": "Signed Bias [pred-true]",
+        "value": round(float(f2_fix["signed_bias_pred_minus_true_mean"]), 4),
+        "ci": None,
+        "source_file": f2_eval_path,
+        "script": "scripts/68_eval_nnunet_f1_f2.py",
+        "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
+        "pr_commit": "67bfbf6",
+        "source_sha256": f2_eval_sha,
     })
 
     # Single-model Fold 1 OOF vs CSV
