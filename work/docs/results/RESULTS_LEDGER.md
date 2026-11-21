@@ -25,6 +25,7 @@
 | 2026-11-15 | `submission_ensemble_5fold_corrected` (c1) | Grand Challenge Official Test Set (True Ellipse) | 335 | 1.9472 | +0.7844 | -0.7844 | 97.98% | 1.2144 | Corrected ellipse submission baseline | `5bf81467e417b84343cb6f313845ee813a6c9f31cd41f8a9800f50b9c177f6cb` |
 | 2026-11-16 | `submission_ensemble_5fold_corrected_mult050` (probe) | Grand Challenge Official Test Set (True Ellipse) | 335 | 2.2417 | +1.4999 | -1.4999 | 97.88% | 1.2580 | **NEGATIVE RESULT**: Probe scaled by 1.004065 (+0.716 mm), shifting platform bias +0.784 -> +1.500 mm and worsening MAE (+0.294 mm) | `682672a906d6317fdaca1e7c40b2b03c465cb98d4e4472d71b8d666f210141a1` |
 | 2026-11-20 | `submission_ensemble_5fold_corrected_measfix` | Grand Challenge Official Test Set (True Ellipse) | 335 | 1.8350 | +0.0743 | -0.0743 | 98.02% | 1.1990 | **OFFICIAL BEST**: Semi-axes shrunk by $\delta_r = 0.1134$ mm; platform bias reduced +0.7844 -> +0.0743 mm; MAE improved 1.9472 -> 1.8350 mm | `e051fda4415c6b488e29665a086104fac639b74bee6f0cbc7a819a97cb6904f3` |
+| 2026-11-21 | `submission_nnunet_f0_measfix` | Grand Challenge Official Test Set (True Ellipse) | 335 | 1.8275 | +0.0382 | -0.0382 | 97.99% | 1.2039 | **NEW OFFICIAL BEST (Rank 107)**: nnU-Net fold 0 + measfix (user-reported file name, comment on the site is wrong) | `5ad02ab58039e40ff6fd52628f969ad86f61b3a5f50cc53dd28755f830f3f4c5` |
 | 2026-11-19 | `hc18-nnunet-f0-250ep` (raw) | Fold 0 Val vs CSV Ground Truth | 206 | 1.8879 | +0.4256 | -0.4256 | 97.96% | 1.2711 | Raw nnU-Net prediction against official CSV reference | `b62968b65f911fd8777b1ab4d705c8075a2c907a0f52d85486ece5e9838287c7` |
 | 2026-11-19 | `hc18-nnunet-f0-250ep` (raw) | Fold 0 Val vs Mask Ellipse | 206 | 1.9267 | -1.0487 | +1.0487 | 97.96% | 1.2711 | Legacy comparison against inflated annotation mask | `b62968b65f911fd8777b1ab4d705c8075a2c907a0f52d85486ece5e9838287c7` |
 | 2026-11-20 | `hc18-nnunet-f0-250ep` (measfix) | Fold 0 Val vs CSV Ground Truth | 206 | 1.8686 | -0.2846 | +0.2846 | 97.96% | 1.2711 | Shrunk by $\delta_r=0.1134$ mm; bias reduced +0.426 -> -0.285 mm | `9b5a3b53d47a376a3af0040debec6f68d07dc4d8396854f950e3634676cb1086` |
@@ -106,6 +107,11 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
   - Grand Challenge Test Submission: 5-fold ensemble with measurement-fix shrink ($\delta_r = 0.1134$ mm).
   - Metrics File: `docs/results/hc18_official/metrics_ensemble_5fold_measfix.json` (`e051fda4415c6b488e29665a086104fac639b74bee6f0cbc7a819a97cb6904f3`)
   - Platform Difference: `PRED - TRUE` (+0.0743 mm). Official MAE 1.8350 mm, Dice 98.02%, HD 1.1990 mm.
+- **`submission_nnunet_f0_measfix` (HC18 Official Best, Rank 107)**:
+  - Grand Challenge Test Submission: 2026-11-21 23:37 Dhaka.
+  - Metrics File: `docs/results/hc18_official/metrics_nnunet_f0_measfix.json` (`5ad02ab58039e40ff6fd52628f969ad86f61b3a5f50cc53dd28755f830f3f4c5`)
+  - Platform Metrics: Abs Diff MAE 1.8275 +- 1.7280 mm, Dice 97.988%, Difference [PRED - TRUE] +0.0382 mm, HD 1.2039 mm.
+  - Provenance: nnU-Net fold 0 + measfix (user-reported file name, comment on the site is wrong: website comment says '5-fold ensemble, patient-grouped CV'). Single nnU-Net fold equals/surpasses our 5-model ensemble (1.8275 vs 1.8350 mm).
 - **`hc18-nnunet-f0-250ep` Model Weights Provenance**:
   - Kaggle Kernel: `prantakumerpandit390/hc18-nnunet-f0-250ep`
   - Local Checkpoint: 30 MB partial download on laptop; the complete weights (`checkpoint_final.pth`, `plans.json`, `dataset.json`) exist intact in Kaggle kernel output and are mounted via `kernel_sources` into `hc18-nnunet-test-f0`.

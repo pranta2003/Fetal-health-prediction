@@ -233,6 +233,35 @@ def build_numbers():
             "source_sha256": hc18_mf_sha,
         })
 
+    hc18_nn_f0_test_path = "docs/results/hc18_official/metrics_nnunet_f0_measfix.json"
+    hc18_nn_f0_test_data = load_json(hc18_nn_f0_test_path)
+    hc18_nn_f0_test_sha = get_sha256(hc18_nn_f0_test_path)
+    nn_f0_test_agg = hc18_nn_f0_test_data["aggregates"]
+
+    nn_f0_test_metrics = [
+        ("hc18_submission_nnunet_f0_measfix_mae", "HC MAE [Abs Diff]", round(float(nn_f0_test_agg["absolute_difference"]["mean"]), 4)),
+        ("hc18_submission_nnunet_f0_measfix_bias_pred_true", "Signed Bias [pred-true]", round(float(nn_f0_test_agg["difference"]["mean"]), 4)),
+        ("hc18_submission_nnunet_f0_measfix_bias_true_pred", "Signed Bias [true-pred]", round(-float(nn_f0_test_agg["difference"]["mean"]), 4)),
+        ("hc18_submission_nnunet_f0_measfix_dice", "Dice (%)", round(float(nn_f0_test_agg["DICE"]["mean"]), 2)),
+        ("hc18_submission_nnunet_f0_measfix_hd", "HD", round(float(nn_f0_test_agg["hausdorff_distance"]["mean"]), 4)),
+    ]
+    for row_id, metric, val in nn_f0_test_metrics:
+        rows.append({
+            "id": row_id,
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net fold 0 + measfix (delta_r=0.1134mm)",
+            "protocol": "HC18 Grand Challenge Official Test Set, 335 images, reference: official ground truth ellipse",
+            "metric": metric,
+            "value": val,
+            "ci": None,
+            "source_file": hc18_nn_f0_test_path,
+            "script": "scripts/52_make_hc18_nnunet_test_kernel.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-test-f0/hc18-nnunet-test-f0.ipynb",
+            "pr_commit": "01f8849",
+            "source_sha256": hc18_nn_f0_test_sha,
+        })
+
     # -------------------------------------------------------------------------
     # 3. HC18 nnU-Net Validation & Measurement Fix Study
     # -------------------------------------------------------------------------
