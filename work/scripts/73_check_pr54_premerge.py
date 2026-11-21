@@ -13,8 +13,15 @@ import sys
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
 # 1. Check PR mergeability
-out = subprocess.check_output(["gh", "pr", "view", "54", "--json", "mergeable"], text=True)
-data = json.loads(out)
+import time
+
+for _ in range(5):
+    out = subprocess.check_output(["gh", "pr", "view", "54", "--json", "mergeable"], text=True)
+    data = json.loads(out)
+    if data.get("mergeable") != "UNKNOWN":
+        break
+    time.sleep(2)
+
 assert data.get("mergeable") == "MERGEABLE", f"PR #54 is not mergeable: {data}"
 print("Check 1 PASSED: PR #54 is MERGEABLE (no conflicts).")
 
