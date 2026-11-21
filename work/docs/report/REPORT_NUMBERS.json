@@ -1299,6 +1299,114 @@
     "source_sha256": "958925f07d43be9119a9169f610f7c263bf29fb56903c0154007cff47d6766c5"
   },
   {
+    "id": "stream3_modern_tuned_xgboost_auc",
+    "field": "tabular",
+    "system": 1,
+    "approach": "Stream 3 Modern: Tuned XGBoost",
+    "protocol": "CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned",
+    "metric": "Test AUC",
+    "value": 0.7382,
+    "ci": [
+      0.7349,
+      0.7412
+    ],
+    "source_file": "docs/results/stream3_modern/stream3_modern_results.json",
+    "script": "scripts/62_train_stream3_modern.py",
+    "notebook": "notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb",
+    "pr_commit": "7c75db9",
+    "source_sha256": "b06e046d95925f02ec5fdc9cb77e87a6f440fbe85957ab8cb49eb8c54315ecfa"
+  },
+  {
+    "id": "stream3_modern_tuned_lightgbm_auc",
+    "field": "tabular",
+    "system": 1,
+    "approach": "Stream 3 Modern: Tuned LightGBM",
+    "protocol": "CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned",
+    "metric": "Test AUC",
+    "value": 0.7383,
+    "ci": [
+      0.7351,
+      0.7412
+    ],
+    "source_file": "docs/results/stream3_modern/stream3_modern_results.json",
+    "script": "scripts/62_train_stream3_modern.py",
+    "notebook": "notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb",
+    "pr_commit": "7c75db9",
+    "source_sha256": "b06e046d95925f02ec5fdc9cb77e87a6f440fbe85957ab8cb49eb8c54315ecfa"
+  },
+  {
+    "id": "stream3_modern_tuned_catboost_auc",
+    "field": "tabular",
+    "system": 1,
+    "approach": "Stream 3 Modern: Tuned CatBoost",
+    "protocol": "CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned",
+    "metric": "Test AUC",
+    "value": 0.7383,
+    "ci": [
+      0.735,
+      0.7414
+    ],
+    "source_file": "docs/results/stream3_modern/stream3_modern_results.json",
+    "script": "scripts/62_train_stream3_modern.py",
+    "notebook": "notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb",
+    "pr_commit": "7c75db9",
+    "source_sha256": "b06e046d95925f02ec5fdc9cb77e87a6f440fbe85957ab8cb49eb8c54315ecfa"
+  },
+  {
+    "id": "stream3_modern_tuned_lr_auc",
+    "field": "tabular",
+    "system": 1,
+    "approach": "Stream 3 Modern: Tuned Logistic Regression",
+    "protocol": "CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned",
+    "metric": "Test AUC",
+    "value": 0.6659,
+    "ci": [
+      0.6624,
+      0.6691
+    ],
+    "source_file": "docs/results/stream3_modern/stream3_modern_results.json",
+    "script": "scripts/62_train_stream3_modern.py",
+    "notebook": "notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb",
+    "pr_commit": "7c75db9",
+    "source_sha256": "b06e046d95925f02ec5fdc9cb77e87a6f440fbe85957ab8cb49eb8c54315ecfa"
+  },
+  {
+    "id": "stream3_modern_calibrated_blend_auc",
+    "field": "tabular",
+    "system": 1,
+    "approach": "Stream 3 Modern: Calibrated GBM+LR Blend",
+    "protocol": "CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned",
+    "metric": "Test AUC",
+    "value": 0.7382,
+    "ci": [
+      0.735,
+      0.7412
+    ],
+    "source_file": "docs/results/stream3_modern/stream3_modern_results.json",
+    "script": "scripts/62_train_stream3_modern.py",
+    "notebook": "notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb",
+    "pr_commit": "7c75db9",
+    "source_sha256": "b06e046d95925f02ec5fdc9cb77e87a6f440fbe85957ab8cb49eb8c54315ecfa"
+  },
+  {
+    "id": "stream3_modern_calibrated_blend_raw_auc",
+    "field": "tabular",
+    "system": 1,
+    "approach": "Stream 3 Modern: Raw GBM+LR Blend",
+    "protocol": "CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned",
+    "metric": "Test AUC",
+    "value": 0.7383,
+    "ci": [
+      0.735,
+      0.7412
+    ],
+    "source_file": "docs/results/stream3_modern/stream3_modern_results.json",
+    "script": "scripts/62_train_stream3_modern.py",
+    "notebook": "notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb",
+    "pr_commit": "7c75db9",
+    "source_sha256": "b06e046d95925f02ec5fdc9cb77e87a6f440fbe85957ab8cb49eb8c54315ecfa"
+  },
+  {
     "id": "stream3_audit_row_a_auc",
     "field": "tabular",
     "system": 1,

@@ -526,6 +526,39 @@ def build_numbers():
         })
 
     # -------------------------------------------------------------------------
+    # 6b. Stream 3 Modern GBDT Campaign (Optuna tuned XGB, LGBM, CatBoost, Calibrated Blend)
+    # -------------------------------------------------------------------------
+    s3_mod_path = "docs/results/stream3_modern/stream3_modern_results.json"
+    s3_mod_data = load_json(s3_mod_path)
+    s3_mod_sha = get_sha256(s3_mod_path)
+    s3_models = s3_mod_data["models"]
+
+    modern_rows = [
+        ("stream3_modern_tuned_xgboost_auc", "Tuned XGBoost", s3_models["tuned_xgboost"]["test_auc"], s3_models["tuned_xgboost"]["ci_95"]),
+        ("stream3_modern_tuned_lightgbm_auc", "Tuned LightGBM", s3_models["tuned_lightgbm"]["test_auc"], s3_models["tuned_lightgbm"]["ci_95"]),
+        ("stream3_modern_tuned_catboost_auc", "Tuned CatBoost", s3_models["tuned_catboost"]["test_auc"], s3_models["tuned_catboost"]["ci_95"]),
+        ("stream3_modern_tuned_lr_auc", "Tuned Logistic Regression", s3_models["tuned_logistic_regression"]["test_auc"], s3_models["tuned_logistic_regression"]["ci_95"]),
+        ("stream3_modern_calibrated_blend_auc", "Calibrated GBM+LR Blend", s3_models["calibrated_gbm_lr_blend"]["calibrated_auc"], s3_models["calibrated_gbm_lr_blend"]["ci_95"]),
+        ("stream3_modern_calibrated_blend_raw_auc", "Raw GBM+LR Blend", s3_models["calibrated_gbm_lr_blend"]["test_auc"], s3_models["calibrated_gbm_lr_blend"]["ci_95"]),
+    ]
+    for row_id, name, val, ci in modern_rows:
+        rows.append({
+            "id": row_id,
+            "field": "tabular",
+            "system": 1,
+            "approach": f"Stream 3 Modern: {name}",
+            "protocol": "CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned",
+            "metric": "Test AUC",
+            "value": round(float(val), 4),
+            "ci": [round(float(ci[0]), 4), round(float(ci[1]), 4)] if ci else None,
+            "source_file": s3_mod_path,
+            "script": "scripts/62_train_stream3_modern.py",
+            "notebook": "notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb",
+            "pr_commit": "7c75db9",
+            "source_sha256": s3_mod_sha,
+        })
+
+    # -------------------------------------------------------------------------
     # 7. Tabular Specification & Leakage Audit Rows (A through D5, E1 through E5)
     # -------------------------------------------------------------------------
     s3_test_path = "tests/test_clinical_regression.py"

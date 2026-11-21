@@ -1,6 +1,6 @@
 # Master Evidence & Numbers Ledger for Dissertation Report
 
-Total verified numbers: **122**
+Total verified numbers: **128**
 
 > [!IMPORTANT]
 > Every number in this ledger is programmatically extracted and cryptographically linked
@@ -103,7 +103,7 @@ Total verified numbers: **122**
 | `pub_ac_fp_to_fp_apad_nme` | Published (2) | Published: BiometryNet FP -> FP (arXiv 2512.16710) | NME +- SD, model trained on combined data, tested on combined; FP->FP | **APAD NME** | **0.08** | - | `docs/results/published_refs.json` | `docs/results/published_refs.json` | `9c97107f9db8...` |
 | `pub_ac_fp_to_fp_tad_nme` | Published (2) | Published: BiometryNet FP -> FP (arXiv 2512.16710) | NME +- SD, model trained on combined data, tested on combined; FP->FP | **TAD NME** | **0.08** | - | `docs/results/published_refs.json` | `docs/results/published_refs.json` | `9c97107f9db8...` |
 
-## tabular (26 metrics)
+## tabular (32 metrics)
 
 | ID | System | Approach | Protocol | Metric | Value | CI (95%) | Source File | Script / Notebook | Source SHA-256 |
 |:---|:---:|:---|:---|:---|:---:|:---:|:---|:---|:---:|
@@ -115,6 +115,12 @@ Total verified numbers: **122**
 | `stream3_e4_random_forest_auc` | Ours (1) | Stream 3: Random Forest (E4 (Clinical-Only, >=20 wk)) | CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110) | **Test AUC** | **0.7043** | [0.7013, 0.7075] | `docs/results/stream3_bench/benchmark_results.json` | `scripts/18_bench_stream3.py`<br>`notebooks/benchmarks/stream3_bench.ipynb` | `958925f07d43...` |
 | `stream3_e4_lightgbm_auc` | Ours (1) | Stream 3: LightGBM (E4 (Clinical-Only, >=20 wk)) | CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110) | **Test AUC** | **0.707** | [0.7041, 0.7101] | `docs/results/stream3_bench/benchmark_results.json` | `scripts/18_bench_stream3.py`<br>`notebooks/benchmarks/stream3_bench.ipynb` | `958925f07d43...` |
 | `stream3_e4_our_xgboost_auc` | Ours (1) | Stream 3: Our XGBoost (E4 (Clinical-Only, >=20 wk)) | CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110) | **Test AUC** | **0.707** | [0.7040, 0.7101] | `docs/results/stream3_bench/benchmark_results.json` | `scripts/18_bench_stream3.py`<br>`notebooks/benchmarks/stream3_bench.ipynb` | `958925f07d43...` |
+| `stream3_modern_tuned_xgboost_auc` | Ours (1) | Stream 3 Modern: Tuned XGBoost | CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned | **Test AUC** | **0.7382** | [0.7349, 0.7412] | `docs/results/stream3_modern/stream3_modern_results.json` | `scripts/62_train_stream3_modern.py`<br>`notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb` | `b06e046d9592...` |
+| `stream3_modern_tuned_lightgbm_auc` | Ours (1) | Stream 3 Modern: Tuned LightGBM | CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned | **Test AUC** | **0.7383** | [0.7351, 0.7412] | `docs/results/stream3_modern/stream3_modern_results.json` | `scripts/62_train_stream3_modern.py`<br>`notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb` | `b06e046d9592...` |
+| `stream3_modern_tuned_catboost_auc` | Ours (1) | Stream 3 Modern: Tuned CatBoost | CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned | **Test AUC** | **0.7383** | [0.7350, 0.7414] | `docs/results/stream3_modern/stream3_modern_results.json` | `scripts/62_train_stream3_modern.py`<br>`notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb` | `b06e046d9592...` |
+| `stream3_modern_tuned_lr_auc` | Ours (1) | Stream 3 Modern: Tuned Logistic Regression | CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned | **Test AUC** | **0.6659** | [0.6624, 0.6691] | `docs/results/stream3_modern/stream3_modern_results.json` | `scripts/62_train_stream3_modern.py`<br>`notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb` | `b06e046d9592...` |
+| `stream3_modern_calibrated_blend_auc` | Ours (1) | Stream 3 Modern: Calibrated GBM+LR Blend | CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned | **Test AUC** | **0.7382** | [0.7350, 0.7412] | `docs/results/stream3_modern/stream3_modern_results.json` | `scripts/62_train_stream3_modern.py`<br>`notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb` | `b06e046d9592...` |
+| `stream3_modern_calibrated_blend_raw_auc` | Ours (1) | Stream 3 Modern: Raw GBM+LR Blend | CDC NVSS temporal split (train <= 2021: 402282, test >= 2022: 130110), primary features, Optuna tuned | **Test AUC** | **0.7383** | [0.7350, 0.7412] | `docs/results/stream3_modern/stream3_modern_results.json` | `scripts/62_train_stream3_modern.py`<br>`notebooks/kaggle/stream3_modern/stream3-modern-s1/stream3-modern-s1.ipynb` | `b06e046d9592...` |
 | `stream3_audit_row_a_auc` | Ours (1) | Row A: all rows, WITH COMBGEST (leaked gestational age) | CDC natality/stillbirth, split=random, verified against Capstone notebook baseline | **Test AUC** | **0.9684** | - | `tests/test_clinical_regression.py` | `src/fetal/clinical/audit.py`<br>`notebooks/history/Capstone_fetalDataset_history.ipynb` | `f9137153d924...` |
 | `stream3_audit_row_b_auc` | Ours (1) | Row B: all rows, no COMBGEST | CDC natality/stillbirth, split=random, verified against Capstone notebook baseline | **Test AUC** | **0.8832** | - | `tests/test_clinical_regression.py` | `src/fetal/clinical/audit.py`<br>`notebooks/history/Capstone_fetalDataset_history.ipynb` | `f9137153d924...` |
 | `stream3_audit_row_c_auc` | Ours (1) | Row C: >=20 wk, WITH COMBGEST (leaked gestational age) | CDC natality/stillbirth, split=random, verified against Capstone notebook baseline | **Test AUC** | **0.9382** | - | `tests/test_clinical_regression.py` | `src/fetal/clinical/audit.py`<br>`notebooks/history/Capstone_fetalDataset_history.ipynb` | `f9137153d924...` |

@@ -52,7 +52,29 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
 | `candidates/submission_ensemble_5fold_corrected_mult050_EXPLORATORY.csv` | Multiplicative scaling $\alpha = 0.50$ | 1.004065 | 335 | `1a1ff42eb8dcc9f417e69235fd9bbaa77d9b468cd56623825911e23afaae9b5d` | Submitted as probe on 2026-11-16 (negative result) |
 | `candidates/submission_ensemble_5fold_corrected_mult100_EXPLORATORY.csv` | Multiplicative scaling $\alpha = 1.00$ | 1.008129 | 335 | `ee568b5157ddd5ffc424f180fab22d52a765fa11ccac62d66f0883dba9c1f356` | **DO NOT SUBMIT** (Never submitted) |
 
+---
+
+## 4. Tabular Stillbirth Prediction (Stream 3 Modern GBDT Campaign)
+- **Protocol**: CDC NVSS Temporal split (train <= 2021 [N=402,282], held-out test >= 2022 [N=130,110], total cohort 532,392 rows, 40,221 test stillbirths).
+- **Features**: 15 clinical & pre-pregnancy variables (5 numeric, 10 categorical, zero post-delivery / outcome-time leakage).
+- **Hyperparameter Optimization**: Optuna (40 trials).
+- **Results File**: `docs/results/stream3_modern/stream3_modern_results.json` (`b06e046d95925f02ec5fdc9cb77e87a6f440fbe85957ab8cb49eb8c54315ecfa`)
+- **Table File**: `docs/results/stream3_modern/stream3_modern_table.md` (`e4616211ef38f049ea22ea58f1d39aae88554afa5d3ec357b5cf4e99243f7b12`)
+
+| Model | Test ROC-AUC | 95% Bootstrap CI | Brier Score (Raw -> Calibrated) | Key Architecture / Hyperparameters |
+|---|:---:|:---:|:---:|---|
+| **Tuned XGBoost** | **0.7382** | [0.7349, 0.7412] | — | max_depth=5, lr=0.0656, n_estimators=237, subsample=0.6171, colsample=0.7687, scale_pos_weight=3.8731 |
+| **Tuned LightGBM** | **0.7383** | [0.7351, 0.7412] | — | max_depth=6, num_leaves=41, lr=0.0560, n_estimators=288, subsample=0.6088, colsample=0.6602, balanced |
+| **Tuned CatBoost** | **0.7383** | [0.7350, 0.7414] | — | Optuna tuned with Balanced auto class weights |
+| **Tuned Logistic Regression** | **0.6659** | [0.6624, 0.6691] | — | Standardized features, C=0.01, balanced |
+| **Calibrated GBM+LR Blend** | **0.7382** | [0.7350, 0.7412] | 0.19641 -> **0.17095** | `0.90 * LightGBM + 0.10 * LR` with Isotonic Calibration |
+
 ### Detailed Notes & Checkpoint Provenance
+- **`stream3-modern-s1`**:
+  - Kaggle Kernel: `prantakumerpandit390/stream3-modern-s1` (Status: `COMPLETE`)
+  - Summary JSON: `docs/results/stream3_modern/stream3_modern_results.json` (`b06e046d95925f02ec5fdc9cb77e87a6f440fbe85957ab8cb49eb8c54315ecfa`)
+  - Summary Table: `docs/results/stream3_modern/stream3_modern_table.md` (`e4616211ef38f049ea22ea58f1d39aae88554afa5d3ec357b5cf4e99243f7b12`)
+  - Execution Log: `docs/results/stream3_modern/stream3-modern-s1.log` (`82677763684ad266b1a37da933d4684583c1fa5d3284cb29964f59e271e24b74`)
 - **`ac-baseline-s42`**:
   - Kaggle Kernel: `prantakumerpandit390/ac-baseline-s42`
   - Output Archive: `E:\BUBT-CSE-4th yr\Capstone\kaggle_outputs\ac_baseline_s42`
