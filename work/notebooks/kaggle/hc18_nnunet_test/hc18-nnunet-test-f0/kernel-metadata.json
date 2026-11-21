@@ -1,0 +1,18 @@
+{
+  "id": "prantakumerpandit390/hc18-nnunet-test-f0",
+  "title": "hc18-nnunet-test-f0",
+  "code_file": "hc18-nnunet-test-f0.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "prantakumerpandit390/hc18-ultrasound"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [
+    "prantakumerpandit390/hc18-nnunet-f0-250ep"
+  ],
+  "model_sources": []
+}

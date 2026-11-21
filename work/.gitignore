@@ -16,6 +16,7 @@ ENV/
 
 # Data and log file extensions
 *.csv
+!candidates/*.csv
 *.npy
 *.log
 
@@ -39,5 +40,6 @@ credentials.json
 *token*
 *secret*
 *password*
+catboost_info/
 .DS_Store
 Thumbs.db

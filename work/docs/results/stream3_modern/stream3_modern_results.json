@@ -1,0 +1,89 @@
+{
+  "protocol": "CDC NVSS Stillbirth Temporal Benchmark (E1: >= 20 wk gestation)",
+  "feature_set": "Primary (5 numeric, 10 categorical, 0 post-delivery features)",
+  "features": [
+    "MAGER",
+    "BMI",
+    "PRECARE",
+    "PRIORDEAD",
+    "PRIORLIVE",
+    "RF_GDIAB",
+    "RF_GHYPE",
+    "RF_EHYPE",
+    "RF_CESAR",
+    "RF_ARTEC",
+    "RF_INFTR",
+    "RF_FEDRG",
+    "CIG_REC",
+    "DPLURAL",
+    "SEX"
+  ],
+  "n_train": 402282,
+  "n_test": 130110,
+  "n_test_stillbirths": 40221,
+  "models": {
+    "tuned_xgboost": {
+      "test_auc": 0.7382,
+      "ci_95": [
+        0.7349,
+        0.7412
+      ],
+      "params": {
+        "max_depth": 5,
+        "learning_rate": 0.06562987642597395,
+        "n_estimators": 237,
+        "subsample": 0.6170739949986943,
+        "colsample_bytree": 0.768702716093108,
+        "scale_pos_weight": 3.8731400146533486,
+        "random_state": 42,
+        "eval_metric": "auc",
+        "n_jobs": -1
+      }
+    },
+    "tuned_lightgbm": {
+      "test_auc": 0.7383,
+      "ci_95": [
+        0.7351,
+        0.7412
+      ],
+      "params": {
+        "max_depth": 6,
+        "num_leaves": 41,
+        "learning_rate": 0.056014434394166236,
+        "n_estimators": 288,
+        "subsample": 0.6087991181616534,
+        "colsample_bytree": 0.6602247562309059,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": -1,
+        "verbose": -1
+      }
+    },
+    "tuned_catboost": {
+      "test_auc": 0.7383,
+      "ci_95": [
+        0.735,
+        0.7414
+      ]
+    },
+    "tuned_logistic_regression": {
+      "test_auc": 0.6659,
+      "ci_95": [
+        0.6624,
+        0.6691
+      ],
+      "best_C": 0.01
+    },
+    "calibrated_gbm_lr_blend": {
+      "test_auc": 0.7383,
+      "calibrated_auc": 0.7382,
+      "ci_95": [
+        0.735,
+        0.7412
+      ],
+      "blend_formula": "0.90 * lightgbm + 0.10 * LR",
+      "brier_score_raw": 0.19641,
+      "brier_score_calibrated": 0.17095
+    }
+  }
+}

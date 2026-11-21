@@ -1,0 +1,28 @@
+{
+  "aggregates": {
+    "absolute_difference": {
+      "mean": 1.8275,
+      "std": 1.728,
+      "count": 335
+    },
+    "difference": {
+      "mean": 0.0382,
+      "count": 335
+    },
+    "DICE": {
+      "mean": 97.988,
+      "count": 335
+    },
+    "hausdorff_distance": {
+      "mean": 1.2039,
+      "count": 335
+    }
+  },
+  "submission_metadata": {
+    "submission_time": "2026-11-21 23:37",
+    "rank": 107,
+    "user_reported_filename": "submission_nnunet_f0_measfix.csv",
+    "website_comment": "5-fold ensemble, patient-grouped CV",
+    "note": "nnU-Net fold 0 + measfix (user-reported file name, comment on the site is wrong)"
+  }
+}

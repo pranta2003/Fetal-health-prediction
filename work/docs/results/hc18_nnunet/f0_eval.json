@@ -1,0 +1,1878 @@
+{
+  "aggregates": {
+    "fold": 1,
+    "n_images": 206,
+    "hc_mae": 1.9267,
+    "hc_rmse": 2.5524,
+    "dice_mean": 0.9796,
+    "hausdorff_mean_mm": 1.2711,
+    "paired_comparison": {
+      "n_patients": 162,
+      "n_images": 206,
+      "existing_fold1_mae": 2.4817,
+      "nnunet_fold1_mae": 1.9267,
+      "delta_mae": -0.555,
+      "ci95_delta_mae": [
+        -1.2647,
+        -0.1216
+      ],
+      "p_val_mae": 0.0028
+    }
+  },
+  "per_image": [
+    {
+      "image": "002_HC.png",
+      "patient_id": "2",
+      "true_HC_mm": 69.3877,
+      "pred_HC_mm": 60.4915,
+      "abs_diff_HC": 8.8962,
+      "dice": 0.8361,
+      "hausdorff_mm": 6.9976
+    },
+    {
+      "image": "007_HC.png",
+      "patient_id": "7",
+      "true_HC_mm": 63.9141,
+      "pred_HC_mm": 59.8703,
+      "abs_diff_HC": 4.0438,
+      "dice": 0.913,
+      "hausdorff_mm": 1.7634
+    },
+    {
+      "image": "010_2HC.png",
+      "patient_id": "10",
+      "true_HC_mm": 73.6951,
+      "pred_HC_mm": 71.2995,
+      "abs_diff_HC": 2.3956,
+      "dice": 0.9731,
+      "hausdorff_mm": 0.5055
+    },
+    {
+      "image": "010_HC.png",
+      "patient_id": "10",
+      "true_HC_mm": 72.7561,
+      "pred_HC_mm": 72.4393,
+      "abs_diff_HC": 0.3168,
+      "dice": 0.9827,
+      "hausdorff_mm": 0.4796
+    },
+    {
+      "image": "023_2HC.png",
+      "patient_id": "23",
+      "true_HC_mm": 69.2311,
+      "pred_HC_mm": 68.8944,
+      "abs_diff_HC": 0.3367,
+      "dice": 0.9592,
+      "hausdorff_mm": 1.43
+    },
+    {
+      "image": "023_HC.png",
+      "patient_id": "23",
+      "true_HC_mm": 71.1518,
+      "pred_HC_mm": 67.4275,
+      "abs_diff_HC": 3.7243,
+      "dice": 0.9504,
+      "hausdorff_mm": 1.2602
+    },
+    {
+      "image": "029_HC.png",
+      "patient_id": "29",
+      "true_HC_mm": 66.9567,
+      "pred_HC_mm": 66.6944,
+      "abs_diff_HC": 0.2623,
+      "dice": 0.9744,
+      "hausdorff_mm": 0.6803
+    },
+    {
+      "image": "030_HC.png",
+      "patient_id": "30",
+      "true_HC_mm": 64.859,
+      "pred_HC_mm": 65.1376,
+      "abs_diff_HC": 0.2786,
+      "dice": 0.9713,
+      "hausdorff_mm": 0.705
+    },
+    {
+      "image": "031_HC.png",
+      "patient_id": "31",
+      "true_HC_mm": 67.8553,
+      "pred_HC_mm": 63.6871,
+      "abs_diff_HC": 4.1682,
+      "dice": 0.9326,
+      "hausdorff_mm": 2.1894
+    },
+    {
+      "image": "033_2HC.png",
+      "patient_id": "33",
+      "true_HC_mm": 79.8648,
+      "pred_HC_mm": 78.1631,
+      "abs_diff_HC": 1.7017,
+      "dice": 0.9856,
+      "hausdorff_mm": 0.3882
+    },
+    {
+      "image": "033_HC.png",
+      "patient_id": "33",
+      "true_HC_mm": 76.9004,
+      "pred_HC_mm": 76.6966,
+      "abs_diff_HC": 0.2038,
+      "dice": 0.9743,
+      "hausdorff_mm": 0.6802
+    },
+    {
+      "image": "039_HC.png",
+      "patient_id": "39",
+      "true_HC_mm": 73.4869,
+      "pred_HC_mm": 72.735,
+      "abs_diff_HC": 0.7519,
+      "dice": 0.9903,
+      "hausdorff_mm": 0.3275
+    },
+    {
+      "image": "049_HC.png",
+      "patient_id": "49",
+      "true_HC_mm": 70.8881,
+      "pred_HC_mm": 72.7929,
+      "abs_diff_HC": 1.9048,
+      "dice": 0.9618,
+      "hausdorff_mm": 0.8878
+    },
+    {
+      "image": "054_HC.png",
+      "patient_id": "54",
+      "true_HC_mm": 73.639,
+      "pred_HC_mm": 73.1401,
+      "abs_diff_HC": 0.4989,
+      "dice": 0.9791,
+      "hausdorff_mm": 0.4494
+    },
+    {
+      "image": "063_2HC.png",
+      "patient_id": "63",
+      "true_HC_mm": 74.1772,
+      "pred_HC_mm": 73.6355,
+      "abs_diff_HC": 0.5417,
+      "dice": 0.9817,
+      "hausdorff_mm": 0.5724
+    },
+    {
+      "image": "063_3HC.png",
+      "patient_id": "63",
+      "true_HC_mm": 81.2315,
+      "pred_HC_mm": 80.4211,
+      "abs_diff_HC": 0.8104,
+      "dice": 0.9721,
+      "hausdorff_mm": 0.9506
+    },
+    {
+      "image": "063_HC.png",
+      "patient_id": "63",
+      "true_HC_mm": 70.9538,
+      "pred_HC_mm": 73.4169,
+      "abs_diff_HC": 2.4631,
+      "dice": 0.9372,
+      "hausdorff_mm": 1.279
+    },
+    {
+      "image": "065_HC.png",
+      "patient_id": "65",
+      "true_HC_mm": 77.2075,
+      "pred_HC_mm": 73.2371,
+      "abs_diff_HC": 3.9704,
+      "dice": 0.9433,
+      "hausdorff_mm": 2.2273
+    },
+    {
+      "image": "066_2HC.png",
+      "patient_id": "66",
+      "true_HC_mm": 82.1431,
+      "pred_HC_mm": 80.7738,
+      "abs_diff_HC": 1.3693,
+      "dice": 0.9714,
+      "hausdorff_mm": 1.2229
+    },
+    {
+      "image": "066_HC.png",
+      "patient_id": "66",
+      "true_HC_mm": 77.9009,
+      "pred_HC_mm": 76.3817,
+      "abs_diff_HC": 1.5192,
+      "dice": 0.9584,
+      "hausdorff_mm": 0.983
+    },
+    {
+      "image": "067_HC.png",
+      "patient_id": "67",
+      "true_HC_mm": 75.4053,
+      "pred_HC_mm": 73.5023,
+      "abs_diff_HC": 1.903,
+      "dice": 0.9747,
+      "hausdorff_mm": 1.0127
+    },
+    {
+      "image": "072_HC.png",
+      "patient_id": "72",
+      "true_HC_mm": 77.1125,
+      "pred_HC_mm": 77.9174,
+      "abs_diff_HC": 0.8049,
+      "dice": 0.9847,
+      "hausdorff_mm": 0.552
+    },
+    {
+      "image": "076_HC.png",
+      "patient_id": "76",
+      "true_HC_mm": 80.3262,
+      "pred_HC_mm": 79.6914,
+      "abs_diff_HC": 0.6348,
+      "dice": 0.994,
+      "hausdorff_mm": 0.2045
+    },
+    {
+      "image": "077_HC.png",
+      "patient_id": "77",
+      "true_HC_mm": 76.9169,
+      "pred_HC_mm": 76.5591,
+      "abs_diff_HC": 0.3578,
+      "dice": 0.9906,
+      "hausdorff_mm": 0.3323
+    },
+    {
+      "image": "078_HC.png",
+      "patient_id": "78",
+      "true_HC_mm": 78.7541,
+      "pred_HC_mm": 79.2902,
+      "abs_diff_HC": 0.5361,
+      "dice": 0.9826,
+      "hausdorff_mm": 0.4524
+    },
+    {
+      "image": "081_HC.png",
+      "patient_id": "81",
+      "true_HC_mm": 72.7531,
+      "pred_HC_mm": 72.8816,
+      "abs_diff_HC": 0.1285,
+      "dice": 0.9607,
+      "hausdorff_mm": 0.8491
+    },
+    {
+      "image": "084_HC.png",
+      "patient_id": "84",
+      "true_HC_mm": 77.4066,
+      "pred_HC_mm": 75.72,
+      "abs_diff_HC": 1.6866,
+      "dice": 0.9717,
+      "hausdorff_mm": 0.7802
+    },
+    {
+      "image": "086_HC.png",
+      "patient_id": "86",
+      "true_HC_mm": 76.7766,
+      "pred_HC_mm": 77.4642,
+      "abs_diff_HC": 0.6876,
+      "dice": 0.9654,
+      "hausdorff_mm": 1.1147
+    },
+    {
+      "image": "096_HC.png",
+      "patient_id": "96",
+      "true_HC_mm": 76.9978,
+      "pred_HC_mm": 73.8416,
+      "abs_diff_HC": 3.1562,
+      "dice": 0.9567,
+      "hausdorff_mm": 1.0252
+    },
+    {
+      "image": "097_HC.png",
+      "patient_id": "97",
+      "true_HC_mm": 73.3289,
+      "pred_HC_mm": 72.3976,
+      "abs_diff_HC": 0.9313,
+      "dice": 0.9748,
+      "hausdorff_mm": 0.6208
+    },
+    {
+      "image": "101_HC.png",
+      "patient_id": "101",
+      "true_HC_mm": 82.2127,
+      "pred_HC_mm": 81.5194,
+      "abs_diff_HC": 0.6933,
+      "dice": 0.9816,
+      "hausdorff_mm": 0.6261
+    },
+    {
+      "image": "109_HC.png",
+      "patient_id": "109",
+      "true_HC_mm": 83.1012,
+      "pred_HC_mm": 81.7299,
+      "abs_diff_HC": 1.3713,
+      "dice": 0.987,
+      "hausdorff_mm": 0.5441
+    },
+    {
+      "image": "110_HC.png",
+      "patient_id": "110",
+      "true_HC_mm": 91.5285,
+      "pred_HC_mm": 90.0237,
+      "abs_diff_HC": 1.5048,
+      "dice": 0.9763,
+      "hausdorff_mm": 1.1335
+    },
+    {
+      "image": "118_HC.png",
+      "patient_id": "118",
+      "true_HC_mm": 77.7577,
+      "pred_HC_mm": 77.7305,
+      "abs_diff_HC": 0.0272,
+      "dice": 0.9695,
+      "hausdorff_mm": 0.7183
+    },
+    {
+      "image": "120_HC.png",
+      "patient_id": "120",
+      "true_HC_mm": 89.5966,
+      "pred_HC_mm": 88.9919,
+      "abs_diff_HC": 0.6047,
+      "dice": 0.9776,
+      "hausdorff_mm": 0.6694
+    },
+    {
+      "image": "137_HC.png",
+      "patient_id": "137",
+      "true_HC_mm": 98.4815,
+      "pred_HC_mm": 95.0171,
+      "abs_diff_HC": 3.4644,
+      "dice": 0.9659,
+      "hausdorff_mm": 1.4344
+    },
+    {
+      "image": "139_HC.png",
+      "patient_id": "139",
+      "true_HC_mm": 97.7141,
+      "pred_HC_mm": 97.3606,
+      "abs_diff_HC": 0.3535,
+      "dice": 0.9732,
+      "hausdorff_mm": 0.9198
+    },
+    {
+      "image": "155_HC.png",
+      "patient_id": "155",
+      "true_HC_mm": 101.8041,
+      "pred_HC_mm": 100.9792,
+      "abs_diff_HC": 0.8249,
+      "dice": 0.9833,
+      "hausdorff_mm": 0.6195
+    },
+    {
+      "image": "168_HC.png",
+      "patient_id": "168",
+      "true_HC_mm": 122.4283,
+      "pred_HC_mm": 123.4233,
+      "abs_diff_HC": 0.995,
+      "dice": 0.9865,
+      "hausdorff_mm": 0.7108
+    },
+    {
+      "image": "174_HC.png",
+      "patient_id": "174",
+      "true_HC_mm": 117.6775,
+      "pred_HC_mm": 115.6363,
+      "abs_diff_HC": 2.0412,
+      "dice": 0.9837,
+      "hausdorff_mm": 0.9089
+    },
+    {
+      "image": "192_2HC.png",
+      "patient_id": "192",
+      "true_HC_mm": 157.1875,
+      "pred_HC_mm": 156.5864,
+      "abs_diff_HC": 0.6011,
+      "dice": 0.9831,
+      "hausdorff_mm": 1.0275
+    },
+    {
+      "image": "192_HC.png",
+      "patient_id": "192",
+      "true_HC_mm": 147.8391,
+      "pred_HC_mm": 151.0353,
+      "abs_diff_HC": 3.1962,
+      "dice": 0.9729,
+      "hausdorff_mm": 1.1086
+    },
+    {
+      "image": "198_2HC.png",
+      "patient_id": "198",
+      "true_HC_mm": 156.5119,
+      "pred_HC_mm": 155.1295,
+      "abs_diff_HC": 1.3824,
+      "dice": 0.9901,
+      "hausdorff_mm": 0.7041
+    },
+    {
+      "image": "198_HC.png",
+      "patient_id": "198",
+      "true_HC_mm": 156.499,
+      "pred_HC_mm": 155.1523,
+      "abs_diff_HC": 1.3467,
+      "dice": 0.9897,
+      "hausdorff_mm": 0.704
+    },
+    {
+      "image": "199_HC.png",
+      "patient_id": "199",
+      "true_HC_mm": 161.9348,
+      "pred_HC_mm": 161.7767,
+      "abs_diff_HC": 0.1581,
+      "dice": 0.9855,
+      "hausdorff_mm": 1.0296
+    },
+    {
+      "image": "204_HC.png",
+      "patient_id": "204",
+      "true_HC_mm": 150.3101,
+      "pred_HC_mm": 150.002,
+      "abs_diff_HC": 0.3081,
+      "dice": 0.9916,
+      "hausdorff_mm": 0.5771
+    },
+    {
+      "image": "208_HC.png",
+      "patient_id": "208",
+      "true_HC_mm": 172.7354,
+      "pred_HC_mm": 178.3734,
+      "abs_diff_HC": 5.638,
+      "dice": 0.9627,
+      "hausdorff_mm": 2.542
+    },
+    {
+      "image": "209_HC.png",
+      "patient_id": "209",
+      "true_HC_mm": 164.7722,
+      "pred_HC_mm": 166.5818,
+      "abs_diff_HC": 1.8096,
+      "dice": 0.9829,
+      "hausdorff_mm": 1.0028
+    },
+    {
+      "image": "210_2HC.png",
+      "patient_id": "210",
+      "true_HC_mm": 164.5289,
+      "pred_HC_mm": 162.7592,
+      "abs_diff_HC": 1.7697,
+      "dice": 0.9813,
+      "hausdorff_mm": 0.9702
+    },
+    {
+      "image": "210_HC.png",
+      "patient_id": "210",
+      "true_HC_mm": 166.7384,
+      "pred_HC_mm": 166.9988,
+      "abs_diff_HC": 0.2604,
+      "dice": 0.9878,
+      "hausdorff_mm": 0.777
+    },
+    {
+      "image": "211_HC.png",
+      "patient_id": "211",
+      "true_HC_mm": 152.9301,
+      "pred_HC_mm": 155.263,
+      "abs_diff_HC": 2.3329,
+      "dice": 0.9799,
+      "hausdorff_mm": 1.2734
+    },
+    {
+      "image": "212_HC.png",
+      "patient_id": "212",
+      "true_HC_mm": 161.418,
+      "pred_HC_mm": 159.9606,
+      "abs_diff_HC": 1.4574,
+      "dice": 0.9841,
+      "hausdorff_mm": 0.7945
+    },
+    {
+      "image": "213_2HC.png",
+      "patient_id": "213",
+      "true_HC_mm": 154.5613,
+      "pred_HC_mm": 151.0239,
+      "abs_diff_HC": 3.5374,
+      "dice": 0.9771,
+      "hausdorff_mm": 1.3203
+    },
+    {
+      "image": "213_HC.png",
+      "patient_id": "213",
+      "true_HC_mm": 158.8531,
+      "pred_HC_mm": 154.5626,
+      "abs_diff_HC": 4.2905,
+      "dice": 0.9786,
+      "hausdorff_mm": 1.1977
+    },
+    {
+      "image": "215_HC.png",
+      "patient_id": "215",
+      "true_HC_mm": 156.0538,
+      "pred_HC_mm": 152.8094,
+      "abs_diff_HC": 3.2444,
+      "dice": 0.98,
+      "hausdorff_mm": 0.9705
+    },
+    {
+      "image": "227_2HC.png",
+      "patient_id": "227",
+      "true_HC_mm": 178.1213,
+      "pred_HC_mm": 179.5368,
+      "abs_diff_HC": 1.4155,
+      "dice": 0.9767,
+      "hausdorff_mm": 1.2306
+    },
+    {
+      "image": "227_HC.png",
+      "patient_id": "227",
+      "true_HC_mm": 174.5191,
+      "pred_HC_mm": 174.4998,
+      "abs_diff_HC": 0.0193,
+      "dice": 0.9863,
+      "hausdorff_mm": 1.1782
+    },
+    {
+      "image": "231_HC.png",
+      "patient_id": "231",
+      "true_HC_mm": 172.0725,
+      "pred_HC_mm": 169.3844,
+      "abs_diff_HC": 2.6881,
+      "dice": 0.9875,
+      "hausdorff_mm": 0.7628
+    },
+    {
+      "image": "235_2HC.png",
+      "patient_id": "235",
+      "true_HC_mm": 169.7391,
+      "pred_HC_mm": 169.6205,
+      "abs_diff_HC": 0.1186,
+      "dice": 0.9811,
+      "hausdorff_mm": 1.21
+    },
+    {
+      "image": "235_HC.png",
+      "patient_id": "235",
+      "true_HC_mm": 172.2542,
+      "pred_HC_mm": 170.6115,
+      "abs_diff_HC": 1.6427,
+      "dice": 0.9786,
+      "hausdorff_mm": 0.9419
+    },
+    {
+      "image": "239_HC.png",
+      "patient_id": "239",
+      "true_HC_mm": 170.0493,
+      "pred_HC_mm": 169.613,
+      "abs_diff_HC": 0.4363,
+      "dice": 0.9906,
+      "hausdorff_mm": 0.573
+    },
+    {
+      "image": "244_HC.png",
+      "patient_id": "244",
+      "true_HC_mm": 175.6489,
+      "pred_HC_mm": 171.8982,
+      "abs_diff_HC": 3.7507,
+      "dice": 0.9822,
+      "hausdorff_mm": 1.042
+    },
+    {
+      "image": "247_HC.png",
+      "patient_id": "247",
+      "true_HC_mm": 173.3851,
+      "pred_HC_mm": 173.6258,
+      "abs_diff_HC": 0.2407,
+      "dice": 0.9903,
+      "hausdorff_mm": 0.7806
+    },
+    {
+      "image": "250_HC.png",
+      "patient_id": "250",
+      "true_HC_mm": 174.4041,
+      "pred_HC_mm": 174.8273,
+      "abs_diff_HC": 0.4232,
+      "dice": 0.9868,
+      "hausdorff_mm": 0.7968
+    },
+    {
+      "image": "254_HC.png",
+      "patient_id": "254",
+      "true_HC_mm": 171.8713,
+      "pred_HC_mm": 172.2002,
+      "abs_diff_HC": 0.3289,
+      "dice": 0.9768,
+      "hausdorff_mm": 1.5286
+    },
+    {
+      "image": "259_HC.png",
+      "patient_id": "259",
+      "true_HC_mm": 172.7594,
+      "pred_HC_mm": 171.2069,
+      "abs_diff_HC": 1.5525,
+      "dice": 0.9883,
+      "hausdorff_mm": 0.6794
+    },
+    {
+      "image": "260_2HC.png",
+      "patient_id": "260",
+      "true_HC_mm": 160.0616,
+      "pred_HC_mm": 159.5292,
+      "abs_diff_HC": 0.5324,
+      "dice": 0.9864,
+      "hausdorff_mm": 0.8245
+    },
+    {
+      "image": "260_HC.png",
+      "patient_id": "260",
+      "true_HC_mm": 164.5455,
+      "pred_HC_mm": 163.0559,
+      "abs_diff_HC": 1.4896,
+      "dice": 0.9898,
+      "hausdorff_mm": 0.5837
+    },
+    {
+      "image": "275_HC.png",
+      "patient_id": "275",
+      "true_HC_mm": 175.3937,
+      "pred_HC_mm": 172.0192,
+      "abs_diff_HC": 3.3745,
+      "dice": 0.9838,
+      "hausdorff_mm": 0.874
+    },
+    {
+      "image": "281_HC.png",
+      "patient_id": "281",
+      "true_HC_mm": 179.7925,
+      "pred_HC_mm": 170.8662,
+      "abs_diff_HC": 8.9263,
+      "dice": 0.9588,
+      "hausdorff_mm": 2.6758
+    },
+    {
+      "image": "285_HC.png",
+      "patient_id": "285",
+      "true_HC_mm": 167.8607,
+      "pred_HC_mm": 168.2343,
+      "abs_diff_HC": 0.3736,
+      "dice": 0.9842,
+      "hausdorff_mm": 0.8202
+    },
+    {
+      "image": "296_HC.png",
+      "patient_id": "296",
+      "true_HC_mm": 192.6748,
+      "pred_HC_mm": 190.8857,
+      "abs_diff_HC": 1.7891,
+      "dice": 0.9905,
+      "hausdorff_mm": 0.6352
+    },
+    {
+      "image": "299_2HC.png",
+      "patient_id": "299",
+      "true_HC_mm": 161.9223,
+      "pred_HC_mm": 161.0808,
+      "abs_diff_HC": 0.8415,
+      "dice": 0.9892,
+      "hausdorff_mm": 0.7638
+    },
+    {
+      "image": "299_HC.png",
+      "patient_id": "299",
+      "true_HC_mm": 163.1279,
+      "pred_HC_mm": 162.5827,
+      "abs_diff_HC": 0.5452,
+      "dice": 0.9876,
+      "hausdorff_mm": 0.6935
+    },
+    {
+      "image": "306_HC.png",
+      "patient_id": "306",
+      "true_HC_mm": 183.9414,
+      "pred_HC_mm": 180.0311,
+      "abs_diff_HC": 3.9103,
+      "dice": 0.978,
+      "hausdorff_mm": 1.3409
+    },
+    {
+      "image": "309_HC.png",
+      "patient_id": "309",
+      "true_HC_mm": 176.9999,
+      "pred_HC_mm": 177.4862,
+      "abs_diff_HC": 0.4863,
+      "dice": 0.9931,
+      "hausdorff_mm": 0.7554
+    },
+    {
+      "image": "311_HC.png",
+      "patient_id": "311",
+      "true_HC_mm": 174.8935,
+      "pred_HC_mm": 171.8015,
+      "abs_diff_HC": 3.092,
+      "dice": 0.9708,
+      "hausdorff_mm": 2.0375
+    },
+    {
+      "image": "319_HC.png",
+      "patient_id": "319",
+      "true_HC_mm": 172.5887,
+      "pred_HC_mm": 171.5158,
+      "abs_diff_HC": 1.0729,
+      "dice": 0.9731,
+      "hausdorff_mm": 1.3941
+    },
+    {
+      "image": "327_2HC.png",
+      "patient_id": "327",
+      "true_HC_mm": 165.9273,
+      "pred_HC_mm": 161.3794,
+      "abs_diff_HC": 4.5479,
+      "dice": 0.9756,
+      "hausdorff_mm": 1.1316
+    },
+    {
+      "image": "327_HC.png",
+      "patient_id": "327",
+      "true_HC_mm": 164.1509,
+      "pred_HC_mm": 161.1956,
+      "abs_diff_HC": 2.9553,
+      "dice": 0.9814,
+      "hausdorff_mm": 1.0033
+    },
+    {
+      "image": "328_HC.png",
+      "patient_id": "328",
+      "true_HC_mm": 177.4653,
+      "pred_HC_mm": 177.814,
+      "abs_diff_HC": 0.3487,
+      "dice": 0.9913,
+      "hausdorff_mm": 0.8111
+    },
+    {
+      "image": "329_HC.png",
+      "patient_id": "329",
+      "true_HC_mm": 173.6031,
+      "pred_HC_mm": 172.3937,
+      "abs_diff_HC": 1.2094,
+      "dice": 0.9638,
+      "hausdorff_mm": 2.5507
+    },
+    {
+      "image": "335_HC.png",
+      "patient_id": "335",
+      "true_HC_mm": 172.1021,
+      "pred_HC_mm": 171.3185,
+      "abs_diff_HC": 0.7836,
+      "dice": 0.9834,
+      "hausdorff_mm": 1.1978
+    },
+    {
+      "image": "336_HC.png",
+      "patient_id": "336",
+      "true_HC_mm": 168.4528,
+      "pred_HC_mm": 168.9429,
+      "abs_diff_HC": 0.4901,
+      "dice": 0.9885,
+      "hausdorff_mm": 0.8104
+    },
+    {
+      "image": "342_HC.png",
+      "patient_id": "342",
+      "true_HC_mm": 173.241,
+      "pred_HC_mm": 171.598,
+      "abs_diff_HC": 1.643,
+      "dice": 0.9732,
+      "hausdorff_mm": 1.1296
+    },
+    {
+      "image": "350_HC.png",
+      "patient_id": "350",
+      "true_HC_mm": 182.8981,
+      "pred_HC_mm": 179.8213,
+      "abs_diff_HC": 3.0768,
+      "dice": 0.9875,
+      "hausdorff_mm": 0.8391
+    },
+    {
+      "image": "351_HC.png",
+      "patient_id": "351",
+      "true_HC_mm": 173.5773,
+      "pred_HC_mm": 173.1827,
+      "abs_diff_HC": 0.3946,
+      "dice": 0.9711,
+      "hausdorff_mm": 2.0022
+    },
+    {
+      "image": "352_2HC.png",
+      "patient_id": "352",
+      "true_HC_mm": 177.8664,
+      "pred_HC_mm": 177.2021,
+      "abs_diff_HC": 0.6643,
+      "dice": 0.9833,
+      "hausdorff_mm": 1.3353
+    },
+    {
+      "image": "352_HC.png",
+      "patient_id": "352",
+      "true_HC_mm": 176.3601,
+      "pred_HC_mm": 173.6236,
+      "abs_diff_HC": 2.7365,
+      "dice": 0.9867,
+      "hausdorff_mm": 0.6637
+    },
+    {
+      "image": "355_HC.png",
+      "patient_id": "355",
+      "true_HC_mm": 182.2508,
+      "pred_HC_mm": 180.4957,
+      "abs_diff_HC": 1.7551,
+      "dice": 0.9793,
+      "hausdorff_mm": 1.1985
+    },
+    {
+      "image": "357_HC.png",
+      "patient_id": "357",
+      "true_HC_mm": 171.0394,
+      "pred_HC_mm": 169.7715,
+      "abs_diff_HC": 1.2679,
+      "dice": 0.9893,
+      "hausdorff_mm": 0.7074
+    },
+    {
+      "image": "360_2HC.png",
+      "patient_id": "360",
+      "true_HC_mm": 183.403,
+      "pred_HC_mm": 181.8413,
+      "abs_diff_HC": 1.5617,
+      "dice": 0.9799,
+      "hausdorff_mm": 1.5347
+    },
+    {
+      "image": "360_HC.png",
+      "patient_id": "360",
+      "true_HC_mm": 176.8597,
+      "pred_HC_mm": 175.2948,
+      "abs_diff_HC": 1.5649,
+      "dice": 0.9694,
+      "hausdorff_mm": 1.8227
+    },
+    {
+      "image": "363_HC.png",
+      "patient_id": "363",
+      "true_HC_mm": 181.6882,
+      "pred_HC_mm": 179.7601,
+      "abs_diff_HC": 1.9281,
+      "dice": 0.9891,
+      "hausdorff_mm": 0.7793
+    },
+    {
+      "image": "368_HC.png",
+      "patient_id": "368",
+      "true_HC_mm": 167.6955,
+      "pred_HC_mm": 171.5154,
+      "abs_diff_HC": 3.8199,
+      "dice": 0.9681,
+      "hausdorff_mm": 1.6672
+    },
+    {
+      "image": "380_HC.png",
+      "patient_id": "380",
+      "true_HC_mm": 176.3553,
+      "pred_HC_mm": 179.0726,
+      "abs_diff_HC": 2.7173,
+      "dice": 0.9743,
+      "hausdorff_mm": 2.3507
+    },
+    {
+      "image": "382_2HC.png",
+      "patient_id": "382",
+      "true_HC_mm": 166.9036,
+      "pred_HC_mm": 164.3867,
+      "abs_diff_HC": 2.5169,
+      "dice": 0.9866,
+      "hausdorff_mm": 0.8008
+    },
+    {
+      "image": "382_HC.png",
+      "patient_id": "382",
+      "true_HC_mm": 170.285,
+      "pred_HC_mm": 170.8033,
+      "abs_diff_HC": 0.5183,
+      "dice": 0.9852,
+      "hausdorff_mm": 0.8896
+    },
+    {
+      "image": "383_HC.png",
+      "patient_id": "383",
+      "true_HC_mm": 172.4876,
+      "pred_HC_mm": 173.1713,
+      "abs_diff_HC": 0.6837,
+      "dice": 0.9874,
+      "hausdorff_mm": 0.7973
+    },
+    {
+      "image": "394_2HC.png",
+      "patient_id": "394",
+      "true_HC_mm": 185.801,
+      "pred_HC_mm": 184.7267,
+      "abs_diff_HC": 1.0743,
+      "dice": 0.9651,
+      "hausdorff_mm": 1.9492
+    },
+    {
+      "image": "394_HC.png",
+      "patient_id": "394",
+      "true_HC_mm": 185.7855,
+      "pred_HC_mm": 186.4554,
+      "abs_diff_HC": 0.6699,
+      "dice": 0.9795,
+      "hausdorff_mm": 1.2548
+    },
+    {
+      "image": "395_HC.png",
+      "patient_id": "395",
+      "true_HC_mm": 177.8422,
+      "pred_HC_mm": 177.1752,
+      "abs_diff_HC": 0.667,
+      "dice": 0.9905,
+      "hausdorff_mm": 0.5416
+    },
+    {
+      "image": "396_HC.png",
+      "patient_id": "396",
+      "true_HC_mm": 174.8673,
+      "pred_HC_mm": 171.9369,
+      "abs_diff_HC": 2.9304,
+      "dice": 0.9822,
+      "hausdorff_mm": 1.5069
+    },
+    {
+      "image": "398_HC.png",
+      "patient_id": "398",
+      "true_HC_mm": 168.8125,
+      "pred_HC_mm": 167.8699,
+      "abs_diff_HC": 0.9426,
+      "dice": 0.9841,
+      "hausdorff_mm": 1.0074
+    },
+    {
+      "image": "404_2HC.png",
+      "patient_id": "404",
+      "true_HC_mm": 171.4128,
+      "pred_HC_mm": 170.2498,
+      "abs_diff_HC": 1.163,
+      "dice": 0.9807,
+      "hausdorff_mm": 1.2186
+    },
+    {
+      "image": "404_HC.png",
+      "patient_id": "404",
+      "true_HC_mm": 191.5276,
+      "pred_HC_mm": 191.5183,
+      "abs_diff_HC": 0.0093,
+      "dice": 0.9837,
+      "hausdorff_mm": 1.3737
+    },
+    {
+      "image": "405_HC.png",
+      "patient_id": "405",
+      "true_HC_mm": 178.8496,
+      "pred_HC_mm": 178.7743,
+      "abs_diff_HC": 0.0753,
+      "dice": 0.984,
+      "hausdorff_mm": 1.2092
+    },
+    {
+      "image": "409_HC.png",
+      "patient_id": "409",
+      "true_HC_mm": 167.8738,
+      "pred_HC_mm": 169.805,
+      "abs_diff_HC": 1.9312,
+      "dice": 0.9839,
+      "hausdorff_mm": 1.0647
+    },
+    {
+      "image": "412_HC.png",
+      "patient_id": "412",
+      "true_HC_mm": 165.6546,
+      "pred_HC_mm": 165.4761,
+      "abs_diff_HC": 0.1785,
+      "dice": 0.9938,
+      "hausdorff_mm": 0.4117
+    },
+    {
+      "image": "424_HC.png",
+      "patient_id": "424",
+      "true_HC_mm": 178.0055,
+      "pred_HC_mm": 176.6075,
+      "abs_diff_HC": 1.398,
+      "dice": 0.987,
+      "hausdorff_mm": 0.837
+    },
+    {
+      "image": "425_2HC.png",
+      "patient_id": "425",
+      "true_HC_mm": 167.994,
+      "pred_HC_mm": 161.6959,
+      "abs_diff_HC": 6.2981,
+      "dice": 0.9692,
+      "hausdorff_mm": 2.2173
+    },
+    {
+      "image": "425_HC.png",
+      "patient_id": "425",
+      "true_HC_mm": 163.4927,
+      "pred_HC_mm": 162.8357,
+      "abs_diff_HC": 0.657,
+      "dice": 0.991,
+      "hausdorff_mm": 0.4811
+    },
+    {
+      "image": "426_2HC.png",
+      "patient_id": "426",
+      "true_HC_mm": 143.3308,
+      "pred_HC_mm": 139.1547,
+      "abs_diff_HC": 4.1761,
+      "dice": 0.9732,
+      "hausdorff_mm": 2.3272
+    },
+    {
+      "image": "426_3HC.png",
+      "patient_id": "426",
+      "true_HC_mm": 143.3526,
+      "pred_HC_mm": 137.743,
+      "abs_diff_HC": 5.6096,
+      "dice": 0.9677,
+      "hausdorff_mm": 1.9019
+    },
+    {
+      "image": "426_4HC.png",
+      "patient_id": "426",
+      "true_HC_mm": 156.9235,
+      "pred_HC_mm": 152.6986,
+      "abs_diff_HC": 4.2249,
+      "dice": 0.971,
+      "hausdorff_mm": 1.2426
+    },
+    {
+      "image": "426_HC.png",
+      "patient_id": "426",
+      "true_HC_mm": 146.2641,
+      "pred_HC_mm": 142.052,
+      "abs_diff_HC": 4.2121,
+      "dice": 0.9721,
+      "hausdorff_mm": 1.803
+    },
+    {
+      "image": "428_HC.png",
+      "patient_id": "428",
+      "true_HC_mm": 172.0045,
+      "pred_HC_mm": 171.9287,
+      "abs_diff_HC": 0.0758,
+      "dice": 0.9907,
+      "hausdorff_mm": 0.5534
+    },
+    {
+      "image": "431_2HC.png",
+      "patient_id": "431",
+      "true_HC_mm": 165.138,
+      "pred_HC_mm": 168.053,
+      "abs_diff_HC": 2.915,
+      "dice": 0.9785,
+      "hausdorff_mm": 0.9233
+    },
+    {
+      "image": "431_HC.png",
+      "patient_id": "431",
+      "true_HC_mm": 167.6031,
+      "pred_HC_mm": 166.6592,
+      "abs_diff_HC": 0.9439,
+      "dice": 0.9939,
+      "hausdorff_mm": 0.4485
+    },
+    {
+      "image": "439_HC.png",
+      "patient_id": "439",
+      "true_HC_mm": 182.9912,
+      "pred_HC_mm": 183.5832,
+      "abs_diff_HC": 0.592,
+      "dice": 0.9869,
+      "hausdorff_mm": 1.0485
+    },
+    {
+      "image": "448_HC.png",
+      "patient_id": "448",
+      "true_HC_mm": 172.1744,
+      "pred_HC_mm": 172.2489,
+      "abs_diff_HC": 0.0745,
+      "dice": 0.9882,
+      "hausdorff_mm": 0.7429
+    },
+    {
+      "image": "453_2HC.png",
+      "patient_id": "453",
+      "true_HC_mm": 168.133,
+      "pred_HC_mm": 168.051,
+      "abs_diff_HC": 0.082,
+      "dice": 0.9855,
+      "hausdorff_mm": 1.1491
+    },
+    {
+      "image": "453_HC.png",
+      "patient_id": "453",
+      "true_HC_mm": 177.2381,
+      "pred_HC_mm": 173.7483,
+      "abs_diff_HC": 3.4898,
+      "dice": 0.9834,
+      "hausdorff_mm": 1.8844
+    },
+    {
+      "image": "464_HC.png",
+      "patient_id": "464",
+      "true_HC_mm": 170.8373,
+      "pred_HC_mm": 169.7397,
+      "abs_diff_HC": 1.0976,
+      "dice": 0.9873,
+      "hausdorff_mm": 0.6642
+    },
+    {
+      "image": "467_HC.png",
+      "patient_id": "467",
+      "true_HC_mm": 178.0923,
+      "pred_HC_mm": 178.7744,
+      "abs_diff_HC": 0.6821,
+      "dice": 0.979,
+      "hausdorff_mm": 1.3563
+    },
+    {
+      "image": "482_2HC.png",
+      "patient_id": "482",
+      "true_HC_mm": 174.3227,
+      "pred_HC_mm": 173.389,
+      "abs_diff_HC": 0.9337,
+      "dice": 0.9863,
+      "hausdorff_mm": 0.8094
+    },
+    {
+      "image": "482_3HC.png",
+      "patient_id": "482",
+      "true_HC_mm": 172.3592,
+      "pred_HC_mm": 170.3248,
+      "abs_diff_HC": 2.0344,
+      "dice": 0.9823,
+      "hausdorff_mm": 1.2062
+    },
+    {
+      "image": "482_HC.png",
+      "patient_id": "482",
+      "true_HC_mm": 176.6362,
+      "pred_HC_mm": 176.3762,
+      "abs_diff_HC": 0.26,
+      "dice": 0.9839,
+      "hausdorff_mm": 1.0475
+    },
+    {
+      "image": "483_2HC.png",
+      "patient_id": "483",
+      "true_HC_mm": 170.1566,
+      "pred_HC_mm": 170.8786,
+      "abs_diff_HC": 0.722,
+      "dice": 0.9875,
+      "hausdorff_mm": 1.2305
+    },
+    {
+      "image": "483_HC.png",
+      "patient_id": "483",
+      "true_HC_mm": 175.7587,
+      "pred_HC_mm": 173.4297,
+      "abs_diff_HC": 2.329,
+      "dice": 0.9864,
+      "hausdorff_mm": 0.9365
+    },
+    {
+      "image": "486_2HC.png",
+      "patient_id": "486",
+      "true_HC_mm": 195.229,
+      "pred_HC_mm": 196.2816,
+      "abs_diff_HC": 1.0526,
+      "dice": 0.9867,
+      "hausdorff_mm": 1.1422
+    },
+    {
+      "image": "486_HC.png",
+      "patient_id": "486",
+      "true_HC_mm": 193.716,
+      "pred_HC_mm": 195.5054,
+      "abs_diff_HC": 1.7894,
+      "dice": 0.9783,
+      "hausdorff_mm": 1.4293
+    },
+    {
+      "image": "493_HC.png",
+      "patient_id": "493",
+      "true_HC_mm": 172.6138,
+      "pred_HC_mm": 167.9599,
+      "abs_diff_HC": 4.6539,
+      "dice": 0.9738,
+      "hausdorff_mm": 1.4524
+    },
+    {
+      "image": "495_2HC.png",
+      "patient_id": "495",
+      "true_HC_mm": 195.1434,
+      "pred_HC_mm": 192.3522,
+      "abs_diff_HC": 2.7912,
+      "dice": 0.9892,
+      "hausdorff_mm": 1.0115
+    },
+    {
+      "image": "495_3HC.png",
+      "patient_id": "495",
+      "true_HC_mm": 187.1391,
+      "pred_HC_mm": 182.1927,
+      "abs_diff_HC": 4.9464,
+      "dice": 0.9729,
+      "hausdorff_mm": 2.1442
+    },
+    {
+      "image": "495_4HC.png",
+      "patient_id": "495",
+      "true_HC_mm": 196.5837,
+      "pred_HC_mm": 193.7625,
+      "abs_diff_HC": 2.8212,
+      "dice": 0.9827,
+      "hausdorff_mm": 1.4677
+    },
+    {
+      "image": "495_HC.png",
+      "patient_id": "495",
+      "true_HC_mm": 198.2469,
+      "pred_HC_mm": 194.6596,
+      "abs_diff_HC": 3.5873,
+      "dice": 0.9788,
+      "hausdorff_mm": 1.3318
+    },
+    {
+      "image": "507_2HC.png",
+      "patient_id": "507",
+      "true_HC_mm": 168.0406,
+      "pred_HC_mm": 168.8937,
+      "abs_diff_HC": 0.8531,
+      "dice": 0.9852,
+      "hausdorff_mm": 1.0444
+    },
+    {
+      "image": "507_HC.png",
+      "patient_id": "507",
+      "true_HC_mm": 168.0406,
+      "pred_HC_mm": 168.8765,
+      "abs_diff_HC": 0.8359,
+      "dice": 0.985,
+      "hausdorff_mm": 1.0444
+    },
+    {
+      "image": "513_HC.png",
+      "patient_id": "513",
+      "true_HC_mm": 179.6051,
+      "pred_HC_mm": 176.4444,
+      "abs_diff_HC": 3.1607,
+      "dice": 0.984,
+      "hausdorff_mm": 0.9543
+    },
+    {
+      "image": "514_HC.png",
+      "patient_id": "514",
+      "true_HC_mm": 182.4771,
+      "pred_HC_mm": 180.9235,
+      "abs_diff_HC": 1.5536,
+      "dice": 0.9906,
+      "hausdorff_mm": 0.9012
+    },
+    {
+      "image": "516_HC.png",
+      "patient_id": "516",
+      "true_HC_mm": 176.2444,
+      "pred_HC_mm": 175.9924,
+      "abs_diff_HC": 0.252,
+      "dice": 0.9792,
+      "hausdorff_mm": 1.4479
+    },
+    {
+      "image": "523_HC.png",
+      "patient_id": "523",
+      "true_HC_mm": 180.4206,
+      "pred_HC_mm": 180.7904,
+      "abs_diff_HC": 0.3698,
+      "dice": 0.9874,
+      "hausdorff_mm": 0.8612
+    },
+    {
+      "image": "529_HC.png",
+      "patient_id": "529",
+      "true_HC_mm": 174.8874,
+      "pred_HC_mm": 176.2458,
+      "abs_diff_HC": 1.3584,
+      "dice": 0.9837,
+      "hausdorff_mm": 1.0849
+    },
+    {
+      "image": "530_HC.png",
+      "patient_id": "530",
+      "true_HC_mm": 175.4718,
+      "pred_HC_mm": 174.7202,
+      "abs_diff_HC": 0.7516,
+      "dice": 0.988,
+      "hausdorff_mm": 0.8167
+    },
+    {
+      "image": "533_HC.png",
+      "patient_id": "533",
+      "true_HC_mm": 185.6145,
+      "pred_HC_mm": 184.1099,
+      "abs_diff_HC": 1.5046,
+      "dice": 0.9871,
+      "hausdorff_mm": 0.8193
+    },
+    {
+      "image": "537_HC.png",
+      "patient_id": "537",
+      "true_HC_mm": 186.4067,
+      "pred_HC_mm": 184.874,
+      "abs_diff_HC": 1.5327,
+      "dice": 0.9887,
+      "hausdorff_mm": 0.8486
+    },
+    {
+      "image": "538_HC.png",
+      "patient_id": "538",
+      "true_HC_mm": 180.3842,
+      "pred_HC_mm": 177.1631,
+      "abs_diff_HC": 3.2211,
+      "dice": 0.9755,
+      "hausdorff_mm": 1.2707
+    },
+    {
+      "image": "541_2HC.png",
+      "patient_id": "541",
+      "true_HC_mm": 176.3592,
+      "pred_HC_mm": 178.5901,
+      "abs_diff_HC": 2.2309,
+      "dice": 0.9842,
+      "hausdorff_mm": 0.9422
+    },
+    {
+      "image": "541_HC.png",
+      "patient_id": "541",
+      "true_HC_mm": 168.4167,
+      "pred_HC_mm": 164.0602,
+      "abs_diff_HC": 4.3565,
+      "dice": 0.9787,
+      "hausdorff_mm": 1.2817
+    },
+    {
+      "image": "548_HC.png",
+      "patient_id": "548",
+      "true_HC_mm": 177.3602,
+      "pred_HC_mm": 175.4034,
+      "abs_diff_HC": 1.9568,
+      "dice": 0.9864,
+      "hausdorff_mm": 1.1035
+    },
+    {
+      "image": "549_HC.png",
+      "patient_id": "549",
+      "true_HC_mm": 170.7451,
+      "pred_HC_mm": 170.8202,
+      "abs_diff_HC": 0.0751,
+      "dice": 0.9922,
+      "hausdorff_mm": 0.5138
+    },
+    {
+      "image": "569_HC.png",
+      "patient_id": "569",
+      "true_HC_mm": 178.8848,
+      "pred_HC_mm": 176.4882,
+      "abs_diff_HC": 2.3966,
+      "dice": 0.9893,
+      "hausdorff_mm": 0.7307
+    },
+    {
+      "image": "572_HC.png",
+      "patient_id": "572",
+      "true_HC_mm": 173.0499,
+      "pred_HC_mm": 173.6003,
+      "abs_diff_HC": 0.5504,
+      "dice": 0.9932,
+      "hausdorff_mm": 0.5784
+    },
+    {
+      "image": "586_HC.png",
+      "patient_id": "586",
+      "true_HC_mm": 184.5914,
+      "pred_HC_mm": 184.7812,
+      "abs_diff_HC": 0.1898,
+      "dice": 0.9872,
+      "hausdorff_mm": 0.845
+    },
+    {
+      "image": "590_HC.png",
+      "patient_id": "590",
+      "true_HC_mm": 180.8026,
+      "pred_HC_mm": 181.0683,
+      "abs_diff_HC": 0.2657,
+      "dice": 0.9902,
+      "hausdorff_mm": 0.6656
+    },
+    {
+      "image": "593_HC.png",
+      "patient_id": "593",
+      "true_HC_mm": 191.5561,
+      "pred_HC_mm": 190.5459,
+      "abs_diff_HC": 1.0102,
+      "dice": 0.9912,
+      "hausdorff_mm": 0.7589
+    },
+    {
+      "image": "597_HC.png",
+      "patient_id": "597",
+      "true_HC_mm": 187.57,
+      "pred_HC_mm": 186.2368,
+      "abs_diff_HC": 1.3332,
+      "dice": 0.9881,
+      "hausdorff_mm": 0.714
+    },
+    {
+      "image": "598_HC.png",
+      "patient_id": "598",
+      "true_HC_mm": 185.5936,
+      "pred_HC_mm": 180.3956,
+      "abs_diff_HC": 5.198,
+      "dice": 0.971,
+      "hausdorff_mm": 1.9356
+    },
+    {
+      "image": "599_HC.png",
+      "patient_id": "599",
+      "true_HC_mm": 188.3699,
+      "pred_HC_mm": 188.9372,
+      "abs_diff_HC": 0.5673,
+      "dice": 0.9904,
+      "hausdorff_mm": 0.8761
+    },
+    {
+      "image": "604_HC.png",
+      "patient_id": "604",
+      "true_HC_mm": 161.4938,
+      "pred_HC_mm": 162.0571,
+      "abs_diff_HC": 0.5633,
+      "dice": 0.9756,
+      "hausdorff_mm": 1.8101
+    },
+    {
+      "image": "613_2HC.png",
+      "patient_id": "613",
+      "true_HC_mm": 171.7842,
+      "pred_HC_mm": 170.788,
+      "abs_diff_HC": 0.9962,
+      "dice": 0.987,
+      "hausdorff_mm": 0.9738
+    },
+    {
+      "image": "613_3HC.png",
+      "patient_id": "613",
+      "true_HC_mm": 171.5303,
+      "pred_HC_mm": 168.2012,
+      "abs_diff_HC": 3.3291,
+      "dice": 0.971,
+      "hausdorff_mm": 2.0966
+    },
+    {
+      "image": "613_HC.png",
+      "patient_id": "613",
+      "true_HC_mm": 181.4502,
+      "pred_HC_mm": 176.2572,
+      "abs_diff_HC": 5.193,
+      "dice": 0.9755,
+      "hausdorff_mm": 2.1282
+    },
+    {
+      "image": "625_HC.png",
+      "patient_id": "625",
+      "true_HC_mm": 201.029,
+      "pred_HC_mm": 197.9877,
+      "abs_diff_HC": 3.0413,
+      "dice": 0.9865,
+      "hausdorff_mm": 0.8161
+    },
+    {
+      "image": "631_2HC.png",
+      "patient_id": "631",
+      "true_HC_mm": 213.3465,
+      "pred_HC_mm": 212.1393,
+      "abs_diff_HC": 1.2072,
+      "dice": 0.9895,
+      "hausdorff_mm": 0.85
+    },
+    {
+      "image": "631_HC.png",
+      "patient_id": "631",
+      "true_HC_mm": 214.9481,
+      "pred_HC_mm": 210.7795,
+      "abs_diff_HC": 4.1686,
+      "dice": 0.9836,
+      "hausdorff_mm": 1.3959
+    },
+    {
+      "image": "633_HC.png",
+      "patient_id": "633",
+      "true_HC_mm": 184.0686,
+      "pred_HC_mm": 182.1784,
+      "abs_diff_HC": 1.8902,
+      "dice": 0.9902,
+      "hausdorff_mm": 0.6399
+    },
+    {
+      "image": "641_HC.png",
+      "patient_id": "641",
+      "true_HC_mm": 213.7703,
+      "pred_HC_mm": 213.8946,
+      "abs_diff_HC": 0.1243,
+      "dice": 0.9916,
+      "hausdorff_mm": 0.7978
+    },
+    {
+      "image": "650_HC.png",
+      "patient_id": "650",
+      "true_HC_mm": 204.2941,
+      "pred_HC_mm": 204.9273,
+      "abs_diff_HC": 0.6332,
+      "dice": 0.9779,
+      "hausdorff_mm": 2.3546
+    },
+    {
+      "image": "656_HC.png",
+      "patient_id": "656",
+      "true_HC_mm": 222.7908,
+      "pred_HC_mm": 218.7556,
+      "abs_diff_HC": 4.0352,
+      "dice": 0.9831,
+      "hausdorff_mm": 1.9829
+    },
+    {
+      "image": "664_HC.png",
+      "patient_id": "664",
+      "true_HC_mm": 226.2125,
+      "pred_HC_mm": 227.8368,
+      "abs_diff_HC": 1.6243,
+      "dice": 0.9846,
+      "hausdorff_mm": 1.3103
+    },
+    {
+      "image": "665_HC.png",
+      "patient_id": "665",
+      "true_HC_mm": 228.6737,
+      "pred_HC_mm": 227.9846,
+      "abs_diff_HC": 0.6891,
+      "dice": 0.9868,
+      "hausdorff_mm": 1.0908
+    },
+    {
+      "image": "668_HC.png",
+      "patient_id": "668",
+      "true_HC_mm": 224.2617,
+      "pred_HC_mm": 222.935,
+      "abs_diff_HC": 1.3267,
+      "dice": 0.9789,
+      "hausdorff_mm": 1.6621
+    },
+    {
+      "image": "672_HC.png",
+      "patient_id": "672",
+      "true_HC_mm": 236.6939,
+      "pred_HC_mm": 238.2201,
+      "abs_diff_HC": 1.5262,
+      "dice": 0.9892,
+      "hausdorff_mm": 0.8959
+    },
+    {
+      "image": "673_2HC.png",
+      "patient_id": "673",
+      "true_HC_mm": 245.1099,
+      "pred_HC_mm": 248.9621,
+      "abs_diff_HC": 3.8522,
+      "dice": 0.9712,
+      "hausdorff_mm": 3.6507
+    },
+    {
+      "image": "673_HC.png",
+      "patient_id": "673",
+      "true_HC_mm": 217.1787,
+      "pred_HC_mm": 219.776,
+      "abs_diff_HC": 2.5973,
+      "dice": 0.9786,
+      "hausdorff_mm": 1.9297
+    },
+    {
+      "image": "692_2HC.png",
+      "patient_id": "692",
+      "true_HC_mm": 254.1744,
+      "pred_HC_mm": 250.4505,
+      "abs_diff_HC": 3.7239,
+      "dice": 0.986,
+      "hausdorff_mm": 1.4737
+    },
+    {
+      "image": "692_HC.png",
+      "patient_id": "692",
+      "true_HC_mm": 260.5818,
+      "pred_HC_mm": 259.4978,
+      "abs_diff_HC": 1.084,
+      "dice": 0.9779,
+      "hausdorff_mm": 1.8566
+    },
+    {
+      "image": "697_HC.png",
+      "patient_id": "697",
+      "true_HC_mm": 273.6221,
+      "pred_HC_mm": 272.3731,
+      "abs_diff_HC": 1.249,
+      "dice": 0.9857,
+      "hausdorff_mm": 1.5186
+    },
+    {
+      "image": "707_HC.png",
+      "patient_id": "707",
+      "true_HC_mm": 262.8201,
+      "pred_HC_mm": 261.4497,
+      "abs_diff_HC": 1.3704,
+      "dice": 0.9837,
+      "hausdorff_mm": 1.4204
+    },
+    {
+      "image": "711_HC.png",
+      "patient_id": "711",
+      "true_HC_mm": 290.9712,
+      "pred_HC_mm": 287.2941,
+      "abs_diff_HC": 3.6771,
+      "dice": 0.9764,
+      "hausdorff_mm": 2.2983
+    },
+    {
+      "image": "713_HC.png",
+      "patient_id": "713",
+      "true_HC_mm": 272.7257,
+      "pred_HC_mm": 271.9551,
+      "abs_diff_HC": 0.7706,
+      "dice": 0.9877,
+      "hausdorff_mm": 1.3175
+    },
+    {
+      "image": "721_HC.png",
+      "patient_id": "721",
+      "true_HC_mm": 244.8832,
+      "pred_HC_mm": 247.8805,
+      "abs_diff_HC": 2.9973,
+      "dice": 0.9842,
+      "hausdorff_mm": 1.9471
+    },
+    {
+      "image": "725_2HC.png",
+      "patient_id": "725",
+      "true_HC_mm": 280.3095,
+      "pred_HC_mm": 277.7391,
+      "abs_diff_HC": 2.5704,
+      "dice": 0.9859,
+      "hausdorff_mm": 1.8579
+    },
+    {
+      "image": "725_HC.png",
+      "patient_id": "725",
+      "true_HC_mm": 289.5348,
+      "pred_HC_mm": 290.6288,
+      "abs_diff_HC": 1.094,
+      "dice": 0.9876,
+      "hausdorff_mm": 1.2788
+    },
+    {
+      "image": "727_HC.png",
+      "patient_id": "727",
+      "true_HC_mm": 269.5925,
+      "pred_HC_mm": 271.2,
+      "abs_diff_HC": 1.6075,
+      "dice": 0.9825,
+      "hausdorff_mm": 1.4925
+    },
+    {
+      "image": "729_HC.png",
+      "patient_id": "729",
+      "true_HC_mm": 280.774,
+      "pred_HC_mm": 275.0348,
+      "abs_diff_HC": 5.7392,
+      "dice": 0.9822,
+      "hausdorff_mm": 2.0842
+    },
+    {
+      "image": "730_2HC.png",
+      "patient_id": "730",
+      "true_HC_mm": 298.7489,
+      "pred_HC_mm": 302.4551,
+      "abs_diff_HC": 3.7062,
+      "dice": 0.9822,
+      "hausdorff_mm": 1.9606
+    },
+    {
+      "image": "730_HC.png",
+      "patient_id": "730",
+      "true_HC_mm": 276.2948,
+      "pred_HC_mm": 277.557,
+      "abs_diff_HC": 1.2622,
+      "dice": 0.9906,
+      "hausdorff_mm": 1.3202
+    },
+    {
+      "image": "734_HC.png",
+      "patient_id": "734",
+      "true_HC_mm": 277.3125,
+      "pred_HC_mm": 272.4979,
+      "abs_diff_HC": 4.8146,
+      "dice": 0.9861,
+      "hausdorff_mm": 1.4153
+    },
+    {
+      "image": "750_HC.png",
+      "patient_id": "750",
+      "true_HC_mm": 284.8359,
+      "pred_HC_mm": 286.1116,
+      "abs_diff_HC": 1.2757,
+      "dice": 0.9789,
+      "hausdorff_mm": 2.3892
+    },
+    {
+      "image": "752_HC.png",
+      "patient_id": "752",
+      "true_HC_mm": 296.7758,
+      "pred_HC_mm": 288.6709,
+      "abs_diff_HC": 8.1049,
+      "dice": 0.9714,
+      "hausdorff_mm": 2.8698
+    },
+    {
+      "image": "754_HC.png",
+      "patient_id": "754",
+      "true_HC_mm": 295.1398,
+      "pred_HC_mm": 298.3089,
+      "abs_diff_HC": 3.1691,
+      "dice": 0.9811,
+      "hausdorff_mm": 2.0913
+    },
+    {
+      "image": "756_2HC.png",
+      "patient_id": "756",
+      "true_HC_mm": 281.3952,
+      "pred_HC_mm": 277.6457,
+      "abs_diff_HC": 3.7495,
+      "dice": 0.9773,
+      "hausdorff_mm": 3.1083
+    },
+    {
+      "image": "756_HC.png",
+      "patient_id": "756",
+      "true_HC_mm": 285.1984,
+      "pred_HC_mm": 278.7883,
+      "abs_diff_HC": 6.4101,
+      "dice": 0.982,
+      "hausdorff_mm": 1.9273
+    },
+    {
+      "image": "757_HC.png",
+      "patient_id": "757",
+      "true_HC_mm": 302.1332,
+      "pred_HC_mm": 306.0319,
+      "abs_diff_HC": 3.8987,
+      "dice": 0.9791,
+      "hausdorff_mm": 2.7142
+    },
+    {
+      "image": "761_HC.png",
+      "patient_id": "761",
+      "true_HC_mm": 296.8828,
+      "pred_HC_mm": 294.7875,
+      "abs_diff_HC": 2.0953,
+      "dice": 0.9806,
+      "hausdorff_mm": 2.2242
+    },
+    {
+      "image": "770_HC.png",
+      "patient_id": "770",
+      "true_HC_mm": 316.4875,
+      "pred_HC_mm": 318.8318,
+      "abs_diff_HC": 2.3443,
+      "dice": 0.9787,
+      "hausdorff_mm": 2.6735
+    },
+    {
+      "image": "772_HC.png",
+      "patient_id": "772",
+      "true_HC_mm": 308.2887,
+      "pred_HC_mm": 307.062,
+      "abs_diff_HC": 1.2267,
+      "dice": 0.99,
+      "hausdorff_mm": 1.0655
+    },
+    {
+      "image": "786_HC.png",
+      "patient_id": "786",
+      "true_HC_mm": 302.0496,
+      "pred_HC_mm": 304.0673,
+      "abs_diff_HC": 2.0177,
+      "dice": 0.9827,
+      "hausdorff_mm": 1.8432
+    },
+    {
+      "image": "792_HC.png",
+      "patient_id": "792",
+      "true_HC_mm": 301.4009,
+      "pred_HC_mm": 300.4781,
+      "abs_diff_HC": 0.9228,
+      "dice": 0.9828,
+      "hausdorff_mm": 1.6039
+    },
+    {
+      "image": "796_2HC.png",
+      "patient_id": "796",
+      "true_HC_mm": 318.063,
+      "pred_HC_mm": 319.5146,
+      "abs_diff_HC": 1.4516,
+      "dice": 0.9668,
+      "hausdorff_mm": 3.8688
+    },
+    {
+      "image": "796_HC.png",
+      "patient_id": "796",
+      "true_HC_mm": 337.7978,
+      "pred_HC_mm": 341.1507,
+      "abs_diff_HC": 3.3529,
+      "dice": 0.9724,
+      "hausdorff_mm": 3.4981
+    },
+    {
+      "image": "801_HC.png",
+      "patient_id": "801",
+      "true_HC_mm": 332.4331,
+      "pred_HC_mm": 333.1615,
+      "abs_diff_HC": 0.7284,
+      "dice": 0.985,
+      "hausdorff_mm": 2.3748
+    },
+    {
+      "image": "802_HC.png",
+      "patient_id": "802",
+      "true_HC_mm": 333.1916,
+      "pred_HC_mm": 329.5581,
+      "abs_diff_HC": 3.6335,
+      "dice": 0.9852,
+      "hausdorff_mm": 2.2564
+    }
+  ]
+}

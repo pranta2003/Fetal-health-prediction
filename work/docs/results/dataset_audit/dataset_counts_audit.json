@@ -1,0 +1,198 @@
+{
+  "abdomen": {
+    "published_total": 823,
+    "published_breakdown": {
+      "FP": 693,
+      "UCL": 130
+    },
+    "raw_total_on_disk": 823,
+    "raw_breakdown": {
+      "FP": 693,
+      "UCL_raw": 130
+    },
+    "our_used_total": 789,
+    "our_split_breakdown": {
+      "train": 642,
+      "test": 147,
+      "sum": 789
+    },
+    "missing_count": 34,
+    "missing_reasons": {
+      "missing_px_to_mm_calibration": {
+        "count": 31,
+        "description": "Present in UCL/annotations/Abdomen.csv but omitted from px_to_mm/Abdomen.csv because pixel calibration was not recorded",
+        "filenames": [
+          "001_2AC.jpg",
+          "001_AC.jpg",
+          "005_5AC.jpeg",
+          "011_AC.png",
+          "031_2AC.png",
+          "031_3AC.png",
+          "031_4AC.png",
+          "031_5AC.png",
+          "031_AC.png",
+          "032_AC.png",
+          "034_2AC.png",
+          "034_3AC.png",
+          "034_AC.png",
+          "035_2AC.png",
+          "035_3AC.png",
+          "035_4AC.png",
+          "035_AC.png",
+          "047_AC.png",
+          "051_AC.png",
+          "052_AC.png",
+          "053_AC.png",
+          "054_AC.png",
+          "056_2AC.png",
+          "056_AC.png",
+          "058_2AC.png",
+          "058_AC.png",
+          "059_2AC.png",
+          "059_AC.png",
+          "120_AC.jpeg",
+          "125_2AC.jpeg",
+          "125_AC.jpeg"
+        ]
+      },
+      "corrupted_geometry_exclusion": {
+        "count": 3,
+        "description": "Patient 125 images (125_3AC, 125_4AC, 125_5AC) excluded in src/fetal/data/ac_dataset.py due to corrupted ultrasound acquisition layout",
+        "filenames": [
+          "125_3AC.jpeg",
+          "125_4AC.jpeg",
+          "125_5AC.jpeg"
+        ]
+      }
+    },
+    "all_34_missing_filenames": [
+      "001_2AC.jpg",
+      "001_AC.jpg",
+      "005_5AC.jpeg",
+      "011_AC.png",
+      "031_2AC.png",
+      "031_3AC.png",
+      "031_4AC.png",
+      "031_5AC.png",
+      "031_AC.png",
+      "032_AC.png",
+      "034_2AC.png",
+      "034_3AC.png",
+      "034_AC.png",
+      "035_2AC.png",
+      "035_3AC.png",
+      "035_4AC.png",
+      "035_AC.png",
+      "047_AC.png",
+      "051_AC.png",
+      "052_AC.png",
+      "053_AC.png",
+      "054_AC.png",
+      "056_2AC.png",
+      "056_AC.png",
+      "058_2AC.png",
+      "058_AC.png",
+      "059_2AC.png",
+      "059_AC.png",
+      "120_AC.jpeg",
+      "125_2AC.jpeg",
+      "125_3AC.jpeg",
+      "125_4AC.jpeg",
+      "125_5AC.jpeg",
+      "125_AC.jpeg"
+    ]
+  },
+  "femur": {
+    "published_total": 895,
+    "published_breakdown": {
+      "FP": 760,
+      "UCL": 135
+    },
+    "raw_total_on_disk": 895,
+    "raw_breakdown": {
+      "FP": 760,
+      "UCL_raw": 135
+    },
+    "calibrated_total": 867,
+    "uncalibrated_ucl_count": 28,
+    "uncalibrated_filenames": [
+      "001_FL.jpg",
+      "031_2FL.png",
+      "031_3FL.png",
+      "031_4FL.png",
+      "031_FL.png",
+      "032_2FL.png",
+      "032_3FL.png",
+      "032_4FL.png",
+      "032_FL.png",
+      "034_2FL.png",
+      "034_3FL.png",
+      "034_FL.png",
+      "035_FL.png",
+      "047_2FL.png",
+      "047_FL.png",
+      "050_2FL.png",
+      "050_3FL.png",
+      "050_FL.png",
+      "051_FL.png",
+      "052_FL.png",
+      "053_FL.png",
+      "054_FL.png",
+      "056_2FL.png",
+      "056_3FL.png",
+      "056_FL.png",
+      "058_FL.png",
+      "059_FL.png",
+      "125_FL.jpeg"
+    ]
+  },
+  "head": {
+    "published_total": 1796,
+    "published_breakdown": {
+      "FP": 1637,
+      "UCL": 159
+    },
+    "raw_total_on_disk": 1796,
+    "raw_breakdown": {
+      "FP": 1637,
+      "UCL_raw": 159
+    },
+    "calibrated_total": 1763,
+    "uncalibrated_ucl_count": 33,
+    "uncalibrated_filenames": [
+      "001_HC.jpg",
+      "031_2HC.png",
+      "031_3HC.png",
+      "031_HC.jpg",
+      "032_2HC.jpg",
+      "032_3HC.png",
+      "032_HC.jpg",
+      "034_2HC.png",
+      "034_3HC.png",
+      "034_4HC.png",
+      "034_HC.jpg",
+      "035_HC.jpg",
+      "047_HC.jpg",
+      "050_2HC.jpg",
+      "050_HC.jpg",
+      "051_HC.jpg",
+      "052_2HC.png",
+      "052_3HC.png",
+      "052_HC.jpg",
+      "053_2HC.png",
+      "053_HC.jpg",
+      "054_HC.jpg",
+      "056_HC.jpg",
+      "058_HC.jpg",
+      "059_2HC.png",
+      "059_HC.jpg",
+      "101_HC.jpeg",
+      "120_2HC.jpeg",
+      "120_HC.jpeg",
+      "125_2HC.jpeg",
+      "125_3HC.jpeg",
+      "125_4HC.jpeg",
+      "125_HC.jpeg"
+    ]
+  }
+}

@@ -7,6 +7,8 @@
   "is_private": true,
   "enable_gpu": true,
   "enable_internet": true,
+  "accelerator": "gpu",
+  "machine_shape": "NvidiaTeslaP100",
   "dataset_sources": [
     "prantakumerpandit390/ac-fetal-v1",
     "prantakumerpandit390/fetal-code-snapshot"

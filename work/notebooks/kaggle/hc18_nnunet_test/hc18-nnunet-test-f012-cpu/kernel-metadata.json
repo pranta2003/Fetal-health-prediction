@@ -1,0 +1,19 @@
+{
+  "id": "prantakumerpandit390/hc18-nnunet-test-f012-cpu",
+  "title": "hc18-nnunet-test-f012-cpu",
+  "code_file": "hc18-nnunet-test-f012-cpu.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "prantakumerpandit390/hc18-ultrasound"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [
+    "prantakumerpandit390/hc18-nnunet-f0-250ep",
+    "prantakumerpandit390/hc18-nnunet-f1f2-100ep"
+  ],
+  "model_sources": []
+}
