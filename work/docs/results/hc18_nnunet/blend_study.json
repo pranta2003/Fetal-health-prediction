@@ -1,0 +1,547 @@
+{
+  "description": "Heterogeneous Blend Study on validation folds 0, 1, 2 (N=613 images, 484 patients)",
+  "models_evaluated": {
+    "nnunet": "nnU-Net 2D (offset-corrected semi-axes by delta_r = 0.1134 mm)",
+    "model_A": "EfficientNet-B4 U-Net 384 (OOF)",
+    "model_B": "ResNet-34 U-Net (Row D OOF)"
+  },
+  "ellipse_parameter_blend_status": {
+    "part_iv_executed": false,
+    "status": "STOPPED_DUE_TO_MISSING_FILES",
+    "reason": "Per-image ellipse parameters (center_x_mm, center_y_mm, semi_axes_a_mm, semi_axes_b_mm, angle_rad) were not saved in OOF files; only pred_HC_mm and pred_BPD are available on disk.",
+    "missing_files": [
+      "docs\\results\\hc18\\oof_ellipse_parameters.csv",
+      "docs\\results\\hc18_ladder\\row_D_ellipse_parameters.csv"
+    ]
+  },
+  "per_fold": {
+    "fold_0": {
+      "n_images": 206,
+      "n_patients": 162,
+      "nnunet_alone_measfix": {
+        "mae": 1.8686,
+        "rmse": 2.4889,
+        "std": 1.648,
+        "median": 1.3921,
+        "signed_bias_pred_minus_true": -0.2846,
+        "signed_bias_true_minus_pred": 0.2846
+      },
+      "efficientnet_b4_alone": {
+        "raw": {
+          "mae": 2.0717,
+          "rmse": 4.9157,
+          "std": 4.4687,
+          "median": 1.4164,
+          "signed_bias_pred_minus_true": 0.1741,
+          "signed_bias_true_minus_pred": -0.1741
+        },
+        "measfix": {
+          "mae": 2.2212,
+          "rmse": 4.9421,
+          "std": 4.4255,
+          "median": 1.5167,
+          "signed_bias_pred_minus_true": -0.5386,
+          "signed_bias_true_minus_pred": 0.5386
+        }
+      },
+      "resnet34_rowd_alone": {
+        "raw": {
+          "mae": 2.1662,
+          "rmse": 4.9876,
+          "std": 4.5036,
+          "median": 1.4654,
+          "signed_bias_pred_minus_true": 0.6126,
+          "signed_bias_true_minus_pred": -0.6126
+        },
+        "measfix": {
+          "mae": 2.1835,
+          "rmse": 4.9509,
+          "std": 4.4541,
+          "median": 1.4688,
+          "signed_bias_pred_minus_true": -0.1001,
+          "signed_bias_true_minus_pred": 0.1001
+        }
+      },
+      "blend_nnunet_and_eff_measfix": {
+        "metrics": {
+          "mae": 1.9094,
+          "rmse": 3.0583,
+          "std": 2.3948,
+          "median": 1.4312,
+          "signed_bias_pred_minus_true": -0.4116,
+          "signed_bias_true_minus_pred": 0.4116
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 162,
+          "mean_a": 1.8686,
+          "mean_b": 1.9094,
+          "delta": 0.0409,
+          "ci95": [
+            -0.1722,
+            0.3537
+          ],
+          "p_value": 0.854
+        }
+      },
+      "blend_nnunet_measfix_and_eff_raw": {
+        "metrics": {
+          "mae": 1.8493,
+          "rmse": 3.0309,
+          "std": 2.4073,
+          "median": 1.2742,
+          "signed_bias_pred_minus_true": -0.0553,
+          "signed_bias_true_minus_pred": 0.0553
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 162,
+          "mean_a": 1.8686,
+          "mean_b": 1.8493,
+          "delta": -0.0193,
+          "ci95": [
+            -0.2292,
+            0.2945
+          ],
+          "p_value": 0.8124
+        }
+      },
+      "blend_nnunet_and_rowd_measfix": {
+        "metrics": {
+          "mae": 1.8703,
+          "rmse": 3.043,
+          "std": 2.4062,
+          "median": 1.3443,
+          "signed_bias_pred_minus_true": -0.1924,
+          "signed_bias_true_minus_pred": 0.1924
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 162,
+          "mean_a": 1.8686,
+          "mean_b": 1.8703,
+          "delta": 0.0017,
+          "ci95": [
+            -0.2115,
+            0.3193
+          ],
+          "p_value": 0.9176
+        }
+      },
+      "blend_nnunet_measfix_and_rowd_raw": {
+        "metrics": {
+          "mae": 1.8634,
+          "rmse": 3.0413,
+          "std": 2.4095,
+          "median": 1.2638,
+          "signed_bias_pred_minus_true": 0.164,
+          "signed_bias_true_minus_pred": -0.164
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 162,
+          "mean_a": 1.8686,
+          "mean_b": 1.8634,
+          "delta": -0.0052,
+          "ci95": [
+            -0.2273,
+            0.3177
+          ],
+          "p_value": 0.8784
+        }
+      }
+    },
+    "fold_1": {
+      "n_images": 199,
+      "n_patients": 161,
+      "nnunet_alone_measfix": {
+        "mae": 1.8767,
+        "rmse": 2.3946,
+        "std": 1.491,
+        "median": 1.567,
+        "signed_bias_pred_minus_true": 0.0806,
+        "signed_bias_true_minus_pred": -0.0806
+      },
+      "efficientnet_b4_alone": {
+        "raw": {
+          "mae": 1.8482,
+          "rmse": 2.4013,
+          "std": 1.5371,
+          "median": 1.5428,
+          "signed_bias_pred_minus_true": -0.1797,
+          "signed_bias_true_minus_pred": 0.1797
+        },
+        "measfix": {
+          "mae": 2.0012,
+          "rmse": 2.5555,
+          "std": 1.5933,
+          "median": 1.6853,
+          "signed_bias_pred_minus_true": -0.8923,
+          "signed_bias_true_minus_pred": 0.8923
+        }
+      },
+      "resnet34_rowd_alone": {
+        "raw": {
+          "mae": 2.2055,
+          "rmse": 3.4778,
+          "std": 2.6958,
+          "median": 1.7541,
+          "signed_bias_pred_minus_true": 0.0014,
+          "signed_bias_true_minus_pred": -0.0014
+        },
+        "measfix": {
+          "mae": 2.2463,
+          "rmse": 3.5498,
+          "std": 2.7556,
+          "median": 1.8492,
+          "signed_bias_pred_minus_true": -0.7112,
+          "signed_bias_true_minus_pred": 0.7112
+        }
+      },
+      "blend_nnunet_and_eff_measfix": {
+        "metrics": {
+          "mae": 1.7935,
+          "rmse": 2.3033,
+          "std": 1.4488,
+          "median": 1.4371,
+          "signed_bias_pred_minus_true": -0.4059,
+          "signed_bias_true_minus_pred": 0.4059
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 161,
+          "mean_a": 1.8767,
+          "mean_b": 1.7935,
+          "delta": -0.0833,
+          "ci95": [
+            -0.1968,
+            0.0329
+          ],
+          "p_value": 0.1604
+        }
+      },
+      "blend_nnunet_measfix_and_eff_raw": {
+        "metrics": {
+          "mae": 1.7524,
+          "rmse": 2.2678,
+          "std": 1.4431,
+          "median": 1.2742,
+          "signed_bias_pred_minus_true": -0.0496,
+          "signed_bias_true_minus_pred": 0.0496
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 161,
+          "mean_a": 1.8767,
+          "mean_b": 1.7524,
+          "delta": -0.1244,
+          "ci95": [
+            -0.2213,
+            -0.0274
+          ],
+          "p_value": 0.0136
+        }
+      },
+      "blend_nnunet_and_rowd_measfix": {
+        "metrics": {
+          "mae": 1.9454,
+          "rmse": 2.578,
+          "std": 1.6958,
+          "median": 1.6571,
+          "signed_bias_pred_minus_true": -0.3153,
+          "signed_bias_true_minus_pred": 0.3153
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 161,
+          "mean_a": 1.8767,
+          "mean_b": 1.9454,
+          "delta": 0.0687,
+          "ci95": [
+            -0.0635,
+            0.2188
+          ],
+          "p_value": 0.3564
+        }
+      },
+      "blend_nnunet_measfix_and_rowd_raw": {
+        "metrics": {
+          "mae": 1.9316,
+          "rmse": 2.5589,
+          "std": 1.6826,
+          "median": 1.6582,
+          "signed_bias_pred_minus_true": 0.041,
+          "signed_bias_true_minus_pred": -0.041
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 161,
+          "mean_a": 1.8767,
+          "mean_b": 1.9316,
+          "delta": 0.0549,
+          "ci95": [
+            -0.0709,
+            0.1983
+          ],
+          "p_value": 0.4348
+        }
+      }
+    },
+    "fold_2": {
+      "n_images": 208,
+      "n_patients": 161,
+      "nnunet_alone_measfix": {
+        "mae": 2.0993,
+        "rmse": 3.0133,
+        "std": 2.1669,
+        "median": 1.5732,
+        "signed_bias_pred_minus_true": -0.2633,
+        "signed_bias_true_minus_pred": 0.2633
+      },
+      "efficientnet_b4_alone": {
+        "raw": {
+          "mae": 2.0489,
+          "rmse": 2.9956,
+          "std": 2.1906,
+          "median": 1.3608,
+          "signed_bias_pred_minus_true": 0.4579,
+          "signed_bias_true_minus_pred": -0.4579
+        },
+        "measfix": {
+          "mae": 2.0568,
+          "rmse": 2.9713,
+          "std": 2.1495,
+          "median": 1.4989,
+          "signed_bias_pred_minus_true": -0.2548,
+          "signed_bias_true_minus_pred": 0.2548
+        }
+      },
+      "resnet34_rowd_alone": {
+        "raw": {
+          "mae": 2.3151,
+          "rmse": 3.5469,
+          "std": 2.6936,
+          "median": 1.4507,
+          "signed_bias_pred_minus_true": 0.9473,
+          "signed_bias_true_minus_pred": -0.9473
+        },
+        "measfix": {
+          "mae": 2.193,
+          "rmse": 3.4261,
+          "std": 2.6386,
+          "median": 1.4083,
+          "signed_bias_pred_minus_true": 0.2347,
+          "signed_bias_true_minus_pred": -0.2347
+        }
+      },
+      "blend_nnunet_and_eff_measfix": {
+        "metrics": {
+          "mae": 1.9824,
+          "rmse": 2.7906,
+          "std": 1.9687,
+          "median": 1.3544,
+          "signed_bias_pred_minus_true": -0.259,
+          "signed_bias_true_minus_pred": 0.259
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 161,
+          "mean_a": 2.0993,
+          "mean_b": 1.9824,
+          "delta": -0.1168,
+          "ci95": [
+            -0.2282,
+            -0.0092
+          ],
+          "p_value": 0.0332
+        }
+      },
+      "blend_nnunet_measfix_and_eff_raw": {
+        "metrics": {
+          "mae": 1.956,
+          "rmse": 2.7802,
+          "std": 1.9805,
+          "median": 1.4834,
+          "signed_bias_pred_minus_true": 0.0973,
+          "signed_bias_true_minus_pred": -0.0973
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 161,
+          "mean_a": 2.0993,
+          "mean_b": 1.956,
+          "delta": -0.1433,
+          "ci95": [
+            -0.2595,
+            -0.0215
+          ],
+          "p_value": 0.0168
+        }
+      },
+      "blend_nnunet_and_rowd_measfix": {
+        "metrics": {
+          "mae": 2.0774,
+          "rmse": 3.0842,
+          "std": 2.2851,
+          "median": 1.4562,
+          "signed_bias_pred_minus_true": -0.0143,
+          "signed_bias_true_minus_pred": 0.0143
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 161,
+          "mean_a": 2.0993,
+          "mean_b": 2.0774,
+          "delta": -0.0218,
+          "ci95": [
+            -0.1498,
+            0.1136
+          ],
+          "p_value": 0.7524
+        }
+      },
+      "blend_nnunet_measfix_and_rowd_raw": {
+        "metrics": {
+          "mae": 2.0803,
+          "rmse": 3.1031,
+          "std": 2.3081,
+          "median": 1.3618,
+          "signed_bias_pred_minus_true": 0.342,
+          "signed_bias_true_minus_pred": -0.342
+        },
+        "bootstrap_vs_nnunet": {
+          "n_patients": 161,
+          "mean_a": 2.0993,
+          "mean_b": 2.0803,
+          "delta": -0.019,
+          "ci95": [
+            -0.1652,
+            0.1371
+          ],
+          "p_value": 0.7996
+        }
+      }
+    }
+  },
+  "pooled": {
+    "n_images": 613,
+    "n_patients": 484,
+    "nnunet_alone_measfix": {
+      "mae": 1.9495,
+      "rmse": 2.6503,
+      "std": 1.7969,
+      "median": 1.4944,
+      "signed_bias_pred_minus_true": -0.1588,
+      "signed_bias_true_minus_pred": 0.1588
+    },
+    "efficientnet_b4_alone": {
+      "raw": {
+        "mae": 1.9914,
+        "rmse": 3.6107,
+        "std": 3.0144,
+        "median": 1.4541,
+        "signed_bias_pred_minus_true": 0.1555,
+        "signed_bias_true_minus_pred": -0.1555
+      },
+      "measfix": {
+        "mae": 2.094,
+        "rmse": 3.6501,
+        "std": 2.9922,
+        "median": 1.572,
+        "signed_bias_pred_minus_true": -0.5571,
+        "signed_bias_true_minus_pred": 0.5571
+      }
+    },
+    "resnet34_rowd_alone": {
+      "raw": {
+        "mae": 2.2295,
+        "rmse": 4.0688,
+        "std": 3.4063,
+        "median": 1.5614,
+        "signed_bias_pred_minus_true": 0.5278,
+        "signed_bias_true_minus_pred": -0.5278
+      },
+      "measfix": {
+        "mae": 2.2071,
+        "rmse": 4.0386,
+        "std": 3.3849,
+        "median": 1.5433,
+        "signed_bias_pred_minus_true": -0.1849,
+        "signed_bias_true_minus_pred": 0.1849
+      }
+    },
+    "blend_nnunet_and_eff_measfix": {
+      "metrics": {
+        "mae": 1.8966,
+        "rmse": 2.74,
+        "std": 1.9792,
+        "median": 1.3936,
+        "signed_bias_pred_minus_true": -0.358,
+        "signed_bias_true_minus_pred": 0.358
+      },
+      "bootstrap_vs_nnunet": {
+        "n_patients": 484,
+        "mean_a": 1.9495,
+        "mean_b": 1.8966,
+        "delta": -0.0529,
+        "ci95": [
+          -0.1453,
+          0.0604
+        ],
+        "p_value": 0.3232
+      }
+    },
+    "blend_nnunet_measfix_and_eff_raw": {
+      "metrics": {
+        "mae": 1.854,
+        "rmse": 2.7165,
+        "std": 1.9871,
+        "median": 1.3419,
+        "signed_bias_pred_minus_true": -0.0016,
+        "signed_bias_true_minus_pred": 0.0016
+      },
+      "bootstrap_vs_nnunet": {
+        "n_patients": 484,
+        "mean_a": 1.9495,
+        "mean_b": 1.854,
+        "delta": -0.0955,
+        "ci95": [
+          -0.1869,
+          0.0178
+        ],
+        "p_value": 0.0888
+      }
+    },
+    "blend_nnunet_and_rowd_measfix": {
+      "metrics": {
+        "mae": 1.9649,
+        "rmse": 2.9149,
+        "std": 2.1548,
+        "median": 1.4862,
+        "signed_bias_pred_minus_true": -0.1719,
+        "signed_bias_true_minus_pred": 0.1719
+      },
+      "bootstrap_vs_nnunet": {
+        "n_patients": 484,
+        "mean_a": 1.9495,
+        "mean_b": 1.9649,
+        "delta": 0.0154,
+        "ci95": [
+          -0.0819,
+          0.1304
+        ],
+        "p_value": 0.8244
+      }
+    },
+    "blend_nnunet_measfix_and_rowd_raw": {
+      "metrics": {
+        "mae": 1.9591,
+        "rmse": 2.9157,
+        "std": 2.1612,
+        "median": 1.4022,
+        "signed_bias_pred_minus_true": 0.1845,
+        "signed_bias_true_minus_pred": -0.1845
+      },
+      "bootstrap_vs_nnunet": {
+        "n_patients": 484,
+        "mean_a": 1.9495,
+        "mean_b": 1.9591,
+        "delta": 0.0096,
+        "ci95": [
+          -0.094,
+          0.1283
+        ],
+        "p_value": 0.9116
+      }
+    }
+  }
+}

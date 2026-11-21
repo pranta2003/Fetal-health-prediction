@@ -32,6 +32,9 @@
 | 2026-11-21 | `hc18-nnunet-f1-100ep` (measfix) | Fold 1 Val vs CSV Ground Truth | 199 (161) | 1.8767 | +0.0806 | -0.0806 | 97.36% | 1.5262 | Shrunk by $\delta_r=0.1134$ mm; bias reduced +0.791 -> +0.081 mm | `87cfc34fdcb90d78c407bc715a1c615d413aec2702866ccc33ab37cca8a4996a` |
 | 2026-11-21 | `hc18-nnunet-f2-100ep` (raw) | Fold 2 Val vs CSV Ground Truth | 208 (161) | 2.1076 | +0.4470 | -0.4470 | 97.39% | 1.3962 | Raw nnU-Net prediction against official CSV reference | `a4edf10eb05f93f690659f17111d7b91069dddd90272de42632f07875137fc32` |
 | 2026-11-21 | `hc18-nnunet-f2-100ep` (measfix) | Fold 2 Val vs CSV Ground Truth | 208 (161) | 2.0993 | -0.2633 | +0.2633 | 97.39% | 1.3962 | Shrunk by $\delta_r=0.1134$ mm; bias reduced +0.447 -> -0.263 mm | `a4edf10eb05f93f690659f17111d7b91069dddd90272de42632f07875137fc32` |
+| 2026-11-21 | `hc18-nnunet-pooled-f012` (raw) | Pooled Folds 0, 1, 2 Val vs CSV Ground Truth | 613 (484) | 1.9853 | +0.5515 | -0.5515 | 97.57% | 1.3964 | Raw pooled nnU-Net prediction across folds 0, 1, 2 | `0268ad1e72644a35e91b2526b364329aad7f20a1cb8c98372429958cc090aa26` |
+| 2026-11-21 | `hc18-nnunet-pooled-f012` (measfix) | Pooled Folds 0, 1, 2 Val vs CSV Ground Truth | 613 (484) | 1.9495 | -0.1588 | +0.1588 | 97.57% | 1.3964 | Shrunk by $\delta_r=0.1134$ mm; bias reduced +0.5515 -> -0.1588 mm | `0268ad1e72644a35e91b2526b364329aad7f20a1cb8c98372429958cc090aa26` |
+| 2026-11-21 | `heterogeneous-blend-nnunet-eff` (measfix+raw) | Pooled Folds 0, 1, 2 Val vs CSV Ground Truth | 613 (484) | 1.8540 | -0.0016 | +0.0016 | - | - | Heterogeneous blend: 0.5 * nnU-Net (measfix) + 0.5 * EffNet (raw); bootstrap vs nnU-Net $\Delta = -0.0955$ mm, $p=0.0888$ | `5045dc810f2ec4a6a95cde82a3659d1606a21066cc82631b073260ac0ca08ed9` |
 | 2026-11-20 | Single-model Fold 1 OOF (raw) | 999 OOF vs CSV Ground Truth | 999 | 2.3019 | -1.2576 | +1.2576 | - | - | Single model raw prediction against CSV reference | `9b5a3b53d47a376a3af0040debec6f68d07dc4d8396854f950e3634676cb1086` |
 
 ### HC18 Ladder Benchmark Reference Dual-Scoring (Rows A – E)
@@ -118,4 +121,17 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
   - Fold 2 Evaluation JSON: `docs/results/hc18_nnunet/f2_eval.json` (`a4edf10eb05f93f690659f17111d7b91069dddd90272de42632f07875137fc32`)
     - N=208 (161 pts). Raw MAE: 2.1076 mm, RMSE: 3.0350 mm, Bias [pred-true]: +0.4470 mm. Measfix MAE: 2.0993 mm, RMSE: 3.0133 mm, Bias [pred-true]: -0.2633 mm. Dice: 0.9739, HD: 1.3962 mm.
     - Paired bootstrap measfix vs raw: $\Delta\text{MAE} = -0.0083$ mm, 95% CI `[-0.1030, +0.0834]`, $p = 0.8748$. Measfix vs OOF: $\Delta\text{MAE} = -0.0589$ mm, 95% CI `[-0.3045, +0.1737]`, $p = 0.6348$.
+- **`hc18-nnunet-pooled-f012` (Pooled Folds 0, 1, 2)**:
+  - Evaluation JSON: `docs/results/hc18_nnunet/pooled_eval.json` (`0268ad1e72644a35e91b2526b364329aad7f20a1cb8c98372429958cc090aa26`)
+  - Cohort: N=613 images, 484 unique patients across folds 0, 1, 2.
+  - Raw: MAE 1.9853 mm, RMSE 2.7024 mm, Bias [pred-true] +0.5515 mm. Dice: 0.9757, HD: 1.3964 mm.
+  - Measfix ($\delta_r = 0.1134$ mm): MAE 1.9495 mm, RMSE 2.6503 mm, Bias [pred-true] -0.1588 mm.
+  - Per size band (measfix): under 110 mm (N=133) MAE 1.6827 mm; 110 to 260 mm (N=407) MAE 1.7655 mm; over 260 mm (N=73) MAE 3.4615 mm.
+  - Significance Note: Fold 0 ($p=0.0028$) and Fold 1 ($p=0.0032$) improvements were statistically significant, whereas Fold 2 was not significant ($\Delta = -0.0589$ mm, $p=0.6348$).
+- **Heterogeneous Blend Study**:
+  - Evaluation JSON: `docs/results/hc18_nnunet/blend_study.json` (`5045dc810f2ec4a6a95cde82a3659d1606a21066cc82631b073260ac0ca08ed9`)
+  - Summary Markdown: `docs/results/hc18_nnunet/BLEND_STUDY.md` (`c01ea80aecb4829739654ef7b6b73139f05111d5fe431c7053e2c15e42676fbd`)
+  - Blending nnU-Net (measfix) with our EfficientNet-B4 U-Net (raw) gives pooled MAE 1.8540 mm (paired bootstrap vs nnU-Net alone: $\Delta = -0.0955$ mm, 95% CI `[-0.1869, +0.0178]`, $p = 0.0888$, not statistically significant).
+  - Part (iv) ellipse parameter blend stopped: per-image ellipse parameters (`center_x`, `center_y`, `semi_axes_a`, `semi_axes_b`, `angle`) were not preserved in OOF prediction files.
+
 
