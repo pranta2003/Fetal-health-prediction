@@ -12,4 +12,4 @@ jobs:
           python-version: '3.11'
       - name: Check Python files compile without syntax errors
         run: |
-          find src -name "*.py" -exec python -m py_compile {} \;
+          python -m compileall work/src work/scripts work/tests
