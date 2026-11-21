@@ -257,7 +257,7 @@ def build_numbers():
             "ci": None,
             "source_file": hc18_nn_f0_test_path,
             "script": "scripts/52_make_hc18_nnunet_test_kernel.py",
-            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-test-f0/hc18-nnunet-test-f0.ipynb",
+            "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f0/hc18-nnunet-test-f0.ipynb",
             "pr_commit": "01f8849",
             "source_sha256": hc18_nn_f0_test_sha,
         })
