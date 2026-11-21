@@ -65,7 +65,7 @@ This directory contains the official Grand Challenge test set evaluation artifac
 for fname, desc, abs_diff, dice, signed, sha in table_rows:
     content += f"| `{fname}` | {desc} | **{abs_diff:.4f}** | **{dice:.2f}%** | **{signed:+.4f}** | `{sha}` |\n"
 
-content += """
+content += r"""
 ## Key Findings & Provenance
 1. **Initial Submissions & Ellipse Angle Error**:
    - Initial submissions (`metrics_single_fold1.json` and `metrics_ensemble_5fold.json`) had a 90° orientation mismatch in OpenCV `cv2.fitEllipse` axis/angle pairing.
