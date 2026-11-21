@@ -304,7 +304,7 @@ if oof_csv.exists():
         "kernel_type": "notebook",
         "is_private": True,
         "enable_gpu": True,
-        "enable_internet": False,
+        "enable_internet": True,
         "accelerator": "gpu",
         "machine_shape": "NvidiaTeslaP100",
         "dataset_sources": dataset_sources,
