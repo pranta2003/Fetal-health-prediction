@@ -6,7 +6,9 @@
   "kernel_type": "notebook",
   "is_private": true,
   "enable_gpu": true,
-  "enable_internet": true,
+  "enable_internet": false,
+  "accelerator": "gpu",
+  "machine_shape": "NvidiaTeslaP100",
   "dataset_sources": [
     "prantakumerpandit390/ac-fetal-v1",
     "prantakumerpandit390/fetal-code-snapshot"
