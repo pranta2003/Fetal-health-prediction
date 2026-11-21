@@ -58,6 +58,7 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
 | Candidate File | Method / Transform | Delta r / Scale | Rows | SHA-256 | Action Status |
 |---|---|---|---|---|---|
 | `candidates/submission_ensemble_5fold_corrected_measfix.csv` | Semi-axes shrunk by $\delta_r = 0.1134$ mm | -0.7102 mm mean HC change | 335 | `93cbf78d98404545dbe0cc78dd58399f73bedc7065b2cfd01e9d0627dd25ab81` | **DO NOT SUBMIT** (Built & verified locally) |
+| `candidates/submission_blend_nnunetf0_ens5_measfix.csv` | Heterogeneous ellipse blend: nnU-Net f0 measfix + 5-fold ensemble measfix | Mean HC: 175.2869 mm (+0.0173 mm vs nnU-Net, -0.0187 mm vs ens5) | 335 | `aabfb91e54cd6b36b57aa52eab5d2752057203bb319f32d45c75106a7d5afd51` | **DO NOT SUBMIT** (Candidate for tomorrow's slot) |
 | `candidates/submission_ensemble_5fold_corrected_mult050_EXPLORATORY.csv` | Multiplicative scaling $\alpha = 0.50$ | 1.004065 | 335 | `1a1ff42eb8dcc9f417e69235fd9bbaa77d9b468cd56623825911e23afaae9b5d` | Submitted as probe on 2026-11-16 (negative result) |
 | `candidates/submission_ensemble_5fold_corrected_mult100_EXPLORATORY.csv` | Multiplicative scaling $\alpha = 1.00$ | 1.008129 | 335 | `ee568b5157ddd5ffc424f180fab22d52a765fa11ccac62d66f0883dba9c1f356` | **DO NOT SUBMIT** (Never submitted) |
 
