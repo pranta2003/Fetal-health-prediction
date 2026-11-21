@@ -1,0 +1,16 @@
+{
+  "device": "cpu",
+  "num_threads": 2,
+  "n_test_images_tested": 3,
+  "test_images": [
+    "000_HC.png",
+    "001_HC.png",
+    "002_HC.png"
+  ],
+  "mean_sec_per_image_per_fold": 5.0815,
+  "std_sec_per_image_per_fold": 0.1926,
+  "mean_sec_per_image_3folds": 15.2446,
+  "estimated_total_seconds_335x3": 5106.9,
+  "estimated_total_minutes_335x3": 85.1,
+  "estimated_total_hours_335x3": 1.42
+}
