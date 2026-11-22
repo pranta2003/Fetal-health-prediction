@@ -252,7 +252,7 @@
     "script": "scripts/40_ac_compare_recipes.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9"
+    "source_sha256": "1d9a938a8e407e6ae556c571cc790c77276351efa4f74e76619c29622f1e9b75"
   },
   {
     "id": "ac_fassd_s42_ac_rmse",
@@ -267,7 +267,7 @@
     "script": "scripts/40_ac_compare_recipes.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9"
+    "source_sha256": "1d9a938a8e407e6ae556c571cc790c77276351efa4f74e76619c29622f1e9b75"
   },
   {
     "id": "ac_fassd_s42_ac_median",
@@ -282,7 +282,7 @@
     "script": "scripts/40_ac_compare_recipes.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9"
+    "source_sha256": "1d9a938a8e407e6ae556c571cc790c77276351efa4f74e76619c29622f1e9b75"
   },
   {
     "id": "ac_fassd_s42_ac_bias",
@@ -297,7 +297,7 @@
     "script": "scripts/40_ac_compare_recipes.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9"
+    "source_sha256": "1d9a938a8e407e6ae556c571cc790c77276351efa4f74e76619c29622f1e9b75"
   },
   {
     "id": "ac_fassd_s42_tad_mae",
@@ -312,7 +312,7 @@
     "script": "scripts/40_ac_compare_recipes.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9"
+    "source_sha256": "1d9a938a8e407e6ae556c571cc790c77276351efa4f74e76619c29622f1e9b75"
   },
   {
     "id": "ac_fassd_s42_apad_mae",
@@ -327,7 +327,7 @@
     "script": "scripts/40_ac_compare_recipes.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9"
+    "source_sha256": "1d9a938a8e407e6ae556c571cc790c77276351efa4f74e76619c29622f1e9b75"
   },
   {
     "id": "ac_fassd_s42_nme",
@@ -342,7 +342,7 @@
     "script": "scripts/40_ac_compare_recipes.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9"
+    "source_sha256": "1d9a938a8e407e6ae556c571cc790c77276351efa4f74e76619c29622f1e9b75"
   },
   {
     "id": "ac_fassd_s42_over10_pct",
@@ -357,7 +357,7 @@
     "script": "scripts/40_ac_compare_recipes.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-fassd-s42/ac-fassd-s42.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9"
+    "source_sha256": "1d9a938a8e407e6ae556c571cc790c77276351efa4f74e76619c29622f1e9b75"
   },
   {
     "id": "hc18_submission_c1_mae",
@@ -747,7 +747,7 @@
     "script": "scripts/68_eval_nnunet_f1_f2.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "87cfc34fdcb90d78c407bc715a1c615d413aec2702866ccc33ab37cca8a4996a"
+    "source_sha256": "ffebc211ca440f10bd16f979d2e0c6ab3798b8ce9139a67db0b7357e6ac1b7a4"
   },
   {
     "id": "hc18_nnunet_f1_raw_vs_csv_bias_pred_true",
@@ -762,7 +762,7 @@
     "script": "scripts/68_eval_nnunet_f1_f2.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "87cfc34fdcb90d78c407bc715a1c615d413aec2702866ccc33ab37cca8a4996a"
+    "source_sha256": "ffebc211ca440f10bd16f979d2e0c6ab3798b8ce9139a67db0b7357e6ac1b7a4"
   },
   {
     "id": "hc18_nnunet_f1_measfix_vs_csv_mae",
@@ -777,7 +777,7 @@
     "script": "scripts/68_eval_nnunet_f1_f2.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "87cfc34fdcb90d78c407bc715a1c615d413aec2702866ccc33ab37cca8a4996a"
+    "source_sha256": "ffebc211ca440f10bd16f979d2e0c6ab3798b8ce9139a67db0b7357e6ac1b7a4"
   },
   {
     "id": "hc18_nnunet_f1_measfix_vs_csv_bias_pred_true",
@@ -792,7 +792,7 @@
     "script": "scripts/68_eval_nnunet_f1_f2.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "87cfc34fdcb90d78c407bc715a1c615d413aec2702866ccc33ab37cca8a4996a"
+    "source_sha256": "ffebc211ca440f10bd16f979d2e0c6ab3798b8ce9139a67db0b7357e6ac1b7a4"
   },
   {
     "id": "hc18_nnunet_f2_raw_vs_csv_mae",
@@ -807,7 +807,7 @@
     "script": "scripts/68_eval_nnunet_f1_f2.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "a4edf10eb05f93f690659f17111d7b91069dddd90272de42632f07875137fc32"
+    "source_sha256": "b3b73c34dc4cc9c576555f3e7782616b15248a593e1bc31c6c497dc8d7195f90"
   },
   {
     "id": "hc18_nnunet_f2_raw_vs_csv_bias_pred_true",
@@ -822,7 +822,7 @@
     "script": "scripts/68_eval_nnunet_f1_f2.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "a4edf10eb05f93f690659f17111d7b91069dddd90272de42632f07875137fc32"
+    "source_sha256": "b3b73c34dc4cc9c576555f3e7782616b15248a593e1bc31c6c497dc8d7195f90"
   },
   {
     "id": "hc18_nnunet_f2_measfix_vs_csv_mae",
@@ -837,7 +837,7 @@
     "script": "scripts/68_eval_nnunet_f1_f2.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "a4edf10eb05f93f690659f17111d7b91069dddd90272de42632f07875137fc32"
+    "source_sha256": "b3b73c34dc4cc9c576555f3e7782616b15248a593e1bc31c6c497dc8d7195f90"
   },
   {
     "id": "hc18_nnunet_f2_measfix_vs_csv_bias_pred_true",
@@ -852,7 +852,7 @@
     "script": "scripts/68_eval_nnunet_f1_f2.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "67bfbf6",
-    "source_sha256": "a4edf10eb05f93f690659f17111d7b91069dddd90272de42632f07875137fc32"
+    "source_sha256": "b3b73c34dc4cc9c576555f3e7782616b15248a593e1bc31c6c497dc8d7195f90"
   },
   {
     "id": "hc18_nnunet_pooled_raw_vs_csv_mae",
@@ -867,7 +867,7 @@
     "script": "scripts/69_hc18_nnunet_blend_and_pooled.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "fcabfdf",
-    "source_sha256": "0268ad1e72644a35e91b2526b364329aad7f20a1cb8c98372429958cc090aa26"
+    "source_sha256": "195a9959c14cb8f69adf60c1de1ff2884508d73a326817935b1caadd58b66229"
   },
   {
     "id": "hc18_nnunet_pooled_raw_vs_csv_bias_pred_true",
@@ -882,7 +882,7 @@
     "script": "scripts/69_hc18_nnunet_blend_and_pooled.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "fcabfdf",
-    "source_sha256": "0268ad1e72644a35e91b2526b364329aad7f20a1cb8c98372429958cc090aa26"
+    "source_sha256": "195a9959c14cb8f69adf60c1de1ff2884508d73a326817935b1caadd58b66229"
   },
   {
     "id": "hc18_nnunet_pooled_measfix_vs_csv_mae",
@@ -897,7 +897,7 @@
     "script": "scripts/69_hc18_nnunet_blend_and_pooled.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "fcabfdf",
-    "source_sha256": "0268ad1e72644a35e91b2526b364329aad7f20a1cb8c98372429958cc090aa26"
+    "source_sha256": "195a9959c14cb8f69adf60c1de1ff2884508d73a326817935b1caadd58b66229"
   },
   {
     "id": "hc18_nnunet_pooled_measfix_vs_csv_bias_pred_true",
@@ -912,7 +912,7 @@
     "script": "scripts/69_hc18_nnunet_blend_and_pooled.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "fcabfdf",
-    "source_sha256": "0268ad1e72644a35e91b2526b364329aad7f20a1cb8c98372429958cc090aa26"
+    "source_sha256": "195a9959c14cb8f69adf60c1de1ff2884508d73a326817935b1caadd58b66229"
   },
   {
     "id": "hc18_nnunet_pooled_dice",
@@ -927,7 +927,7 @@
     "script": "scripts/69_hc18_nnunet_blend_and_pooled.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "fcabfdf",
-    "source_sha256": "0268ad1e72644a35e91b2526b364329aad7f20a1cb8c98372429958cc090aa26"
+    "source_sha256": "195a9959c14cb8f69adf60c1de1ff2884508d73a326817935b1caadd58b66229"
   },
   {
     "id": "hc18_nnunet_pooled_hd",
@@ -942,7 +942,7 @@
     "script": "scripts/69_hc18_nnunet_blend_and_pooled.py",
     "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb",
     "pr_commit": "fcabfdf",
-    "source_sha256": "0268ad1e72644a35e91b2526b364329aad7f20a1cb8c98372429958cc090aa26"
+    "source_sha256": "195a9959c14cb8f69adf60c1de1ff2884508d73a326817935b1caadd58b66229"
   },
   {
     "id": "hc18_blend_nnunet_eff_measfix_raw_mae",
@@ -957,7 +957,7 @@
     "script": "scripts/69_hc18_nnunet_blend_and_pooled.py",
     "notebook": "notebooks/benchmarks/hc18_official.ipynb",
     "pr_commit": "fcabfdf",
-    "source_sha256": "5045dc810f2ec4a6a95cde82a3659d1606a21066cc82631b073260ac0ca08ed9"
+    "source_sha256": "776fbe0e192c9a8ff001f9eeb372c5d4b43532b2f6711387b13c5cfef699e66e"
   },
   {
     "id": "hc18_blend_nnunet_eff_measfix_raw_bias",
@@ -972,7 +972,7 @@
     "script": "scripts/69_hc18_nnunet_blend_and_pooled.py",
     "notebook": "notebooks/benchmarks/hc18_official.ipynb",
     "pr_commit": "fcabfdf",
-    "source_sha256": "5045dc810f2ec4a6a95cde82a3659d1606a21066cc82631b073260ac0ca08ed9"
+    "source_sha256": "776fbe0e192c9a8ff001f9eeb372c5d4b43532b2f6711387b13c5cfef699e66e"
   },
   {
     "id": "hc18_blend_nnunet_eff_measfix_raw_delta",
@@ -990,7 +990,82 @@
     "script": "scripts/69_hc18_nnunet_blend_and_pooled.py",
     "notebook": "notebooks/benchmarks/hc18_official.ipynb",
     "pr_commit": "fcabfdf",
-    "source_sha256": "5045dc810f2ec4a6a95cde82a3659d1606a21066cc82631b073260ac0ca08ed9"
+    "source_sha256": "776fbe0e192c9a8ff001f9eeb372c5d4b43532b2f6711387b13c5cfef699e66e"
+  },
+  {
+    "id": "hc18_test_f012_gpu_cpu_max_diff",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net test 3-fold ensemble GPU vs CPU inference",
+    "protocol": "HC18 Official Test Set, 335 images, comparing GPU and CPU predicted HC",
+    "metric": "Max Abs Diff (GPU vs CPU)",
+    "value": 0.0048,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/test_f012_candidates_summary.json",
+    "script": "scripts/75_process_nnunet_f012_test.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb",
+    "pr_commit": "d25dfb9",
+    "source_sha256": "2a4291124592bc5bd452e020a3a23de2e14733c40633d0d4f262ffc9ca795f49"
+  },
+  {
+    "id": "hc18_test_f012_raw_mean_hc",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net test 3-fold ensemble (raw)",
+    "protocol": "HC18 Official Test Set, 335 images, mean predicted HC across images",
+    "metric": "Mean HC (mm)",
+    "value": 175.9986,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/test_f012_candidates_summary.json",
+    "script": "scripts/75_process_nnunet_f012_test.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb",
+    "pr_commit": "d25dfb9",
+    "source_sha256": "2a4291124592bc5bd452e020a3a23de2e14733c40633d0d4f262ffc9ca795f49"
+  },
+  {
+    "id": "hc18_test_f012_measfix_mean_hc",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net test 3-fold ensemble + measfix (delta_r=0.1134mm)",
+    "protocol": "HC18 Official Test Set, 335 images, mean predicted HC across images",
+    "metric": "Mean HC (mm)",
+    "value": 175.2884,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/test_f012_candidates_summary.json",
+    "script": "scripts/75_process_nnunet_f012_test.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb",
+    "pr_commit": "d25dfb9",
+    "source_sha256": "2a4291124592bc5bd452e020a3a23de2e14733c40633d0d4f262ffc9ca795f49"
+  },
+  {
+    "id": "hc18_test_f012_measfix_diff_vs_f0",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net test 3-fold ensemble + measfix vs fold 0 measfix",
+    "protocol": "HC18 Official Test Set, 335 images, mean HC diff vs submission_nnunet_f0_measfix",
+    "metric": "Mean HC diff vs f0 (mm)",
+    "value": 0.0189,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/test_f012_candidates_summary.json",
+    "script": "scripts/75_process_nnunet_f012_test.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb",
+    "pr_commit": "d25dfb9",
+    "source_sha256": "2a4291124592bc5bd452e020a3a23de2e14733c40633d0d4f262ffc9ca795f49"
+  },
+  {
+    "id": "hc18_test_f012_measfix_diff_vs_ens",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net test 3-fold ensemble + measfix vs 5-fold ensemble measfix",
+    "protocol": "HC18 Official Test Set, 335 images, mean HC diff vs submission_ensemble_5fold_corrected_measfix",
+    "metric": "Mean HC diff vs 5-fold ens (mm)",
+    "value": -0.0172,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/test_f012_candidates_summary.json",
+    "script": "scripts/75_process_nnunet_f012_test.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb",
+    "pr_commit": "d25dfb9",
+    "source_sha256": "2a4291124592bc5bd452e020a3a23de2e14733c40633d0d4f262ffc9ca795f49"
   },
   {
     "id": "hc18_single_oof_999_raw_vs_csv_mae",

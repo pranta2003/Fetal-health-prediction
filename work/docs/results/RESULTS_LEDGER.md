@@ -140,5 +140,13 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
   - Summary Markdown: `docs/results/hc18_nnunet/BLEND_STUDY.md` (`c01ea80aecb4829739654ef7b6b73139f05111d5fe431c7053e2c15e42676fbd`)
   - Blending nnU-Net (measfix) with our EfficientNet-B4 U-Net (raw) gives pooled MAE 1.8540 mm (paired bootstrap vs nnU-Net alone: $\Delta = -0.0955$ mm, 95% CI `[-0.1869, +0.0178]`, $p = 0.0888$, not statistically significant).
   - Part (iv) ellipse parameter blend stopped: per-image ellipse parameters (`center_x`, `center_y`, `semi_axes_a`, `semi_axes_b`, `angle`) were not preserved in OOF prediction files.
+- **`hc18-nnunet-test-f012` & `hc18-nnunet-test-f012-cpu` (Official Test Set 3-Fold Ensemble)**:
+  - Kaggle Kernels: `prantakumerpandit390/hc18-nnunet-test-f012` (GPU, `COMPLETE`) and `prantakumerpandit390/hc18-nnunet-test-f012-cpu` (CPU, `COMPLETE`).
+  - Output Directories: `C:\fetal-data\kaggle_outputs\hc18_nnunet_test_f012\` and `C:\fetal-data\kaggle_outputs\hc18_nnunet_test_f012_cpu\`.
+  - Summary JSON: `docs/results/hc18_nnunet/test_f012_candidates_summary.json`
+  - GPU vs CPU Invariance: 335 images evaluated; max absolute HC difference between GPU and CPU is 0.004840 mm (mean absolute diff 0.000636 mm), confirming near-exact inference equivalence across hardware backends.
+  - Candidate Raw: `candidates/submission_nnunet_f012_raw.csv` (SHA256: `c8ed4c15a43e99adf4b9614d7b25aee32c404f31b9c97c6a59755549dd8d1ddb`). Mean HC: 175.9986 mm. Mean diff vs Fold 0 measfix: +0.7290 mm (abs: 0.8158 mm); mean diff vs 5-fold ensemble measfix: +0.6930 mm (abs: 1.2745 mm).
+  - Candidate Measfix: `candidates/submission_nnunet_f012_measfix.csv` (SHA256: `f5c6daaa51ff2f5e192303c8e1a769fc2dcf8ff2f4d437f150000d9c5f57e700`). Mean HC: 175.2884 mm. Mean diff vs Fold 0 measfix: +0.0189 mm (abs: 0.4165 mm); mean diff vs 5-fold ensemble measfix: -0.0172 mm (abs: 1.0406 mm).
+
 
 
