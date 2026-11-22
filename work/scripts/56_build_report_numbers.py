@@ -491,6 +491,144 @@ def build_numbers():
         "source_sha256": f2_eval_sha,
     })
 
+    # nnU-Net Fold 3
+    f3_eval_path = "docs/results/hc18_nnunet/f3_eval.json"
+    if (REPO_ROOT / f3_eval_path).is_file():
+        f3_eval_data = load_json(f3_eval_path)
+        f3_eval_sha = get_sha256(f3_eval_path)
+        f3_raw = f3_eval_data["raw_vs_csv"]
+        f3_fix = f3_eval_data["measfix_vs_csv"]
+
+        rows.append({
+            "id": "hc18_nnunet_f3_raw_vs_csv_mae",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net 100ep fold 3 (raw)",
+            "protocol": "Fold 3 validation, 194 images, reference: official CSV ground truth ellipse",
+            "metric": "HC MAE [Abs Diff]",
+            "value": round(float(f3_raw["mae"]), 4),
+            "ci": None,
+            "source_file": f3_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": f3_eval_sha,
+        })
+        rows.append({
+            "id": "hc18_nnunet_f3_raw_vs_csv_bias_pred_true",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net 100ep fold 3 (raw)",
+            "protocol": "Fold 3 validation, 194 images, reference: official CSV ground truth ellipse",
+            "metric": "Signed Bias [pred-true]",
+            "value": round(float(f3_raw["signed_bias_pred_minus_true_mean"]), 4),
+            "ci": None,
+            "source_file": f3_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": f3_eval_sha,
+        })
+        rows.append({
+            "id": "hc18_nnunet_f3_measfix_vs_csv_mae",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net 100ep fold 3 (measfix: delta_r=0.1134mm)",
+            "protocol": "Fold 3 validation, 194 images, reference: official CSV ground truth ellipse",
+            "metric": "HC MAE [Abs Diff]",
+            "value": round(float(f3_fix["mae"]), 4),
+            "ci": None,
+            "source_file": f3_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": f3_eval_sha,
+        })
+        rows.append({
+            "id": "hc18_nnunet_f3_measfix_vs_csv_bias_pred_true",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net 100ep fold 3 (measfix: delta_r=0.1134mm)",
+            "protocol": "Fold 3 validation, 194 images, reference: official CSV ground truth ellipse",
+            "metric": "Signed Bias [pred-true]",
+            "value": round(float(f3_fix["signed_bias_pred_minus_true_mean"]), 4),
+            "ci": None,
+            "source_file": f3_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": f3_eval_sha,
+        })
+
+    # nnU-Net Fold 4
+    f4_eval_path = "docs/results/hc18_nnunet/f4_eval.json"
+    if (REPO_ROOT / f4_eval_path).is_file():
+        f4_eval_data = load_json(f4_eval_path)
+        f4_eval_sha = get_sha256(f4_eval_path)
+        f4_raw = f4_eval_data["raw_vs_csv"]
+        f4_fix = f4_eval_data["measfix_vs_csv"]
+
+        rows.append({
+            "id": "hc18_nnunet_f4_raw_vs_csv_mae",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net 100ep fold 4 (raw)",
+            "protocol": "Fold 4 validation, 192 images, reference: official CSV ground truth ellipse",
+            "metric": "HC MAE [Abs Diff]",
+            "value": round(float(f4_raw["mae"]), 4),
+            "ci": None,
+            "source_file": f4_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": f4_eval_sha,
+        })
+        rows.append({
+            "id": "hc18_nnunet_f4_raw_vs_csv_bias_pred_true",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net 100ep fold 4 (raw)",
+            "protocol": "Fold 4 validation, 192 images, reference: official CSV ground truth ellipse",
+            "metric": "Signed Bias [pred-true]",
+            "value": round(float(f4_raw["signed_bias_pred_minus_true_mean"]), 4),
+            "ci": None,
+            "source_file": f4_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": f4_eval_sha,
+        })
+        rows.append({
+            "id": "hc18_nnunet_f4_measfix_vs_csv_mae",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net 100ep fold 4 (measfix: delta_r=0.1134mm)",
+            "protocol": "Fold 4 validation, 192 images, reference: official CSV ground truth ellipse",
+            "metric": "HC MAE [Abs Diff]",
+            "value": round(float(f4_fix["mae"]), 4),
+            "ci": None,
+            "source_file": f4_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": f4_eval_sha,
+        })
+        rows.append({
+            "id": "hc18_nnunet_f4_measfix_vs_csv_bias_pred_true",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net 100ep fold 4 (measfix: delta_r=0.1134mm)",
+            "protocol": "Fold 4 validation, 192 images, reference: official CSV ground truth ellipse",
+            "metric": "Signed Bias [pred-true]",
+            "value": round(float(f4_fix["signed_bias_pred_minus_true_mean"]), 4),
+            "ci": None,
+            "source_file": f4_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": f4_eval_sha,
+        })
+
     # nnU-Net Pooled (Folds 0, 1, 2)
     pooled_eval_path = "docs/results/hc18_nnunet/pooled_eval.json"
     pooled_eval_data = load_json(pooled_eval_path)
@@ -589,6 +727,106 @@ def build_numbers():
         "pr_commit": "fcabfdf",
         "source_sha256": pooled_eval_sha,
     })
+
+    # nnU-Net Pooled (All 5 Folds: 0, 1, 2, 3, 4)
+    pooled_5fold_eval_path = "docs/results/hc18_nnunet/pooled_eval_5fold.json"
+    if (REPO_ROOT / pooled_5fold_eval_path).is_file():
+        p5_data = load_json(pooled_5fold_eval_path)
+        p5_sha = get_sha256(pooled_5fold_eval_path)
+        p5_raw = p5_data["raw_vs_csv"]
+        p5_fix = p5_data["measfix_vs_csv"]
+        p5_mask = p5_data["mask_metrics"]
+
+        rows.append({
+            "id": "hc18_nnunet_pooled_5fold_raw_vs_csv_mae",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net pooled 5-fold CV (raw)",
+            "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: official CSV ground truth ellipse",
+            "metric": "HC MAE [Abs Diff]",
+            "value": round(float(p5_raw["mae"]), 4),
+            "ci": None,
+            "source_file": pooled_5fold_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": p5_sha,
+        })
+        rows.append({
+            "id": "hc18_nnunet_pooled_5fold_raw_vs_csv_bias_pred_true",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net pooled 5-fold CV (raw)",
+            "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: official CSV ground truth ellipse",
+            "metric": "Signed Bias [pred-true]",
+            "value": round(float(p5_raw["signed_bias_pred_minus_true"]), 4),
+            "ci": None,
+            "source_file": pooled_5fold_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": p5_sha,
+        })
+        rows.append({
+            "id": "hc18_nnunet_pooled_5fold_measfix_vs_csv_mae",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net pooled 5-fold CV (measfix: delta_r=0.1134mm)",
+            "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: official CSV ground truth ellipse",
+            "metric": "HC MAE [Abs Diff]",
+            "value": round(float(p5_fix["mae"]), 4),
+            "ci": None,
+            "source_file": pooled_5fold_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": p5_sha,
+        })
+        rows.append({
+            "id": "hc18_nnunet_pooled_5fold_measfix_vs_csv_bias_pred_true",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net pooled 5-fold CV (measfix: delta_r=0.1134mm)",
+            "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: official CSV ground truth ellipse",
+            "metric": "Signed Bias [pred-true]",
+            "value": round(float(p5_fix["signed_bias_pred_minus_true"]), 4),
+            "ci": None,
+            "source_file": pooled_5fold_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": p5_sha,
+        })
+        rows.append({
+            "id": "hc18_nnunet_pooled_5fold_dice",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net pooled 5-fold CV",
+            "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: rasterized ground truth annotation",
+            "metric": "Dice (%)",
+            "value": round(float(p5_mask["dice_mean"]) * 100, 2),
+            "ci": None,
+            "source_file": pooled_5fold_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": p5_sha,
+        })
+        rows.append({
+            "id": "hc18_nnunet_pooled_5fold_hd",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net pooled 5-fold CV",
+            "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: rasterized ground truth annotation",
+            "metric": "HD",
+            "value": round(float(p5_mask["hausdorff_mean_mm"]), 4),
+            "ci": None,
+            "source_file": pooled_5fold_eval_path,
+            "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+            "pr_commit": "46c6af8",
+            "source_sha256": p5_sha,
+        })
 
     # Heterogeneous Blend Study
     blend_path = "docs/results/hc18_nnunet/blend_study.json"

@@ -1,0 +1,102 @@
+{
+  "n_folds": 5,
+  "n_images": 999,
+  "n_patients": 806,
+  "delta_r_mm": 0.11342152722878392,
+  "raw_vs_csv": {
+    "mae": 2.0294,
+    "rmse": 2.7673,
+    "std": 1.8823,
+    "median": 1.5136,
+    "signed_bias_pred_minus_true": 0.6221,
+    "signed_bias_pred_minus_true_std": 2.6978,
+    "signed_bias_true_minus_pred": -0.6221,
+    "signed_bias_true_minus_pred_std": 2.6978
+  },
+  "measfix_vs_csv": {
+    "mae": 1.9733,
+    "rmse": 2.6979,
+    "std": 1.8407,
+    "median": 1.5057,
+    "signed_bias_pred_minus_true": -0.0882,
+    "signed_bias_pred_minus_true_std": 2.6978,
+    "signed_bias_true_minus_pred": 0.0882,
+    "signed_bias_true_minus_pred_std": 2.6978
+  },
+  "mask_metrics": {
+    "dice_mean": 0.9749,
+    "dice_std": 0.0622,
+    "dice_median": 0.9817,
+    "hausdorff_mean_mm": 1.4203,
+    "hausdorff_std_mm": 1.4302,
+    "hausdorff_median_mm": 1.1422
+  },
+  "per_size_band": {
+    "small_under_110mm": {
+      "n": 205,
+      "raw_mae": 1.5961,
+      "raw_rmse": 2.226,
+      "raw_bias_pred_minus_true": 0.3133,
+      "measfix_mae": 1.6339,
+      "measfix_rmse": 2.2394,
+      "measfix_bias_pred_minus_true": -0.3978,
+      "dice_mean": 0.9662,
+      "hausdorff_mean_mm": 1.2834
+    },
+    "medium_110_to_250mm": {
+      "n": 645,
+      "raw_mae": 1.8581,
+      "raw_rmse": 2.4486,
+      "raw_bias_pred_minus_true": 0.701,
+      "measfix_mae": 1.765,
+      "measfix_rmse": 2.3461,
+      "measfix_bias_pred_minus_true": -0.009,
+      "dice_mean": 0.9781,
+      "hausdorff_mean_mm": 1.231
+    },
+    "large_over_250mm": {
+      "n": 149,
+      "raw_mae": 3.3672,
+      "raw_rmse": 4.3095,
+      "raw_bias_pred_minus_true": 0.7054,
+      "measfix_mae": 3.342,
+      "measfix_rmse": 4.2513,
+      "measfix_bias_pred_minus_true": -0.0051,
+      "dice_mean": 0.973,
+      "hausdorff_mean_mm": 2.4283
+    }
+  },
+  "paired_bootstrap_measfix_vs_raw": {
+    "n_patients": 806,
+    "mean_a": 2.0294,
+    "mean_b": 1.9733,
+    "delta": -0.0561,
+    "ci95": [
+      -0.0975,
+      -0.0134
+    ],
+    "p_value": 0.008
+  },
+  "paired_bootstrap_nnunet_raw_vs_oof": {
+    "n_patients": 806,
+    "mean_a": 2.3019,
+    "mean_b": 2.0294,
+    "delta": -0.2725,
+    "ci95": [
+      -0.4644,
+      -0.1132
+    ],
+    "p_value": 0.0008
+  },
+  "paired_bootstrap_nnunet_measfix_vs_oof": {
+    "n_patients": 806,
+    "mean_a": 2.3019,
+    "mean_b": 1.9733,
+    "delta": -0.3287,
+    "ci95": [
+      -0.5032,
+      -0.1836
+    ],
+    "p_value": 0.0
+  }
+}

@@ -855,6 +855,126 @@
     "source_sha256": "b3b73c34dc4cc9c576555f3e7782616b15248a593e1bc31c6c497dc8d7195f90"
   },
   {
+    "id": "hc18_nnunet_f3_raw_vs_csv_mae",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net 100ep fold 3 (raw)",
+    "protocol": "Fold 3 validation, 194 images, reference: official CSV ground truth ellipse",
+    "metric": "HC MAE [Abs Diff]",
+    "value": 2.2217,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/f3_eval.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "e952f6205278e7560749042568ef7e037d670ea25a3add8e7ed149eb75204a81"
+  },
+  {
+    "id": "hc18_nnunet_f3_raw_vs_csv_bias_pred_true",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net 100ep fold 3 (raw)",
+    "protocol": "Fold 3 validation, 194 images, reference: official CSV ground truth ellipse",
+    "metric": "Signed Bias [pred-true]",
+    "value": 0.728,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/f3_eval.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "e952f6205278e7560749042568ef7e037d670ea25a3add8e7ed149eb75204a81"
+  },
+  {
+    "id": "hc18_nnunet_f3_measfix_vs_csv_mae",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net 100ep fold 3 (measfix: delta_r=0.1134mm)",
+    "protocol": "Fold 3 validation, 194 images, reference: official CSV ground truth ellipse",
+    "metric": "HC MAE [Abs Diff]",
+    "value": 2.1408,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/f3_eval.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "e952f6205278e7560749042568ef7e037d670ea25a3add8e7ed149eb75204a81"
+  },
+  {
+    "id": "hc18_nnunet_f3_measfix_vs_csv_bias_pred_true",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net 100ep fold 3 (measfix: delta_r=0.1134mm)",
+    "protocol": "Fold 3 validation, 194 images, reference: official CSV ground truth ellipse",
+    "metric": "Signed Bias [pred-true]",
+    "value": 0.0178,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/f3_eval.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "e952f6205278e7560749042568ef7e037d670ea25a3add8e7ed149eb75204a81"
+  },
+  {
+    "id": "hc18_nnunet_f4_raw_vs_csv_mae",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net 100ep fold 4 (raw)",
+    "protocol": "Fold 4 validation, 192 images, reference: official CSV ground truth ellipse",
+    "metric": "HC MAE [Abs Diff]",
+    "value": 1.976,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/f4_eval.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "73176ae2f75aadb29daadfa356d6f76e1a28a604efd01dd8450485bff29affbd"
+  },
+  {
+    "id": "hc18_nnunet_f4_raw_vs_csv_bias_pred_true",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net 100ep fold 4 (raw)",
+    "protocol": "Fold 4 validation, 192 images, reference: official CSV ground truth ellipse",
+    "metric": "Signed Bias [pred-true]",
+    "value": 0.7405,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/f4_eval.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "73176ae2f75aadb29daadfa356d6f76e1a28a604efd01dd8450485bff29affbd"
+  },
+  {
+    "id": "hc18_nnunet_f4_measfix_vs_csv_mae",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net 100ep fold 4 (measfix: delta_r=0.1134mm)",
+    "protocol": "Fold 4 validation, 192 images, reference: official CSV ground truth ellipse",
+    "metric": "HC MAE [Abs Diff]",
+    "value": 1.8798,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/f4_eval.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "73176ae2f75aadb29daadfa356d6f76e1a28a604efd01dd8450485bff29affbd"
+  },
+  {
+    "id": "hc18_nnunet_f4_measfix_vs_csv_bias_pred_true",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net 100ep fold 4 (measfix: delta_r=0.1134mm)",
+    "protocol": "Fold 4 validation, 192 images, reference: official CSV ground truth ellipse",
+    "metric": "Signed Bias [pred-true]",
+    "value": 0.0303,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/f4_eval.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "73176ae2f75aadb29daadfa356d6f76e1a28a604efd01dd8450485bff29affbd"
+  },
+  {
     "id": "hc18_nnunet_pooled_raw_vs_csv_mae",
     "field": "HC18",
     "system": 1,
@@ -945,6 +1065,96 @@
     "source_sha256": "195a9959c14cb8f69adf60c1de1ff2884508d73a326817935b1caadd58b66229"
   },
   {
+    "id": "hc18_nnunet_pooled_5fold_raw_vs_csv_mae",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net pooled 5-fold CV (raw)",
+    "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: official CSV ground truth ellipse",
+    "metric": "HC MAE [Abs Diff]",
+    "value": 2.0294,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/pooled_eval_5fold.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "897fbf38ed501656fa8d882092aa9545c11776ed765bb3f8031aab1bfef7f6c9"
+  },
+  {
+    "id": "hc18_nnunet_pooled_5fold_raw_vs_csv_bias_pred_true",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net pooled 5-fold CV (raw)",
+    "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: official CSV ground truth ellipse",
+    "metric": "Signed Bias [pred-true]",
+    "value": 0.6221,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/pooled_eval_5fold.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "897fbf38ed501656fa8d882092aa9545c11776ed765bb3f8031aab1bfef7f6c9"
+  },
+  {
+    "id": "hc18_nnunet_pooled_5fold_measfix_vs_csv_mae",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net pooled 5-fold CV (measfix: delta_r=0.1134mm)",
+    "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: official CSV ground truth ellipse",
+    "metric": "HC MAE [Abs Diff]",
+    "value": 1.9733,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/pooled_eval_5fold.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "897fbf38ed501656fa8d882092aa9545c11776ed765bb3f8031aab1bfef7f6c9"
+  },
+  {
+    "id": "hc18_nnunet_pooled_5fold_measfix_vs_csv_bias_pred_true",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net pooled 5-fold CV (measfix: delta_r=0.1134mm)",
+    "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: official CSV ground truth ellipse",
+    "metric": "Signed Bias [pred-true]",
+    "value": -0.0882,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/pooled_eval_5fold.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "897fbf38ed501656fa8d882092aa9545c11776ed765bb3f8031aab1bfef7f6c9"
+  },
+  {
+    "id": "hc18_nnunet_pooled_5fold_dice",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net pooled 5-fold CV",
+    "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: rasterized ground truth annotation",
+    "metric": "Dice (%)",
+    "value": 97.49,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/pooled_eval_5fold.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "897fbf38ed501656fa8d882092aa9545c11776ed765bb3f8031aab1bfef7f6c9"
+  },
+  {
+    "id": "hc18_nnunet_pooled_5fold_hd",
+    "field": "HC18",
+    "system": 1,
+    "approach": "nnU-Net pooled 5-fold CV",
+    "protocol": "Full 5-fold CV, 999 images, 806 patients, reference: rasterized ground truth annotation",
+    "metric": "HD",
+    "value": 1.4203,
+    "ci": null,
+    "source_file": "docs/results/hc18_nnunet/pooled_eval_5fold.json",
+    "script": "scripts/76_eval_nnunet_f3_f4_and_pooled5.py",
+    "notebook": "notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb",
+    "pr_commit": "46c6af8",
+    "source_sha256": "897fbf38ed501656fa8d882092aa9545c11776ed765bb3f8031aab1bfef7f6c9"
+  },
+  {
     "id": "hc18_blend_nnunet_eff_measfix_raw_mae",
     "field": "HC18",
     "system": 1,
@@ -1005,7 +1215,7 @@
     "script": "scripts/75_process_nnunet_f012_test.py",
     "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb",
     "pr_commit": "d25dfb9",
-    "source_sha256": "2a4291124592bc5bd452e020a3a23de2e14733c40633d0d4f262ffc9ca795f49"
+    "source_sha256": "6c4bd2431e63ff6fc3daef8ab9d30710d39281d37f00e6f536503ebf6496679a"
   },
   {
     "id": "hc18_test_f012_raw_mean_hc",
@@ -1020,7 +1230,7 @@
     "script": "scripts/75_process_nnunet_f012_test.py",
     "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb",
     "pr_commit": "d25dfb9",
-    "source_sha256": "2a4291124592bc5bd452e020a3a23de2e14733c40633d0d4f262ffc9ca795f49"
+    "source_sha256": "6c4bd2431e63ff6fc3daef8ab9d30710d39281d37f00e6f536503ebf6496679a"
   },
   {
     "id": "hc18_test_f012_measfix_mean_hc",
@@ -1035,7 +1245,7 @@
     "script": "scripts/75_process_nnunet_f012_test.py",
     "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb",
     "pr_commit": "d25dfb9",
-    "source_sha256": "2a4291124592bc5bd452e020a3a23de2e14733c40633d0d4f262ffc9ca795f49"
+    "source_sha256": "6c4bd2431e63ff6fc3daef8ab9d30710d39281d37f00e6f536503ebf6496679a"
   },
   {
     "id": "hc18_test_f012_measfix_diff_vs_f0",
@@ -1050,7 +1260,7 @@
     "script": "scripts/75_process_nnunet_f012_test.py",
     "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb",
     "pr_commit": "d25dfb9",
-    "source_sha256": "2a4291124592bc5bd452e020a3a23de2e14733c40633d0d4f262ffc9ca795f49"
+    "source_sha256": "6c4bd2431e63ff6fc3daef8ab9d30710d39281d37f00e6f536503ebf6496679a"
   },
   {
     "id": "hc18_test_f012_measfix_diff_vs_ens",
@@ -1065,7 +1275,7 @@
     "script": "scripts/75_process_nnunet_f012_test.py",
     "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb",
     "pr_commit": "d25dfb9",
-    "source_sha256": "2a4291124592bc5bd452e020a3a23de2e14733c40633d0d4f262ffc9ca795f49"
+    "source_sha256": "6c4bd2431e63ff6fc3daef8ab9d30710d39281d37f00e6f536503ebf6496679a"
   },
   {
     "id": "hc18_single_oof_999_raw_vs_csv_mae",
