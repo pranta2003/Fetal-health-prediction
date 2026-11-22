@@ -59,6 +59,12 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
 |---|---|---|---|---|---|
 | `candidates/submission_ensemble_5fold_corrected_measfix.csv` | Semi-axes shrunk by $\delta_r = 0.1134$ mm | -0.7102 mm mean HC change | 335 | `93cbf78d98404545dbe0cc78dd58399f73bedc7065b2cfd01e9d0627dd25ab81` | **DO NOT SUBMIT** (Built & verified locally) |
 | `candidates/submission_blend_nnunetf0_ens5_measfix.csv` | Heterogeneous ellipse blend: nnU-Net f0 measfix + 5-fold ensemble measfix | Mean HC: 175.2869 mm (+0.0173 mm vs nnU-Net, -0.0187 mm vs ens5) | 335 | `aabfb91e54cd6b36b57aa52eab5d2752057203bb319f32d45c75106a7d5afd51` | **DO NOT SUBMIT** (Candidate for tomorrow's slot) |
+| `candidates/submission_nnunet_f012_raw.csv` | nnU-Net 3-fold ensemble (folds 0, 1, 2) raw | Mean HC: 175.9986 mm | 335 | `c8ed4c15a43e99adf4b9614d7b25aee32c404f31b9c97c6a59755549dd8d1ddb` | **DO NOT SUBMIT** (Built & verified locally) |
+| `candidates/submission_nnunet_f012_measfix.csv` | nnU-Net 3-fold ensemble (folds 0, 1, 2) measfix | $\delta_r = 0.1134$ mm, Mean HC: 175.2884 mm | 335 | `f5c6daaa51ff2f5e192303c8e1a769fc2dcf8ff2f4d437f150000d9c5f57e700` | **DO NOT SUBMIT** (Built & verified locally) |
+| `candidates/submission_blend_nnunetf012_ens5_measfix.csv` | Heterogeneous blend: nnU-Net f012 measfix + 5-fold ensemble measfix | Mean HC: 175.2964 mm | 335 | `1519186ebdffd941c77b6e6636b6137b56ac9d59676b8af3e236cd79b984eebe` | **DO NOT SUBMIT** (Built & verified locally) |
+| `candidates/submission_nnunet_f01234_raw.csv` | nnU-Net 5-fold ensemble (folds 0, 1, 2, 3, 4) raw | Mean HC: 176.0100 mm | 335 | `270136b25ce86fb3bd5e3ed053569540fba6e745a61f71d101b094c4f84e4fdc` | **DO NOT SUBMIT** (Built & verified locally) |
+| `candidates/submission_nnunet_f01234_measfix.csv` | nnU-Net 5-fold ensemble (folds 0, 1, 2, 3, 4) measfix | $\delta_r = 0.1134$ mm, Mean HC: 175.2998 mm | 335 | `b62f2a15d5b4d5d028aa5b4bd1b817594a537d8184891af63184a35b7d375ca5` | **DO NOT SUBMIT** (Built & verified locally) |
+| `candidates/submission_blend_nnunetf01234_ens5_measfix.csv` | Heterogeneous blend: nnU-Net f01234 measfix + 5-fold ensemble measfix | Mean HC: 175.3021 mm | 335 | `ca9acd5bc0caf79d03b08909a6ef140d974dbdb5500240af557a68833ac1349a` | **DO NOT SUBMIT** (Built & verified locally) |
 | `candidates/submission_ensemble_5fold_corrected_mult050_EXPLORATORY.csv` | Multiplicative scaling $\alpha = 0.50$ | 1.004065 | 335 | `1a1ff42eb8dcc9f417e69235fd9bbaa77d9b468cd56623825911e23afaae9b5d` | Submitted as probe on 2026-11-16 (negative result) |
 | `candidates/submission_ensemble_5fold_corrected_mult100_EXPLORATORY.csv` | Multiplicative scaling $\alpha = 1.00$ | 1.008129 | 335 | `ee568b5157ddd5ffc424f180fab22d52a765fa11ccac62d66f0883dba9c1f356` | **DO NOT SUBMIT** (Never submitted) |
 
@@ -168,9 +174,15 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
   - Averaged ellipse parameters between 3-fold nnU-Net measfix (175.2884 mm) and 5-fold ensemble measfix (175.3056 mm).
   - Mean HC: 175.2964 mm. Max angular difference modulo $\pi$: 0.3126 rad ($\le 0.5$ rad).
 - **5-Fold Test Kernels (`hc18-nnunet-test-f01234` & `hc18-nnunet-test-f01234-cpu`)**:
-  - Kaggle Kernels: `prantakumerpandit390/hc18-nnunet-test-f01234` (GPU T4) and `prantakumerpandit390/hc18-nnunet-test-f01234-cpu` (CPU).
+  - Kaggle Kernels: `prantakumerpandit390/hc18-nnunet-test-f01234` (GPU T4, `COMPLETE`) and `prantakumerpandit390/hc18-nnunet-test-f01234-cpu` (CPU, `RUNNING`).
   - Input Sources: `prantakumerpandit390/hc18-ultrasound`, `hc18-nnunet-f0-250ep`, `hc18-nnunet-f1f2-100ep`, `hc18-nnunet-f3f4-100ep`.
-  - Pushed at: 2026-11-22 13:51:20 Dhaka. CPU expected runtime: $5.082\text{ s} \times 335 \times 5 = 8512.4\text{ s} \approx 141.9\text{ min} \approx 2.36\text{ h}$ (ETA: 16:13 Dhaka).
+  - Pushed at: 2026-11-22 13:51:20 Dhaka.
+  - Output Archive: `C:\fetal-data\kaggle_outputs\hc18_nnunet_test_f01234\`
+  - Summary JSON: `docs/results/hc18_nnunet/test_f01234_candidates_summary.json`
+  - Candidate Raw: `candidates/submission_nnunet_f01234_raw.csv` (SHA256: `270136b25ce86fb3bd5e3ed053569540fba6e745a61f71d101b094c4f84e4fdc`). Mean HC: 176.0100 mm. Mean diff vs f012 measfix: +0.7215 mm (abs: 0.7262 mm); vs 5-fold ensemble measfix: +0.7043 mm (abs: 1.2677 mm).
+  - Candidate Measfix: `candidates/submission_nnunet_f01234_measfix.csv` (SHA256: `b62f2a15d5b4d5d028aa5b4bd1b817594a537d8184891af63184a35b7d375ca5`). Mean HC: 175.2998 mm. Mean diff vs f012 measfix: +0.0113 mm (mean abs diff 0.1728 mm $\le 0.3$ mm, verified). Mean diff vs 5-fold ensemble measfix: -0.0059 mm (abs: 1.0087 mm).
+  - Blend Candidate: `candidates/submission_blend_nnunetf01234_ens5_measfix.csv` (SHA256: `ca9acd5bc0caf79d03b08909a6ef140d974dbdb5500240af557a68833ac1349a`). Mean HC: 175.3021 mm. Max angular difference modulo $\pi$: 0.2827 rad ($\le 0.5$ rad). Mean diff vs nnunet_f01234_measfix: +0.0024 mm (abs: 0.5043 mm); vs 5-fold ensemble measfix: -0.0035 mm (abs: 0.5044 mm).
+
 
 
 

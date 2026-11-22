@@ -1,0 +1,33 @@
+{
+  "gpu_kernel": "hc18-nnunet-test-f01234",
+  "candidates": {
+    "submission_nnunet_f01234_raw.csv": {
+      "sha256": "270136b25ce86fb3bd5e3ed053569540fba6e745a61f71d101b094c4f84e4fdc",
+      "rows": 335,
+      "mean_hc": 176.0099547138267,
+      "mean_diff_vs_f012_mf": 0.7215072593932037,
+      "abs_diff_vs_f012_mf": 0.7262497510708923,
+      "mean_diff_vs_ens_mf": 0.7043135684812759,
+      "abs_diff_vs_ens_mf": 1.2677025843696874
+    },
+    "submission_nnunet_f01234_measfix.csv": {
+      "sha256": "b62f2a15d5b4d5d028aa5b4bd1b817594a537d8184891af63184a35b7d375ca5",
+      "rows": 335,
+      "mean_hc": 175.29977951129948,
+      "mean_diff_vs_f012_mf": 0.011332056866031443,
+      "abs_diff_vs_f012_mf": 0.1728141550633835,
+      "mean_diff_vs_ens_mf": -0.005861634045896368,
+      "abs_diff_vs_ens_mf": 1.0086665572782034
+    },
+    "submission_blend_nnunetf01234_ens5_measfix.csv": {
+      "sha256": "ca9acd5bc0caf79d03b08909a6ef140d974dbdb5500240af557a68833ac1349a",
+      "rows": 335,
+      "mean_hc": 175.30213677988348,
+      "max_angle_diff_mod_pi": 0.28272847851093963,
+      "mean_diff_vs_nnunet_f01234": 0.0023572685839787903,
+      "abs_diff_vs_nnunet_f01234": 0.504263374428511,
+      "mean_diff_vs_ens_mf": -0.003504365461917578,
+      "abs_diff_vs_ens_mf": 0.5044031828496923
+    }
+  }
+}

@@ -2,11 +2,11 @@
 
 This document maps every empirical claim and metric across the thesis/report to its exact on-disk artifact, producing script or notebook, and git commit provenance.
 
-**Total Numbers Mapped**: 177 | **Verified Files on Disk**: 177 | **Missing Files**: 0
+**Total Numbers Mapped**: 183 | **Verified Files on Disk**: 183 | **Missing Files**: 0
 
 ---
 
-## HC18 Domain Claims (84 metrics)
+## HC18 Domain Claims (90 metrics)
 
 | ID | Report Claim | Value | Result File Path | Producing Script / Notebook | Git Commit | File Status |
 |---|---|:---:|---|---|:---:|:---:|
@@ -71,6 +71,12 @@ This document maps every empirical claim and metric across the thesis/report to 
 | `hc18_test_f012_measfix_mean_hc` | nnU-Net test 3-fold ensemble + measfix (delta_r=0.1134mm) - Mean HC (mm) | **175.2884** | `docs/results/hc18_nnunet/test_f012_candidates_summary.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb` | `d25dfb9` | EXISTS |
 | `hc18_test_f012_measfix_diff_vs_f0` | nnU-Net test 3-fold ensemble + measfix vs fold 0 measfix - Mean HC diff vs f0 (mm) | **0.0189** | `docs/results/hc18_nnunet/test_f012_candidates_summary.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb` | `d25dfb9` | EXISTS |
 | `hc18_test_f012_measfix_diff_vs_ens` | nnU-Net test 3-fold ensemble + measfix vs 5-fold ensemble measfix - Mean HC diff vs 5-fold ens (mm) | **-0.0172** | `docs/results/hc18_nnunet/test_f012_candidates_summary.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f012/hc18-nnunet-test-f012.ipynb` | `d25dfb9` | EXISTS |
+| `hc18_test_f01234_raw_mean_hc` | nnU-Net test 5-fold ensemble (raw) - Mean HC (mm) | **176.01** | `docs/results/hc18_nnunet/test_f01234_candidates_summary.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb` | `3de958b` | EXISTS |
+| `hc18_test_f01234_measfix_mean_hc` | nnU-Net test 5-fold ensemble + measfix (delta_r=0.1134mm) - Mean HC (mm) | **175.2998** | `docs/results/hc18_nnunet/test_f01234_candidates_summary.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb` | `3de958b` | EXISTS |
+| `hc18_test_f01234_measfix_diff_vs_f012` | nnU-Net test 5-fold ensemble + measfix vs 3-fold ensemble measfix - Mean HC diff vs f012 (mm) | **0.0113** | `docs/results/hc18_nnunet/test_f01234_candidates_summary.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb` | `3de958b` | EXISTS |
+| `hc18_test_f01234_measfix_abs_diff_vs_f012` | nnU-Net test 5-fold ensemble + measfix vs 3-fold ensemble measfix - Mean Absolute HC diff vs f012 (mm) | **0.1728** | `docs/results/hc18_nnunet/test_f01234_candidates_summary.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb` | `3de958b` | EXISTS |
+| `hc18_test_f01234_measfix_diff_vs_ens` | nnU-Net test 5-fold ensemble + measfix vs 5-fold ensemble measfix - Mean HC diff vs 5-fold ens (mm) | **-0.0059** | `docs/results/hc18_nnunet/test_f01234_candidates_summary.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb` | `3de958b` | EXISTS |
+| `hc18_blend_nnunet_f01234_ens5_mean_hc` | Heterogeneous Blend (5-fold nnU-Net measfix + 5-fold ens measfix) - Mean HC (mm) | **175.3021** | `docs/results/hc18_nnunet/test_f01234_candidates_summary.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb` | `3de958b` | EXISTS |
 | `hc18_single_oof_999_raw_vs_csv_mae` | EfficientNet-B4 U-Net 384 (single model OOF) - HC MAE [Abs Diff] | **2.3019** | `docs/results/hc18_official/measfix_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `01879db` | EXISTS |
 | `hc18_single_oof_999_raw_vs_csv_bias_pred_true` | EfficientNet-B4 U-Net 384 (single model OOF) - Signed Bias [pred-true] | **-1.2576** | `docs/results/hc18_official/measfix_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `01879db` | EXISTS |
 | `hc18_annotation_mask_vs_csv_diff_mean` | OpenCV fitEllipse on Ground Truth Training Annotations - Signed Bias [pred-true] | **0.7126** | `docs/results/hc18_official/measfix_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `01879db` | EXISTS |
