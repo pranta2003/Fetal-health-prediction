@@ -2,11 +2,11 @@
 
 This document maps every empirical claim and metric across the thesis/report to its exact on-disk artifact, producing script or notebook, and git commit provenance.
 
-**Total Numbers Mapped**: 163 | **Verified Files on Disk**: 163 | **Missing Files**: 0
+**Total Numbers Mapped**: 177 | **Verified Files on Disk**: 177 | **Missing Files**: 0
 
 ---
 
-## HC18 Domain Claims (70 metrics)
+## HC18 Domain Claims (84 metrics)
 
 | ID | Report Claim | Value | Result File Path | Producing Script / Notebook | Git Commit | File Status |
 |---|---|:---:|---|---|:---:|:---:|
@@ -43,12 +43,26 @@ This document maps every empirical claim and metric across the thesis/report to 
 | `hc18_nnunet_f2_raw_vs_csv_bias_pred_true` | nnU-Net 100ep fold 2 (raw) - Signed Bias [pred-true] | **0.447** | `docs/results/hc18_nnunet/f2_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `67bfbf6` | EXISTS |
 | `hc18_nnunet_f2_measfix_vs_csv_mae` | nnU-Net 100ep fold 2 (measfix: delta_r=0.1134mm) - HC MAE [Abs Diff] | **2.0993** | `docs/results/hc18_nnunet/f2_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `67bfbf6` | EXISTS |
 | `hc18_nnunet_f2_measfix_vs_csv_bias_pred_true` | nnU-Net 100ep fold 2 (measfix: delta_r=0.1134mm) - Signed Bias [pred-true] | **-0.2633** | `docs/results/hc18_nnunet/f2_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `67bfbf6` | EXISTS |
+| `hc18_nnunet_f3_raw_vs_csv_mae` | nnU-Net 100ep fold 3 (raw) - HC MAE [Abs Diff] | **2.2217** | `docs/results/hc18_nnunet/f3_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_f3_raw_vs_csv_bias_pred_true` | nnU-Net 100ep fold 3 (raw) - Signed Bias [pred-true] | **0.728** | `docs/results/hc18_nnunet/f3_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_f3_measfix_vs_csv_mae` | nnU-Net 100ep fold 3 (measfix: delta_r=0.1134mm) - HC MAE [Abs Diff] | **2.1408** | `docs/results/hc18_nnunet/f3_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_f3_measfix_vs_csv_bias_pred_true` | nnU-Net 100ep fold 3 (measfix: delta_r=0.1134mm) - Signed Bias [pred-true] | **0.0178** | `docs/results/hc18_nnunet/f3_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_f4_raw_vs_csv_mae` | nnU-Net 100ep fold 4 (raw) - HC MAE [Abs Diff] | **1.976** | `docs/results/hc18_nnunet/f4_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_f4_raw_vs_csv_bias_pred_true` | nnU-Net 100ep fold 4 (raw) - Signed Bias [pred-true] | **0.7405** | `docs/results/hc18_nnunet/f4_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_f4_measfix_vs_csv_mae` | nnU-Net 100ep fold 4 (measfix: delta_r=0.1134mm) - HC MAE [Abs Diff] | **1.8798** | `docs/results/hc18_nnunet/f4_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_f4_measfix_vs_csv_bias_pred_true` | nnU-Net 100ep fold 4 (measfix: delta_r=0.1134mm) - Signed Bias [pred-true] | **0.0303** | `docs/results/hc18_nnunet/f4_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
 | `hc18_nnunet_pooled_raw_vs_csv_mae` | nnU-Net pooled folds 0-2 (raw) - HC MAE [Abs Diff] | **1.9853** | `docs/results/hc18_nnunet/pooled_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `fcabfdf` | EXISTS |
 | `hc18_nnunet_pooled_raw_vs_csv_bias_pred_true` | nnU-Net pooled folds 0-2 (raw) - Signed Bias [pred-true] | **0.5515** | `docs/results/hc18_nnunet/pooled_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `fcabfdf` | EXISTS |
 | `hc18_nnunet_pooled_measfix_vs_csv_mae` | nnU-Net pooled folds 0-2 (measfix: delta_r=0.1134mm) - HC MAE [Abs Diff] | **1.9495** | `docs/results/hc18_nnunet/pooled_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `fcabfdf` | EXISTS |
 | `hc18_nnunet_pooled_measfix_vs_csv_bias_pred_true` | nnU-Net pooled folds 0-2 (measfix: delta_r=0.1134mm) - Signed Bias [pred-true] | **-0.1588** | `docs/results/hc18_nnunet/pooled_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `fcabfdf` | EXISTS |
 | `hc18_nnunet_pooled_dice` | nnU-Net pooled folds 0-2 - Dice (%) | **97.57** | `docs/results/hc18_nnunet/pooled_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `fcabfdf` | EXISTS |
 | `hc18_nnunet_pooled_hd` | nnU-Net pooled folds 0-2 - HD | **1.3964** | `docs/results/hc18_nnunet/pooled_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f1f2-100ep/hc18-nnunet-f1f2-100ep.ipynb` | `fcabfdf` | EXISTS |
+| `hc18_nnunet_pooled_5fold_raw_vs_csv_mae` | nnU-Net pooled 5-fold CV (raw) - HC MAE [Abs Diff] | **2.0294** | `docs/results/hc18_nnunet/pooled_eval_5fold.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_pooled_5fold_raw_vs_csv_bias_pred_true` | nnU-Net pooled 5-fold CV (raw) - Signed Bias [pred-true] | **0.6221** | `docs/results/hc18_nnunet/pooled_eval_5fold.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_pooled_5fold_measfix_vs_csv_mae` | nnU-Net pooled 5-fold CV (measfix: delta_r=0.1134mm) - HC MAE [Abs Diff] | **1.9733** | `docs/results/hc18_nnunet/pooled_eval_5fold.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_pooled_5fold_measfix_vs_csv_bias_pred_true` | nnU-Net pooled 5-fold CV (measfix: delta_r=0.1134mm) - Signed Bias [pred-true] | **-0.0882** | `docs/results/hc18_nnunet/pooled_eval_5fold.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_pooled_5fold_dice` | nnU-Net pooled 5-fold CV - Dice (%) | **97.49** | `docs/results/hc18_nnunet/pooled_eval_5fold.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
+| `hc18_nnunet_pooled_5fold_hd` | nnU-Net pooled 5-fold CV - HD | **1.4203** | `docs/results/hc18_nnunet/pooled_eval_5fold.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f3f4-100ep/hc18-nnunet-f3f4-100ep.ipynb` | `46c6af8` | EXISTS |
 | `hc18_blend_nnunet_eff_measfix_raw_mae` | Heterogeneous Blend: nnU-Net (measfix) + EffNet (raw) - HC MAE [Abs Diff] | **1.854** | `docs/results/hc18_nnunet/blend_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `fcabfdf` | EXISTS |
 | `hc18_blend_nnunet_eff_measfix_raw_bias` | Heterogeneous Blend: nnU-Net (measfix) + EffNet (raw) - Signed Bias [pred-true] | **-0.0016** | `docs/results/hc18_nnunet/blend_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `fcabfdf` | EXISTS |
 | `hc18_blend_nnunet_eff_measfix_raw_delta` | Heterogeneous Blend: nnU-Net (measfix) + EffNet (raw) vs nnU-Net alone - Delta MAE | **-0.0955 [-0.1869, 0.0178]** | `docs/results/hc18_nnunet/blend_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `fcabfdf` | EXISTS |

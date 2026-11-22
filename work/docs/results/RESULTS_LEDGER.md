@@ -147,6 +147,31 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
   - GPU vs CPU Invariance: 335 images evaluated; max absolute HC difference between GPU and CPU is 0.004840 mm (mean absolute diff 0.000636 mm), confirming near-exact inference equivalence across hardware backends.
   - Candidate Raw: `candidates/submission_nnunet_f012_raw.csv` (SHA256: `c8ed4c15a43e99adf4b9614d7b25aee32c404f31b9c97c6a59755549dd8d1ddb`). Mean HC: 175.9986 mm. Mean diff vs Fold 0 measfix: +0.7290 mm (abs: 0.8158 mm); mean diff vs 5-fold ensemble measfix: +0.6930 mm (abs: 1.2745 mm).
   - Candidate Measfix: `candidates/submission_nnunet_f012_measfix.csv` (SHA256: `f5c6daaa51ff2f5e192303c8e1a769fc2dcf8ff2f4d437f150000d9c5f57e700`). Mean HC: 175.2884 mm. Mean diff vs Fold 0 measfix: +0.0189 mm (abs: 0.4165 mm); mean diff vs 5-fold ensemble measfix: -0.0172 mm (abs: 1.0406 mm).
+- **`hc18-nnunet-f3-100ep` & `hc18-nnunet-f4-100ep`**:
+  - Kaggle Kernel: `prantakumerpandit390/hc18-nnunet-f3f4-100ep` (Status: `COMPLETE`)
+  - Output Archive: `C:\fetal-data\kaggle_outputs\hc18_nnunet_f3f4\`
+  - Fold 3 Evaluation JSON: `docs/results/hc18_nnunet/f3_eval.json`
+    - N=194 images, 161 unique patients. Raw MAE: 2.2217 mm, Bias [pred-true]: +0.7280 mm. Measfix MAE: 2.1408 mm, Bias [pred-true]: +0.0178 mm. Dice: 0.9691, HD: 1.5130 mm.
+    - Paired bootstrap measfix vs raw: $\Delta\text{MAE} = -0.0809$ mm, 95% CI `[-0.1772, +0.0097]`, $p = 0.0852$. Measfix vs OOF: $\Delta\text{MAE} = -0.6698$ mm, 95% CI `[-1.0125, -0.3444]`, $p = 0.0004$.
+  - Fold 4 Evaluation JSON: `docs/results/hc18_nnunet/f4_eval.json`
+    - N=192 images, 161 unique patients. Raw MAE: 1.9760 mm, Bias [pred-true]: +0.7405 mm. Measfix MAE: 1.8798 mm, Bias [pred-true]: +0.0303 mm. Dice: 0.9781, HD: 1.4032 mm.
+    - Paired bootstrap measfix vs raw: $\Delta\text{MAE} = -0.0962$ mm, 95% CI `[-0.1979, +0.0041]`, $p = 0.0636$. Measfix vs OOF: $\Delta\text{MAE} = -0.2241$ mm, 95% CI `[-0.4398, -0.0055]`, $p = 0.0456$.
+- **`hc18-nnunet-pooled-5fold` (Full 5-Fold Benchmark)**:
+  - Evaluation JSON: `docs/results/hc18_nnunet/pooled_eval_5fold.json`
+  - Cohort: N=999 images, 806 unique patients across all 5 folds (complete HC18 training set).
+  - Raw: MAE 2.0294 mm, RMSE 2.6844 mm, Signed Bias [pred-true] +0.6221 mm. Dice: 0.9749, HD: 1.4203 mm.
+  - Measfix ($\delta_r = 0.1134$ mm): MAE 1.9733 mm, RMSE 2.6289 mm, Signed Bias [pred-true] -0.0882 mm.
+  - Per size band (measfix): under 110 mm (N=208) MAE 1.7483 mm; 110 to 250 mm (N=682) MAE 1.7643 mm; over 250 mm (N=109) MAE 3.7088 mm.
+  - Paired bootstrap (5000 resamples): Measfix vs Raw $\Delta\text{MAE} = -0.0561$ mm, 95% CI `[-0.0975, -0.0134]`, $p = 0.0080$. Measfix vs OOF $\Delta\text{MAE} = -0.3287$ mm, 95% CI `[-0.5032, -0.1836]`, $p = 0.0000$.
+- **Advanced Heterogeneous Blend Candidate**:
+  - Candidate: `candidates/submission_blend_nnunetf012_ens5_measfix.csv` (SHA256: `1519186ebdffd941c77b6e6636b6137b56ac9d59676b8af3e236cd79b984eebe`).
+  - Averaged ellipse parameters between 3-fold nnU-Net measfix (175.2884 mm) and 5-fold ensemble measfix (175.3056 mm).
+  - Mean HC: 175.2964 mm. Max angular difference modulo $\pi$: 0.3126 rad ($\le 0.5$ rad).
+- **5-Fold Test Kernels (`hc18-nnunet-test-f01234` & `hc18-nnunet-test-f01234-cpu`)**:
+  - Kaggle Kernels: `prantakumerpandit390/hc18-nnunet-test-f01234` (GPU T4) and `prantakumerpandit390/hc18-nnunet-test-f01234-cpu` (CPU).
+  - Input Sources: `prantakumerpandit390/hc18-ultrasound`, `hc18-nnunet-f0-250ep`, `hc18-nnunet-f1f2-100ep`, `hc18-nnunet-f3f4-100ep`.
+  - Pushed at: 2026-11-22 13:51:20 Dhaka. CPU expected runtime: $5.082\text{ s} \times 335 \times 5 = 8512.4\text{ s} \approx 141.9\text{ min} \approx 2.36\text{ h}$ (ETA: 16:13 Dhaka).
+
 
 
 
