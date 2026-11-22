@@ -1,0 +1,21 @@
+{
+  "id": "prantakumerpandit390/hc18-nnunet-test-f01234",
+  "title": "hc18-nnunet-test-f01234",
+  "code_file": "hc18-nnunet-test-f01234.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "prantakumerpandit390/hc18-ultrasound"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [
+    "prantakumerpandit390/hc18-nnunet-f0-250ep",
+    "prantakumerpandit390/hc18-nnunet-f1f2-100ep",
+    "prantakumerpandit390/hc18-nnunet-f3f4-100ep"
+  ],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}
