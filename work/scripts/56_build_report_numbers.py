@@ -971,6 +971,109 @@ def build_numbers():
             "source_sha256": test_f012_sha,
         })
 
+    # -------------------------------------------------------------------------
+    # HC18 nnU-Net Test Set Full 5-Fold Ensemble (Folds 0, 1, 2, 3, 4)
+    # -------------------------------------------------------------------------
+    test_f01234_summary_path = "docs/results/hc18_nnunet/test_f01234_candidates_summary.json"
+    if (REPO_ROOT / test_f01234_summary_path).is_file():
+        test_f01234_data = load_json(test_f01234_summary_path)
+        test_f01234_sha = get_sha256(test_f01234_summary_path)
+        cands5 = test_f01234_data["candidates"]
+        raw_cand5 = cands5["submission_nnunet_f01234_raw.csv"]
+        mf_cand5 = cands5["submission_nnunet_f01234_measfix.csv"]
+        blend_cand5 = cands5["submission_blend_nnunetf01234_ens5_measfix.csv"]
+
+        rows.append({
+            "id": "hc18_test_f01234_raw_mean_hc",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net test 5-fold ensemble (raw)",
+            "protocol": "HC18 Official Test Set, 335 images, mean predicted HC across images",
+            "metric": "Mean HC (mm)",
+            "value": round(float(raw_cand5["mean_hc"]), 4),
+            "ci": None,
+            "source_file": test_f01234_summary_path,
+            "script": "scripts/80_process_nnunet_f01234_test.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb",
+            "pr_commit": "3de958b",
+            "source_sha256": test_f01234_sha,
+        })
+        rows.append({
+            "id": "hc18_test_f01234_measfix_mean_hc",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net test 5-fold ensemble + measfix (delta_r=0.1134mm)",
+            "protocol": "HC18 Official Test Set, 335 images, mean predicted HC across images",
+            "metric": "Mean HC (mm)",
+            "value": round(float(mf_cand5["mean_hc"]), 4),
+            "ci": None,
+            "source_file": test_f01234_summary_path,
+            "script": "scripts/80_process_nnunet_f01234_test.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb",
+            "pr_commit": "3de958b",
+            "source_sha256": test_f01234_sha,
+        })
+        rows.append({
+            "id": "hc18_test_f01234_measfix_diff_vs_f012",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net test 5-fold ensemble + measfix vs 3-fold ensemble measfix",
+            "protocol": "HC18 Official Test Set, 335 images, mean HC diff vs submission_nnunet_f012_measfix",
+            "metric": "Mean HC diff vs f012 (mm)",
+            "value": round(float(mf_cand5["mean_diff_vs_f012_mf"]), 4),
+            "ci": None,
+            "source_file": test_f01234_summary_path,
+            "script": "scripts/80_process_nnunet_f01234_test.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb",
+            "pr_commit": "3de958b",
+            "source_sha256": test_f01234_sha,
+        })
+        rows.append({
+            "id": "hc18_test_f01234_measfix_abs_diff_vs_f012",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net test 5-fold ensemble + measfix vs 3-fold ensemble measfix",
+            "protocol": "HC18 Official Test Set, 335 images, mean absolute HC diff vs submission_nnunet_f012_measfix",
+            "metric": "Mean Absolute HC diff vs f012 (mm)",
+            "value": round(float(mf_cand5["abs_diff_vs_f012_mf"]), 4),
+            "ci": None,
+            "source_file": test_f01234_summary_path,
+            "script": "scripts/80_process_nnunet_f01234_test.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb",
+            "pr_commit": "3de958b",
+            "source_sha256": test_f01234_sha,
+        })
+        rows.append({
+            "id": "hc18_test_f01234_measfix_diff_vs_ens",
+            "field": "HC18",
+            "system": 1,
+            "approach": "nnU-Net test 5-fold ensemble + measfix vs 5-fold ensemble measfix",
+            "protocol": "HC18 Official Test Set, 335 images, mean HC diff vs submission_ensemble_5fold_corrected_measfix",
+            "metric": "Mean HC diff vs 5-fold ens (mm)",
+            "value": round(float(mf_cand5["mean_diff_vs_ens_mf"]), 4),
+            "ci": None,
+            "source_file": test_f01234_summary_path,
+            "script": "scripts/80_process_nnunet_f01234_test.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb",
+            "pr_commit": "3de958b",
+            "source_sha256": test_f01234_sha,
+        })
+        rows.append({
+            "id": "hc18_blend_nnunet_f01234_ens5_mean_hc",
+            "field": "HC18",
+            "system": 1,
+            "approach": "Heterogeneous Blend (5-fold nnU-Net measfix + 5-fold ens measfix)",
+            "protocol": "HC18 Official Test Set, 335 images, circular mean mod pi angle, mean HC across images",
+            "metric": "Mean HC (mm)",
+            "value": round(float(blend_cand5["mean_hc"]), 4),
+            "ci": None,
+            "source_file": test_f01234_summary_path,
+            "script": "scripts/80_process_nnunet_f01234_test.py",
+            "notebook": "notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb",
+            "pr_commit": "3de958b",
+            "source_sha256": test_f01234_sha,
+        })
+
     # Single-model Fold 1 OOF vs CSV
     single_oof = measfix_data["validation_application"]["single_model_oof_999"]
     rows.append({
