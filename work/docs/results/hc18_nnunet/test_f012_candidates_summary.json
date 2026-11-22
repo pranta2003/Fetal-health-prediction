@@ -1,0 +1,27 @@
+{
+  "comparison_gpu_vs_cpu": {
+    "max_abs_diff_raw": 0.004839742821332038,
+    "mean_abs_diff_raw": 0.0006363533669997423,
+    "max_abs_diff_measfix": 0.004840580104882974
+  },
+  "candidates": {
+    "submission_nnunet_f012_raw.csv": {
+      "sha256": "c8ed4c15a43e99adf4b9614d7b25aee32c404f31b9c97c6a59755549dd8d1ddb",
+      "rows": 335,
+      "mean_hc": 175.99862100471296,
+      "mean_diff_vs_f0_mf": 0.7290424258879751,
+      "abs_diff_vs_f0_mf": 0.8157855137893302,
+      "mean_diff_vs_ens": 0.6929798593675184,
+      "abs_diff_vs_ens": 1.274495155396372
+    },
+    "submission_nnunet_f012_measfix.csv": {
+      "sha256": "f5c6daaa51ff2f5e192303c8e1a769fc2dcf8ff2f4d437f150000d9c5f57e700",
+      "rows": 335,
+      "mean_hc": 175.28844745443348,
+      "mean_diff_vs_f0_mf": 0.01886887560852886,
+      "abs_diff_vs_f0_mf": 0.41648031659000573,
+      "mean_diff_vs_ens": -0.017193690911927812,
+      "abs_diff_vs_ens": 1.040620706430519
+    }
+  }
+}
