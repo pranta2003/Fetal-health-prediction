@@ -61,6 +61,9 @@ From the CDC NVSS vital statistics database (`src/fetal/clinical/constants.py` a
    - CDC NVSS training records ($\le 2021$, $N = 402,282$) are filtered to singleton deliveries with valid `COMBGEST` ($20 \le \text{GA} \le 42$) and `DBWT` ($227 \le \text{DBWT} \le 8165$).
    - For each gestational week $w \in \{20, \dots, 42\}$, compute empirical percentiles: $p_{10}(w), p_{50}(w), p_{90}(w)$, plus mean and standard deviation.
    - Save table to `docs/results/fusion/gestational_percentiles.csv`.
+   > [!NOTE] Reference Cohort Criteria
+   > Reference curves are constructed strictly from CDC NVSS **live births only** (`OUTCOME == 0`), excluding stillbirths and fetal deaths.
+   > Training data is restricted to historical birth years **2016–2021** ($\le 2021$), preserving subsequent years ($\ge 2022$) as untouched temporal evaluation data.
 4. **Bridge Scoring**:
    - Fetal biometric percentile: $Z_{\text{growth}} = (\text{EFW} - \mu_{\text{CDC}}(GA)) / \sigma_{\text{CDC}}(GA)$.
    - SGA indicator: $\text{SGA} = \mathbf{1}[\text{EFW} < p_{10}(GA)]$.
