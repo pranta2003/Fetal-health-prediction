@@ -45,7 +45,7 @@ for entry in numbers:
     })
 
 # Group rows by field
-fields_order = ["HC18", "AC", "femur", "tabular", "fassd", "head", "dataset_audit", "other"]
+fields_order = ["HC18", "AC", "femur", "tabular", "fassd", "head", "fusion", "dataset_audit", "other"]
 grouped = {}
 for r in rows:
     f = r["field"]
