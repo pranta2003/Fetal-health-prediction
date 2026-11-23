@@ -1,6 +1,6 @@
 # Master Evidence & Numbers Ledger for Dissertation Report
 
-Total verified numbers: **188**
+Total verified numbers: **194**
 
 > [!IMPORTANT]
 > Every number in this ledger is programmatically extracted and cryptographically linked
@@ -223,4 +223,15 @@ Total verified numbers: **188**
 |:---|:---:|:---|:---|:---|:---:|:---:|:---|:---|:---:|
 | `fassd_ensemble_macro_dice` | Ours (1) | FASSD: 4-structure segmentation ensemble (part A settings) | FASSD official test set, 271 images, 35 patients | **Macro Dice** | **0.7914** | - | `docs/results/fassd/ensemble/fassd_ensemble_results.json` | `scripts/28_eval_fassd_ensemble.py`<br>`notebooks/benchmarks/fassd_ensemble.ipynb` | `34f039af56d6...` |
 | `fassd_ensemble_macro_hd95` | Ours (1) | FASSD: 4-structure segmentation ensemble (part A settings) | FASSD official test set, 271 images, 35 patients | **Macro HD95** | **22.3118** | - | `docs/results/fassd/ensemble/fassd_ensemble_results.json` | `scripts/28_eval_fassd_ensemble.py`<br>`notebooks/benchmarks/fassd_ensemble.ipynb` | `34f039af56d6...` |
+
+## fusion (6 metrics)
+
+| ID | System | Approach | Protocol | Metric | Value | CI (95%) | Source File | Script / Notebook | Source SHA-256 |
+|:---|:---:|:---|:---|:---|:---:|:---:|:---|:---|:---:|
+| `fusion_cdc_reference_total_live_births` | Ours (1) | CDC NVSS Gestational Growth Reference (2016-2021) | CDC NVSS training years <= 2021, live births only (OUTCOME==0), 20<=COMBGEST<=42, plausible DBWT [227, 8165]g | **Cohort Size (N)** | **262542** | - | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `ded130be563e...` |
+| `fusion_cdc_p50_week_20` | Ours (1) | CDC NVSS Gestational Growth Reference: Week 20 | Completed week 20 live singleton births (N=60) | **Median Birth Weight (p50)** | **336.0** | - | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `ded130be563e...` |
+| `fusion_cdc_p50_week_28` | Ours (1) | CDC NVSS Gestational Growth Reference: Week 28 | Completed week 28 live singleton births (N=539) | **Median Birth Weight (p50)** | **1191.0** | - | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `ded130be563e...` |
+| `fusion_cdc_p50_week_34` | Ours (1) | CDC NVSS Gestational Growth Reference: Week 34 | Completed week 34 live singleton births (N=4366) | **Median Birth Weight (p50)** | **2410.0** | - | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `ded130be563e...` |
+| `fusion_cdc_p50_week_37` | Ours (1) | CDC NVSS Gestational Growth Reference: Week 37 | Completed week 37 live singleton births (N=26228) | **Median Birth Weight (p50)** | **3033.0** | - | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `ded130be563e...` |
+| `fusion_cdc_p50_week_40` | Ours (1) | CDC NVSS Gestational Growth Reference: Week 40 | Completed week 40 live singleton births (N=50335) | **Median Birth Weight (p50)** | **3459.0** | - | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `ded130be563e...` |
 

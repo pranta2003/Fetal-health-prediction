@@ -2,7 +2,7 @@
 
 This document maps every empirical claim and metric across the thesis/report to its exact on-disk artifact, producing script or notebook, and git commit provenance.
 
-**Total Numbers Mapped**: 188 | **Verified Files on Disk**: 188 | **Missing Files**: 0
+**Total Numbers Mapped**: 194 | **Verified Files on Disk**: 194 | **Missing Files**: 0
 
 ---
 
@@ -224,6 +224,19 @@ This document maps every empirical claim and metric across the thesis/report to 
 | `pub_head_ofd_nme` | Published: BiometryNet OFD (arXiv 2512.16710) - OFD NME | **0.03** | `docs/results/published_refs.json` | `docs/results/published_refs.json` | `a6d1a58` | EXISTS |
 | `head_landmark_ensemble_bpd_nme` | Head Landmark: 3-seed median ensemble - BPD NME | **0.029** | `docs/results/head_landmark/head_landmark_results.json` | `notebooks/benchmarks/head_landmark.ipynb` | `a6d1a58` | EXISTS |
 | `head_landmark_ensemble_ofd_nme` | Head Landmark: 3-seed median ensemble - OFD NME | **0.0274** | `docs/results/head_landmark/head_landmark_results.json` | `notebooks/benchmarks/head_landmark.ipynb` | `a6d1a58` | EXISTS |
+
+---
+
+## FUSION Domain Claims (6 metrics)
+
+| ID | Report Claim | Value | Result File Path | Producing Script / Notebook | Git Commit | File Status |
+|---|---|:---:|---|---|:---:|:---:|
+| `fusion_cdc_reference_total_live_births` | CDC NVSS Gestational Growth Reference (2016-2021) - Cohort Size (N) | **262542** | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `master` | EXISTS |
+| `fusion_cdc_p50_week_20` | CDC NVSS Gestational Growth Reference: Week 20 - Median Birth Weight (p50) | **336.0** | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `master` | EXISTS |
+| `fusion_cdc_p50_week_28` | CDC NVSS Gestational Growth Reference: Week 28 - Median Birth Weight (p50) | **1191.0** | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `master` | EXISTS |
+| `fusion_cdc_p50_week_34` | CDC NVSS Gestational Growth Reference: Week 34 - Median Birth Weight (p50) | **2410.0** | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `master` | EXISTS |
+| `fusion_cdc_p50_week_37` | CDC NVSS Gestational Growth Reference: Week 37 - Median Birth Weight (p50) | **3033.0** | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `master` | EXISTS |
+| `fusion_cdc_p50_week_40` | CDC NVSS Gestational Growth Reference: Week 40 - Median Birth Weight (p50) | **3459.0** | `docs/results/fusion/gestational_percentiles_summary.json` | `scripts/81_build_gestational_percentiles.py` | `master` | EXISTS |
 
 ---
 

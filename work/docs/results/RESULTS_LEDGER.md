@@ -184,6 +184,27 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
   - Candidate Measfix: `candidates/submission_nnunet_f01234_measfix.csv` (SHA256: `b62f2a15d5b4d5d028aa5b4bd1b817594a537d8184891af63184a35b7d375ca5`). Mean HC: 175.2998 mm. Mean diff vs f012 measfix: +0.0113 mm (mean abs diff 0.1728 mm $\le 0.3$ mm, verified). Mean diff vs 5-fold ensemble measfix: -0.0059 mm (abs: 1.0087 mm).
   - Blend Candidate: `candidates/submission_blend_nnunetf01234_ens5_measfix.csv` (SHA256: `ca9acd5bc0caf79d03b08909a6ef140d974dbdb5500240af557a68833ac1349a`). Mean HC: 175.3021 mm. Max angular difference modulo $\pi$: 0.2827 rad ($\le 0.5$ rad). Mean diff vs nnunet_f01234_measfix: +0.0024 mm (abs: 0.5043 mm); vs 5-fold ensemble measfix: -0.0035 mm (abs: 0.5044 mm).
 
+---
+
+## 5. Multi-Modal Fusion Biometric Reference (CDC NVSS Gestational Age Percentiles)
+- **Protocol**: CDC NVSS live births only (`OUTCOME == 0`, stillbirths excluded), training years $\le 2021$ (2016–2021), completed gestational age $20 \le \text{COMBGEST} \le 42$ weeks, plausible birth weight $227 \le \text{DBWT} \le 8165$ g (missing `9999` dropped).
+- **Cohort Size**: $N = 262,542$ verified live births across 23 completed weeks.
+- **Reference CSV**: `docs/results/fusion/gestational_percentiles.csv` (`95aa3fb988ca87fcfc3a9f427bb3a756ecffb23fb0f4f2d72fba9558df65873b`)
+- **Summary JSON**: `docs/results/fusion/gestational_percentiles_summary.json` (`ded130be563e7aad919815fbdcd9a725edbba82c0be7a2cfd4f2631fa82e236c`)
+- **Generating Script**: `scripts/81_build_gestational_percentiles.py`
+
+| GA Week | Sample N | 10th Pct $p_{10}$ (g) | Median $p_{50}$ (g) | 90th Pct $p_{90}$ (g) | Mean (g) | Std (g) | Clinical Milestone |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+| **20** | 60 | 254.7 | 336.0 | 687.4 | 429.7 | 257.9 | Anomaly scan baseline |
+| **24** | 217 | 496.0 | 690.0 | 1300.0 | 847.5 | 576.9 | Viability threshold |
+| **28** | 539 | 740.0 | 1191.0 | 3095.2 | 1493.6 | 835.8 | Early 3rd trimester |
+| **32** | 1,675 | 1442.0 | 1984.0 | 3345.0 | 2192.8 | 731.3 | Late preterm growth monitoring |
+| **34** | 4,366 | 1800.0 | 2410.0 | 3370.0 | 2505.7 | 609.8 | Late preterm threshold |
+| **37** | 26,228 | 2466.0 | 3033.0 | 3665.6 | 3054.8 | 484.4 | Early term delivery reference |
+| **40** | 50,335 | 2945.0 | 3459.0 | 4030.0 | 3473.4 | 440.5 | Full term expected birth weight |
+| **42** | 6,563 | 2870.0 | 3435.0 | 4053.0 | 3448.8 | 477.3 | Post-term surveillance |
+
+
 
 
 

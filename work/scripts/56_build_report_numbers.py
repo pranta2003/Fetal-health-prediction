@@ -1669,6 +1669,49 @@ def build_numbers():
     })
 
     # -------------------------------------------------------------------------
+    # 11. Multi-Modal Fusion Biometric Growth Reference (CDC Gestational Percentiles)
+    # -------------------------------------------------------------------------
+    fusion_pct_path = "docs/results/fusion/gestational_percentiles_summary.json"
+    fusion_pct_data = load_json(fusion_pct_path)
+    fusion_pct_sha = get_sha256(fusion_pct_path)
+
+    n_total_ref = fusion_pct_data["row_counts"]["final_reference_rows"]
+    rows.append({
+        "id": "fusion_cdc_reference_total_live_births",
+        "field": "fusion",
+        "system": 1,
+        "approach": "CDC NVSS Gestational Growth Reference (2016-2021)",
+        "protocol": "CDC NVSS training years <= 2021, live births only (OUTCOME==0), 20<=COMBGEST<=42, plausible DBWT [227, 8165]g",
+        "metric": "Cohort Size (N)",
+        "value": n_total_ref,
+        "ci": None,
+        "source_file": fusion_pct_path,
+        "script": "scripts/81_build_gestational_percentiles.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": fusion_pct_sha,
+    })
+
+    for wk in [20, 28, 34, 37, 40]:
+        wk_str = str(wk)
+        wk_stats = fusion_pct_data["per_week"][wk_str]
+        rows.append({
+            "id": f"fusion_cdc_p50_week_{wk}",
+            "field": "fusion",
+            "system": 1,
+            "approach": f"CDC NVSS Gestational Growth Reference: Week {wk}",
+            "protocol": f"Completed week {wk} live singleton births (N={wk_stats['n']})",
+            "metric": "Median Birth Weight (p50)",
+            "value": wk_stats["p50_g"],
+            "ci": None,
+            "source_file": fusion_pct_path,
+            "script": "scripts/81_build_gestational_percentiles.py",
+            "notebook": None,
+            "pr_commit": "master",
+            "source_sha256": fusion_pct_sha,
+        })
+
+    # -------------------------------------------------------------------------
     # Save REPORT_NUMBERS.json
     # -------------------------------------------------------------------------
     json_path = DOCS_REPORT_DIR / "REPORT_NUMBERS.json"
@@ -1688,7 +1731,7 @@ def build_numbers():
         f.write("> to an immutable committed artifact on disk. Zero values are hand-typed.\n\n")
 
         # Table grouped by field
-        fields = ["HC18", "AC", "tabular", "femur", "head", "FASSD"]
+        fields = ["HC18", "AC", "tabular", "femur", "head", "FASSD", "fusion"]
         for fld in fields:
             fld_rows = [r for r in rows if r["field"] == fld]
             if not fld_rows:
