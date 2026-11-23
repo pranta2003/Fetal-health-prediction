@@ -2,11 +2,11 @@
 
 This document maps every empirical claim and metric across the thesis/report to its exact on-disk artifact, producing script or notebook, and git commit provenance.
 
-**Total Numbers Mapped**: 183 | **Verified Files on Disk**: 183 | **Missing Files**: 0
+**Total Numbers Mapped**: 188 | **Verified Files on Disk**: 188 | **Missing Files**: 0
 
 ---
 
-## HC18 Domain Claims (90 metrics)
+## HC18 Domain Claims (95 metrics)
 
 | ID | Report Claim | Value | Result File Path | Producing Script / Notebook | Git Commit | File Status |
 |---|---|:---:|---|---|:---:|:---:|
@@ -30,6 +30,11 @@ This document maps every empirical claim and metric across the thesis/report to 
 | `hc18_submission_nnunet_f0_measfix_bias_true_pred` | nnU-Net fold 0 + measfix (delta_r=0.1134mm) - Signed Bias [true-pred] | **-0.0382** | `docs/results/hc18_official/metrics_nnunet_f0_measfix.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f0/hc18-nnunet-test-f0.ipynb` | `01f8849` | EXISTS |
 | `hc18_submission_nnunet_f0_measfix_dice` | nnU-Net fold 0 + measfix (delta_r=0.1134mm) - Dice (%) | **97.99** | `docs/results/hc18_official/metrics_nnunet_f0_measfix.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f0/hc18-nnunet-test-f0.ipynb` | `01f8849` | EXISTS |
 | `hc18_submission_nnunet_f0_measfix_hd` | nnU-Net fold 0 + measfix (delta_r=0.1134mm) - HD | **1.2039** | `docs/results/hc18_official/metrics_nnunet_f0_measfix.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f0/hc18-nnunet-test-f0.ipynb` | `01f8849` | EXISTS |
+| `hc18_submission_nnunet_f01234_measfix_mae` | nnU-Net 5-fold ensemble + measfix (delta_r=0.1134mm) - HC MAE [Abs Diff] | **1.7832** | `docs/results/hc18_official/metrics_nnunet_f01234_measfix.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb` | `2b473b7` | EXISTS |
+| `hc18_submission_nnunet_f01234_measfix_bias_pred_true` | nnU-Net 5-fold ensemble + measfix (delta_r=0.1134mm) - Signed Bias [pred-true] | **0.0684** | `docs/results/hc18_official/metrics_nnunet_f01234_measfix.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb` | `2b473b7` | EXISTS |
+| `hc18_submission_nnunet_f01234_measfix_bias_true_pred` | nnU-Net 5-fold ensemble + measfix (delta_r=0.1134mm) - Signed Bias [true-pred] | **-0.0684** | `docs/results/hc18_official/metrics_nnunet_f01234_measfix.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb` | `2b473b7` | EXISTS |
+| `hc18_submission_nnunet_f01234_measfix_dice` | nnU-Net 5-fold ensemble + measfix (delta_r=0.1134mm) - Dice (%) | **98.08** | `docs/results/hc18_official/metrics_nnunet_f01234_measfix.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb` | `2b473b7` | EXISTS |
+| `hc18_submission_nnunet_f01234_measfix_hd` | nnU-Net 5-fold ensemble + measfix (delta_r=0.1134mm) - HD | **1.1623** | `docs/results/hc18_official/metrics_nnunet_f01234_measfix.json` | `notebooks/kaggle/hc18_nnunet_test/hc18-nnunet-test-f01234/hc18-nnunet-test-f01234.ipynb` | `2b473b7` | EXISTS |
 | `hc18_nnunet_f0_raw_vs_mask_mae` | nnU-Net 250ep fold 0 (raw) - HC MAE [Abs Diff] | **1.9267** | `docs/results/hc18_nnunet/f0_eval.json` | `notebooks/kaggle/hc18_nnunet/hc18-nnunet-f0-250ep/hc18-nnunet-f0-250ep.ipynb` | `110fdd0` | EXISTS |
 | `hc18_nnunet_f0_raw_vs_csv_mae` | nnU-Net 250ep fold 0 (raw) - HC MAE [Abs Diff] | **1.8879** | `docs/results/hc18_official/measfix_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `01879db` | EXISTS |
 | `hc18_nnunet_f0_raw_vs_csv_bias_pred_true` | nnU-Net 250ep fold 0 (raw) - Signed Bias [pred-true] | **0.4256** | `docs/results/hc18_official/measfix_study.json` | `notebooks/benchmarks/hc18_official.ipynb` | `01879db` | EXISTS |
