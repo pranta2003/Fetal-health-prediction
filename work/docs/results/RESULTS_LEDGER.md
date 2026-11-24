@@ -15,10 +15,13 @@
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 2026-11-19 | `ac-baseline-s42` (v3_full baseline, seed 42) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.7744 | 7.6074 | 2.8474 | -0.0826 | 1.7331 | 2.0793 | 0.0808 | 12.15% | `8ca2aed7810fcb0b4a84ca5ba57e53f101d50f1349ac6484a351a070ec779f52` |
 | 2026-11-24 | `ac-baseline-s43` (v3_full baseline, seed 43) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.5406 | 7.1260 | 2.9084 | -0.1976 | 1.6685 | 2.0281 | 0.0789 | 9.81% | `9c92e54993b5e8d2cea156ded48e24d067219a3a604becc0de8bba4b64756e13` |
+| 2026-11-24 | `ac-baseline-s44` (v3_full baseline, seed 44) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.8375 | 7.5856 | 3.0034 | -1.9355 | 1.6584 | 2.1452 | 0.0792 | 11.68% | `1ba39853a469d8e4362358db417d4555ecff2e073a5e4a4fec46d10c38910f8f` |
+| 2026-11-24 | `ac-baseline-s45` (v3_full baseline, seed 45) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.9220 | 7.8936 | 2.7109 | -1.3674 | 1.6547 | 2.1850 | 0.0778 | 12.62% | `52d16ed559adcdf060448b74c0cb264c3aabd3df2ff2ccfb7421b89c279bee4a` |
 | 2026-11-19 | `ac-ema-s42` (v3_full + EMA, seed 42) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.6430 | 7.2886 | 2.8375 | -0.7910 | 1.6868 | 2.0389 | 0.0793 | 11.84% | `ff8ca0558d9cbebbc9024296586377764f27d4168de3be6c33fb94572a771637` |
 | 2026-11-24 | `ac-wing-s42` (v3_full + Wing loss, seed 42) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.8796 | 7.4940 | 3.1506 | -0.1662 | 1.6705 | 2.1797 | 0.0829 | 11.99% | `af79383c71c4754d011897d5969768ef10d8616b928434fea885f77475515909` |
 | 2026-11-21 | `ac-fassd-s42` (v3_full + FASSD pretraining, seed 42) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.9459 | 8.3335 | 2.9702 | -0.4653 | 1.7911 | 2.1315 | 0.0820 | 12.62% | `6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9` |
 | 2026-11-24 | `ac-2seed-avg` (mean of s42 and s43) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.4780 | 6.9725 | 2.8152 | -0.1401 | - | - | 0.0228 | 10.75% | `40c6f7ca72498b9b5916db05d7aacc4300de8859d5a536920fff8d25d41b6831` |
+| 2026-11-24 | `ac-4seed-avg` (mean of s42, s43, s44, s45) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.4028 | 6.9691 | 2.6473 | -0.8958 | - | - | 0.0224 | 10.12% | `14ff4add3af0351d61dfa034cf684b5b21de04756413f0628bf8af981b75d8be` |
 
 ---
 
@@ -122,7 +125,14 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
     - **2-Seed Ensemble [mean(s42, s43) vs baseline s42]**: $\Delta\text{MAE} = -0.2963$ mm, 95% CI `[-0.4750, -0.1099]`, $p = 0.0012$. Significant gain achieved simply by ensembling two random initializations.
 - **`ac-baseline-s44` & `ac-baseline-s45` (Kaggle Runs)**:
   - Kaggle Kernels: `prantakumerpandit390/ac-baseline-s44` (Status: `COMPLETE`) and `prantakumerpandit390/ac-baseline-s45` (Status: `COMPLETE`).
-  - Recipes: v3_full baseline, patient-grouped 5-fold cross-validation on 642 images across 501 patients, seeds 44 and 45.
+  - Output Archives: `C:\fetal-data\kaggle_outputs\ac_baseline_s44\` and `C:\fetal-data\kaggle_outputs\ac_baseline_s45\`.
+  - Summary JSONs: `docs/results/ac_campaign/ac_baseline_s44.json` (`1ba39853a469d8e4362358db417d4555ecff2e073a5e4a4fec46d10c38910f8f`), `docs/results/ac_campaign/ac_baseline_s45.json` (`52d16ed559adcdf060448b74c0cb264c3aabd3df2ff2ccfb7421b89c279bee4a`), and `docs/results/ac_campaign/ac_4seed_comparison.json` (`14ff4add3af0351d61dfa034cf684b5b21de04756413f0628bf8af981b75d8be`).
+  - Recipes: v3_full baseline, patient-grouped 5-fold cross-validation on 642 images across 501 patients (`folds_v1.csv`), seeds 44 and 45.
+  - Paired Patient-Level Bootstrap (5000 resamples, seed 42):
+    - **Seed 44 vs Seed 42**: $\Delta\text{MAE} = +0.0632$ mm, 95% CI `[-0.2787, +0.3995]`, $p = 0.7060$.
+    - **Seed 45 vs Seed 42**: $\Delta\text{MAE} = +0.1476$ mm, 95% CI `[-0.1820, +0.4801]`, $p = 0.3964$.
+    - **4-Seed Ensemble vs Baseline s42**: $\Delta\text{MAE} = -0.3715$ mm, 95% CI `[-0.5912, -0.1567]`, $p = 0.0004$ (statistically significant MAE reduction).
+    - **4-Seed Ensemble vs 2-Seed Ensemble**: $\Delta\text{MAE} = -0.0752$ mm, 95% CI `[-0.1986, +0.0564]`, $p = 0.2400$.
 - **`Dataset502_AC` (nnU-Net AC Dataset Preparation)**:
   - Dataset Directory: `C:\fetal-data\nnunet_ac\Dataset502_AC\`
   - Kaggle Dataset: `prantakumerpandit390/dataset502-ac` (status: `ready`, private dataset with Dataset502_AC and offline wheels)
