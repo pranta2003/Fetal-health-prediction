@@ -1,0 +1,16 @@
+{
+  "id": "prantakumerpandit390/ac-nnunet-f0",
+  "title": "ac-nnunet-f0",
+  "code_file": "ac-nnunet-f0.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "prantakumerpandit390/dataset502-ac"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
