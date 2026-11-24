@@ -1,0 +1,49 @@
+{
+  "dataset_name": "Dataset502_AC",
+  "output_dir": "C:\\fetal-data\\nnunet_ac\\Dataset502_AC",
+  "num_training_images": 642,
+  "num_test_images": 147,
+  "bad_fits_count": 0,
+  "bad_fits": [],
+  "rejection_rule": "Reject if semi-axis <= 0, aspect ratio > 4.0 or < 0.25, diameter midpoints distance > max(r_tad, r_apad), or contour < 5 points",
+  "mean_signed_diff_mm": -0.0951,
+  "mean_abs_diff_mm": 0.1953,
+  "max_abs_diff_mm": 2.9493,
+  "oof_mapping": {
+    "fold_0": {
+      "ac_campaign_fold": 1,
+      "val_cases_count": 142,
+      "val_patients_count": 101,
+      "train_cases_count": 500,
+      "train_patients_count": 400
+    },
+    "fold_1": {
+      "ac_campaign_fold": 2,
+      "val_cases_count": 121,
+      "val_patients_count": 100,
+      "train_cases_count": 521,
+      "train_patients_count": 401
+    },
+    "fold_2": {
+      "ac_campaign_fold": 3,
+      "val_cases_count": 124,
+      "val_patients_count": 100,
+      "train_cases_count": 518,
+      "train_patients_count": 401
+    },
+    "fold_3": {
+      "ac_campaign_fold": 4,
+      "val_cases_count": 121,
+      "val_patients_count": 100,
+      "train_cases_count": 521,
+      "train_patients_count": 401
+    },
+    "fold_4": {
+      "ac_campaign_fold": 5,
+      "val_cases_count": 134,
+      "val_patients_count": 100,
+      "train_cases_count": 508,
+      "train_patients_count": 401
+    }
+  }
+}

@@ -273,6 +273,87 @@ def build_numbers():
         "source_sha256": ac_comp_sha,
     })
 
+    # nnU-Net AC Dataset Preparation
+    ac_nn_prep_path = "docs/results/ac_campaign/ac_nnunet_prep_summary.json"
+    ac_nn_prep_data = load_json(ac_nn_prep_path)
+    ac_nn_prep_sha = get_sha256(ac_nn_prep_path)
+
+    rows.append({
+        "id": "ac_nnunet_prep_num_training_images",
+        "field": "AC",
+        "system": 1,
+        "approach": "nnU-Net AC Dataset Prep (Dataset502_AC)",
+        "protocol": "5-fold patient-grouped split (folds_v1.csv), 642 images, 501 patients",
+        "metric": "Number of Training Images",
+        "value": ac_nn_prep_data["num_training_images"],
+        "ci": None,
+        "source_file": ac_nn_prep_path,
+        "script": "scripts/83_ac_to_nnunet.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_nn_prep_sha,
+    })
+    rows.append({
+        "id": "ac_nnunet_prep_bad_fits_count",
+        "field": "AC",
+        "system": 1,
+        "approach": "nnU-Net AC Dataset Prep (Dataset502_AC)",
+        "protocol": "Rejection rule: semi-axis <= 0, aspect ratio > 4.0 or < 0.25, midpoints distance > max(r_tad, r_apad), or contour < 5 points",
+        "metric": "Bad Ellipse Fits Count",
+        "value": ac_nn_prep_data["bad_fits_count"],
+        "ci": None,
+        "source_file": ac_nn_prep_path,
+        "script": "scripts/83_ac_to_nnunet.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_nn_prep_sha,
+    })
+    rows.append({
+        "id": "ac_nnunet_prep_mean_signed_diff_mm",
+        "field": "AC",
+        "system": 1,
+        "approach": "nnU-Net AC Dataset Prep (Dataset502_AC)",
+        "protocol": "Circumference from rasterized mask contour ellipse vs sonographer caliper Ramanujan AC",
+        "metric": "Mean Signed Difference (mask - ref) (mm)",
+        "value": ac_nn_prep_data["mean_signed_diff_mm"],
+        "ci": None,
+        "source_file": ac_nn_prep_path,
+        "script": "scripts/83_ac_to_nnunet.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_nn_prep_sha,
+    })
+    rows.append({
+        "id": "ac_nnunet_prep_mean_abs_diff_mm",
+        "field": "AC",
+        "system": 1,
+        "approach": "nnU-Net AC Dataset Prep (Dataset502_AC)",
+        "protocol": "Circumference from rasterized mask contour ellipse vs sonographer caliper Ramanujan AC",
+        "metric": "Mean Absolute Difference (mask - ref) (mm)",
+        "value": ac_nn_prep_data["mean_abs_diff_mm"],
+        "ci": None,
+        "source_file": ac_nn_prep_path,
+        "script": "scripts/83_ac_to_nnunet.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_nn_prep_sha,
+    })
+    rows.append({
+        "id": "ac_nnunet_prep_max_abs_diff_mm",
+        "field": "AC",
+        "system": 1,
+        "approach": "nnU-Net AC Dataset Prep (Dataset502_AC)",
+        "protocol": "Circumference from rasterized mask contour ellipse vs sonographer caliper Ramanujan AC",
+        "metric": "Max Absolute Difference (mask - ref) (mm)",
+        "value": ac_nn_prep_data["max_abs_diff_mm"],
+        "ci": None,
+        "source_file": ac_nn_prep_path,
+        "script": "scripts/83_ac_to_nnunet.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_nn_prep_sha,
+    })
+
     # -------------------------------------------------------------------------
     # 2. HC18 Grand Challenge Submissions & Bias Probe
     # -------------------------------------------------------------------------
