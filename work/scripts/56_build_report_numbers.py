@@ -143,6 +143,136 @@ def build_numbers():
             "source_sha256": ac_fassd_sha,
         })
 
+    ac_s43_path = "docs/results/ac_campaign/ac_baseline_s43.json"
+    ac_s43_data = load_json(ac_s43_path)
+    ac_s43_sha = get_sha256(ac_s43_path)
+    s43_oof = ac_s43_data["oof_summary"]
+
+    ac_s43_metrics = [
+        ("ac_baseline_s43_ac_mae", "AC MAE", round(float(s43_oof["ac_mae"]), 4), "mm"),
+        ("ac_baseline_s43_ac_rmse", "AC RMSE", round(float(s43_oof["ac_rmse"]), 4), "mm"),
+        ("ac_baseline_s43_ac_median", "AC Median", round(float(s43_oof["ac_median"]), 4), "mm"),
+        ("ac_baseline_s43_ac_bias", "AC Bias [pred-true]", round(float(s43_oof["ac_bias"]), 4), "mm"),
+        ("ac_baseline_s43_tad_mae", "TAD MAE", round(float(s43_oof["tad_mae"]), 4), "mm"),
+        ("ac_baseline_s43_apad_mae", "APAD MAE", round(float(s43_oof["apad_mae"]), 4), "mm"),
+        ("ac_baseline_s43_nme", "NME", round(float(s43_oof["nme"]), 4), None),
+        ("ac_baseline_s43_over10_pct", ">10mm (%)", round(float(s43_oof["over10"]) * 100, 2), "%"),
+    ]
+    for row_id, metric, val, unit in ac_s43_metrics:
+        rows.append({
+            "id": row_id,
+            "field": "AC",
+            "system": 1,
+            "approach": "v3_full baseline (seed 43)",
+            "protocol": "5-fold patient-grouped CV (folds_v1.csv), 642 images, 501 patients, out-of-fold",
+            "metric": metric,
+            "value": val,
+            "ci": None,
+            "source_file": ac_s43_path,
+            "script": "scripts/82_eval_ac_s43_and_wing_comparison.py",
+            "notebook": "notebooks/kaggle/ac_campaign/ac-baseline-s43/ac-baseline-s43.ipynb",
+            "pr_commit": "master",
+            "source_sha256": ac_s43_sha,
+        })
+
+    ac_wing_path = "docs/results/ac_campaign/ac_wing_s42.json"
+    ac_wing_data = load_json(ac_wing_path)
+    ac_wing_sha = get_sha256(ac_wing_path)
+    wing_oof = ac_wing_data["oof_summary"]
+
+    ac_wing_metrics = [
+        ("ac_wing_s42_ac_mae", "AC MAE", round(float(wing_oof["ac_mae"]), 4), "mm"),
+        ("ac_wing_s42_ac_rmse", "AC RMSE", round(float(wing_oof["ac_rmse"]), 4), "mm"),
+        ("ac_wing_s42_ac_median", "AC Median", round(float(wing_oof["ac_median"]), 4), "mm"),
+        ("ac_wing_s42_ac_bias", "AC Bias [pred-true]", round(float(wing_oof["ac_bias"]), 4), "mm"),
+        ("ac_wing_s42_tad_mae", "TAD MAE", round(float(wing_oof["tad_mae"]), 4), "mm"),
+        ("ac_wing_s42_apad_mae", "APAD MAE", round(float(wing_oof["apad_mae"]), 4), "mm"),
+        ("ac_wing_s42_nme", "NME", round(float(wing_oof["nme"]), 4), None),
+        ("ac_wing_s42_over10_pct", ">10mm (%)", round(float(wing_oof["over10"]) * 100, 2), "%"),
+    ]
+    for row_id, metric, val, unit in ac_wing_metrics:
+        rows.append({
+            "id": row_id,
+            "field": "AC",
+            "system": 1,
+            "approach": "v3_full + Wing loss (seed 42)",
+            "protocol": "5-fold patient-grouped CV (folds_v1.csv), 642 images, 501 patients, out-of-fold",
+            "metric": metric,
+            "value": val,
+            "ci": None,
+            "source_file": ac_wing_path,
+            "script": "scripts/82_eval_ac_s43_and_wing_comparison.py",
+            "notebook": "notebooks/kaggle/ac_campaign/ac-wing-s42/ac-wing-s42.ipynb",
+            "pr_commit": "master",
+            "source_sha256": ac_wing_sha,
+        })
+
+    ac_comp_path = "docs/results/ac_campaign/ac_s43_wing_comparison.json"
+    ac_comp_data = load_json(ac_comp_path)
+    ac_comp_sha = get_sha256(ac_comp_path)
+    comps = ac_comp_data["comparisons"]
+
+    rows.append({
+        "id": "ac_bootstrap_s43_vs_s42_seed_noise_delta_mae",
+        "field": "AC",
+        "system": 1,
+        "approach": "AC Seed Noise: baseline s43 vs s42",
+        "protocol": "Patient-level paired cluster bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+        "metric": "Delta MAE (mm)",
+        "value": comps["a_baseline_s43_vs_baseline_s42_seed_noise"]["delta_mae"],
+        "ci": comps["a_baseline_s43_vs_baseline_s42_seed_noise"]["ci95_delta_mae"],
+        "source_file": ac_comp_path,
+        "script": "scripts/82_eval_ac_s43_and_wing_comparison.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_comp_sha,
+    })
+    rows.append({
+        "id": "ac_bootstrap_wing_vs_s42_delta_mae",
+        "field": "AC",
+        "system": 1,
+        "approach": "AC Wing Loss vs Baseline: wing s42 vs baseline s42",
+        "protocol": "Patient-level paired cluster bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+        "metric": "Delta MAE (mm)",
+        "value": comps["b_wing_s42_vs_baseline_s42"]["delta_mae"],
+        "ci": comps["b_wing_s42_vs_baseline_s42"]["ci95_delta_mae"],
+        "source_file": ac_comp_path,
+        "script": "scripts/82_eval_ac_s43_and_wing_comparison.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_comp_sha,
+    })
+    rows.append({
+        "id": "ac_bootstrap_wing_vs_s43_delta_mae",
+        "field": "AC",
+        "system": 1,
+        "approach": "AC Wing Loss vs Baseline Seed 43: wing s42 vs baseline s43",
+        "protocol": "Patient-level paired cluster bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+        "metric": "Delta MAE (mm)",
+        "value": comps["c_wing_s42_vs_baseline_s43"]["delta_mae"],
+        "ci": comps["c_wing_s42_vs_baseline_s43"]["ci95_delta_mae"],
+        "source_file": ac_comp_path,
+        "script": "scripts/82_eval_ac_s43_and_wing_comparison.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_comp_sha,
+    })
+    rows.append({
+        "id": "ac_bootstrap_avg2_vs_s42_delta_mae",
+        "field": "AC",
+        "system": 1,
+        "approach": "AC 2-Seed Ensemble vs Baseline: mean(s42, s43) vs baseline s42",
+        "protocol": "Patient-level paired cluster bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+        "metric": "Delta MAE (mm)",
+        "value": comps["d_2seed_avg_vs_baseline_s42"]["delta_mae"],
+        "ci": comps["d_2seed_avg_vs_baseline_s42"]["ci95_delta_mae"],
+        "source_file": ac_comp_path,
+        "script": "scripts/82_eval_ac_s43_and_wing_comparison.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_comp_sha,
+    })
+
     # -------------------------------------------------------------------------
     # 2. HC18 Grand Challenge Submissions & Bias Probe
     # -------------------------------------------------------------------------

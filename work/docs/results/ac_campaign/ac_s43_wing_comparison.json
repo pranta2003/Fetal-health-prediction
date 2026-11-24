@@ -1,0 +1,107 @@
+{
+  "description": "Patient-level paired cluster bootstrap comparison (5000 resamples, seed 42) for AC models",
+  "cohort": {
+    "n_images": 642,
+    "n_patients": 501,
+    "protocol": "5-fold cross-validation on folds_v1.csv"
+  },
+  "models": {
+    "ac_baseline_s42": {
+      "ac_mae": 4.7744,
+      "ac_rmse": 7.6074,
+      "ac_median": 2.8474,
+      "ac_bias": -0.0826,
+      "nme": 0.0808,
+      "over10_pct": 12.15,
+      "seed": 42
+    },
+    "ac_baseline_s43": {
+      "ac_mae": 4.5406,
+      "ac_rmse": 7.126,
+      "ac_median": 2.9084,
+      "ac_bias": -0.1976,
+      "nme": 0.0789,
+      "over10_pct": 9.81,
+      "seed": 43
+    },
+    "ac_wing_s42": {
+      "ac_mae": 4.8796,
+      "ac_rmse": 7.494,
+      "ac_median": 3.1506,
+      "ac_bias": -0.1662,
+      "nme": 0.0829,
+      "over10_pct": 11.99,
+      "seed": 42
+    },
+    "ac_2seed_avg_s42_s43": {
+      "ac_mae": 4.478,
+      "ac_rmse": 6.9725,
+      "ac_median": 2.8152,
+      "ac_bias": -0.1401,
+      "nme": 0.0228,
+      "over10_pct": 10.75
+    }
+  },
+  "comparisons": {
+    "a_baseline_s43_vs_baseline_s42_seed_noise": {
+      "comparison": "baseline s43 vs baseline s42 (random seed noise)",
+      "delta_mae": -0.2337,
+      "ci95_delta_mae": [
+        -0.5773,
+        0.1279
+      ],
+      "p_val_mae": 0.1856,
+      "delta_rmse": -0.4814,
+      "ci95_delta_rmse": [
+        -1.253,
+        0.3274
+      ],
+      "p_val_rmse": 0.2244
+    },
+    "b_wing_s42_vs_baseline_s42": {
+      "comparison": "wing s42 vs baseline s42",
+      "delta_mae": 0.1052,
+      "ci95_delta_mae": [
+        -0.2537,
+        0.4676
+      ],
+      "p_val_mae": 0.55,
+      "delta_rmse": -0.1134,
+      "ci95_delta_rmse": [
+        -0.9371,
+        0.6336
+      ],
+      "p_val_rmse": 0.798
+    },
+    "c_wing_s42_vs_baseline_s43": {
+      "comparison": "wing s42 vs baseline s43",
+      "delta_mae": 0.3389,
+      "ci95_delta_mae": [
+        -0.0233,
+        0.7047
+      ],
+      "p_val_mae": 0.0664,
+      "delta_rmse": 0.368,
+      "ci95_delta_rmse": [
+        -0.3956,
+        1.0697
+      ],
+      "p_val_rmse": 0.3016
+    },
+    "d_2seed_avg_vs_baseline_s42": {
+      "comparison": "mean of baseline s42 and s43 vs baseline s42",
+      "delta_mae": -0.2963,
+      "ci95_delta_mae": [
+        -0.475,
+        -0.1099
+      ],
+      "p_val_mae": 0.0012,
+      "delta_rmse": -0.6349,
+      "ci95_delta_rmse": [
+        -1.0156,
+        -0.2576
+      ],
+      "p_val_rmse": 0.0008
+    }
+  }
+}
