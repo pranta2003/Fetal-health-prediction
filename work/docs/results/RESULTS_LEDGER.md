@@ -14,8 +14,11 @@
 | Date | Run ID / Recipe | Split / Protocol | N (Pts) | AC MAE (mm) | AC RMSE (mm) | AC Median (mm) | AC Bias [pred-true] (mm) | TAD MAE (mm) | APAD MAE (mm) | NME | >10mm (%) | Artifact SHA-256 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 2026-11-19 | `ac-baseline-s42` (v3_full baseline, seed 42) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.7744 | 7.6074 | 2.8474 | -0.0826 | 1.7331 | 2.0793 | 0.0808 | 12.15% | `8ca2aed7810fcb0b4a84ca5ba57e53f101d50f1349ac6484a351a070ec779f52` |
+| 2026-11-24 | `ac-baseline-s43` (v3_full baseline, seed 43) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.5406 | 7.1260 | 2.9084 | -0.1976 | 1.6685 | 2.0281 | 0.0789 | 9.81% | `9c92e54993b5e8d2cea156ded48e24d067219a3a604becc0de8bba4b64756e13` |
 | 2026-11-19 | `ac-ema-s42` (v3_full + EMA, seed 42) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.6430 | 7.2886 | 2.8375 | -0.7910 | 1.6868 | 2.0389 | 0.0793 | 11.84% | `ff8ca0558d9cbebbc9024296586377764f27d4168de3be6c33fb94572a771637` |
+| 2026-11-24 | `ac-wing-s42` (v3_full + Wing loss, seed 42) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.8796 | 7.4940 | 3.1506 | -0.1662 | 1.6705 | 2.1797 | 0.0829 | 11.99% | `af79383c71c4754d011897d5969768ef10d8616b928434fea885f77475515909` |
 | 2026-11-21 | `ac-fassd-s42` (v3_full + FASSD pretraining, seed 42) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.9459 | 8.3335 | 2.9702 | -0.4653 | 1.7911 | 2.1315 | 0.0820 | 12.62% | `6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9` |
+| 2026-11-24 | `ac-2seed-avg` (mean of s42 and s43) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.4780 | 6.9725 | 2.8152 | -0.1401 | - | - | 0.0228 | 10.75% | `40c6f7ca72498b9b5916db05d7aacc4300de8859d5a536920fff8d25d41b6831` |
 
 ---
 
@@ -107,6 +110,16 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
   - Output Archive: `E:\BUBT-CSE-4th yr\Capstone\kaggle_outputs\ac_fassd_s42`
   - Summary JSON: `docs/results/ac_campaign/ac_fassd_s42.json` (`6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9`)
   - Protocol: Patient-grouped 5-fold CV with FASSD self-supervised pretrained backbone weights on 642 images across 501 patients. Paired bootstrap vs baseline s42: $\Delta\text{MAE} = +0.1715$ mm, 95% CI `[-0.2306, +0.5989]`, $p = 0.4108$. Clearly did not help.
+- **`ac-baseline-s43` & `ac-wing-s42` (Kaggle Runs)**:
+  - Kaggle Kernels: `prantakumerpandit390/ac-baseline-s43` and `prantakumerpandit390/ac-wing-s42` (both `COMPLETE`).
+  - Output Archives: `C:\fetal-data\kaggle_outputs\ac_baseline_s43\` and `C:\fetal-data\kaggle_outputs\ac_wing_s42\`.
+  - Summary JSONs: `docs/results/ac_campaign/ac_baseline_s43.json` (`9c92e54993b5e8d2cea156ded48e24d067219a3a604becc0de8bba4b64756e13`), `docs/results/ac_campaign/ac_wing_s42.json` (`af79383c71c4754d011897d5969768ef10d8616b928434fea885f77475515909`), and comparison `docs/results/ac_campaign/ac_s43_wing_comparison.json` (`40c6f7ca72498b9b5916db05d7aacc4300de8859d5a536920fff8d25d41b6831`).
+  - Protocol: 5-fold patient-grouped CV on 642 images across 501 patients (`folds_v1.csv`).
+  - Paired Patient-Level Bootstrap (5000 resamples, seed 42):
+    - **Seed Noise [s43 vs s42]**: $\Delta\text{MAE} = -0.2337$ mm, 95% CI `[-0.5773, +0.1279]`, $p = 0.1856$. Random seed fluctuation is ~0.23 mm and not statistically significant.
+    - **Wing Loss [wing s42 vs baseline s42]**: $\Delta\text{MAE} = +0.1052$ mm, 95% CI `[-0.2537, +0.4676]`, $p = 0.5500$. Wing loss does not outperform default loss.
+    - **Wing Loss vs Seed 43 [wing s42 vs baseline s43]**: $\Delta\text{MAE} = +0.3389$ mm, 95% CI `[-0.0233, +0.7047]`, $p = 0.0664$.
+    - **2-Seed Ensemble [mean(s42, s43) vs baseline s42]**: $\Delta\text{MAE} = -0.2963$ mm, 95% CI `[-0.4750, -0.1099]`, $p = 0.0012$. Significant gain achieved simply by ensembling two random initializations.
 - **`submission_ensemble_5fold_corrected_mult050` (HC18 Probe)**:
   - Grand Challenge Test Submission: Probe with multiplicative factor 1.004065 (formerly labeled mult100 in preliminary docs, mult100 was never submitted).
   - Metrics File: `docs/results/hc18_calibration/metrics_probe_mult050.json` (`682672a906d6317fdaca1e7c40b2b03c465cb98d4e4472d71b8d666f210141a1`)
