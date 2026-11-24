@@ -1,0 +1,452 @@
+{
+  "title": "Comprehensive Dataset Inventory",
+  "generated_by": "scripts/build_data_inventory.py",
+  "datasets": {
+    "cdc_tabular": {
+      "dataset_name": "CDC NVSS Vital Statistics Tabular (Stillbirth Risk)",
+      "source_file": "C:\\fetal-data\\cdc\\clinical_training_data.csv",
+      "raw_on_disk": false,
+      "raw_source_description": "16 annual files (2016-2023) from CDC National Vital Statistics System: 8 Natality files (2016_NATAL.csv to 2023_NATAL.csv, totaling 29,950,846 live births) and 8 Fetal Death files (2016_FETAL_COD.csv to 2023_FETAL_COD.csv, totaling 358,175 fetal deaths). The 16 raw files were processed in Google Colab/Drive and are NOT hosted on the local laptop disk.",
+      "modelling_file_construction": "From the 29.95M live births, exactly ~45,000 live births per year (total 359,961, seed 42) were sampled. All 358,175 fetal deaths across 2016-2023 were retained without downsampling. The sets were concatenated (359,961 + 358,175 = 718,136 rows, 80 columns) and shuffled (seed 42).",
+      "total_rows": 718136,
+      "total_columns": 80,
+      "rows_by_outcome": {
+        "live_births_outcome_0": 359961,
+        "stillbirths_outcome_1": 358175
+      },
+      "rows_by_year": {
+        "2016": 96391,
+        "2017": 94170,
+        "2018": 92667,
+        "2019": 91004,
+        "2020": 86810,
+        "2021": 87421,
+        "2022": 85108,
+        "2023": 84565
+      },
+      "rows_by_year_and_outcome": {
+        "2016": {
+          "live": 45000,
+          "stillbirth": 51391
+        },
+        "2017": {
+          "live": 45000,
+          "stillbirth": 49170
+        },
+        "2018": {
+          "live": 44991,
+          "stillbirth": 47676
+        },
+        "2019": {
+          "live": 44997,
+          "stillbirth": 46007
+        },
+        "2020": {
+          "live": 44994,
+          "stillbirth": 41816
+        },
+        "2021": {
+          "live": 44993,
+          "stillbirth": 42428
+        },
+        "2022": {
+          "live": 44995,
+          "stillbirth": 40113
+        },
+        "2023": {
+          "live": 44991,
+          "stillbirth": 39574
+        }
+      },
+      "rows_after_20wk_filter": {
+        "raw_file_d20": {
+          "total": 544920,
+          "live_births": 359843,
+          "stillbirths": 185077,
+          "train_le_2021": {
+            "total": 411993,
+            "stillbirths": 142105,
+            "live_births": 269888
+          },
+          "test_ge_2022": {
+            "total": 132927,
+            "stillbirths": 42972,
+            "live_births": 89955
+          }
+        },
+        "deduplicated_d20": {
+          "total": 532392,
+          "live_births": 359567,
+          "stillbirths": 172825,
+          "train_le_2021": {
+            "total": 402282,
+            "stillbirths": 132604,
+            "live_births": 269678
+          },
+          "test_ge_2022": {
+            "total": 130110,
+            "stillbirths": 40221,
+            "live_births": 89889
+          }
+        }
+      },
+      "e1_primary_model_features": {
+        "count": 15,
+        "numeric_count": 5,
+        "categorical_count": 10,
+        "numeric_features": [
+          "MAGER",
+          "BMI",
+          "PRECARE",
+          "PRIORDEAD",
+          "PRIORLIVE"
+        ],
+        "categorical_features": [
+          "RF_GDIAB",
+          "RF_GHYPE",
+          "RF_EHYPE",
+          "RF_CESAR",
+          "RF_ARTEC",
+          "RF_INFTR",
+          "RF_FEDRG",
+          "CIG_REC",
+          "DPLURAL",
+          "SEX"
+        ],
+        "all_features": [
+          "MAGER",
+          "BMI",
+          "PRECARE",
+          "PRIORDEAD",
+          "PRIORLIVE",
+          "RF_GDIAB",
+          "RF_GHYPE",
+          "RF_EHYPE",
+          "RF_CESAR",
+          "RF_ARTEC",
+          "RF_INFTR",
+          "RF_FEDRG",
+          "CIG_REC",
+          "DPLURAL",
+          "SEX"
+        ]
+      },
+      "columns_removed_breakdown": {
+        "total_removed": 65,
+        "categories": {
+          "target_and_split": [
+            "OUTCOME",
+            "YEAR"
+          ],
+          "data_leakage_outcome_time": [
+            "COMBGEST",
+            "OEGest_Comb",
+            "OBGEST_FLG",
+            "DBWT",
+            "BWTR4"
+          ],
+          "labor_delivery_facility_attendant": [
+            "ATTEND",
+            "BFACIL",
+            "BFACIL3",
+            "DLMP_MM",
+            "DLMP_YY",
+            "DMETH_REC",
+            "RDMETH_REC",
+            "ME_PRES",
+            "ME_ROUT",
+            "ME_TRIAL",
+            "MM_AICU",
+            "MM_RUPT",
+            "RESTATUS"
+          ],
+          "reporting_and_imputation_flags": [
+            "F_CIGS_0",
+            "F_CIGS_1",
+            "F_CIGS_2",
+            "F_CIGS_3",
+            "F_MEDUC",
+            "F_MM_AICU",
+            "F_MPCB",
+            "F_M_HT",
+            "F_PWGT",
+            "F_RF_CESAR",
+            "F_RF_GDIAB",
+            "F_RF_GHYPER",
+            "F_RF_NCESAR",
+            "F_RF_PDIAB",
+            "F_RF_PHYPER",
+            "F_TOBACO",
+            "F_WIC",
+            "MAGE_IMPFLG",
+            "MAGE_REPFLG",
+            "IMP_PLUR",
+            "IMP_SEX",
+            "MRACEIMP",
+            "FAGERPT_FLG"
+          ],
+          "paternal_characteristics": [
+            "FAGECOMB",
+            "FAGEREC11"
+          ],
+          "redundant_recodes": [
+            "BMI_R",
+            "CIG_0",
+            "CIG_1",
+            "CIG_2",
+            "CIG_3",
+            "MAGER9",
+            "MAGER14",
+            "M_Ht_In",
+            "PWgt_R",
+            "LBO_REC",
+            "ILLB_R",
+            "ILLB_R11",
+            "RF_CESARN",
+            "MRACE15",
+            "MRACEHISP",
+            "MHISPX"
+          ],
+          "socioeconomic_and_sensitive_demographic": [
+            "MEDUC",
+            "WIC",
+            "MBSTATE_REC",
+            "MRACE6"
+          ]
+        }
+      }
+    },
+    "hc18": {
+      "dataset_name": "HC18 Grand Challenge (Head Circumference)",
+      "source": "Grand Challenge / Radboud University Medical Center (van den Heuvel et al., 2018)",
+      "files": {
+        "training_csv": "C:\\fetal-data\\HC18\\training_set_pixel_size_and_HC.csv",
+        "test_csv": "C:\\fetal-data\\HC18\\test_set_pixel_size.csv"
+      },
+      "total_images": 1334,
+      "total_patients": 1141,
+      "train_set": {
+        "images": 999,
+        "patients": 806,
+        "folds": {
+          "fold_0": {
+            "train": 793,
+            "val": 206
+          },
+          "fold_1": {
+            "train": 800,
+            "val": 199
+          },
+          "fold_2": {
+            "train": 791,
+            "val": 208
+          },
+          "fold_3": {
+            "train": 805,
+            "val": 194
+          },
+          "fold_4": {
+            "train": 807,
+            "val": 192
+          }
+        }
+      },
+      "test_set": {
+        "images": 335,
+        "patients": 335,
+        "description": "Official unseen Grand Challenge test set evaluated on grand-challenge.org"
+      }
+    },
+    "ac": {
+      "dataset_name": "Fetal Abdominal Circumference (AC)",
+      "sources": {
+        "FP": "Fetal Planes dataset (Burgos-Artizzu et al., 2020 / Zenodo), Barcelona cohort",
+        "UCL": "University College London fetal ultrasound cohort (Gimenez et al., 2024 / Zenodo)"
+      },
+      "files": {
+        "fp_annotations": "C:\\fetal-data\\FP\\annotations\\Abdomen.csv",
+        "ucl_calibrated_annotations": "C:\\fetal-data\\UCL\\annotations\\px_to_mm\\Abdomen.csv",
+        "folds_csv": "C:\\fetal-github-clone\\work\\docs\\results\\ac_campaign\\folds_v1.csv"
+      },
+      "published_literature_counts": {
+        "FP": 693,
+        "UCL": 130,
+        "total": 823
+      },
+      "raw_on_disk_counts": {
+        "FP": 693,
+        "UCL_raw": 130,
+        "total": 823
+      },
+      "calibrated_used_counts": {
+        "FP": 693,
+        "UCL": 99,
+        "total": 792,
+        "exclusions_from_published": "34 total missing (31 UCL uncalibrated without px_to_mm rate, 3 patient 125 corrupted layout)"
+      },
+      "training_cv_cohort": {
+        "images": 642,
+        "patients": 501,
+        "folds": {
+          "fold_1": {
+            "images": 142,
+            "patients": 101
+          },
+          "fold_2": {
+            "images": 121,
+            "patients": 100
+          },
+          "fold_3": {
+            "images": 124,
+            "patients": 100
+          },
+          "fold_4": {
+            "images": 121,
+            "patients": 100
+          },
+          "fold_5": {
+            "images": 134,
+            "patients": 100
+          }
+        }
+      },
+      "test_cohort": {
+        "images": 147,
+        "fp_images": 125,
+        "ucl_images": 22,
+        "description": "Held-out test set from official Abdomen_Test.csv files"
+      }
+    },
+    "femur": {
+      "dataset_name": "Fetal Femur Length (FL)",
+      "sources": {
+        "FP": "Fetal Planes dataset (Burgos-Artizzu et al., 2020), Plane 5 (Femur)",
+        "UCL": "University College London fetal ultrasound cohort, Femur landmarks"
+      },
+      "files": {
+        "fp_annotations": "C:\\fetal-data\\FP\\annotations\\Femur.csv",
+        "ucl_calibrated_annotations": "C:\\fetal-data\\UCL\\annotations\\px_to_mm\\Femur.csv",
+        "audit_file": "C:\\fetal-github-clone\\work\\docs\\results\\femur\\femur_data_followup.json"
+      },
+      "published_literature_counts": {
+        "FP": 760,
+        "UCL": 135,
+        "total": 895
+      },
+      "calibrated_total": 867,
+      "exclusions": "3 FP images missing px_to_mm rate (Patient00888, Patient01319, Patient01423); 28 UCL uncalibrated",
+      "clean_cohort": {
+        "images": 864,
+        "patients": 658
+      },
+      "splits": {
+        "train": {
+          "images": 451,
+          "patients": 345,
+          "fp_images": 382,
+          "ucl_images": 69
+        },
+        "validation": {
+          "images": 65,
+          "patients": 47,
+          "fp_images": 52,
+          "ucl_images": 13
+        },
+        "test": {
+          "images": 348,
+          "patients": 266,
+          "fp_images": 323,
+          "ucl_images": 25
+        }
+      }
+    },
+    "head_landmarks": {
+      "dataset_name": "Fetal Head Landmark Biometry (BPD & OFD Calipers)",
+      "sources": {
+        "FP": "Fetal Planes dataset (Burgos-Artizzu et al., 2020), Head/Trans-thalamic plane",
+        "UCL": "University College London cohort, Head landmarks (px_to_mm calibrated)"
+      },
+      "files": {
+        "fp_annotations": "C:\\fetal-data\\FP\\annotations\\Head.csv",
+        "ucl_calibrated_annotations": "C:\\fetal-data\\UCL\\annotations\\px_to_mm\\Head.csv",
+        "fp_train_split": "C:\\fetal-data\\FP\\annotations\\Head_Train.csv",
+        "fp_test_split": "C:\\fetal-data\\FP\\annotations\\Head_Test.csv",
+        "ucl_train_split": "C:\\fetal-data\\UCL\\annotations\\px_to_mm\\Head_Train.csv",
+        "ucl_test_split": "C:\\fetal-data\\UCL\\annotations\\px_to_mm\\Head_Test.csv"
+      },
+      "published_literature_counts": {
+        "FP": 1637,
+        "UCL": 159,
+        "total": 1796
+      },
+      "raw_on_disk_counts": {
+        "FP": 1637,
+        "UCL_raw": 159,
+        "total": 1796
+      },
+      "calibrated_total": 1763,
+      "uncalibrated_ucl_count": 33,
+      "splits": {
+        "train": {
+          "total_images": 848,
+          "fp_images": 757,
+          "fp_patients": 449,
+          "ucl_images": 91,
+          "ucl_patients": 26
+        },
+        "test": {
+          "total_images": 915,
+          "fp_images": 880,
+          "fp_patients": 460,
+          "ucl_images": 35,
+          "ucl_patients": 5
+        }
+      }
+    },
+    "fassd": {
+      "dataset_name": "FASSD (Fetal Abdominal Structures Segmentation Dataset)",
+      "source": "FASSD Dataset (Xu et al., 2023 / Zenodo / Kaggle prantakumerpandit390/fassd-fetal-abdomen-v2)",
+      "files": {
+        "audit_file": "C:\\fetal-github-clone\\work\\docs\\results\\fassd\\fassd_audit.json",
+        "split_v1_csv": "C:\\fetal-github-clone\\work\\docs\\results\\fassd\\split_v1.csv",
+        "split_v2_csv": "C:\\fetal-github-clone\\work\\docs\\results\\fassd\\split_v2.csv"
+      },
+      "total_images": 1588,
+      "total_patients": 169,
+      "structures": [
+        "artery",
+        "liver",
+        "stomach",
+        "vein"
+      ],
+      "split_v1": {
+        "test": {
+          "images": 252,
+          "patients": 26
+        },
+        "train": {
+          "images": 1100,
+          "patients": 118
+        },
+        "val": {
+          "images": 236,
+          "patients": 25
+        }
+      },
+      "split_v2": {
+        "test": {
+          "images": 271,
+          "patients": 25
+        },
+        "train": {
+          "images": 1063,
+          "patients": 118
+        },
+        "val": {
+          "images": 254,
+          "patients": 26
+        }
+      }
+    }
+  }
+}
