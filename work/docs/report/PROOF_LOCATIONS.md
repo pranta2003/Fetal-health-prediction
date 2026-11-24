@@ -2,7 +2,7 @@
 
 This document maps every empirical claim and metric across the thesis/report to its exact on-disk artifact, producing script or notebook, and git commit provenance.
 
-**Total Numbers Mapped**: 219 | **Verified Files on Disk**: 219 | **Missing Files**: 0
+**Total Numbers Mapped**: 239 | **Verified Files on Disk**: 239 | **Missing Files**: 0
 
 ---
 
@@ -108,7 +108,7 @@ This document maps every empirical claim and metric across the thesis/report to 
 
 ---
 
-## AC Domain Claims (77 metrics)
+## AC Domain Claims (97 metrics)
 
 | ID | Report Claim | Value | Result File Path | Producing Script / Notebook | Git Commit | File Status |
 |---|---|:---:|---|---|:---:|:---:|
@@ -156,6 +156,26 @@ This document maps every empirical claim and metric across the thesis/report to 
 | `ac_bootstrap_wing_vs_s42_delta_mae` | AC Wing Loss vs Baseline: wing s42 vs baseline s42 - Delta MAE (mm) | **0.1052 [-0.2537, 0.4676]** | `docs/results/ac_campaign/ac_s43_wing_comparison.json` | `scripts/82_eval_ac_s43_and_wing_comparison.py` | `master` | EXISTS |
 | `ac_bootstrap_wing_vs_s43_delta_mae` | AC Wing Loss vs Baseline Seed 43: wing s42 vs baseline s43 - Delta MAE (mm) | **0.3389 [-0.0233, 0.7047]** | `docs/results/ac_campaign/ac_s43_wing_comparison.json` | `scripts/82_eval_ac_s43_and_wing_comparison.py` | `master` | EXISTS |
 | `ac_bootstrap_avg2_vs_s42_delta_mae` | AC 2-Seed Ensemble vs Baseline: mean(s42, s43) vs baseline s42 - Delta MAE (mm) | **-0.2963 [-0.475, -0.1099]** | `docs/results/ac_campaign/ac_s43_wing_comparison.json` | `scripts/82_eval_ac_s43_and_wing_comparison.py` | `master` | EXISTS |
+| `ac_baseline_s44_ac_mae` | v3_full baseline (seed 44) - AC MAE | **4.8375** | `docs/results/ac_campaign/ac_baseline_s44.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s44/ac-baseline-s44.ipynb` | `master` | EXISTS |
+| `ac_baseline_s44_ac_rmse` | v3_full baseline (seed 44) - AC RMSE | **7.5856** | `docs/results/ac_campaign/ac_baseline_s44.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s44/ac-baseline-s44.ipynb` | `master` | EXISTS |
+| `ac_baseline_s44_ac_median` | v3_full baseline (seed 44) - AC Median | **3.0034** | `docs/results/ac_campaign/ac_baseline_s44.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s44/ac-baseline-s44.ipynb` | `master` | EXISTS |
+| `ac_baseline_s44_ac_bias` | v3_full baseline (seed 44) - AC Bias [pred-true] | **-1.9355** | `docs/results/ac_campaign/ac_baseline_s44.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s44/ac-baseline-s44.ipynb` | `master` | EXISTS |
+| `ac_baseline_s44_tad_mae` | v3_full baseline (seed 44) - TAD MAE | **1.6584** | `docs/results/ac_campaign/ac_baseline_s44.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s44/ac-baseline-s44.ipynb` | `master` | EXISTS |
+| `ac_baseline_s44_apad_mae` | v3_full baseline (seed 44) - APAD MAE | **2.1452** | `docs/results/ac_campaign/ac_baseline_s44.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s44/ac-baseline-s44.ipynb` | `master` | EXISTS |
+| `ac_baseline_s44_nme` | v3_full baseline (seed 44) - NME | **0.0792** | `docs/results/ac_campaign/ac_baseline_s44.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s44/ac-baseline-s44.ipynb` | `master` | EXISTS |
+| `ac_baseline_s44_over10_pct` | v3_full baseline (seed 44) - >10mm (%) | **11.68** | `docs/results/ac_campaign/ac_baseline_s44.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s44/ac-baseline-s44.ipynb` | `master` | EXISTS |
+| `ac_baseline_s45_ac_mae` | v3_full baseline (seed 45) - AC MAE | **4.922** | `docs/results/ac_campaign/ac_baseline_s45.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s45/ac-baseline-s45.ipynb` | `master` | EXISTS |
+| `ac_baseline_s45_ac_rmse` | v3_full baseline (seed 45) - AC RMSE | **7.8936** | `docs/results/ac_campaign/ac_baseline_s45.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s45/ac-baseline-s45.ipynb` | `master` | EXISTS |
+| `ac_baseline_s45_ac_median` | v3_full baseline (seed 45) - AC Median | **2.7109** | `docs/results/ac_campaign/ac_baseline_s45.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s45/ac-baseline-s45.ipynb` | `master` | EXISTS |
+| `ac_baseline_s45_ac_bias` | v3_full baseline (seed 45) - AC Bias [pred-true] | **-1.3674** | `docs/results/ac_campaign/ac_baseline_s45.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s45/ac-baseline-s45.ipynb` | `master` | EXISTS |
+| `ac_baseline_s45_tad_mae` | v3_full baseline (seed 45) - TAD MAE | **1.6547** | `docs/results/ac_campaign/ac_baseline_s45.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s45/ac-baseline-s45.ipynb` | `master` | EXISTS |
+| `ac_baseline_s45_apad_mae` | v3_full baseline (seed 45) - APAD MAE | **2.185** | `docs/results/ac_campaign/ac_baseline_s45.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s45/ac-baseline-s45.ipynb` | `master` | EXISTS |
+| `ac_baseline_s45_nme` | v3_full baseline (seed 45) - NME | **0.0778** | `docs/results/ac_campaign/ac_baseline_s45.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s45/ac-baseline-s45.ipynb` | `master` | EXISTS |
+| `ac_baseline_s45_over10_pct` | v3_full baseline (seed 45) - >10mm (%) | **12.62** | `docs/results/ac_campaign/ac_baseline_s45.json` | `notebooks/kaggle/ac_campaign/ac-baseline-s45/ac-baseline-s45.ipynb` | `master` | EXISTS |
+| `ac_bootstrap_4seed_avg_vs_s42_delta_mae` | AC 4-Seed Ensemble vs Baseline: mean(s42..s45) vs baseline s42 - Delta MAE (mm) | **-0.3715 [-0.5912, -0.1567]** | `docs/results/ac_campaign/ac_4seed_comparison.json` | `scripts/86_eval_ac_seeds_and_4seed_ensemble.py` | `master` | EXISTS |
+| `ac_bootstrap_4seed_avg_vs_2seed_avg_delta_mae` | AC 4-Seed Ensemble vs 2-Seed Ensemble: mean(s42..s45) vs mean(s42, s43) - Delta MAE (mm) | **-0.0752 [-0.1986, 0.0564]** | `docs/results/ac_campaign/ac_4seed_comparison.json` | `scripts/86_eval_ac_seeds_and_4seed_ensemble.py` | `master` | EXISTS |
+| `ac_bootstrap_s44_vs_s42_delta_mae` | AC Seed Noise: baseline s44 vs s42 - Delta MAE (mm) | **0.0632 [-0.2787, 0.3995]** | `docs/results/ac_campaign/ac_4seed_comparison.json` | `scripts/86_eval_ac_seeds_and_4seed_ensemble.py` | `master` | EXISTS |
+| `ac_bootstrap_s45_vs_s42_delta_mae` | AC Seed Noise: baseline s45 vs s42 - Delta MAE (mm) | **0.1476 [-0.182, 0.4801]** | `docs/results/ac_campaign/ac_4seed_comparison.json` | `scripts/86_eval_ac_seeds_and_4seed_ensemble.py` | `master` | EXISTS |
 | `ac_nnunet_prep_num_training_images` | nnU-Net AC Dataset Prep (Dataset502_AC) - Number of Training Images | **642** | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `master` | EXISTS |
 | `ac_nnunet_prep_bad_fits_count` | nnU-Net AC Dataset Prep (Dataset502_AC) - Bad Ellipse Fits Count | **0** | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `master` | EXISTS |
 | `ac_nnunet_prep_mean_signed_diff_mm` | nnU-Net AC Dataset Prep (Dataset502_AC) - Mean Signed Difference (mask - ref) (mm) | **-0.0951** | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `master` | EXISTS |
