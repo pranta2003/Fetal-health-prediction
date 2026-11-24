@@ -273,6 +273,139 @@ def build_numbers():
         "source_sha256": ac_comp_sha,
     })
 
+    # Seed 44 Baseline
+    ac_s44_path = "docs/results/ac_campaign/ac_baseline_s44.json"
+    ac_s44_data = load_json(ac_s44_path)
+    ac_s44_sha = get_sha256(ac_s44_path)
+    s44_oof = ac_s44_data["oof_summary"]
+
+    ac_s44_metrics = [
+        ("ac_baseline_s44_ac_mae", "AC MAE", round(float(s44_oof["ac_mae"]), 4), "mm"),
+        ("ac_baseline_s44_ac_rmse", "AC RMSE", round(float(s44_oof["ac_rmse"]), 4), "mm"),
+        ("ac_baseline_s44_ac_median", "AC Median", round(float(s44_oof["ac_median"]), 4), "mm"),
+        ("ac_baseline_s44_ac_bias", "AC Bias [pred-true]", round(float(s44_oof["ac_bias"]), 4), "mm"),
+        ("ac_baseline_s44_tad_mae", "TAD MAE", round(float(s44_oof["tad_mae"]), 4), "mm"),
+        ("ac_baseline_s44_apad_mae", "APAD MAE", round(float(s44_oof["apad_mae"]), 4), "mm"),
+        ("ac_baseline_s44_nme", "NME", round(float(s44_oof["nme"]), 4), None),
+        ("ac_baseline_s44_over10_pct", ">10mm (%)", round(float(s44_oof["over10"]) * 100, 2), "%"),
+    ]
+    for row_id, metric, val, unit in ac_s44_metrics:
+        rows.append({
+            "id": row_id,
+            "field": "AC",
+            "system": 1,
+            "approach": "v3_full baseline (seed 44)",
+            "protocol": "5-fold patient-grouped CV (folds_v1.csv), 642 images, 501 patients, out-of-fold",
+            "metric": metric,
+            "value": val,
+            "ci": None,
+            "source_file": ac_s44_path,
+            "script": "scripts/86_eval_ac_seeds_and_4seed_ensemble.py",
+            "notebook": "notebooks/kaggle/ac_campaign/ac-baseline-s44/ac-baseline-s44.ipynb",
+            "pr_commit": "master",
+            "source_sha256": ac_s44_sha,
+        })
+
+    # Seed 45 Baseline
+    ac_s45_path = "docs/results/ac_campaign/ac_baseline_s45.json"
+    ac_s45_data = load_json(ac_s45_path)
+    ac_s45_sha = get_sha256(ac_s45_path)
+    s45_oof = ac_s45_data["oof_summary"]
+
+    ac_s45_metrics = [
+        ("ac_baseline_s45_ac_mae", "AC MAE", round(float(s45_oof["ac_mae"]), 4), "mm"),
+        ("ac_baseline_s45_ac_rmse", "AC RMSE", round(float(s45_oof["ac_rmse"]), 4), "mm"),
+        ("ac_baseline_s45_ac_median", "AC Median", round(float(s45_oof["ac_median"]), 4), "mm"),
+        ("ac_baseline_s45_ac_bias", "AC Bias [pred-true]", round(float(s45_oof["ac_bias"]), 4), "mm"),
+        ("ac_baseline_s45_tad_mae", "TAD MAE", round(float(s45_oof["tad_mae"]), 4), "mm"),
+        ("ac_baseline_s45_apad_mae", "APAD MAE", round(float(s45_oof["apad_mae"]), 4), "mm"),
+        ("ac_baseline_s45_nme", "NME", round(float(s45_oof["nme"]), 4), None),
+        ("ac_baseline_s45_over10_pct", ">10mm (%)", round(float(s45_oof["over10"]) * 100, 2), "%"),
+    ]
+    for row_id, metric, val, unit in ac_s45_metrics:
+        rows.append({
+            "id": row_id,
+            "field": "AC",
+            "system": 1,
+            "approach": "v3_full baseline (seed 45)",
+            "protocol": "5-fold patient-grouped CV (folds_v1.csv), 642 images, 501 patients, out-of-fold",
+            "metric": metric,
+            "value": val,
+            "ci": None,
+            "source_file": ac_s45_path,
+            "script": "scripts/86_eval_ac_seeds_and_4seed_ensemble.py",
+            "notebook": "notebooks/kaggle/ac_campaign/ac-baseline-s45/ac-baseline-s45.ipynb",
+            "pr_commit": "master",
+            "source_sha256": ac_s45_sha,
+        })
+
+    # 4-Seed Comparison & Ensembling Bootstraps
+    ac_4seed_comp_path = "docs/results/ac_campaign/ac_4seed_comparison.json"
+    ac_4seed_comp_data = load_json(ac_4seed_comp_path)
+    ac_4seed_comp_sha = get_sha256(ac_4seed_comp_path)
+    c4 = ac_4seed_comp_data["comparisons"]
+
+    rows.append({
+        "id": "ac_bootstrap_4seed_avg_vs_s42_delta_mae",
+        "field": "AC",
+        "system": 1,
+        "approach": "AC 4-Seed Ensemble vs Baseline: mean(s42..s45) vs baseline s42",
+        "protocol": "Patient-level paired cluster bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+        "metric": "Delta MAE (mm)",
+        "value": c4["4seed_avg_vs_s42"]["delta_mae"],
+        "ci": c4["4seed_avg_vs_s42"]["ci95_delta_mae"],
+        "source_file": ac_4seed_comp_path,
+        "script": "scripts/86_eval_ac_seeds_and_4seed_ensemble.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_4seed_comp_sha,
+    })
+    rows.append({
+        "id": "ac_bootstrap_4seed_avg_vs_2seed_avg_delta_mae",
+        "field": "AC",
+        "system": 1,
+        "approach": "AC 4-Seed Ensemble vs 2-Seed Ensemble: mean(s42..s45) vs mean(s42, s43)",
+        "protocol": "Patient-level paired cluster bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+        "metric": "Delta MAE (mm)",
+        "value": c4["4seed_avg_vs_2seed_avg"]["delta_mae"],
+        "ci": c4["4seed_avg_vs_2seed_avg"]["ci95_delta_mae"],
+        "source_file": ac_4seed_comp_path,
+        "script": "scripts/86_eval_ac_seeds_and_4seed_ensemble.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_4seed_comp_sha,
+    })
+    rows.append({
+        "id": "ac_bootstrap_s44_vs_s42_delta_mae",
+        "field": "AC",
+        "system": 1,
+        "approach": "AC Seed Noise: baseline s44 vs s42",
+        "protocol": "Patient-level paired cluster bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+        "metric": "Delta MAE (mm)",
+        "value": c4["s44_vs_s42"]["delta_mae"],
+        "ci": c4["s44_vs_s42"]["ci95_delta_mae"],
+        "source_file": ac_4seed_comp_path,
+        "script": "scripts/86_eval_ac_seeds_and_4seed_ensemble.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_4seed_comp_sha,
+    })
+    rows.append({
+        "id": "ac_bootstrap_s45_vs_s42_delta_mae",
+        "field": "AC",
+        "system": 1,
+        "approach": "AC Seed Noise: baseline s45 vs s42",
+        "protocol": "Patient-level paired cluster bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+        "metric": "Delta MAE (mm)",
+        "value": c4["s45_vs_s42"]["delta_mae"],
+        "ci": c4["s45_vs_s42"]["ci95_delta_mae"],
+        "source_file": ac_4seed_comp_path,
+        "script": "scripts/86_eval_ac_seeds_and_4seed_ensemble.py",
+        "notebook": None,
+        "pr_commit": "master",
+        "source_sha256": ac_4seed_comp_sha,
+    })
+
     # nnU-Net AC Dataset Preparation
     ac_nn_prep_path = "docs/results/ac_campaign/ac_nnunet_prep_summary.json"
     ac_nn_prep_data = load_json(ac_nn_prep_path)
