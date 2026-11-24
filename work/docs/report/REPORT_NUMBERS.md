@@ -1,6 +1,6 @@
 # Master Evidence & Numbers Ledger for Dissertation Report
 
-Total verified numbers: **214**
+Total verified numbers: **219**
 
 > [!IMPORTANT]
 > Every number in this ledger is programmatically extracted and cryptographically linked
@@ -106,7 +106,7 @@ Total verified numbers: **214**
 | `pub_hc18_rong2019_mad` | Published (2) | Published: Rong2019 (via Mask-R2CNN (PMC8580944)) | Official HC18 challenge 335-image test set, HC mean absolute difference (MAD) in mm (mean +- SD) | **HC MAE [MAD]** | **2.45** | - | `docs/results/published_refs.json` | `docs/results/published_refs.json` | `9c97107f9db8...` |
 | `pub_hc18_van_den_heuvel2018_mad` | Published (2) | Published: van den Heuvel2018 (via Mask-R2CNN (PMC8580944)) | Official HC18 challenge 335-image test set, HC mean absolute difference (MAD) in mm (mean +- SD) | **HC MAE [MAD]** | **2.8** | - | `docs/results/published_refs.json` | `docs/results/published_refs.json` | `9c97107f9db8...` |
 
-## AC (72 metrics)
+## AC (77 metrics)
 
 | ID | System | Approach | Protocol | Metric | Value | CI (95%) | Source File | Script / Notebook | Source SHA-256 |
 |:---|:---:|:---|:---|:---|:---:|:---:|:---|:---|:---:|
@@ -154,6 +154,11 @@ Total verified numbers: **214**
 | `ac_bootstrap_wing_vs_s42_delta_mae` | Ours (1) | AC Wing Loss vs Baseline: wing s42 vs baseline s42 | Patient-level paired cluster bootstrap (5000 resamples, seed 42), 642 images, 501 patients | **Delta MAE (mm)** | **0.1052** | [-0.2537, 0.4676] | `docs/results/ac_campaign/ac_s43_wing_comparison.json` | `scripts/82_eval_ac_s43_and_wing_comparison.py` | `40c6f7ca7249...` |
 | `ac_bootstrap_wing_vs_s43_delta_mae` | Ours (1) | AC Wing Loss vs Baseline Seed 43: wing s42 vs baseline s43 | Patient-level paired cluster bootstrap (5000 resamples, seed 42), 642 images, 501 patients | **Delta MAE (mm)** | **0.3389** | [-0.0233, 0.7047] | `docs/results/ac_campaign/ac_s43_wing_comparison.json` | `scripts/82_eval_ac_s43_and_wing_comparison.py` | `40c6f7ca7249...` |
 | `ac_bootstrap_avg2_vs_s42_delta_mae` | Ours (1) | AC 2-Seed Ensemble vs Baseline: mean(s42, s43) vs baseline s42 | Patient-level paired cluster bootstrap (5000 resamples, seed 42), 642 images, 501 patients | **Delta MAE (mm)** | **-0.2963** | [-0.4750, -0.1099] | `docs/results/ac_campaign/ac_s43_wing_comparison.json` | `scripts/82_eval_ac_s43_and_wing_comparison.py` | `40c6f7ca7249...` |
+| `ac_nnunet_prep_num_training_images` | Ours (1) | nnU-Net AC Dataset Prep (Dataset502_AC) | 5-fold patient-grouped split (folds_v1.csv), 642 images, 501 patients | **Number of Training Images** | **642** | - | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `da99fa91e0e2...` |
+| `ac_nnunet_prep_bad_fits_count` | Ours (1) | nnU-Net AC Dataset Prep (Dataset502_AC) | Rejection rule: semi-axis <= 0, aspect ratio > 4.0 or < 0.25, midpoints distance > max(r_tad, r_apad), or contour < 5 points | **Bad Ellipse Fits Count** | **0** | - | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `da99fa91e0e2...` |
+| `ac_nnunet_prep_mean_signed_diff_mm` | Ours (1) | nnU-Net AC Dataset Prep (Dataset502_AC) | Circumference from rasterized mask contour ellipse vs sonographer caliper Ramanujan AC | **Mean Signed Difference (mask - ref) (mm)** | **-0.0951** | - | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `da99fa91e0e2...` |
+| `ac_nnunet_prep_mean_abs_diff_mm` | Ours (1) | nnU-Net AC Dataset Prep (Dataset502_AC) | Circumference from rasterized mask contour ellipse vs sonographer caliper Ramanujan AC | **Mean Absolute Difference (mask - ref) (mm)** | **0.1953** | - | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `da99fa91e0e2...` |
+| `ac_nnunet_prep_max_abs_diff_mm` | Ours (1) | nnU-Net AC Dataset Prep (Dataset502_AC) | Circumference from rasterized mask contour ellipse vs sonographer caliper Ramanujan AC | **Max Absolute Difference (mask - ref) (mm)** | **2.9493** | - | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `da99fa91e0e2...` |
 | `ac_hist_v1_heatmap_regression_colab_mae` | Ours (1) | Historical AC: v1 heatmap regression (Colab) | 5-fold patient-disjoint cross-validation, n=789, res=384 | **AC MAE** | **182.6** | - | `docs/results/ac_lab_pc/history_table.json` | `scripts/16_verify_ac_lab_pc.py`<br>`notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `51f09e46511a...` |
 | `ac_hist_v1_heatmap_regression_colab_rmse` | Ours (1) | Historical AC: v1 heatmap regression (Colab) | 5-fold patient-disjoint cross-validation, n=789, res=384 | **AC RMSE** | **195.13** | - | `docs/results/ac_lab_pc/history_table.json` | `scripts/16_verify_ac_lab_pc.py`<br>`notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `51f09e46511a...` |
 | `ac_hist_dsnt_5_fold_oof_mae` | Ours (1) | Historical AC: DSNT 5-fold OOF | 5-fold patient-disjoint cross-validation, n=789, res=384 | **AC MAE** | **5.18** | - | `docs/results/ac_lab_pc/history_table.json` | `scripts/16_verify_ac_lab_pc.py`<br>`notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `51f09e46511a...` |

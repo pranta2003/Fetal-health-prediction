@@ -2,7 +2,7 @@
 
 This document maps every empirical claim and metric across the thesis/report to its exact on-disk artifact, producing script or notebook, and git commit provenance.
 
-**Total Numbers Mapped**: 214 | **Verified Files on Disk**: 214 | **Missing Files**: 0
+**Total Numbers Mapped**: 219 | **Verified Files on Disk**: 219 | **Missing Files**: 0
 
 ---
 
@@ -108,7 +108,7 @@ This document maps every empirical claim and metric across the thesis/report to 
 
 ---
 
-## AC Domain Claims (72 metrics)
+## AC Domain Claims (77 metrics)
 
 | ID | Report Claim | Value | Result File Path | Producing Script / Notebook | Git Commit | File Status |
 |---|---|:---:|---|---|:---:|:---:|
@@ -156,6 +156,11 @@ This document maps every empirical claim and metric across the thesis/report to 
 | `ac_bootstrap_wing_vs_s42_delta_mae` | AC Wing Loss vs Baseline: wing s42 vs baseline s42 - Delta MAE (mm) | **0.1052 [-0.2537, 0.4676]** | `docs/results/ac_campaign/ac_s43_wing_comparison.json` | `scripts/82_eval_ac_s43_and_wing_comparison.py` | `master` | EXISTS |
 | `ac_bootstrap_wing_vs_s43_delta_mae` | AC Wing Loss vs Baseline Seed 43: wing s42 vs baseline s43 - Delta MAE (mm) | **0.3389 [-0.0233, 0.7047]** | `docs/results/ac_campaign/ac_s43_wing_comparison.json` | `scripts/82_eval_ac_s43_and_wing_comparison.py` | `master` | EXISTS |
 | `ac_bootstrap_avg2_vs_s42_delta_mae` | AC 2-Seed Ensemble vs Baseline: mean(s42, s43) vs baseline s42 - Delta MAE (mm) | **-0.2963 [-0.475, -0.1099]** | `docs/results/ac_campaign/ac_s43_wing_comparison.json` | `scripts/82_eval_ac_s43_and_wing_comparison.py` | `master` | EXISTS |
+| `ac_nnunet_prep_num_training_images` | nnU-Net AC Dataset Prep (Dataset502_AC) - Number of Training Images | **642** | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `master` | EXISTS |
+| `ac_nnunet_prep_bad_fits_count` | nnU-Net AC Dataset Prep (Dataset502_AC) - Bad Ellipse Fits Count | **0** | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `master` | EXISTS |
+| `ac_nnunet_prep_mean_signed_diff_mm` | nnU-Net AC Dataset Prep (Dataset502_AC) - Mean Signed Difference (mask - ref) (mm) | **-0.0951** | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `master` | EXISTS |
+| `ac_nnunet_prep_mean_abs_diff_mm` | nnU-Net AC Dataset Prep (Dataset502_AC) - Mean Absolute Difference (mask - ref) (mm) | **0.1953** | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `master` | EXISTS |
+| `ac_nnunet_prep_max_abs_diff_mm` | nnU-Net AC Dataset Prep (Dataset502_AC) - Max Absolute Difference (mask - ref) (mm) | **2.9493** | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `master` | EXISTS |
 | `ac_hist_v1_heatmap_regression_colab_mae` | Historical AC: v1 heatmap regression (Colab) - AC MAE | **182.6** | `docs/results/ac_lab_pc/history_table.json` | `notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `52119c8` | EXISTS |
 | `ac_hist_v1_heatmap_regression_colab_rmse` | Historical AC: v1 heatmap regression (Colab) - AC RMSE | **195.13** | `docs/results/ac_lab_pc/history_table.json` | `notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `52119c8` | EXISTS |
 | `ac_hist_dsnt_5_fold_oof_mae` | Historical AC: DSNT 5-fold OOF - AC MAE | **5.18** | `docs/results/ac_lab_pc/history_table.json` | `notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `52119c8` | EXISTS |

@@ -120,6 +120,22 @@ Audit of ground-truth reference definitions across ladder rows from `docs/result
     - **Wing Loss [wing s42 vs baseline s42]**: $\Delta\text{MAE} = +0.1052$ mm, 95% CI `[-0.2537, +0.4676]`, $p = 0.5500$. Wing loss does not outperform default loss.
     - **Wing Loss vs Seed 43 [wing s42 vs baseline s43]**: $\Delta\text{MAE} = +0.3389$ mm, 95% CI `[-0.0233, +0.7047]`, $p = 0.0664$.
     - **2-Seed Ensemble [mean(s42, s43) vs baseline s42]**: $\Delta\text{MAE} = -0.2963$ mm, 95% CI `[-0.4750, -0.1099]`, $p = 0.0012$. Significant gain achieved simply by ensembling two random initializations.
+- **`ac-baseline-s44` & `ac-baseline-s45` (Kaggle Runs Pushed)**:
+  - Kaggle Kernels: `prantakumerpandit390/ac-baseline-s44` (pushed 2026-11-24 11:15:35, status `QUEUED`) and `prantakumerpandit390/ac-baseline-s45` (pushed 2026-11-24 11:15:41, status `RUNNING`).
+  - Recipes: v3_full baseline, patient-grouped 5-fold cross-validation on 642 images across 501 patients, seeds 44 and 45.
+- **`Dataset502_AC` (nnU-Net AC Dataset Preparation)**:
+  - Dataset Directory: `C:\fetal-data\nnunet_ac\Dataset502_AC\`
+  - Summary JSON: `docs/results/ac_campaign/ac_nnunet_prep_summary.json` (`0c6dd39d20f7dbc98fd565fecebf8023c66504e0f7f6e6830b14f2e2f06c5729`)
+  - Generating Script: `scripts/83_ac_to_nnunet.py`
+  - Cohort: 642 training images in `imagesTr/` with solid filled ellipse masks in `labelsTr/`, plus 147 test images in `imagesTs/`.
+  - Ellipse Fitting & Quality: 0 bad ellipse fits out of 642 cases (rejection rule: semi-axis $\le 0$, aspect ratio $> 4.0$ or $< 0.25$, midpoints distance $> \max(r_{\text{tad}}, r_{\text{apad}})$, or contour $< 5$ points).
+  - Mask Circumference Agreement vs Reference: Mean signed difference $-0.0951$ mm, mean absolute difference $0.1953$ mm, max absolute difference $2.9493$ mm vs sonographer caliper Ramanujan AC.
+  - Splits: `splits_final.json` maps 5 folds (Fold 0: 142 val / 500 train; Fold 1: 121 val / 521 train; Fold 2: 124 val / 518 train; Fold 3: 121 val / 521 train; Fold 4: 134 val / 508 train) with 0 patient overlap across all folds.
+- **`ac-nnunet-f0` (AC nnU-Net Fold 0 Training Kernel Prepared)**:
+  - Kernel Directory: `notebooks/kaggle/ac_nnunet/ac-nnunet-f0/`
+  - Generating Script: `scripts/84_make_ac_nnunet_kaggle_kernel.py`
+  - Configuration: 2D (`nnUNetPlans__2d`), `nnUNetTrainer_250epochs`, Fold 0 (500 train, 142 val cases).
+  - Status: Prepared locally; NOT pushed to Kaggle per protocol rules.
 - **`submission_ensemble_5fold_corrected_mult050` (HC18 Probe)**:
   - Grand Challenge Test Submission: Probe with multiplicative factor 1.004065 (formerly labeled mult100 in preliminary docs, mult100 was never submitted).
   - Metrics File: `docs/results/hc18_calibration/metrics_probe_mult050.json` (`682672a906d6317fdaca1e7c40b2b03c465cb98d4e4472d71b8d666f210141a1`)
