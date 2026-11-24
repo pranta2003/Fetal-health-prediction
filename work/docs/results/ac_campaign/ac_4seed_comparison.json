@@ -1,0 +1,149 @@
+{
+  "description": "Patient-level paired cluster bootstrap comparison (5000 resamples, seed 42) for 4-seed AC baseline models and ensembles",
+  "cohort": {
+    "n_images": 642,
+    "n_patients": 501,
+    "protocol": "5-fold cross-validation on folds_v1.csv"
+  },
+  "models": {
+    "ac_baseline_s42": {
+      "ac_mae": 4.7744,
+      "ac_rmse": 7.6074,
+      "ac_median": 2.8474,
+      "ac_bias": -0.0826,
+      "nme": 0.0242,
+      "over10_pct": 12.15,
+      "seed": 42
+    },
+    "ac_baseline_s43": {
+      "ac_mae": 4.5406,
+      "ac_rmse": 7.126,
+      "ac_median": 2.9084,
+      "ac_bias": -0.1976,
+      "nme": 0.0234,
+      "over10_pct": 9.81,
+      "seed": 43
+    },
+    "ac_baseline_s44": {
+      "ac_mae": 4.8375,
+      "ac_rmse": 7.5856,
+      "ac_median": 3.0034,
+      "ac_bias": -1.9355,
+      "nme": 0.0247,
+      "over10_pct": 11.68,
+      "seed": 44
+    },
+    "ac_baseline_s45": {
+      "ac_mae": 4.922,
+      "ac_rmse": 7.8936,
+      "ac_median": 2.7109,
+      "ac_bias": -1.3674,
+      "nme": 0.0249,
+      "over10_pct": 12.62,
+      "seed": 45
+    },
+    "ac_2seed_avg_s42_s43": {
+      "ac_mae": 4.478,
+      "ac_rmse": 6.9725,
+      "ac_median": 2.8152,
+      "ac_bias": -0.1401,
+      "nme": 0.0228,
+      "over10_pct": 10.75,
+      "seeds": [
+        42,
+        43
+      ]
+    },
+    "ac_4seed_avg_s42_s45": {
+      "ac_mae": 4.4028,
+      "ac_rmse": 6.9691,
+      "ac_median": 2.6473,
+      "ac_bias": -0.8958,
+      "nme": 0.0224,
+      "over10_pct": 10.12,
+      "seeds": [
+        42,
+        43,
+        44,
+        45
+      ]
+    }
+  },
+  "comparisons": {
+    "4seed_avg_vs_s42": {
+      "comparison": "4-seed average (s42..s45) vs baseline s42",
+      "delta_mae": -0.3715,
+      "ci95_delta_mae": [
+        -0.5912,
+        -0.1567
+      ],
+      "p_val_mae": 0.0004,
+      "delta_rmse": -0.6384,
+      "ci95_delta_rmse": [
+        -1.1594,
+        -0.1513
+      ],
+      "p_val_rmse": 0.0052
+    },
+    "4seed_avg_vs_2seed_avg": {
+      "comparison": "4-seed average vs 2-seed average (s42 + s43)",
+      "delta_mae": -0.0752,
+      "ci95_delta_mae": [
+        -0.1986,
+        0.0564
+      ],
+      "p_val_mae": 0.24,
+      "delta_rmse": -0.0034,
+      "ci95_delta_rmse": [
+        -0.2725,
+        0.2552
+      ],
+      "p_val_rmse": 0.9948
+    },
+    "s44_vs_s42": {
+      "comparison": "baseline s44 vs baseline s42",
+      "delta_mae": 0.0632,
+      "ci95_delta_mae": [
+        -0.2787,
+        0.3995
+      ],
+      "p_val_mae": 0.706,
+      "delta_rmse": -0.0219,
+      "ci95_delta_rmse": [
+        -0.7864,
+        0.6645
+      ],
+      "p_val_rmse": 0.992
+    },
+    "s45_vs_s42": {
+      "comparison": "baseline s45 vs baseline s42",
+      "delta_mae": 0.1476,
+      "ci95_delta_mae": [
+        -0.182,
+        0.4801
+      ],
+      "p_val_mae": 0.3964,
+      "delta_rmse": 0.2862,
+      "ci95_delta_rmse": [
+        -0.4877,
+        1.1226
+      ],
+      "p_val_rmse": 0.4996
+    },
+    "s43_vs_s42_reference": {
+      "comparison": "baseline s43 vs baseline s42",
+      "delta_mae": -0.2337,
+      "ci95_delta_mae": [
+        -0.5773,
+        0.1279
+      ],
+      "p_val_mae": 0.1856,
+      "delta_rmse": -0.4814,
+      "ci95_delta_rmse": [
+        -1.253,
+        0.3274
+      ],
+      "p_val_rmse": 0.2244
+    }
+  }
+}
