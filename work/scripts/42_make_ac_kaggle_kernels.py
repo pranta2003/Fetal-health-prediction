@@ -340,6 +340,20 @@ def main() -> None:
             "extra_kernels": None,
         },
         {
+            "slug": "ac-baseline-s44",
+            "title": "Recipe (a) Unchanged v3_full Baseline (Seed 44)",
+            "extra_train_args": "--seed 44 --recipe v3_full",
+            "extra_datasets": None,
+            "extra_kernels": None,
+        },
+        {
+            "slug": "ac-baseline-s45",
+            "title": "Recipe (a) Unchanged v3_full Baseline (Seed 45)",
+            "extra_train_args": "--seed 45 --recipe v3_full",
+            "extra_datasets": None,
+            "extra_kernels": None,
+        },
+        {
             "slug": "ac-wing-s42",
             "title": "Recipe (b) Wing Loss for Landmark Term (Seed 42)",
             "extra_train_args": "--seed 42 --recipe v3_full --loss wing",
