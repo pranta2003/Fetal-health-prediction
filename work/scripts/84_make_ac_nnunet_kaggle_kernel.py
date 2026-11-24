@@ -1,6 +1,6 @@
 """scripts/84_make_ac_nnunet_kaggle_kernel.py
 
-Generates Kaggle training notebook and metadata config for AC nnU-Net v2 (2D, Fold 0, 250 epochs).
+Generates Kaggle training notebook and metadata config for AC nnU-Net v2 (2D, Fold 0, 100 epochs, T4 x2, no internet).
 Target: notebooks/kaggle/ac_nnunet/ac-nnunet-f0
 """
 
@@ -73,7 +73,8 @@ def build_kernel_files() -> tuple[dict, dict]:
         "kernel_type": "notebook",
         "is_private": True,
         "enable_gpu": True,
-        "enable_internet": True,
+        "enable_internet": False,
+        "machine_shape": "NvidiaTeslaT4",
         "dataset_sources": [
             "prantakumerpandit390/dataset502-ac",
         ],
@@ -87,24 +88,24 @@ def build_kernel_files() -> tuple[dict, dict]:
     # Cell 1: Intro Markdown
     cells.append(
         make_markdown_cell(
-            """# AC nnU-Net v2 Training (Fold 0, 250 Epochs)
+            """# AC nnU-Net v2 Training (Fold 0, 100 Epochs, T4 x2, Offline)
 
 - Dataset: `Dataset502_AC` (642 AC training cases with filled ellipse masks)
 - Split: Fixed patient-grouped 5-fold split (`splits_final.json`, Fold 0: 500 train / 142 val)
 - Configuration: 2D (`nnUNetPlans__2d`)
-- Trainer: `nnUNetTrainer_250epochs`
+- Trainer: `nnUNetTrainer_100epochs`
 - Output: Preserves validation masks, `summary.json`, `progress.png`, and execution metrics.
 """,
             cell_id="cell_1_intro",
         )
     )
 
-    # Cell 2: System & GPU check, installation
+    # Cell 2: System & GPU check, offline installation
     cells.append(
         make_code_cell(
             """!nvidia-smi
-!pip install --upgrade pip
-!pip install nnunetv2
+# Install nnunetv2 and dependencies offline from wheels directory in dataset502-ac
+!pip install --no-index --find-links /kaggle/input/dataset502-ac/wheels nnunetv2 || pip install /kaggle/input/dataset502-ac/wheels/*.whl || pip install nnunetv2
 """,
             cell_id="cell_2_install",
         )
@@ -230,10 +231,10 @@ print("Diff check passed: exactly 500 train / 142 val cases with zero overlap.")
 
 start_train = time.time()
 print("=" * 70)
-print("Starting AC nnU-Net training: 502 2d 0 -tr nnUNetTrainer_250epochs")
+print("Starting AC nnU-Net training: 502 2d 0 -tr nnUNetTrainer_100epochs")
 print("=" * 70)
 
-!nnUNetv2_train 502 2d 0 -tr nnUNetTrainer_250epochs
+!nnUNetv2_train 502 2d 0 -tr nnUNetTrainer_100epochs
 
 elapsed = time.time() - start_train
 print(f"AC nnU-Net training finished in {elapsed:.1f} s ({elapsed / 60:.1f} min)")
@@ -245,7 +246,7 @@ print(f"AC nnU-Net training finished in {elapsed:.1f} s ({elapsed / 60:.1f} min)
     # Cell 8: Preserve validation outputs & create manifest
     cells.append(
         make_code_cell(
-            """trainer_dir = res_dir / "Dataset502_AC" / "nnUNetTrainer_250epochs__nnUNetPlans__2d" / "fold_0"
+            """trainer_dir = res_dir / "Dataset502_AC" / "nnUNetTrainer_100epochs__nnUNetPlans__2d" / "fold_0"
 
 if trainer_dir.exists():
     print(f"Preserving results from {trainer_dir} to {out_dir}...")
@@ -265,7 +266,7 @@ if trainer_dir.exists():
         "dataset": "Dataset502_AC",
         "configuration": "2d",
         "fold": 0,
-        "trainer": "nnUNetTrainer_250epochs",
+        "trainer": "nnUNetTrainer_100epochs",
         "train_cases": 500,
         "val_cases": 142,
         "elapsed_seconds": round(elapsed, 1),
@@ -303,3 +304,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
