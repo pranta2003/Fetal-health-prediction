@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: data_prep
+# USED BY: work/docs/CODE_MAP.md
+
 """scripts/39_make_ac_folds.py
 
 Builds a fixed patient-grouped 5-fold assignment on the official TRAIN set

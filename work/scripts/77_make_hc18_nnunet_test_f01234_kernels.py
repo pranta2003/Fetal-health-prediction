@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: kernel_builder
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/REPORT_NUMBERS.json
+
 """77_make_hc18_nnunet_test_f01234_kernels.py: Generate 5-fold ensemble test kernels (GPU & CPU).
 
 Outputs:

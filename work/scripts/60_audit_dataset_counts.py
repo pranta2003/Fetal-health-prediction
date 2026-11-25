@@ -1,3 +1,8 @@
+# FIELD: Report tools
+# MODEL: None (Audit & Verification Harness)
+# STEP: report_tools
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/GAPS.md
+
 """scripts/60_audit_dataset_counts.py
 
 Performs a dataset count audit across all anatomical structures (Abdomen, Femur, Head)

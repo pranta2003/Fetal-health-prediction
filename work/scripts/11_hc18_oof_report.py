@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: evaluation
+# USED BY: work/docs/ARCHITECTURE.md, work/docs/CODE_MAP.md
+
 """Out-Of-Fold (OOF) evaluation report for HC18 5-fold segmentation pipeline.
 
 Loads 5 fold checkpoints (fm_B), reconstructs patient-grouped folds, runs TTA inference

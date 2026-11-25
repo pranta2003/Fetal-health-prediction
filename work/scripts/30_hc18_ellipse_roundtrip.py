@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md
+
 """HC18 Ellipse Roundtrip Dice Analysis.
 
 Evaluates 5 candidate rasterization conventions on all 999 HC18 training masks

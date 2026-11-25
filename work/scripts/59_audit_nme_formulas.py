@@ -1,3 +1,8 @@
+# FIELD: Report tools
+# MODEL: None (Audit & Verification Harness)
+# STEP: report_tools
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/GAPS.md
+
 """scripts/59_audit_nme_formulas.py
 
 Audits NME (Normalized Mean Error) formulations across the codebase and compares with

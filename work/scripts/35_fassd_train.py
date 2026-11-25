@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: training
+# USED BY: work/docs/CODE_MAP.md, work/docs/results/fassd/RUN1_HD95_VERIFICATION.md
+
 """35_fassd_train.py: CLI training script for FASSD multilabel segmentation.
 
 Trains a 4-channel sigmoid U-Net (artery, liver, stomach, vein) on the compact Kaggle

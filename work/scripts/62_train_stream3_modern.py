@@ -1,3 +1,8 @@
+# FIELD: Tabular
+# MODEL: XGBoost / LightGBM / CatBoost / LR
+# STEP: training
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/REPORT_NUMBERS.json
+
 """scripts/62_train_stream3_modern.py
 
 Stream 3 Modern GBDT Campaign (Step 1):

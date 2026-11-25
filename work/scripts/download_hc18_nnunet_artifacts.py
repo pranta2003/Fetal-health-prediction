@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 import os
 import sys
 import re

@@ -1,3 +1,8 @@
+# FIELD: Report tools
+# MODEL: None (Audit & Verification Harness)
+# STEP: report_tools
+# USED BY: work/docs/ARCHITECTURE.md, work/docs/CODE_MAP.md
+
 """14_hash_results.py: Generate or verify SHA256SUMS for results directory.
 
 Usage:

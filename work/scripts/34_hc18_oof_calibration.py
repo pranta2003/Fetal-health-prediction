@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net / Post-hoc Transform
+# STEP: calibration
+# USED BY: work/docs/CODE_MAP.md, work/tests/test_hc18_calibration.py
+
 """34_hc18_oof_calibration.py: HC18 out-of-fold post-hoc calibration study.
 
 Evaluates whether post-hoc calibration improves Head Circumference (HC) MAE on

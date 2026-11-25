@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: ensemble
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/EVIDENCE_MAP.md
+
 """FASSD Multilabel Segmentation Ensemble Study Runner.
 
 Performs probability-averaging ensembling of available FASSD checkpoints,

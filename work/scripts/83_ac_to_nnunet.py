@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: AC
+# MODEL: nnU-Net
+# STEP: data_prep
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/PROOF_LOCATIONS.md
+
 """scripts/83_ac_to_nnunet.py
 
 Convert Fetal Abdominal Circumference (AC) dataset to nnU-Net v2 format.

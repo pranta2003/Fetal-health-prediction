@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: General
+# MODEL: None
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 """Check PR #54 pre-merge conditions:
 1. No conflicts (mergeable).
 2. git ls-files on repo-cleanup contains every path listed in docs/report/PROOF_LOCATIONS.md.

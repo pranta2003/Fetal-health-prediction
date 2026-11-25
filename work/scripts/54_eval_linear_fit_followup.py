@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: General
+# MODEL: None
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 """Compute linear fit comparison on nnU-Net 206 and OOF 999 against CSV HC."""
 
 from pathlib import Path

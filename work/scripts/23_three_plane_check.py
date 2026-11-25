@@ -1,3 +1,8 @@
+# FIELD: Fusion
+# MODEL: Hadlock Formula / CDC Growth Charts
+# STEP: audit
+# USED BY: work/docs/CODE_MAP.md, work/tests/test_hadlock_step2.py
+
 """23_three_plane_check.py: Three-plane (head + abdomen + femur) subject check for FP and UCL.
 
 Audits subject counts, per-plane availability, pairwise and 3-plane overlaps,

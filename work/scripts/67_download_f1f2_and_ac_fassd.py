@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 """scripts/67_download_f1f2_and_ac_fassd.py
 
 Targeted, resumable downloader for:

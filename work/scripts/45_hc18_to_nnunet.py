@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: data_prep
+# USED BY: work/docs/CODE_MAP.md
+
 """45_hc18_to_nnunet.py: Convert HC18 training data to nnU-Net v2 format.
 
 Prepares Dataset501_HC18 in standard nnU-Net v2 2D directory structure:

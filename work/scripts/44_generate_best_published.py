@@ -1,3 +1,8 @@
+# FIELD: Report tools
+# MODEL: None (Audit & Verification Harness)
+# STEP: report_tools
+# USED BY: work/docs/CODE_MAP.md, work/docs/results/literature/BEST_PUBLISHED.md
+
 """scripts/44_generate_best_published.py
 
 Reads committed results files and synthesizes docs/results/literature/BEST_PUBLISHED.md

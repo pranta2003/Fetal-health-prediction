@@ -1,3 +1,8 @@
+# FIELD: Fusion
+# MODEL: Hadlock Formula / CDC Growth Charts
+# STEP: kernel_builder
+# USED BY: work/docs/CODE_MAP.md
+
 """make_hadlock_step2_notebook.py: Generate and format notebooks/benchmarks/hadlock_step2.ipynb."""
 
 from pathlib import Path

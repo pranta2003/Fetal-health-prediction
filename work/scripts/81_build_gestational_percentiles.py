@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: Fusion
+# MODEL: Hadlock Formula / CDC Growth Charts
+# STEP: data_prep
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/PROOF_LOCATIONS.md
+
 """scripts/81_build_gestational_percentiles.py
 
 Builds gestational-age-specific empirical birth weight percentiles (p10, p50, p90)

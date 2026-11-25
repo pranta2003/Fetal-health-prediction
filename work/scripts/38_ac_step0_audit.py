@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: audit
+# USED BY: work/docs/CODE_MAP.md, work/docs/results/ac_campaign/STEP0.md
+
 """scripts/38_ac_step0_audit.py
 
 AC Campaign Step 0: Read-only audit and planning script.

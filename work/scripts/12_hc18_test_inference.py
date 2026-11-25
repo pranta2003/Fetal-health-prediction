@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: inference
+# USED BY: work/docs/ARCHITECTURE.md, work/docs/CODE_MAP.md
+
 """Official test set inference for HC18 Grand Challenge submission format.
 
 Generates two submission CSV files:

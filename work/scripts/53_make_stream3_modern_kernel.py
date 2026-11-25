@@ -1,3 +1,8 @@
+# FIELD: Tabular
+# MODEL: XGBoost / LightGBM / CatBoost / LR
+# STEP: kernel_builder
+# USED BY: work/docs/CODE_MAP.md
+
 """scripts/53_make_stream3_modern_kernel.py
 
 Generates Kaggle CPU notebook kernel for Stream 3 Modern GBDT Campaign (Step 1):

@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: kernel_builder
+# USED BY: work/docs/CODE_MAP.md, work/tests/test_hc18_nnunet.py
+
 """scripts/47_make_nnunet_kaggle_kernel.py
 
 Generates Kaggle training notebook and metadata config for HC18 nnU-Net v2 (2D, Fold 0, 250 epochs).

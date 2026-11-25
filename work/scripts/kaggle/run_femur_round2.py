@@ -1,3 +1,8 @@
+# FIELD: Femur
+# MODEL: EfficientNet-B4 / ConvNeXt Landmark
+# STEP: training
+# USED BY: work/docs/CODE_MAP.md
+
 """Self-contained Kaggle runner for Femur Round 2: Modern Techniques.
 
 Trains and evaluates:

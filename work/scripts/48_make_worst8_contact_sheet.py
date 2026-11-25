@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: diagnostic
+# USED BY: work/docs/CODE_MAP.md
+
 """Create a 2x4 contact sheet PNG of the worst 8 AC OOF images."""
 
 from pathlib import Path

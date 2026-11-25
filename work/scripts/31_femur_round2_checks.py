@@ -1,3 +1,8 @@
+# FIELD: Femur
+# MODEL: EfficientNet-B4 / ConvNeXt Landmark
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md, work/docs/results/femur_round2/baseline_sensitivity.json
+
 """31_femur_round2_checks.py: Sensitivity of baseline, run integrity checks, and worst-10 audit."""
 
 from __future__ import annotations

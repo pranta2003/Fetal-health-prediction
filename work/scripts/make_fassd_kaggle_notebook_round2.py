@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: kernel_builder
+# USED BY: work/docs/CODE_MAP.md
+
 """make_fassd_kaggle_notebook_round2.py: Generate notebooks/kaggle/fassd_train_kernel_round2.ipynb.
 
 Creates the Round 2 training notebook for Kaggle (T4 GPU), orchestrating experiments across:

@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 """32_femur_outlier_impact.py: FL MAE impact of outlier 005_3FL.jpeg with patient-level bootstrap CIs."""
 
 from __future__ import annotations

@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 """16_extract_notebook_results.py: Extract historical metrics from notebook.
 
 Reads historical Capstone notebook outputs and extracts lines containing

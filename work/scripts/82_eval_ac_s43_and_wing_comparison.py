@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/PROOF_LOCATIONS.md
+
 """scripts/82_eval_ac_s43_and_wing_comparison.py
 
 Evaluates ac-baseline-s43 and ac-wing-s42 5-fold out-of-fold predictions against

@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net / Post-hoc Transform
+# STEP: calibration
+# USED BY: work/docs/CODE_MAP.md
+
 """make_hc18_calibration_notebook.py: Generate notebooks/benchmarks/hc18_oof_calibration.ipynb."""
 
 from pathlib import Path

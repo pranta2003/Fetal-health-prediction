@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: Historical (ResNet-34 / Multi-Task)
+# STEP: training
+# USED BY: work/docs/CODE_MAP.md, work/scripts/kaggle/run_hc18_ladder.py
+
 """19_hc18_ladder.py: Train HC18 historical approach ladder on grouped fold 1.
 
 Trains rows A (cell 22), B (cell 27), C (cell 25), and D (cell 31 recipe),

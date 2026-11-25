@@ -1,3 +1,8 @@
+# FIELD: Femur
+# MODEL: EfficientNet-B4 / ConvNeXt Landmark
+# STEP: audit
+# USED BY: work/docs/CODE_MAP.md, work/notebooks/benchmarks/benchmark_summary.ipynb
+
 """Femur (FL) biometry dataset inspection and validation report.
 
 Inspects FP and UCL femur annotations, checks landmark coordinates,

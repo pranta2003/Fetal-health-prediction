@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: Historical (ResNet-34 / Multi-Task)
+# STEP: training
+# USED BY: work/docs/CODE_MAP.md
+
 """Kaggle runner script for HC18 historical approach ladder (Benchmark 2B).
 
 Clones repo branch bench-hc18-ladder, installs dependencies, runs:

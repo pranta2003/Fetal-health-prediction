@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: postproc
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/EVIDENCE_MAP.md
+
 """FASSD Post-Processing Study Script.
 
 Runs inference on VAL (254) and TEST (271) images for FASSD Run 1 models (gray and rgb seed 42),

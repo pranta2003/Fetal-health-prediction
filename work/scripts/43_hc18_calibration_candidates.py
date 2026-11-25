@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net / Post-hoc Transform
+# STEP: calibration
+# USED BY: work/docs/CODE_MAP.md
+
 """scripts/43_hc18_calibration_candidates.py
 
 Computes damped multiplicative post-hoc calibration candidates (strengths 0.25, 0.5, 1.0)

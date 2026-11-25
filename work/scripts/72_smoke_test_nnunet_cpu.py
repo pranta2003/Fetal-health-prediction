@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: smoke_test
+# USED BY: work/docs/CODE_MAP.md
+
 """Smoke test nnU-Net CPU inference locally on 3 test images.
 
 Measures seconds per image per fold on CPU and estimates total runtime for

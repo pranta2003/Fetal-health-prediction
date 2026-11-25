@@ -1,3 +1,8 @@
+# FIELD: General
+# MODEL: None
+# STEP: utility
+# USED BY: work/docs/ARCHITECTURE.md, work/docs/CODE_MAP.md
+
 import argparse
 import json
 import os

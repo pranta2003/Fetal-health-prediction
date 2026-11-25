@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: General
+# MODEL: None
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 """70_build_blend_candidate.py: Build and verify the heterogeneous blend candidate.
 
 Averages ellipse parameters of:

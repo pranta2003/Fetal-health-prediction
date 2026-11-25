@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: kernel_builder
+# USED BY: work/docs/CODE_MAP.md
+
 """Generate Kaggle kernels for parallel 100-epoch nnU-Net training (Folds 1-2 and 3-4).
 
 DO NOT PUSH before Saturday 2026-11-21 06:00 Dhaka (quota reset).

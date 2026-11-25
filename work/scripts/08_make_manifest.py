@@ -1,3 +1,8 @@
+# FIELD: Report tools
+# MODEL: None (Audit & Verification Harness)
+# STEP: report_tools
+# USED BY: work/docs/ARCHITECTURE.md, work/docs/CODE_MAP.md
+
 """08_make_manifest.py: Build or verify SHA-256 manifest of model checkpoints directory.
 
 Usage:

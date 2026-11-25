@@ -1,3 +1,8 @@
+# FIELD: Femur
+# MODEL: EfficientNet-B4 / ConvNeXt Landmark
+# STEP: audit
+# USED BY: work/docs/CODE_MAP.md, work/notebooks/benchmarks/femur_data.ipynb
+
 """21_femur_data_followup.py: Femur (FL) dataset inspection, outlier analysis, and split verification.
 
 Outputs:

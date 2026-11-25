@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: kernel_builder
+# USED BY: work/docs/CODE_MAP.md
+
 """Generate Kaggle kernel for HC18 nnU-Net 3-fold ensemble CPU inference.
 
 Outputs:

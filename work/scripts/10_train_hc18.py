@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: training
+# USED BY: work/docs/ARCHITECTURE.md, work/docs/CODE_MAP.md
+
 """10_train_hc18.py: CLI runner for 5-fold HC18 segmentation model training.
 
 Runs EfficientNet-B4 U-Net training with patient-grouped folds, computes out-of-fold

@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: General
+# MODEL: None
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 """79_smoke_test_5fold_cpu.py: Smoke test 5-fold ensemble CPU inference on 3 test images."""
 
 import time

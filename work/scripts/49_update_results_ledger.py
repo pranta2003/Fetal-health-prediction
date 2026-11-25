@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: Report tools
+# MODEL: None (Audit & Verification Harness)
+# STEP: report_tools
+# USED BY: work/docs/CODE_MAP.md
+
 """Generate docs/results/RESULTS_LEDGER.md strictly from JSON files on disk."""
 
 import json

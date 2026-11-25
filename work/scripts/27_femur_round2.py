@@ -1,3 +1,8 @@
+# FIELD: Femur
+# MODEL: EfficientNet-B4 / ConvNeXt Landmark
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md
+
 """27_femur_round2.py: Femur Round 2 runner, report generator, and artifact validator.
 
 Validates and formats results for modern femur techniques:

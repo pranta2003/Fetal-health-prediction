@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: data_prep
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/EVIDENCE_MAP.md
+
 """scripts/42_make_ac_kaggle_kernels.py
 
 Generates Kaggle training notebooks and metadata configs for AC Campaign experiments:

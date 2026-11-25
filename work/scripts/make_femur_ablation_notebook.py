@@ -1,3 +1,8 @@
+# FIELD: Femur
+# MODEL: EfficientNet-B4 / ConvNeXt Landmark
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md
+
 """make_femur_ablation_notebook.py: Generate notebooks/benchmarks/femur_ablation.ipynb."""
 
 from pathlib import Path
