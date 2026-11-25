@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: dataset_loading
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """HC18 patient-grouped cross-validation splitting.
 
 Prevents data leakage across folds by ensuring all ultrasound images

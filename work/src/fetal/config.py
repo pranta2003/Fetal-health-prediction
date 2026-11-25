@@ -1,3 +1,8 @@
+# FIELD: General
+# MODEL: None
+# STEP: configuration
+# USED BY: pipeline imports across work/scripts and work/tests
+
 import os
 import re
 from pathlib import Path

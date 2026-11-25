@@ -1,3 +1,8 @@
+# FIELD: Tabular
+# MODEL: XGBoost / GBDT
+# STEP: evaluation
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Leakage and specification audit routines for Stream 3 clinical model."""
 
 import os

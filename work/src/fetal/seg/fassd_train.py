@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: training
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """FASSD Multilabel Segmentation Training & Evaluation Module.
 
 Implements 4-channel sigmoid multilabel segmentation for fetal abdominal structures

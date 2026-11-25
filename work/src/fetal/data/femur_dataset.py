@@ -1,3 +1,8 @@
+# FIELD: Femur
+# MODEL: EfficientNet-B4 / ConvNeXt Landmark
+# STEP: dataset_loading
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Femur (FL) dataset parsing and biometry utilities.
 
 Parses landmark annotations and images for fetal femur length (FL)

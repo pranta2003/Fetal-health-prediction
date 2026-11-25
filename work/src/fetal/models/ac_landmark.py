@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: model_definition
+# USED BY: pipeline imports across work/scripts and work/tests
+
 import torch
 import segmentation_models_pytorch as smp
 from fetal import config

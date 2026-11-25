@@ -1,3 +1,8 @@
+# FIELD: Head landmarks
+# MODEL: EfficientNet-B4 Caliper U-Net
+# STEP: evaluation
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Evaluation utilities for Head landmark regression models.
 
 Computes BPD and OFD caliper errors (mm), signed biases, NME (same formula as AC NME),

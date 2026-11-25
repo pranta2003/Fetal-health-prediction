@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: training
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """HC18 5-fold training pipeline with patient-grouped splits.
 
 Trains EfficientNet-B4 U-Net models across patient-grouped cross-validation folds,

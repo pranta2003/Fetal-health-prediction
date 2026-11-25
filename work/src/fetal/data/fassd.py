@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net
+# STEP: dataset_loading
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """fassd.py: Data loader and patient-grouped splitting for the FASSD dataset.
 
 FASSD (Fetal Abdominal Structures Segmentation Dataset Using Ultrasonic Images):

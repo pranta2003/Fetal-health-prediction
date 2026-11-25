@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: evaluation
+# USED BY: pipeline imports across work/scripts and work/tests
+
 import cv2
 import numpy as np
 

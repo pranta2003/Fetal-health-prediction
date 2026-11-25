@@ -1,3 +1,8 @@
+# FIELD: Fusion
+# MODEL: Hadlock Formula / Growth Percentiles
+# STEP: growth_estimation
+# USED BY: pipeline imports across work/scripts and work/tests
+
 import math
 from scipy.stats import norm
 

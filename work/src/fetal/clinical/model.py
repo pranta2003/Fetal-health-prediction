@@ -1,3 +1,8 @@
+# FIELD: Tabular
+# MODEL: XGBoost / GBDT
+# STEP: model_definition
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Pipeline creation and model fitting for Stream 3 clinical XGBoost risk model."""
 
 from sklearn.compose import ColumnTransformer

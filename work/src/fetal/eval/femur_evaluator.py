@@ -1,3 +1,8 @@
+# FIELD: Femur
+# MODEL: EfficientNet-B4 / ConvNeXt Landmark
+# STEP: evaluation
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Evaluation utilities for Femur (FL) landmark regression models.
 
 Computes femur length (FL) in mm, absolute errors, signed biases, percentage errors,

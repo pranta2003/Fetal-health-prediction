@@ -1,3 +1,8 @@
+# FIELD: General
+# MODEL: None
+# STEP: checkpointing
+# USED BY: pipeline imports across work/scripts and work/tests
+
 import os
 import torch
 

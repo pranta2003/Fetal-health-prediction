@@ -1,3 +1,8 @@
+# FIELD: General
+# MODEL: None
+# STEP: training
+# USED BY: pipeline imports across work/scripts and work/tests
+
 from fetal.train.checkpoint import atomic_save
 from fetal.train.constants import BATCH, LR, MAX_EPOCHS, PATIENCE, DEV_FRACTION
 from fetal.train.train_ac import run_one

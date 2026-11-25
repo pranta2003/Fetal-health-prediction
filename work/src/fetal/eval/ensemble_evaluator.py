@@ -1,3 +1,8 @@
+# FIELD: General
+# MODEL: None
+# STEP: evaluation
+# USED BY: pipeline imports across work/scripts and work/tests
+
 import os
 import pandas as pd
 import torch

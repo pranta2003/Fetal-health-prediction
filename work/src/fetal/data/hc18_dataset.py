@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: dataset_loading
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """HC18 Dataset module with aspect-ratio letterboxing and augmentation.
 
 Loads ultrasound head images and annotation masks from the HC18 challenge dataset.
