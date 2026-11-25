@@ -508,6 +508,11 @@ def build_numbers():
         ("ac_baseline_4seed_avg_f0_mae", "4-Seed Ensemble (Fold 0 Val)", "AC MAE", round(float(f0_models["ac_baseline_4seed_avg"]["mae"]), 4), None),
         ("ac_f0_delta_s43_vs_s42", "s43 vs s42 (Fold 0 Val)", "Delta MAE (mm)", round(float(f0_boots["s43_vs_s42"]["delta_mae"]), 4), f0_boots["s43_vs_s42"]["ci95_delta_mae"]),
         ("ac_f0_delta_4seed_vs_s42", "4-Seed Avg vs s42 (Fold 0 Val)", "Delta MAE (mm)", round(float(f0_boots["4seed_avg_vs_s42"]["delta_mae"]), 4), f0_boots["4seed_avg_vs_s42"]["ci95_delta_mae"]),
+        ("ac_nnunet_f0_mae", "ac-nnunet-f0 (Fold 0 Val)", "AC MAE", round(float(f0_models["ac_nnunet_f0"]["mae"]), 4), None),
+        ("ac_nnunet_f0_rmse", "ac-nnunet-f0 (Fold 0 Val)", "AC RMSE", round(float(f0_models["ac_nnunet_f0"]["rmse"]), 4), None),
+        ("ac_nnunet_f0_bias", "ac-nnunet-f0 (Fold 0 Val)", "Signed Bias (pred-true) (mm)", round(float(f0_models["ac_nnunet_f0"]["bias"]), 4), None),
+        ("ac_f0_delta_nnunet_vs_s42", "nnunet vs s42 (Fold 0 Val)", "Delta MAE (mm)", round(float(f0_boots["nnunet_vs_s42"]["delta_mae"]), 4), f0_boots["nnunet_vs_s42"]["ci95_delta_mae"]),
+        ("ac_f0_delta_nnunet_vs_4seed", "nnunet vs 4-Seed Avg (Fold 0 Val)", "Delta MAE (mm)", round(float(f0_boots["nnunet_vs_4seed_avg"]["delta_mae"]), 4), f0_boots["nnunet_vs_4seed_avg"]["ci95_delta_mae"]),
     ]
 
     for row_id, approach, metric_name, val, ci in f0_entries:
