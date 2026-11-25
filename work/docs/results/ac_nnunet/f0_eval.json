@@ -1,0 +1,154 @@
+{
+  "cohort": "AC Campaign Fold 0 Validation (Fold 1 of folds_v1.csv)",
+  "n_images": 142,
+  "n_patients": 101,
+  "models": {
+    "ac_baseline_s42": {
+      "n_samples": 142,
+      "mae": 4.6437,
+      "rmse": 7.305,
+      "median": 2.9946,
+      "bias": -2.264,
+      "errors_gt10_rate": 0.0986,
+      "errors_gt10_count": 14,
+      "nme": 0.0239
+    },
+    "ac_baseline_s43": {
+      "n_samples": 142,
+      "mae": 4.7297,
+      "rmse": 7.1157,
+      "median": 3.3002,
+      "bias": -0.4883,
+      "errors_gt10_rate": 0.1127,
+      "errors_gt10_count": 16,
+      "nme": 0.0253
+    },
+    "ac_baseline_s44": {
+      "n_samples": 142,
+      "mae": 5.3977,
+      "rmse": 8.3756,
+      "median": 3.4759,
+      "bias": -3.817,
+      "errors_gt10_rate": 0.1408,
+      "errors_gt10_count": 20,
+      "nme": 0.0278
+    },
+    "ac_baseline_s45": {
+      "n_samples": 142,
+      "mae": 5.6692,
+      "rmse": 9.4026,
+      "median": 3.3648,
+      "bias": -4.242,
+      "errors_gt10_rate": 0.1549,
+      "errors_gt10_count": 22,
+      "nme": 0.0289
+    },
+    "ac_baseline_2seed_avg": {
+      "n_samples": 142,
+      "mae": 4.5093,
+      "rmse": 6.8685,
+      "median": 2.938,
+      "bias": -1.3762,
+      "errors_gt10_rate": 0.0986,
+      "errors_gt10_count": 14,
+      "nme": 0.0236
+    },
+    "ac_baseline_4seed_avg": {
+      "n_samples": 142,
+      "mae": 4.6786,
+      "rmse": 7.4863,
+      "median": 2.8867,
+      "bias": -2.7028,
+      "errors_gt10_rate": 0.1056,
+      "errors_gt10_count": 15,
+      "nme": 0.0243
+    },
+    "ac_nnunet_f0": {
+      "status": "failed_execution",
+      "reason": "Execution halted: nnUNetv2_train command not found (offline dependency missing in dataset502-ac)",
+      "validation_masks_found": false
+    }
+  },
+  "paired_bootstrap_5000_seed42": {
+    "s43_vs_s42": {
+      "n_patients": 101,
+      "n_images": 142,
+      "delta_mae": 0.086,
+      "ci95_delta_mae": [
+        -0.6201,
+        0.8202
+      ],
+      "p_val_mae": 0.8108,
+      "delta_rmse": -0.1893,
+      "ci95_delta_rmse": [
+        -1.5051,
+        1.1665
+      ],
+      "p_val_rmse": 0.798
+    },
+    "s44_vs_s42": {
+      "n_patients": 101,
+      "n_images": 142,
+      "delta_mae": 0.7539,
+      "ci95_delta_mae": [
+        0.2709,
+        1.2493
+      ],
+      "p_val_mae": 0.0028,
+      "delta_rmse": 1.0706,
+      "ci95_delta_rmse": [
+        0.2785,
+        1.9709
+      ],
+      "p_val_rmse": 0.006
+    },
+    "s45_vs_s42": {
+      "n_patients": 101,
+      "n_images": 142,
+      "delta_mae": 1.0255,
+      "ci95_delta_mae": [
+        0.3375,
+        1.9392
+      ],
+      "p_val_mae": 0.0,
+      "delta_rmse": 2.0976,
+      "ci95_delta_rmse": [
+        0.5328,
+        4.6635
+      ],
+      "p_val_rmse": 0.0
+    },
+    "4seed_avg_vs_s42": {
+      "n_patients": 101,
+      "n_images": 142,
+      "delta_mae": 0.0348,
+      "ci95_delta_mae": [
+        -0.3005,
+        0.4464
+      ],
+      "p_val_mae": 0.8956,
+      "delta_rmse": 0.1813,
+      "ci95_delta_rmse": [
+        -0.4681,
+        1.049
+      ],
+      "p_val_rmse": 0.6364
+    },
+    "4seed_avg_vs_2seed_avg": {
+      "n_patients": 101,
+      "n_images": 142,
+      "delta_mae": 0.1692,
+      "ci95_delta_mae": [
+        -0.1631,
+        0.4934
+      ],
+      "p_val_mae": 0.3116,
+      "delta_rmse": 0.6178,
+      "ci95_delta_rmse": [
+        0.1576,
+        1.1224
+      ],
+      "p_val_rmse": 0.0068
+    }
+  }
+}

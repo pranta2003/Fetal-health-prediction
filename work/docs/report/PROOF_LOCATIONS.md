@@ -2,7 +2,7 @@
 
 This document maps every empirical claim and metric across the thesis/report to its exact on-disk artifact, producing script or notebook, and git commit provenance.
 
-**Total Numbers Mapped**: 239 | **Verified Files on Disk**: 239 | **Missing Files**: 0
+**Total Numbers Mapped**: 246 | **Verified Files on Disk**: 246 | **Missing Files**: 0
 
 ---
 
@@ -108,7 +108,7 @@ This document maps every empirical claim and metric across the thesis/report to 
 
 ---
 
-## AC Domain Claims (97 metrics)
+## AC Domain Claims (104 metrics)
 
 | ID | Report Claim | Value | Result File Path | Producing Script / Notebook | Git Commit | File Status |
 |---|---|:---:|---|---|:---:|:---:|
@@ -181,6 +181,13 @@ This document maps every empirical claim and metric across the thesis/report to 
 | `ac_nnunet_prep_mean_signed_diff_mm` | nnU-Net AC Dataset Prep (Dataset502_AC) - Mean Signed Difference (mask - ref) (mm) | **-0.0951** | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `master` | EXISTS |
 | `ac_nnunet_prep_mean_abs_diff_mm` | nnU-Net AC Dataset Prep (Dataset502_AC) - Mean Absolute Difference (mask - ref) (mm) | **0.1953** | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `master` | EXISTS |
 | `ac_nnunet_prep_max_abs_diff_mm` | nnU-Net AC Dataset Prep (Dataset502_AC) - Max Absolute Difference (mask - ref) (mm) | **2.9493** | `docs/results/ac_campaign/ac_nnunet_prep_summary.json` | `scripts/83_ac_to_nnunet.py` | `master` | EXISTS |
+| `ac_baseline_s42_f0_mae` | ac-baseline-s42 (Fold 0 Val) - AC MAE | **4.6437** | `docs/results/ac_nnunet/f0_eval.json` | `notebooks/kaggle/ac_nnunet/ac-nnunet-f0/ac-nnunet-f0.ipynb` | `master` | EXISTS |
+| `ac_baseline_s43_f0_mae` | ac-baseline-s43 (Fold 0 Val) - AC MAE | **4.7297** | `docs/results/ac_nnunet/f0_eval.json` | `notebooks/kaggle/ac_nnunet/ac-nnunet-f0/ac-nnunet-f0.ipynb` | `master` | EXISTS |
+| `ac_baseline_s44_f0_mae` | ac-baseline-s44 (Fold 0 Val) - AC MAE | **5.3977** | `docs/results/ac_nnunet/f0_eval.json` | `notebooks/kaggle/ac_nnunet/ac-nnunet-f0/ac-nnunet-f0.ipynb` | `master` | EXISTS |
+| `ac_baseline_s45_f0_mae` | ac-baseline-s45 (Fold 0 Val) - AC MAE | **5.6692** | `docs/results/ac_nnunet/f0_eval.json` | `notebooks/kaggle/ac_nnunet/ac-nnunet-f0/ac-nnunet-f0.ipynb` | `master` | EXISTS |
+| `ac_baseline_4seed_avg_f0_mae` | 4-Seed Ensemble (Fold 0 Val) - AC MAE | **4.6786** | `docs/results/ac_nnunet/f0_eval.json` | `notebooks/kaggle/ac_nnunet/ac-nnunet-f0/ac-nnunet-f0.ipynb` | `master` | EXISTS |
+| `ac_f0_delta_s43_vs_s42` | s43 vs s42 (Fold 0 Val) - Delta MAE (mm) | **0.086 [-0.6201, 0.8202]** | `docs/results/ac_nnunet/f0_eval.json` | `notebooks/kaggle/ac_nnunet/ac-nnunet-f0/ac-nnunet-f0.ipynb` | `master` | EXISTS |
+| `ac_f0_delta_4seed_vs_s42` | 4-Seed Avg vs s42 (Fold 0 Val) - Delta MAE (mm) | **0.0348 [-0.3005, 0.4464]** | `docs/results/ac_nnunet/f0_eval.json` | `notebooks/kaggle/ac_nnunet/ac-nnunet-f0/ac-nnunet-f0.ipynb` | `master` | EXISTS |
 | `ac_hist_v1_heatmap_regression_colab_mae` | Historical AC: v1 heatmap regression (Colab) - AC MAE | **182.6** | `docs/results/ac_lab_pc/history_table.json` | `notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `52119c8` | EXISTS |
 | `ac_hist_v1_heatmap_regression_colab_rmse` | Historical AC: v1 heatmap regression (Colab) - AC RMSE | **195.13** | `docs/results/ac_lab_pc/history_table.json` | `notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `52119c8` | EXISTS |
 | `ac_hist_dsnt_5_fold_oof_mae` | Historical AC: DSNT 5-fold OOF - AC MAE | **5.18** | `docs/results/ac_lab_pc/history_table.json` | `notebooks/history/ac_lab_pc/ac_lab_pc_history.ipynb` | `52119c8` | EXISTS |
