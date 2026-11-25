@@ -490,17 +490,26 @@ def build_model_selection_tables():
     )
 
     ac_f0_eval = json.loads((work / "docs/results/ac_nnunet/f0_eval.json").read_text(encoding="utf-8"))
-    f0_s42 = ac_f0_eval["models"]["ac_baseline_s42"]
-    f0_s43 = ac_f0_eval["models"]["ac_baseline_s43"]
-    f0_s44 = ac_f0_eval["models"]["ac_baseline_s44"]
-    f0_s45 = ac_f0_eval["models"]["ac_baseline_s45"]
-    f0_4seed = ac_f0_eval["models"]["ac_baseline_4seed_avg"]
-    content.append(
-        f"| ac-nnunet-f0 (Fold 0, 100 epochs) | 2D nnU-Net (PlainConvUNet) | nnU-Net automated pipeline, 100 epochs, private dataset offline execution | "
-        f"Fold 0 validation (folds_v1.csv fold 1) | 142 (101 patients) | "
-        f"Execution halted: nnUNetv2_train command not found (offline dependency missing in dataset502-ac); 0 validation masks generated; fold-0 baseline evaluation completed: s42 MAE {f0_s42['mae']:.4f} mm, s43 {f0_s43['mae']:.4f} mm, s44 {f0_s44['mae']:.4f} mm, s45 {f0_s45['mae']:.4f} mm, 4-seed avg {f0_4seed['mae']:.4f} mm | "
-        f"{get_full_path('docs/results/ac_nnunet/f0_eval.json')} |\n"
-    )
+    f0_nnunet = ac_f0_eval["models"]["ac_nnunet_f0"]
+    if "mae" in f0_nnunet:
+        content.append(
+            f"| ac-nnunet-f0 (Fold 0, 100 epochs) | 2D nnU-Net (PlainConvUNet) | nnU-Net automated pipeline, 100 epochs, T4 x2, Ramanujan perimeter on AMS ellipse | "
+            f"Fold 0 validation (folds_v1.csv fold 1) | 142 (101 patients) | "
+            f"AC MAE {f0_nnunet['mae']:.4f} mm, AC RMSE {f0_nnunet['rmse']:.4f} mm, Median {f0_nnunet['median']:.4f} mm, Signed Bias {f0_nnunet['bias']:.4f} mm, NME {f0_nnunet['nme']:.4f}, >10mm {f0_nnunet['errors_gt10_rate']*100:.2f}% | "
+            f"{get_full_path('docs/results/ac_nnunet/f0_eval.json')} |\n"
+        )
+    else:
+        f0_s42 = ac_f0_eval["models"]["ac_baseline_s42"]
+        f0_s43 = ac_f0_eval["models"]["ac_baseline_s43"]
+        f0_s44 = ac_f0_eval["models"]["ac_baseline_s44"]
+        f0_s45 = ac_f0_eval["models"]["ac_baseline_s45"]
+        f0_4seed = ac_f0_eval["models"]["ac_baseline_4seed_avg"]
+        content.append(
+            f"| ac-nnunet-f0 (Fold 0, 100 epochs) | 2D nnU-Net (PlainConvUNet) | nnU-Net automated pipeline, 100 epochs, private dataset offline execution | "
+            f"Fold 0 validation (folds_v1.csv fold 1) | 142 (101 patients) | "
+            f"Execution halted: nnUNetv2_train command not found (offline dependency missing in dataset502-ac); 0 validation masks generated; fold-0 baseline evaluation completed: s42 MAE {f0_s42['mae']:.4f} mm, s43 {f0_s43['mae']:.4f} mm, s44 {f0_s44['mae']:.4f} mm, s45 {f0_s45['mae']:.4f} mm, 4-seed avg {f0_4seed['mae']:.4f} mm | "
+            f"{get_full_path('docs/results/ac_nnunet/f0_eval.json')} |\n"
+        )
 
     content.append("\n---\n\n")
 
