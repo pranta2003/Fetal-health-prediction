@@ -22,6 +22,23 @@
 | 2026-11-21 | `ac-fassd-s42` (v3_full + FASSD pretraining, seed 42) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.9459 | 8.3335 | 2.9702 | -0.4653 | 1.7911 | 2.1315 | 0.0820 | 12.62% | `6153da5481a8d6654020d0ad9c2ed821a6a51b1fd87238db374d02704dca9eb9` |
 | 2026-11-24 | `ac-2seed-avg` (mean of s42 and s43) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.4780 | 6.9725 | 2.8152 | -0.1401 | - | - | 0.0228 | 10.75% | `40c6f7ca72498b9b5916db05d7aacc4300de8859d5a536920fff8d25d41b6831` |
 | 2026-11-24 | `ac-4seed-avg` (mean of s42, s43, s44, s45) | 5-fold CV (`folds_v1.csv`) | 642 (501) | 4.4028 | 6.9691 | 2.6473 | -0.8958 | - | - | 0.0224 | 10.12% | `14ff4add3af0351d61dfa034cf684b5b21de04756413f0628bf8af981b75d8be` |
+| 2026-11-25 | `ac-nnunet-f0` (nnU-Net 2D, fold 0) | Fold 0 Val (`folds_v1.csv` fold 1) | 142 (101) | - | - | - | - | - | - | - | - | `e4e732ae73f8a5d4ad685e26f172af6179400c1d76e753c04ab4f945709735c2` |
+
+### AC Campaign Fold 0 Validation Subset Benchmark (142 images, 101 patients)
+Evaluated via `scripts/85_eval_ac_nnunet_f0.py` and saved to `docs/results/ac_nnunet/f0_eval.json`:
+- `ac-baseline-s42`: AC MAE 4.6437 mm, RMSE 7.3050 mm, Median 2.9946 mm, Bias -2.2640 mm, NME 0.0239, >10mm 9.86%
+- `ac-baseline-s43`: AC MAE 4.7297 mm, RMSE 7.1157 mm, Median 3.3002 mm, Bias -0.4883 mm, NME 0.0253, >10mm 11.27%
+- `ac-baseline-s44`: AC MAE 5.3977 mm, RMSE 8.3756 mm, Median 3.4759 mm, Bias -3.8170 mm, NME 0.0278, >10mm 14.08%
+- `ac-baseline-s45`: AC MAE 5.6692 mm, RMSE 9.4026 mm, Median 3.3648 mm, Bias -4.2420 mm, NME 0.0289, >10mm 15.49%
+- `ac-baseline-2seed-avg` (mean s42 & s43): AC MAE 4.5093 mm, RMSE 6.8685 mm, Median 2.9380 mm, Bias -1.3762 mm, NME 0.0236, >10mm 9.86%
+- `ac-baseline-4seed-avg` (mean s42-s45): AC MAE 4.6786 mm, RMSE 7.4863 mm, Median 2.8867 mm, Bias -2.7028 mm, NME 0.0243, >10mm 10.56%
+- `ac-nnunet-f0`: Execution halted: nnUNetv2_train command not found (offline dependency missing in dataset502-ac); 0 validation masks generated
+- Paired cluster bootstrap (5000 resamples, seed 42) vs s42:
+  - s43 vs s42: $\Delta = +0.0860$ mm, 95% CI [-0.6201, +0.8202], $p = 0.8108$
+  - s44 vs s42: $\Delta = +0.7539$ mm, 95% CI [+0.2709, +1.2493], $p = 0.0028$
+  - s45 vs s42: $\Delta = +1.0255$ mm, 95% CI [+0.3375, +1.9392], $p = 0.0000$
+  - 4-seed avg vs s42: $\Delta = +0.0348$ mm, 95% CI [-0.3005, +0.4464], $p = 0.8956$
+  - 4-seed avg vs 2-seed avg: $\Delta = +0.1692$ mm, 95% CI [-0.1631, +0.4934], $p = 0.3116$
 
 ---
 
