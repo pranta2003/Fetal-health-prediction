@@ -493,6 +493,40 @@ def build_numbers():
         "source_sha256": ac_nn_prep_sha,
     })
 
+    # AC nnU-Net Fold 0 & Fold 0 Baseline Comparisons (142 validation images)
+    ac_f0_path = "docs/results/ac_nnunet/f0_eval.json"
+    ac_f0_data = load_json(ac_f0_path)
+    ac_f0_sha = get_sha256(ac_f0_path)
+    f0_models = ac_f0_data["models"]
+    f0_boots = ac_f0_data["paired_bootstrap_5000_seed42"]
+
+    f0_entries = [
+        ("ac_baseline_s42_f0_mae", "ac-baseline-s42 (Fold 0 Val)", "AC MAE", round(float(f0_models["ac_baseline_s42"]["mae"]), 4), None),
+        ("ac_baseline_s43_f0_mae", "ac-baseline-s43 (Fold 0 Val)", "AC MAE", round(float(f0_models["ac_baseline_s43"]["mae"]), 4), None),
+        ("ac_baseline_s44_f0_mae", "ac-baseline-s44 (Fold 0 Val)", "AC MAE", round(float(f0_models["ac_baseline_s44"]["mae"]), 4), None),
+        ("ac_baseline_s45_f0_mae", "ac-baseline-s45 (Fold 0 Val)", "AC MAE", round(float(f0_models["ac_baseline_s45"]["mae"]), 4), None),
+        ("ac_baseline_4seed_avg_f0_mae", "4-Seed Ensemble (Fold 0 Val)", "AC MAE", round(float(f0_models["ac_baseline_4seed_avg"]["mae"]), 4), None),
+        ("ac_f0_delta_s43_vs_s42", "s43 vs s42 (Fold 0 Val)", "Delta MAE (mm)", round(float(f0_boots["s43_vs_s42"]["delta_mae"]), 4), f0_boots["s43_vs_s42"]["ci95_delta_mae"]),
+        ("ac_f0_delta_4seed_vs_s42", "4-Seed Avg vs s42 (Fold 0 Val)", "Delta MAE (mm)", round(float(f0_boots["4seed_avg_vs_s42"]["delta_mae"]), 4), f0_boots["4seed_avg_vs_s42"]["ci95_delta_mae"]),
+    ]
+
+    for row_id, approach, metric_name, val, ci in f0_entries:
+        rows.append({
+            "id": row_id,
+            "field": "AC",
+            "system": 1,
+            "approach": approach,
+            "protocol": "Fold 0 validation subset (142 images, 101 patients) from folds_v1.csv fold 1",
+            "metric": metric_name,
+            "value": val,
+            "ci": ci,
+            "source_file": ac_f0_path,
+            "script": "scripts/85_eval_ac_nnunet_f0.py",
+            "notebook": "notebooks/kaggle/ac_nnunet/ac-nnunet-f0/ac-nnunet-f0.ipynb",
+            "pr_commit": "master",
+            "source_sha256": ac_f0_sha,
+        })
+
     # -------------------------------------------------------------------------
     # 2. HC18 Grand Challenge Submissions & Bias Probe
     # -------------------------------------------------------------------------
