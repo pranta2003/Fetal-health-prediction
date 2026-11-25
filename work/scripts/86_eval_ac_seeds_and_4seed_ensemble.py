@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/PROOF_LOCATIONS.md
+
 """scripts/86_eval_ac_seeds_and_4seed_ensemble.py
 
 Evaluates ac-baseline-s44 and ac-baseline-s45 5-fold out-of-fold predictions against

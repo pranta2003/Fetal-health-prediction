@@ -1,3 +1,8 @@
+# FIELD: Tabular
+# MODEL: XGBoost / GBDT
+# STEP: evaluation
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Evaluation metrics, bootstrap confidence intervals, and gestational band evaluations for Stream 3."""
 
 import numpy as np

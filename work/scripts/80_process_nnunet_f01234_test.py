@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: smoke_test
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/REPORT_NUMBERS.json
+
 """80_process_nnunet_f01234_test.py: Process 5-fold nnU-Net test outputs, candidates, and blend.
 
 Tasks:

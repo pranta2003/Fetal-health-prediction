@@ -1,3 +1,8 @@
+# FIELD: Report tools
+# MODEL: None (Audit & Verification Harness)
+# STEP: report_tools
+# USED BY: work/docs/CODE_MAP.md
+
 """Helper script to construct benchmark notebooks for Stream 3 and AC."""
 
 from pathlib import Path

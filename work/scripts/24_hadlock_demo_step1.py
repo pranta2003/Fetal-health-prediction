@@ -1,3 +1,8 @@
+# FIELD: Fusion
+# MODEL: Hadlock Formula / CDC Growth Charts
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md, work/notebooks/benchmarks/head_external.ipynb
+
 """Hadlock Demo Step 1: Count usable subjects and run external validation on FP/UCL head images.
 
 Audits cross-plane usable subjects for 3-plane Hadlock estimation, then applies

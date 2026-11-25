@@ -1,3 +1,8 @@
+# FIELD: General
+# MODEL: None
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md, work/notebooks/benchmarks/benchmark_summary.ipynb
+
 """20_benchmark_summary.py: Synthesize multi-modal benchmark results and published baselines.
 
 Reads:

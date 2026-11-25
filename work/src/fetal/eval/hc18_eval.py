@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: evaluation
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Evaluation and biometric measurement for HC18 fetal head biometry.
 
 Reuses robust ellipse fitting to compute Head Circumference (HC) and Biparietal

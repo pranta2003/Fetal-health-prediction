@@ -1,3 +1,8 @@
+# FIELD: Tabular
+# MODEL: XGBoost / LightGBM / CatBoost / LR
+# STEP: training
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/EVIDENCE_MAP.md
+
 """18_bench_stream3.py: Benchmark Stream 3 clinical risk models under identical protocol.
 
 Compares:

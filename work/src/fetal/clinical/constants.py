@@ -1,3 +1,8 @@
+# FIELD: Tabular
+# MODEL: XGBoost / GBDT
+# STEP: data_prep
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Constants and feature specifications for Stream 3 (CDC clinical risk model)."""
 
 # Numeric features from CDC birth records

@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/EVIDENCE_MAP.md
+
 """46_eval_nnunet_hc18.py: Evaluate nnU-Net predicted masks for HC18 fold 1.
 
 Takes nnU-Net's predicted masks for fold 1:

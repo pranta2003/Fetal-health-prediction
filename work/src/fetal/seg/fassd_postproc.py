@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: postproc
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """FASSD Post-Processing & Validation Module.
 
 Implements candidate post-processing methods for FASSD multi-label abdominal

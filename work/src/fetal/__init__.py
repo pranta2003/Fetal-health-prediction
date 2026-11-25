@@ -1,3 +1,8 @@
+# FIELD: General
+# MODEL: None
+# STEP: utility
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """
 Fetal Health Multimodal Assessment Package.
 """

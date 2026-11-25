@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: data_prep
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/EVIDENCE_MAP.md
+
 """scripts/41_prepare_ac_kaggle_dataset.py
 
 Packages AC data (FP + UCL images, annotations, and folds_v1.csv)

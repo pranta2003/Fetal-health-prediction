@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: data_prep
+# USED BY: work/docs/CODE_MAP.md
+
 """make_fassd_audit_notebook.py: Generate notebooks/benchmarks/fassd_audit.ipynb."""
 
 from pathlib import Path

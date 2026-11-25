@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: inference
+# USED BY: work/docs/CODE_MAP.md, work/docs/PROGRESS.md
+
 """Kaggle runner script for HC18 OOF evaluation and official test inference.
 
 Clones repo from master, installs dependencies, links datasets, executes:

@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: General
+# MODEL: None
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 """HC18 Measurement-Fix Study.
 
 Investigates and models the systematic measurement discrepancy between

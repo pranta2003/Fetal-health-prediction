@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: inference
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/REPORT_NUMBERS.json
+
 """69_hc18_nnunet_blend_and_pooled.py: Pooled nnU-Net evaluation and heterogeneous blend study.
 
 Performs:

@@ -1,3 +1,8 @@
+# FIELD: General
+# MODEL: None
+# STEP: training
+# USED BY: pipeline imports across work/scripts and work/tests
+
 from fetal import config
 
 BATCH = 4

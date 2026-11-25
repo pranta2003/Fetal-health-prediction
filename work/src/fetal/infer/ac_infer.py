@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: inference
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """ac_infer.py: Single-image inference API for abdominal circumference (AC) biometry."""
 
 import os

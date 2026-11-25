@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: data_prep
+# USED BY: work/docs/CODE_MAP.md
+
 """33_fassd_audit.py: Comprehensive audit and patient-grouped split for the FASSD dataset.
 
 Performs 7 exhaustive checks on the FASSD ultrasonic images:

@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: Report tools
+# MODEL: None (Audit & Verification Harness)
+# STEP: report_tools
+# USED BY: work/docs/CODE_MAP.md
+
 """scripts/58_audit_notebooks.py
 
 Audits all Jupyter notebooks under notebooks/:

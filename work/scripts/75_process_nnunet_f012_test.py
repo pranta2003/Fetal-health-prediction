@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: smoke_test
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/REPORT_NUMBERS.json
+
 import hashlib
 import shutil
 from pathlib import Path

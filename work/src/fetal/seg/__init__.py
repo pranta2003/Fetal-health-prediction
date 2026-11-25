@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net
+# STEP: segmentation
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """FASSD fetal abdominal structures segmentation module."""
 
 from .fassd_train import (

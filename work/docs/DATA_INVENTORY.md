@@ -187,13 +187,14 @@ From the 80 columns present in `clinical_training_data.csv`, exactly **15 featur
 
 ---
 
-## 7. Master File Paths Reference
+## 7. Master File Paths & Disk Footprint Reference
 
-| Modality / Target | Primary Data Files & Audit Sources (Full Absolute Local Paths) |
-| :--- | :--- |
-| **CDC Tabular** | `C:\fetal-data\cdc\clinical_training_data.csv`<br>`C:\fetal-github-clone\work\docs\results\data_inventory.json` |
-| **HC18 Challenge** | `C:\fetal-data\HC18\training_set_pixel_size_and_HC.csv`<br>`C:\fetal-data\HC18\test_set_pixel_size.csv`<br>`C:\fetal-github-clone\work\docs\results\hc18_nnunet\pooled_eval_5fold.json` |
-| **Abdominal Circumference** | `C:\fetal-data\FP\annotations\Abdomen.csv`<br>`C:\fetal-data\UCL\annotations\px_to_mm\Abdomen.csv`<br>`C:\fetal-github-clone\work\docs\results\ac_campaign\folds_v1.csv` |
-| **Femur Length** | `C:\fetal-data\FP\annotations\Femur.csv`<br>`C:\fetal-data\UCL\annotations\px_to_mm\Femur.csv`<br>`C:\fetal-github-clone\work\docs\results\femur\femur_data_followup.json` |
-| **Head Landmarks** | `C:\fetal-data\FP\annotations\Head.csv`<br>`C:\fetal-data\FP\annotations\Head_Train.csv`<br>`C:\fetal-data\FP\annotations\Head_Test.csv`<br>`C:\fetal-data\UCL\annotations\px_to_mm\Head.csv`<br>`C:\fetal-data\UCL\annotations\px_to_mm\Head_Train.csv`<br>`C:\fetal-data\UCL\annotations\px_to_mm\Head_Test.csv` |
-| **FASSD Segmentation** | `C:\fetal-github-clone\work\docs\results\fassd\fassd_audit.json`<br>`C:\fetal-github-clone\work\docs\results\fassd\split_v1.csv`<br>`C:\fetal-github-clone\work\docs\results\fassd\split_v2.csv` |
+| Modality / Target | Primary Data Files & Audit Sources (Full Absolute Local Paths) | Local Directory | Size on Disk (MB) | Size on Disk (GB) |
+| :--- | :--- | :--- | :---: | :---: |
+| **CDC Tabular** | `C:\fetal-data\cdc\clinical_training_data.csv`<br>`C:\fetal-github-clone\work\docs\results\data_inventory.json` | `C:\fetal-data\cdc\` | 172.95 MB | 0.169 GB |
+| **HC18 Challenge** | `C:\fetal-data\HC18\training_set_pixel_size_and_HC.csv`<br>`C:\fetal-data\HC18\test_set_pixel_size.csv`<br>`C:\fetal-github-clone\work\docs\results\hc18_nnunet\pooled_eval_5fold.json` | `C:\fetal-data\HC18\` | 336.66 MB | 0.329 GB |
+| **Abdominal Circumference** | `C:\fetal-data\FP\annotations\Abdomen.csv`<br>`C:\fetal-data\UCL\annotations\px_to_mm\Abdomen.csv`<br>`C:\fetal-github-clone\work\docs\results\ac_campaign\folds_v1.csv` | `C:\fetal-data\FP\`<br>`C:\fetal-data\UCL\` | 527.25 MB<br>109.60 MB | 0.515 GB<br>0.107 GB |
+| **Femur Length** | `C:\fetal-data\FP\annotations\Femur.csv`<br>`C:\fetal-data\UCL\annotations\px_to_mm\Femur.csv`<br>`C:\fetal-github-clone\work\docs\results\femur\femur_data_followup.json` | Shared FP/UCL images;<br>`C:\fetal-data\kaggle_femur_dataset\` | 146.97 MB | 0.144 GB |
+| **Head Landmarks** | `C:\fetal-data\FP\annotations\Head.csv`<br>`C:\fetal-data\FP\annotations\Head_Train.csv`<br>`C:\fetal-data\FP\annotations\Head_Test.csv`<br>`C:\fetal-data\UCL\annotations\px_to_mm\Head.csv`<br>`C:\fetal-data\UCL\annotations\px_to_mm\Head_Train.csv`<br>`C:\fetal-data\UCL\annotations\px_to_mm\Head_Test.csv` | Shared FP/UCL images;<br>`C:\fetal-data\kaggle_head_dataset\` | 332.51 MB | 0.325 GB |
+| **FASSD Segmentation** | `C:\fetal-github-clone\work\docs\results\fassd\fassd_audit.json`<br>`C:\fetal-github-clone\work\docs\results\fassd\split_v1.csv`<br>`C:\fetal-github-clone\work\docs\results\fassd\split_v2.csv` | Cloud hosted on Kaggle (`fassd-fetal-abdomen-v2`) | ~1.2 GB (Cloud) | 0.00 GB (Local) |
+| **nnU-Net Datasets** | `C:\fetal-data\nnunet_ac\Dataset502_AC\`<br>`C:\fetal-data\nnUNet_raw\Dataset501_HC18\` | `C:\fetal-data\nnunet_ac\`<br>`C:\fetal-data\nnUNet_raw\` | 151.22 MB<br>133.48 MB | 0.148 GB<br>0.130 GB |

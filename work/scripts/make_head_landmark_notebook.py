@@ -1,3 +1,8 @@
+# FIELD: Head landmarks
+# MODEL: EfficientNet-B4 Caliper U-Net
+# STEP: kernel_builder
+# USED BY: work/docs/CODE_MAP.md
+
 """Script to construct benchmark notebook notebooks/benchmarks/head_landmark.ipynb."""
 
 from pathlib import Path

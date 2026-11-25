@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: training
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """src/fetal/train/ema.py
 
 Exponential Moving Average (EMA) for PyTorch model weights.

@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/EVIDENCE_MAP.md
+
 """scripts/40_ac_compare_recipes.py
 
 Compares two AC prediction sets (OOF or Test) with patient-level paired bootstrap

@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: nnU-Net
+# STEP: kernel_builder
+# USED BY: work/docs/CODE_MAP.md, work/docs/results/RESULTS_LEDGER.md
+
 """scripts/84_make_ac_nnunet_kaggle_kernel.py
 
 Generates Kaggle training notebook and metadata config for AC nnU-Net v2 (2D, Fold 0, 100 epochs, T4 x2, no internet).

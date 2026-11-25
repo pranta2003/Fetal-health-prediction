@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: smoke_test
+# USED BY: work/docs/CODE_MAP.md
+
 """Test the submission ellipse extraction pipeline on 3 validation masks locally."""
 
 from pathlib import Path

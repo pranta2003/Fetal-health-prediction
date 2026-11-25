@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: training
+# USED BY: work/docs/ARCHITECTURE.md, work/docs/CODE_MAP.md
+
 import argparse
 import os
 import sys

@@ -1,3 +1,8 @@
+# FIELD: Femur
+# MODEL: EfficientNet-B4 / ConvNeXt Landmark
+# STEP: model_definition
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Femur landmark model definitions and peak decoders for ablation study.
 
 Row A / C: U-Net EfficientNet-B4 predicting 1 heatmap channel with 2 peaks.

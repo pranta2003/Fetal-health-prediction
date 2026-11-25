@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: training
+# USED BY: pipeline imports across work/scripts and work/tests
+
 import os
 from fetal import config
 from fetal.train.constants import BATCH

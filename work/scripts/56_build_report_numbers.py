@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: Report tools
+# MODEL: None (Audit & Verification Harness)
+# STEP: report_tools
+# USED BY: README.md, work/docs/CLEANUP_PLAN.md
+
 """scripts/56_build_report_numbers.py
 
 Extracts verified numbers directly from committed result files and builds:

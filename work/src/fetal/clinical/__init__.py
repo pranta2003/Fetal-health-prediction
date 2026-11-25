@@ -1,3 +1,8 @@
+# FIELD: Tabular
+# MODEL: XGBoost / GBDT
+# STEP: module
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Stream 3: Clinical tabular risk assessment module."""
 
 from fetal.clinical.constants import (

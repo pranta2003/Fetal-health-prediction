@@ -1,3 +1,8 @@
+# FIELD: Tabular
+# MODEL: XGBoost / GBDT
+# STEP: data_prep
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Data loading, sentinel cleaning, and deduplication for Stream 3 clinical records."""
 
 import numpy as np

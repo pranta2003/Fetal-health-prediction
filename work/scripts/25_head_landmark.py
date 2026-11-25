@@ -1,3 +1,8 @@
+# FIELD: Head landmarks
+# MODEL: EfficientNet-B4 Caliper U-Net
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md
+
 """Runner and evaluation script for Head Landmark model (Hadlock demo + dataset paper benchmark).
 
 Trains or loads 3 seed models (seeds 42, 43, 44), evaluates on FP+UCL Head test set,

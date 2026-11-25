@@ -1,3 +1,8 @@
+# FIELD: Femur
+# MODEL: EfficientNet-B4 / ConvNeXt Landmark
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md
+
 """22_femur_ablation.py: Femur landmark ablation study runner and report generator.
 
 Evaluates 3 architectural approaches on FP+UCL Femur dataset (348 test images):

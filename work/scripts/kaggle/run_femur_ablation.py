@@ -1,3 +1,8 @@
+# FIELD: Femur
+# MODEL: EfficientNet-B4 / ConvNeXt Landmark
+# STEP: training
+# USED BY: work/docs/CODE_MAP.md
+
 """Self-contained Kaggle runner for Femur Model Ablation Study (Rows A, B, C; seeds 42, 43, 44).
 
 Trains and evaluates 9 models on Kaggle GPU T4:

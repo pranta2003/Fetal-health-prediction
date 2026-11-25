@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: ensemble
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """FASSD Multilabel Segmentation Ensembling Utilities.
 
 Provides probability map averaging, ensemble candidate selection,

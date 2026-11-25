@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 """Format and verify HC18 official metrics table for README.md."""
 
 import json

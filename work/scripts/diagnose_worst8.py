@@ -1,3 +1,8 @@
+# FIELD: General
+# MODEL: None
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 import pandas as pd
 from pathlib import Path
 

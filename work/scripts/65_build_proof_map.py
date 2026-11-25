@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: Report tools
+# MODEL: None (Audit & Verification Harness)
+# STEP: report_tools
+# USED BY: README.md, work/docs/CLEANUP_PLAN.md
+
 """Build docs/report/PROOF_LOCATIONS.md mapping every report number to file, script/notebook, and commit."""
 
 import json

@@ -1,3 +1,8 @@
+# FIELD: Fusion
+# MODEL: Hadlock Formula / CDC Growth Charts
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md, work/notebooks/benchmarks/hadlock_step2.ipynb
+
 """26_hadlock_demo_step2.py: Hadlock demo step 2 - multi-plane EFW evaluation on strictly held-out 3-plane test cohort."""
 
 from __future__ import annotations

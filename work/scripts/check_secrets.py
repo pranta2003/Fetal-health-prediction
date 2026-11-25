@@ -1,3 +1,8 @@
+# FIELD: General
+# MODEL: None
+# STEP: utility
+# USED BY: work/docs/CODE_MAP.md
+
 """check_secrets.py: Scan workspace for leaked tokens, keys, and private credentials."""
 
 from __future__ import annotations

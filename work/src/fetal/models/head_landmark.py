@@ -1,3 +1,8 @@
+# FIELD: Head landmarks
+# MODEL: EfficientNet-B4 Caliper U-Net
+# STEP: model_definition
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """Head landmark model definition and spatial soft-argmax decoder.
 
 Reuses the AC landmark architecture: U-Net with EfficientNet-B4 backbone,

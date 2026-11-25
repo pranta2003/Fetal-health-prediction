@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: dataset_loading
+# USED BY: pipeline imports across work/scripts and work/tests
+
 import os
 import re
 import cv2

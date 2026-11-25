@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net / Historical
+# STEP: model_definition
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """hc18_old_approaches.py: Historical HC18 model architectures and datasets.
 
 Re-implements the 4 historical HC18 model families from the Capstone notebook:

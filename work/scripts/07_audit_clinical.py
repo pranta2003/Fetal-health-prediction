@@ -1,3 +1,8 @@
+# FIELD: Tabular
+# MODEL: XGBoost / LightGBM / CatBoost / LR
+# STEP: audit
+# USED BY: work/docs/ARCHITECTURE.md, work/docs/CODE_MAP.md
+
 """07_audit_clinical.py: CLI runner for Stream 3 clinical risk audit and temporal model training."""
 
 import argparse

@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: data_prep
+# USED BY: work/docs/CODE_MAP.md
+
 """make_fassd_split_v2.py: Split leakage fix, group-level partitioning, and compact Kaggle dataset preparation.
 
 Addresses data leakage in FASSD split_v1.csv where duplicate images across patients

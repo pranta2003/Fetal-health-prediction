@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: AC
+# MODEL: nnU-Net
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md, work/docs/results/RESULTS_LEDGER.md
+
 """scripts/85_eval_ac_nnunet_f0.py
 
 Evaluates AC nnU-Net v2 (Fold 0, 100 epochs) validation predictions on the 142 validation images.

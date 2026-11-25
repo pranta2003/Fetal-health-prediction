@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net / Historical
+# STEP: model_definition
+# USED BY: pipeline imports across work/scripts and work/tests
+
 """HC18 U-Net segmentation model architecture and loss function.
 
 Implements the 3-channel EfficientNet-B4 U-Net architecture and compound

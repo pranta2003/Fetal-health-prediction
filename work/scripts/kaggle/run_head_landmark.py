@@ -1,3 +1,8 @@
+# FIELD: Head landmarks
+# MODEL: EfficientNet-B4 Caliper U-Net
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md
+
 """Self-contained Kaggle runner for Head Landmark regression model (seeds 42, 43, 44).
 
 Trains U-Net EfficientNet-B4 landmark models on FP+UCL Head images,

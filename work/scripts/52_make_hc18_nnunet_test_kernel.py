@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: kernel_builder
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/GAPS.md
+
 """Generate Kaggle kernel for HC18 nnU-Net fold 0 test set inference.
 
 Outputs:

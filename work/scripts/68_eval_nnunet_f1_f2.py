@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/REPORT_NUMBERS.json
+
 """68_eval_nnunet_f1_f2.py: Comprehensive evaluation of nnU-Net Fold 1 and Fold 2 predictions.
 
 Evaluates validation masks against official CSV ground truth and annotation masks:

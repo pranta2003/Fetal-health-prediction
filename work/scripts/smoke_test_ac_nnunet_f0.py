@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: AC
+# MODEL: nnU-Net
+# STEP: smoke_test
+# USED BY: work/docs/CODE_MAP.md, work/docs/results/RESULTS_LEDGER.md
+
 """Smoke test AC nnU-Net pipeline locally on 3 images.
 
 Tests:

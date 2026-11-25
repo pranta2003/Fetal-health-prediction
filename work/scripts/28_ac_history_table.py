@@ -1,3 +1,8 @@
+# FIELD: AC
+# MODEL: EfficientNet-B4 Landmark U-Net
+# STEP: audit
+# USED BY: work/docs/CODE_MAP.md, work/notebooks/history/ac_lab_pc/README.md
+
 """28_ac_history_table.py: Synthesize AC lab-PC history proof tables and fact checks.
 
 Reads committed inputs from notebooks/history/ac_lab_pc/inputs/ and produces:

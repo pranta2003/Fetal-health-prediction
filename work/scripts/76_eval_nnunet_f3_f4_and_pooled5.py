@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: nnU-Net
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/REPORT_NUMBERS.json
+
 """76_eval_nnunet_f3_f4_and_pooled5.py: Evaluation of nnU-Net Folds 3, 4 and 5-Fold Pooled Benchmark.
 
 1. Evaluates Fold 3 on validation_fold3 (N=194, OOF Fold 4).

@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: postproc
+# USED BY: work/docs/CODE_MAP.md
+
 """Generate notebooks/benchmarks/fassd_postproc.ipynb."""
 from __future__ import annotations
 

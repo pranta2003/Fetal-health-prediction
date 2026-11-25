@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: Historical (ResNet-34 / Multi-Task)
+# STEP: training
+# USED BY: work/docs/CODE_MAP.md, work/docs/report/GAPS.md
+
 """scripts/61_audit_hc18_ladder_refs.py
 
 Audits HC18 benchmark ladder rows (Rows A, B, C, D, E) for ground-truth reference definitions:

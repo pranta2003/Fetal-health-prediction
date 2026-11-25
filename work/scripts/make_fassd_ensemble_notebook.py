@@ -1,3 +1,8 @@
+# FIELD: FASSD
+# MODEL: EfficientNet-B4 Multilabel U-Net / U-Net++
+# STEP: ensemble
+# USED BY: work/docs/CODE_MAP.md
+
 """Generate and execute notebooks/benchmarks/fassd_ensemble.ipynb."""
 
 from __future__ import annotations

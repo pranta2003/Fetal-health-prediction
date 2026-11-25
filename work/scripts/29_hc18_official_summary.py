@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: evaluation
+# USED BY: work/docs/CODE_MAP.md
+
 """Generate official HC18 Grand Challenge test set evaluation summary.
 
 Reads metrics_ensemble_5fold.json, metrics_single_fold1.json, and published_refs.json

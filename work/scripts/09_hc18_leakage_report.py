@@ -1,3 +1,8 @@
+# FIELD: HC18
+# MODEL: EfficientNet-B4 U-Net
+# STEP: leakage_audit
+# USED BY: work/docs/ARCHITECTURE.md, work/docs/CODE_MAP.md
+
 """HC18 Dataset Analysis & Patient Leakage Audit Report.
 
 Demonstrates the data leakage flaw in standard ungrouped K-Fold cross-validation
