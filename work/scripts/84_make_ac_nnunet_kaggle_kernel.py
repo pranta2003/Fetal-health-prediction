@@ -5,7 +5,7 @@
 
 """scripts/84_make_ac_nnunet_kaggle_kernel.py
 
-Generates Kaggle training notebook and metadata config for AC nnU-Net v2 (2D, Fold 0, 100 epochs, T4 x2, no internet).
+Generates Kaggle training notebook and metadata config for AC nnU-Net v2 (2D, Fold 0, 100 epochs, T4 x2).
 Target: notebooks/kaggle/ac_nnunet/ac-nnunet-f0
 """
 
@@ -78,7 +78,7 @@ def build_kernel_files() -> tuple[dict, dict]:
         "kernel_type": "notebook",
         "is_private": True,
         "enable_gpu": True,
-        "enable_internet": False,
+        "enable_internet": True,
         "machine_shape": "NvidiaTeslaT4",
         "dataset_sources": [
             "prantakumerpandit390/dataset502-ac",
@@ -93,7 +93,7 @@ def build_kernel_files() -> tuple[dict, dict]:
     # Cell 1: Intro Markdown
     cells.append(
         make_markdown_cell(
-            """# AC nnU-Net v2 Training (Fold 0, 100 Epochs, T4 x2, Offline)
+            """# AC nnU-Net v2 Training (Fold 0, 100 Epochs, T4 x2)
 
 - Dataset: `Dataset502_AC` (642 AC training cases with filled ellipse masks)
 - Split: Fixed patient-grouped 5-fold split (`splits_final.json`, Fold 0: 500 train / 142 val)
@@ -105,18 +105,36 @@ def build_kernel_files() -> tuple[dict, dict]:
         )
     )
 
-    # Cell 2: System & GPU check, offline installation
+    # Cell 2: System & GPU check, installation matching HC18 with offline fallback
     cells.append(
         make_code_cell(
             """!nvidia-smi
-# Install nnunetv2 and dependencies offline from wheels directory in dataset502-ac
-!pip install --no-index --find-links /kaggle/input/dataset502-ac/wheels nnunetv2 || pip install /kaggle/input/dataset502-ac/wheels/*.whl || pip install nnunetv2
+!pip install --upgrade pip
+# Install nnunetv2 (offline fallback if wheels present in dataset502-ac, otherwise PyPI matching HC18)
+!pip install --no-index --find-links /kaggle/input/dataset502-ac/wheels nnunetv2 || pip install nnunetv2
 """,
             cell_id="cell_2_install",
         )
     )
 
-    # Cell 3: nnU-Net Environment Setup
+    # Cell 3: Verification check for nnUNetv2_train binary
+    cells.append(
+        make_code_cell(
+            """import shutil
+
+nnunet_train_cmd = shutil.which("nnUNetv2_train")
+if not nnunet_train_cmd:
+    raise RuntimeError(
+        "CRITICAL ERROR: nnUNetv2_train command was not found in PATH after installation! "
+        "Halting execution immediately to avoid running silently for nothing."
+    )
+print(f"SUCCESS: Verified nnUNetv2_train binary found at: {nnunet_train_cmd}")
+""",
+            cell_id="cell_3_verify",
+        )
+    )
+
+    # Cell 4: nnU-Net Environment Setup
     cells.append(
         make_code_cell(
             """import os
@@ -139,11 +157,11 @@ res_dir.mkdir(parents=True, exist_ok=True)
 out_dir.mkdir(parents=True, exist_ok=True)
 print("nnU-Net v2 directories created successfully.")
 """,
-            cell_id="cell_3_env",
+            cell_id="cell_4_env",
         )
     )
 
-    # Cell 4: Unpack dataset
+    # Cell 5: Unpack dataset
     cells.append(
         make_code_cell(
             """import os
@@ -181,20 +199,20 @@ print(f"Dataset unpacked successfully: {n_images} imagesTr, {n_labels} labelsTr.
 assert n_images == 642, f"Expected 642 imagesTr, found {n_images}"
 assert n_labels == 642, f"Expected 642 labelsTr, found {n_labels}"
 """,
-            cell_id="cell_4_unpack",
+            cell_id="cell_5_unpack",
         )
     )
 
-    # Cell 5: Plan and Preprocess
+    # Cell 6: Plan and Preprocess
     cells.append(
         make_code_cell(
             """!nnUNetv2_plan_and_preprocess -d 502 -c 2d --verify_dataset_integrity
 """,
-            cell_id="cell_5_plan",
+            cell_id="cell_6_plan",
         )
     )
 
-    # Cell 6: Copy splits_final.json and Diff Check
+    # Cell 7: Copy splits_final.json and Diff Check
     cells.append(
         make_code_cell(
             """import json
@@ -225,11 +243,11 @@ overlap = set(fold0["train"]).intersection(set(fold0["val"]))
 assert len(overlap) == 0, f"Patient leakage detected: {overlap}"
 print("Diff check passed: exactly 500 train / 142 val cases with zero overlap.")
 """,
-            cell_id="cell_6_splits",
+            cell_id="cell_7_splits",
         )
     )
 
-    # Cell 7: Train nnU-Net
+    # Cell 8: Train nnU-Net
     cells.append(
         make_code_cell(
             """import time
@@ -244,11 +262,11 @@ print("=" * 70)
 elapsed = time.time() - start_train
 print(f"AC nnU-Net training finished in {elapsed:.1f} s ({elapsed / 60:.1f} min)")
 """,
-            cell_id="cell_7_train",
+            cell_id="cell_8_train",
         )
     )
 
-    # Cell 8: Preserve validation outputs & create manifest
+    # Cell 9: Preserve validation outputs & create manifest
     cells.append(
         make_code_cell(
             """trainer_dir = res_dir / "Dataset502_AC" / "nnUNetTrainer_100epochs__nnUNetPlans__2d" / "fold_0"
@@ -282,7 +300,7 @@ if trainer_dir.exists():
 else:
     print(f"WARNING: trainer directory {trainer_dir} does not exist!")
 """,
-            cell_id="cell_8_preserve",
+            cell_id="cell_9_preserve",
         )
     )
 
