@@ -335,7 +335,7 @@ def run_evaluation(
     }
 
     output_json.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_json, "w", encoding="utf-8") as f:
+    with open(output_json, "w", encoding="utf-8", newline="\n") as f:
         json.dump(results, f, indent=2)
 
     print(f"Results successfully saved to {output_json}")

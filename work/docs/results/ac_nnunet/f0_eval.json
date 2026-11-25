@@ -64,9 +64,14 @@
       "nme": 0.0243
     },
     "ac_nnunet_f0": {
-      "status": "failed_execution",
-      "reason": "Execution halted: nnUNetv2_train command not found (offline dependency missing in dataset502-ac)",
-      "validation_masks_found": false
+      "n_samples": 142,
+      "mae": 5.3186,
+      "rmse": 7.8008,
+      "median": 3.4392,
+      "bias": -0.9848,
+      "errors_gt10_rate": 0.1479,
+      "errors_gt10_count": 21,
+      "nme": 0.027
     }
   },
   "paired_bootstrap_5000_seed42": {
@@ -149,6 +154,86 @@
         1.1224
       ],
       "p_val_rmse": 0.0068
+    },
+    "nnunet_vs_s42": {
+      "n_patients": 101,
+      "n_images": 142,
+      "delta_mae": 0.6749,
+      "ci95_delta_mae": [
+        -0.278,
+        1.6181
+      ],
+      "p_val_mae": 0.1528,
+      "delta_rmse": 0.4958,
+      "ci95_delta_rmse": [
+        -1.2557,
+        2.2235
+      ],
+      "p_val_rmse": 0.5548
+    },
+    "nnunet_vs_s43": {
+      "n_patients": 101,
+      "n_images": 142,
+      "delta_mae": 0.5889,
+      "ci95_delta_mae": [
+        -0.4487,
+        1.6453
+      ],
+      "p_val_mae": 0.2668,
+      "delta_rmse": 0.6851,
+      "ci95_delta_rmse": [
+        -0.8795,
+        2.2911
+      ],
+      "p_val_rmse": 0.3964
+    },
+    "nnunet_vs_s44": {
+      "n_patients": 101,
+      "n_images": 142,
+      "delta_mae": -0.079,
+      "ci95_delta_mae": [
+        -1.1091,
+        0.9106
+      ],
+      "p_val_mae": 0.8964,
+      "delta_rmse": -0.5748,
+      "ci95_delta_rmse": [
+        -2.2641,
+        1.1278
+      ],
+      "p_val_rmse": 0.518
+    },
+    "nnunet_vs_s45": {
+      "n_patients": 101,
+      "n_images": 142,
+      "delta_mae": -0.3506,
+      "ci95_delta_mae": [
+        -1.5683,
+        0.6924
+      ],
+      "p_val_mae": 0.5716,
+      "delta_rmse": -1.6018,
+      "ci95_delta_rmse": [
+        -4.4822,
+        0.6947
+      ],
+      "p_val_rmse": 0.2232
+    },
+    "nnunet_vs_4seed_avg": {
+      "n_patients": 101,
+      "n_images": 142,
+      "delta_mae": 0.6401,
+      "ci95_delta_mae": [
+        -0.3643,
+        1.6306
+      ],
+      "p_val_mae": 0.212,
+      "delta_rmse": 0.3145,
+      "ci95_delta_rmse": [
+        -1.3595,
+        1.9891
+      ],
+      "p_val_rmse": 0.7032
     }
   }
 }
