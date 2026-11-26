@@ -3847,5 +3847,170 @@
     "notebook": null,
     "pr_commit": "master",
     "source_sha256": "ded130be563e7aad919815fbdcd9a725edbba82c0be7a2cfd4f2631fa82e236c"
+  },
+  {
+    "id": "ac_convnext_s42_ac_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "ac-convnext-s42 (tu-convnext_tiny, NEGATIVE RESULT)",
+    "protocol": "5-fold patient-grouped CV (folds_v1.csv), 642 images, 501 patients, out-of-fold",
+    "metric": "AC MAE (mm)",
+    "value": 6.0657,
+    "ci": null,
+    "source_file": "docs/results/ac_campaign/ac_convnext_s42.json",
+    "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
+    "notebook": "notebooks/kaggle/ac_campaign/ac-convnext-s42/ac-convnext-s42.ipynb",
+    "pr_commit": "master",
+    "source_sha256": "be65fc78de4c4fbe0e93aefffcab812d6ab763c2f6f36afef62f97d789ca2d7a"
+  },
+  {
+    "id": "ac_convnext_s42_vs_4seed_delta_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "ac-convnext-s42 vs 4-seed avg (NEGATIVE RESULT)",
+    "protocol": "Paired patient-level bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+    "metric": "Delta MAE (mm)",
+    "value": 1.6629,
+    "ci": [
+      1.1094,
+      2.2822
+    ],
+    "source_file": "docs/results/ac_campaign/ac_convnext_s42.json",
+    "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
+    "notebook": "notebooks/kaggle/ac_campaign/ac-convnext-s42/ac-convnext-s42.ipynb",
+    "pr_commit": "master",
+    "source_sha256": "be65fc78de4c4fbe0e93aefffcab812d6ab763c2f6f36afef62f97d789ca2d7a"
+  },
+  {
+    "id": "ac_hrnet_s42_ac_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "ac-hrnet-s42 (tu-hrnet_w32, NEGATIVE RESULT)",
+    "protocol": "5-fold patient-grouped CV (folds_v1.csv), 642 images, 501 patients, out-of-fold",
+    "metric": "AC MAE (mm)",
+    "value": 4.9298,
+    "ci": null,
+    "source_file": "docs/results/ac_campaign/ac_hrnet_s42.json",
+    "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
+    "notebook": "notebooks/kaggle/ac_campaign/ac-hrnet-s42/ac-hrnet-s42.ipynb",
+    "pr_commit": "master",
+    "source_sha256": "53530122cb1fba4623170bc4a5976424921ad9ad6eb9a50bcf5b28ff83262872"
+  },
+  {
+    "id": "ac_hrnet_s42_vs_4seed_delta_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "ac-hrnet-s42 vs 4-seed avg (NEGATIVE RESULT)",
+    "protocol": "Paired patient-level bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+    "metric": "Delta MAE (mm)",
+    "value": 0.527,
+    "ci": [
+      0.0797,
+      1.0503
+    ],
+    "source_file": "docs/results/ac_campaign/ac_hrnet_s42.json",
+    "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
+    "notebook": "notebooks/kaggle/ac_campaign/ac-hrnet-s42/ac-hrnet-s42.ipynb",
+    "pr_commit": "master",
+    "source_sha256": "53530122cb1fba4623170bc4a5976424921ad9ad6eb9a50bcf5b28ff83262872"
+  },
+  {
+    "id": "ac_blend_a_5model_ac_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "Blend a: 5-model 1/5 (NEGATIVE RESULT: CI includes 0)",
+    "protocol": "5-fold patient-grouped CV (folds_v1.csv), 642 images, 501 patients, out-of-fold",
+    "metric": "AC MAE (mm)",
+    "value": 4.382,
+    "ci": null,
+    "source_file": "docs/results/ac_campaign/ac_heterogeneous_blends.json",
+    "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
+    "notebook": null,
+    "pr_commit": "master",
+    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
+  },
+  {
+    "id": "ac_blend_a_5model_vs_4seed_delta_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "Blend a: 5-model 1/5 (NEGATIVE RESULT: CI includes 0) vs 4-seed avg",
+    "protocol": "Paired patient-level bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+    "metric": "Delta MAE (mm)",
+    "value": -0.0208,
+    "ci": [
+      -0.1102,
+      0.0825
+    ],
+    "source_file": "docs/results/ac_campaign/ac_heterogeneous_blends.json",
+    "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
+    "notebook": null,
+    "pr_commit": "master",
+    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
+  },
+  {
+    "id": "ac_blend_b_50_50_ac_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "Blend b: 50/50 4-seed + HRNet (NEGATIVE RESULT: CI includes 0)",
+    "protocol": "5-fold patient-grouped CV (folds_v1.csv), 642 images, 501 patients, out-of-fold",
+    "metric": "AC MAE (mm)",
+    "value": 4.5169,
+    "ci": null,
+    "source_file": "docs/results/ac_campaign/ac_heterogeneous_blends.json",
+    "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
+    "notebook": null,
+    "pr_commit": "master",
+    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
+  },
+  {
+    "id": "ac_blend_b_50_50_vs_4seed_delta_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "Blend b: 50/50 4-seed + HRNet (NEGATIVE RESULT: CI includes 0) vs 4-seed avg",
+    "protocol": "Paired patient-level bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+    "metric": "Delta MAE (mm)",
+    "value": 0.1141,
+    "ci": [
+      -0.1054,
+      0.3727
+    ],
+    "source_file": "docs/results/ac_campaign/ac_heterogeneous_blends.json",
+    "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
+    "notebook": null,
+    "pr_commit": "master",
+    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
+  },
+  {
+    "id": "ac_blend_c_6model_ac_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "Blend c: 6-model 1/6 (NEGATIVE RESULT: CI includes 0)",
+    "protocol": "5-fold patient-grouped CV (folds_v1.csv), 642 images, 501 patients, out-of-fold",
+    "metric": "AC MAE (mm)",
+    "value": 4.3815,
+    "ci": null,
+    "source_file": "docs/results/ac_campaign/ac_heterogeneous_blends.json",
+    "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
+    "notebook": null,
+    "pr_commit": "master",
+    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
+  },
+  {
+    "id": "ac_blend_c_6model_vs_4seed_delta_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "Blend c: 6-model 1/6 (NEGATIVE RESULT: CI includes 0) vs 4-seed avg",
+    "protocol": "Paired patient-level bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+    "metric": "Delta MAE (mm)",
+    "value": -0.0213,
+    "ci": [
+      -0.1514,
+      0.1094
+    ],
+    "source_file": "docs/results/ac_campaign/ac_heterogeneous_blends.json",
+    "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
+    "notebook": null,
+    "pr_commit": "master",
+    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
   }
 ]
