@@ -468,7 +468,7 @@ def build_model_selection_tables():
     content.append(
         f"| ac-2seed-avg (mean s42 & s43) | 2-Seed Landmark Ensemble | Arithmetic mean of predictions from baseline seeds 42 and 43 | "
         f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
-        f"AC MAE {s2_m['ac_mae']:.4f} mm, AC RMSE {s2_m['ac_rmse']:.4f} mm, Median {s2_m['ac_median']:.4f} mm, Signed Bias {s2_m['ac_bias']:.4f} mm, NME {s2_m['nme']:.4f}, >10mm {s2_m['over10_pct']:.2f}% | "
+        f"AC MAE {s2_m['ac_mae']:.4f} mm, AC RMSE {s2_m['ac_rmse']:.4f} mm, Median {s2_m['ac_median']:.4f} mm, Signed Bias {s2_m['ac_bias']:.4f} mm, >10mm {s2_m['over10_pct']:.2f}% (Landmark NME N/A for scalar-averaged OOF) | "
         f"{get_full_path('docs/results/ac_campaign/ac_s43_wing_comparison.json')} |\n"
     )
 
@@ -477,7 +477,7 @@ def build_model_selection_tables():
     content.append(
         f"| ac-4seed-avg (mean s42, s43, s44, s45) | 4-Seed Landmark Ensemble | Arithmetic mean of predictions from baseline seeds 42, 43, 44, 45 | "
         f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
-        f"AC MAE {s4_m['ac_mae']:.4f} mm, AC RMSE {s4_m['ac_rmse']:.4f} mm, Median {s4_m['ac_median']:.4f} mm, Signed Bias {s4_m['ac_bias']:.4f} mm, NME {s4_m['nme']:.4f}, >10mm {s4_m['over10_pct']:.2f}% | "
+        f"AC MAE {s4_m['ac_mae']:.4f} mm, AC RMSE {s4_m['ac_rmse']:.4f} mm, Median {s4_m['ac_median']:.4f} mm, Signed Bias {s4_m['ac_bias']:.4f} mm, >10mm {s4_m['over10_pct']:.2f}% (Landmark NME N/A for scalar-averaged OOF) | "
         f"{get_full_path('docs/results/ac_campaign/ac_4seed_comparison.json')} |\n"
     )
 
@@ -510,7 +510,7 @@ def build_model_selection_tables():
         content.append(
             f"| {b_label} | Heterogeneous Landmark Blend | {b_tech} | "
             f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
-            f"AC MAE {bm['ac_mae']:.4f} mm, AC RMSE {bm['ac_rmse']:.4f} mm, Median {bm['ac_median']:.4f} mm, Signed Bias {bm['ac_bias']:.4f} mm, NME {bm['nme']:.4f}, >10mm {bm['over10_pct']:.2f}%, vs 4-seed {bb['delta_mae']:+.4f} mm CI [{bb['ci95_delta_mae'][0]:+.4f}, {bb['ci95_delta_mae'][1]:+.4f}] p={bb['p_val_mae']:.4f} | "
+            f"AC MAE {bm['ac_mae']:.4f} mm, AC RMSE {bm['ac_rmse']:.4f} mm, Median {bm['ac_median']:.4f} mm, Signed Bias {bm['ac_bias']:.4f} mm, >10mm {bm['over10_pct']:.2f}% (Landmark NME N/A for scalar-averaged OOF), vs 4-seed {bb['delta_mae']:+.4f} mm CI [{bb['ci95_delta_mae'][0]:+.4f}, {bb['ci95_delta_mae'][1]:+.4f}] p={bb['p_val_mae']:.4f} | "
             f"{get_full_path('docs/results/ac_campaign/ac_heterogeneous_blends.json')} |\n"
         )
 
@@ -543,6 +543,7 @@ def build_model_selection_tables():
             f"Execution halted: nnUNetv2_train command not found (offline dependency missing in dataset502-ac); 0 validation masks generated; fold-0 baseline evaluation completed: s42 MAE {f0_s42['mae']:.4f} mm, s43 {f0_s43['mae']:.4f} mm, s44 {f0_s44['mae']:.4f} mm, s45 {f0_s45['mae']:.4f} mm, 4-seed avg {f0_4seed['mae']:.4f} mm | "
             f"{get_full_path('docs/results/ac_nnunet/f0_eval.json')} |\n"
         )
+    content.append("\n> **Note on NME for averaged/blended rows**: Single-model NME (~0.08–0.09) is 2D Landmark NME normalized by TAD/APAD diameters (`src/fetal/eval/ac_evaluator.py`). Because `oof_predictions_pooled.csv` saves only scalar `ac_pred` (not 2D landmark coordinates), Landmark NME cannot be computed for averaged OOF predictions (`ac-2seed-avg`, `ac-4seed-avg`, `ac-blend-a/b/c`). Scripts 86/87 previously reported scalar AC relative error `|pred - true| / true` (~0.022) under `nme`, which is not comparable and has been removed (`N/A`).\n")
 
     content.append("\n---\n\n")
 
