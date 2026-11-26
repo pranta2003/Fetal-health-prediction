@@ -380,16 +380,16 @@ def build_model_selection_tables():
             model = "Heatmap Regression (Hourglass/UNet)"
             technique = f"Gaussian heatmap regression, resolution {res}x{res}, multi-fold early stopping"
         elif "DSNT" in run_name:
-            model = "DSNT Landmark Model (ResNet-34)"
+            model = "DSNT Landmark Model (U-Net EfficientNet-B4)"
             technique = f"Differentiable Spatial to Numerical Transform, coordinate regression, resolution {res}x{res}"
         elif "base" in run_name:
-            model = "Landmark Regression (ResNet-34)"
+            model = "Landmark Regression (U-Net EfficientNet-B4)"
             technique = f"Baseline landmark regression, resolution {res}x{res}, flip-TTA"
         elif "full" in run_name:
-            model = "Landmark Regression (ResNet-34)"
+            model = "Landmark Regression (U-Net EfficientNet-B4)"
             technique = f"Multi-source dataset, combined landmark loss, resolution {res}x{res}, flip-TTA"
         elif "ens" in run_name:
-            model = "Landmark Regression Ensemble (ResNet-34)"
+            model = "Landmark Regression Ensemble (U-Net EfficientNet-B4)"
             technique = f"Ensemble recipe ({run_name}), resolution {res}x{res}, flip-TTA"
         elif "smoke" in run_name:
             model = "Landmark Regression (Sanity check)"
@@ -409,7 +409,7 @@ def build_model_selection_tables():
     s42 = json.loads((work / "docs/results/ac_campaign/ac_baseline_s42.json").read_text(encoding="utf-8"))
     s42_m = s42["oof_summary"]
     content.append(
-        f"| ac-baseline-s42 | Landmark Regression (ResNet-34) | v3_full recipe, seed 42, 5-fold cross-validation | "
+        f"| ac-baseline-s42 | Landmark Regression (U-Net EfficientNet-B4) | v3_full recipe, seed 42, 5-fold cross-validation | "
         f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
         f"AC MAE {s42_m['ac_mae']:.4f} mm, AC RMSE {s42_m['ac_rmse']:.4f} mm, Median {s42_m['ac_median']:.4f} mm, Signed Bias {s42_m['ac_bias']:.4f} mm, TAD MAE {s42_m['tad_mae']:.4f} mm, APAD MAE {s42_m['apad_mae']:.4f} mm, NME {s42_m['nme']:.4f}, >10mm {s42_m['over10']*100:.2f}% | "
         f"{get_full_path('docs/results/ac_campaign/ac_baseline_s42.json')} |\n"
@@ -417,7 +417,7 @@ def build_model_selection_tables():
 
     s43 = json.loads((work / "docs/results/ac_campaign/ac_baseline_s43.json").read_text(encoding="utf-8"))
     content.append(
-        f"| ac-baseline-s43 | Landmark Regression (ResNet-34) | v3_full recipe, seed 43, 5-fold cross-validation | "
+        f"| ac-baseline-s43 | Landmark Regression (U-Net EfficientNet-B4) | v3_full recipe, seed 43, 5-fold cross-validation | "
         f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
         f"AC MAE {s43['ac_mae']:.4f} mm, AC RMSE {s43['ac_rmse']:.4f} mm, Median {s43['ac_median']:.4f} mm, Signed Bias {s43['ac_bias']:.4f} mm, TAD MAE {s43['tad_mae']:.4f} mm, APAD MAE {s43['apad_mae']:.4f} mm, NME {s43['nme']:.4f}, >10mm {s43['over10']*100:.2f}% | "
         f"{get_full_path('docs/results/ac_campaign/ac_baseline_s43.json')} |\n"
@@ -425,7 +425,7 @@ def build_model_selection_tables():
 
     s44 = json.loads((work / "docs/results/ac_campaign/ac_baseline_s44.json").read_text(encoding="utf-8"))
     content.append(
-        f"| ac-baseline-s44 | Landmark Regression (ResNet-34) | v3_full recipe, seed 44, 5-fold cross-validation | "
+        f"| ac-baseline-s44 | Landmark Regression (U-Net EfficientNet-B4) | v3_full recipe, seed 44, 5-fold cross-validation | "
         f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
         f"AC MAE {s44['ac_mae']:.4f} mm, AC RMSE {s44['ac_rmse']:.4f} mm, Median {s44['ac_median']:.4f} mm, Signed Bias {s44['ac_bias']:.4f} mm, TAD MAE {s44['tad_mae']:.4f} mm, APAD MAE {s44['apad_mae']:.4f} mm, NME {s44['nme']:.4f}, >10mm {s44['over10']*100:.2f}% | "
         f"{get_full_path('docs/results/ac_campaign/ac_baseline_s44.json')} |\n"
@@ -433,7 +433,7 @@ def build_model_selection_tables():
 
     s45 = json.loads((work / "docs/results/ac_campaign/ac_baseline_s45.json").read_text(encoding="utf-8"))
     content.append(
-        f"| ac-baseline-s45 | Landmark Regression (ResNet-34) | v3_full recipe, seed 45, 5-fold cross-validation | "
+        f"| ac-baseline-s45 | Landmark Regression (U-Net EfficientNet-B4) | v3_full recipe, seed 45, 5-fold cross-validation | "
         f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
         f"AC MAE {s45['ac_mae']:.4f} mm, AC RMSE {s45['ac_rmse']:.4f} mm, Median {s45['ac_median']:.4f} mm, Signed Bias {s45['ac_bias']:.4f} mm, TAD MAE {s45['tad_mae']:.4f} mm, APAD MAE {s45['apad_mae']:.4f} mm, NME {s45['nme']:.4f}, >10mm {s45['over10']*100:.2f}% | "
         f"{get_full_path('docs/results/ac_campaign/ac_baseline_s45.json')} |\n"
@@ -441,7 +441,7 @@ def build_model_selection_tables():
 
     ema = json.loads((work / "docs/results/ac_campaign/ac_ema_s42.json").read_text(encoding="utf-8"))
     content.append(
-        f"| ac-ema-s42 | Landmark Regression (ResNet-34) | v3_full recipe + Exponential Moving Average (EMA decay 0.999), seed 42 | "
+        f"| ac-ema-s42 | Landmark Regression (U-Net EfficientNet-B4) | v3_full recipe + Exponential Moving Average (EMA decay 0.999), seed 42 | "
         f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
         f"AC MAE {ema['ac_mae']:.4f} mm, AC RMSE {ema['ac_rmse']:.4f} mm, Median {ema['ac_median']:.4f} mm, Signed Bias {ema['ac_bias']:.4f} mm, TAD MAE {ema['tad_mae']:.4f} mm, APAD MAE {ema['apad_mae']:.4f} mm, NME {ema['nme']:.4f}, >10mm {ema['over10']*100:.2f}% | "
         f"{get_full_path('docs/results/ac_campaign/ac_ema_s42.json')} |\n"
@@ -449,7 +449,7 @@ def build_model_selection_tables():
 
     wing = json.loads((work / "docs/results/ac_campaign/ac_wing_s42.json").read_text(encoding="utf-8"))
     content.append(
-        f"| ac-wing-s42 | Landmark Regression (ResNet-34) | v3_full recipe + Wing loss on landmark coordinates, seed 42 | "
+        f"| ac-wing-s42 | Landmark Regression (U-Net EfficientNet-B4) | v3_full recipe + Wing loss on landmark coordinates, seed 42 | "
         f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
         f"AC MAE {wing['ac_mae']:.4f} mm, AC RMSE {wing['ac_rmse']:.4f} mm, Median {wing['ac_median']:.4f} mm, Signed Bias {wing['ac_bias']:.4f} mm, TAD MAE {wing['tad_mae']:.4f} mm, APAD MAE {wing['apad_mae']:.4f} mm, NME {wing['nme']:.4f}, >10mm {wing['over10']*100:.2f}% | "
         f"{get_full_path('docs/results/ac_campaign/ac_wing_s42.json')} |\n"
@@ -457,7 +457,7 @@ def build_model_selection_tables():
 
     fassd = json.loads((work / "docs/results/ac_campaign/ac_fassd_s42.json").read_text(encoding="utf-8"))
     content.append(
-        f"| ac-fassd-s42 | Landmark Regression (ResNet-34) | v3_full recipe + FASSD abdomen segmentation pre-training, seed 42 | "
+        f"| ac-fassd-s42 | Landmark Regression (U-Net EfficientNet-B4) | v3_full recipe + FASSD abdomen segmentation pre-training, seed 42 | "
         f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
         f"AC MAE {fassd['ac_mae']:.4f} mm, AC RMSE {fassd['ac_rmse']:.4f} mm, Median {fassd['ac_median']:.4f} mm, Signed Bias {fassd['ac_bias']:.4f} mm, TAD MAE {fassd['tad_mae']:.4f} mm, APAD MAE {fassd['apad_mae']:.4f} mm, NME {fassd['nme']:.4f}, >10mm {fassd['over10']*100:.2f}% | "
         f"{get_full_path('docs/results/ac_campaign/ac_fassd_s42.json')} |\n"

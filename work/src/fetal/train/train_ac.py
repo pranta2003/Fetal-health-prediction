@@ -40,6 +40,7 @@ def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None, patience=None):
     use_ema = cfg.get("ema", False)
     loss_type = cfg.get("loss_type", "default")
     init_encoder_path = cfg.get("init_encoder", None)
+    encoder_name = cfg.get("encoder_name", "efficientnet-b4")
 
     d = os.path.join(out_dir, cfg["name"])
     os.makedirs(d, exist_ok=True)
@@ -52,7 +53,7 @@ def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None, patience=None):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    model = build_model().to(config.DEVICE)
+    model = build_model(encoder_name=encoder_name).to(config.DEVICE)
 
     if init_encoder_path:
         load_pretrained_encoder(model, init_encoder_path, verbose=True)
