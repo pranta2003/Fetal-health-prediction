@@ -481,6 +481,39 @@ def build_model_selection_tables():
         f"{get_full_path('docs/results/ac_campaign/ac_4seed_comparison.json')} |\n"
     )
 
+    conv = json.loads((work / "docs/results/ac_campaign/ac_convnext_s42.json").read_text(encoding="utf-8"))
+    conv_b = conv["paired_bootstrap_vs_4seed_avg"]
+    content.append(
+        f"| ac-convnext-s42 (NEGATIVE RESULT) | Landmark Regression (U-Net ConvNeXt-Tiny) | v3_full recipe, tu-convnext_tiny encoder, seed 42, 5-fold CV | "
+        f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
+        f"AC MAE {conv['ac_mae']:.4f} mm, AC RMSE {conv['ac_rmse']:.4f} mm, Median {conv['ac_median']:.4f} mm, Signed Bias {conv['ac_bias']:.4f} mm, TAD MAE {conv['tad_mae']:.4f} mm, APAD MAE {conv['apad_mae']:.4f} mm, NME {conv['nme']:.4f}, >10mm {conv['over10']*100:.2f}%, vs 4-seed {conv_b['delta_mae']:+.4f} mm CI [{conv_b['ci95_delta_mae'][0]:+.4f}, {conv_b['ci95_delta_mae'][1]:+.4f}] p={conv_b['p_val_mae']:.4f} | "
+        f"{get_full_path('docs/results/ac_campaign/ac_convnext_s42.json')} |\n"
+    )
+
+    hrnet = json.loads((work / "docs/results/ac_campaign/ac_hrnet_s42.json").read_text(encoding="utf-8"))
+    hrnet_b = hrnet["paired_bootstrap_vs_4seed_avg"]
+    content.append(
+        f"| ac-hrnet-s42 (NEGATIVE RESULT) | Landmark Regression (U-Net HRNet-W32) | v3_full recipe, tu-hrnet_w32 encoder, seed 42, 5-fold CV | "
+        f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
+        f"AC MAE {hrnet['ac_mae']:.4f} mm, AC RMSE {hrnet['ac_rmse']:.4f} mm, Median {hrnet['ac_median']:.4f} mm, Signed Bias {hrnet['ac_bias']:.4f} mm, TAD MAE {hrnet['tad_mae']:.4f} mm, APAD MAE {hrnet['apad_mae']:.4f} mm, NME {hrnet['nme']:.4f}, >10mm {hrnet['over10']*100:.2f}%, vs 4-seed {hrnet_b['delta_mae']:+.4f} mm CI [{hrnet_b['ci95_delta_mae'][0]:+.4f}, {hrnet_b['ci95_delta_mae'][1]:+.4f}] p={hrnet_b['p_val_mae']:.4f} | "
+        f"{get_full_path('docs/results/ac_campaign/ac_hrnet_s42.json')} |\n"
+    )
+
+    blends = json.loads((work / "docs/results/ac_campaign/ac_heterogeneous_blends.json").read_text(encoding="utf-8"))["blends"]
+    for b_key, b_label, b_tech in [
+        ("blend_a_5model_equal", "ac-blend-a: 5-model equal 1/5 (NEGATIVE RESULT: CI includes 0)", "Pre-specified equal mean (s42+s43+s44+s45+HRNet)/5"),
+        ("blend_b_50_50", "ac-blend-b: 50/50 4-seed + HRNet (NEGATIVE RESULT: CI includes 0)", "Pre-specified 50/50 mean (4-seed avg + HRNet)/2"),
+        ("blend_c_6model_equal", "ac-blend-c: 6-model equal 1/6 (NEGATIVE RESULT: CI includes 0)", "Pre-specified equal mean (s42+s43+s44+s45+HRNet+ConvNeXt)/6"),
+    ]:
+        bm = blends[b_key]["metrics"]
+        bb = blends[b_key]["vs_4seed_avg"]
+        content.append(
+            f"| {b_label} | Heterogeneous Landmark Blend | {b_tech} | "
+            f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
+            f"AC MAE {bm['ac_mae']:.4f} mm, AC RMSE {bm['ac_rmse']:.4f} mm, Median {bm['ac_median']:.4f} mm, Signed Bias {bm['ac_bias']:.4f} mm, NME {bm['nme']:.4f}, >10mm {bm['over10_pct']:.2f}%, vs 4-seed {bb['delta_mae']:+.4f} mm CI [{bb['ci95_delta_mae'][0]:+.4f}, {bb['ci95_delta_mae'][1]:+.4f}] p={bb['p_val_mae']:.4f} | "
+            f"{get_full_path('docs/results/ac_campaign/ac_heterogeneous_blends.json')} |\n"
+        )
+
     ac_nnunet_prep = json.loads((work / "docs/results/ac_campaign/ac_nnunet_prep_summary.json").read_text(encoding="utf-8"))
     content.append(
         f"| AC nnU-Net Dataset Conversion (Dataset502_AC) | Dataset Conversion / Ramanujan Solid Ellipse Mask | Fit ellipse to 4 sonographer landmark points; draw solid filled binary ellipse mask | "

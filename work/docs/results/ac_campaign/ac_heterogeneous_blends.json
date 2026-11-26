@@ -1,0 +1,100 @@
+{
+  "description": "Pre-specified equal-weight heterogeneous OOF blends (no weight search) vs 4-seed EfficientNet-B4 average",
+  "cohort": {
+    "n_images": 642,
+    "n_patients": 501,
+    "protocol": "5-fold CV (folds_v1.csv)"
+  },
+  "reference_4seed_avg": {
+    "ac_mae": 4.402809374800352,
+    "ac_rmse": 6.969078094623718,
+    "ac_median": 2.647319793701172,
+    "ac_bias": -0.8957844434126135,
+    "nme": 0.022368194603467298,
+    "over10": 0.10124610591900311,
+    "over10_pct": 10.12461059190031
+  },
+  "blends": {
+    "blend_a_5model_equal": {
+      "formula": "(s42 + s43 + s44 + s45 + hrnet) / 5",
+      "metrics": {
+        "ac_mae": 4.382039026753554,
+        "ac_rmse": 6.931801353050887,
+        "ac_median": 2.648097229003909,
+        "ac_bias": -0.9025727316597906,
+        "nme": 0.022326171581415238,
+        "over10": 0.102803738317757,
+        "over10_pct": 10.2803738317757
+      },
+      "vs_4seed_avg": {
+        "delta_mae": -0.0208,
+        "ci95_delta_mae": [
+          -0.1102,
+          0.0825
+        ],
+        "p_val_mae": 0.6556,
+        "delta_rmse": -0.0373,
+        "ci95_delta_rmse": [
+          -0.1699,
+          0.1079
+        ],
+        "p_val_rmse": 0.5684,
+        "ci_excludes_zero": false
+      }
+    },
+    "blend_b_50_50": {
+      "formula": "(4seed_avg + hrnet) / 2",
+      "metrics": {
+        "ac_mae": 4.516934846420526,
+        "ac_rmse": 7.271322228679529,
+        "ac_median": 2.786818504333482,
+        "ac_bias": -0.9127551640305563,
+        "nme": 0.023197444780738166,
+        "over10": 0.11214953271028037,
+        "over10_pct": 11.214953271028037
+      },
+      "vs_4seed_avg": {
+        "delta_mae": 0.1141,
+        "ci95_delta_mae": [
+          -0.1054,
+          0.3727
+        ],
+        "p_val_mae": 0.362,
+        "delta_rmse": 0.3022,
+        "ci95_delta_rmse": [
+          -0.1916,
+          0.892
+        ],
+        "p_val_rmse": 0.2716,
+        "ci_excludes_zero": false
+      }
+    },
+    "blend_c_6model_equal": {
+      "formula": "(s42 + s43 + s44 + s45 + hrnet + convnext) / 6",
+      "metrics": {
+        "ac_mae": 4.381513377711532,
+        "ac_rmse": 6.954425835601324,
+        "ac_median": 2.6572354634602817,
+        "ac_bias": -0.9451249797024823,
+        "nme": 0.022358468975254002,
+        "over10": 0.10124610591900311,
+        "over10_pct": 10.12461059190031
+      },
+      "vs_4seed_avg": {
+        "delta_mae": -0.0213,
+        "ci95_delta_mae": [
+          -0.1514,
+          0.1094
+        ],
+        "p_val_mae": 0.7432,
+        "delta_rmse": -0.0147,
+        "ci95_delta_rmse": [
+          -0.2106,
+          0.1803
+        ],
+        "p_val_rmse": 0.868,
+        "ci_excludes_zero": false
+      }
+    }
+  }
+}
