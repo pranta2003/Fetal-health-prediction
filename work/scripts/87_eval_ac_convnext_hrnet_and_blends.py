@@ -40,12 +40,14 @@ HRNET_DIR = Path(r"C:\fetal-data\kaggle_outputs\ac_hrnet_s42_v2\ac-hrnet-s42")
 def compute_metrics(pred: pd.Series, true: pd.Series) -> dict:
     err = np.abs(pred - true)
     signed = pred - true
+    # Note: oof_predictions_pooled.csv lacks 2D landmark coordinates, so Landmark NME
+    # cannot be computed for averaged predictions; this is scalar AC relative error.
     return {
         "ac_mae": float(np.mean(err)),
         "ac_rmse": float(np.sqrt(np.mean((pred - true) ** 2))),
         "ac_median": float(np.median(err)),
         "ac_bias": float(np.mean(signed)),
-        "nme": float(np.mean(err / np.maximum(true, 1e-6))),
+        "ac_rel_err": float(np.mean(err / np.maximum(true, 1e-6))),
         "over10": float(np.mean(err > 10.0)),
         "over10_pct": float(np.mean(err > 10.0) * 100.0),
     }
@@ -127,7 +129,7 @@ def main():
 
     print("=== Single Models (N=642, 501 patients) ===")
     for name, m in [("ac-4seed-avg", m_4seed), ("ac-convnext-s42", m_conv), ("ac-hrnet-s42", m_hrnet)]:
-        print(f"{name:<18} | MAE {m['ac_mae']:.4f} | RMSE {m['ac_rmse']:.4f} | Med {m['ac_median']:.4f} | Bias {m['ac_bias']:+.4f} | NME(AC) {m['nme']:.4f} | >10mm {m['over10_pct']:.2f}%")
+        print(f"{name:<18} | MAE {m['ac_mae']:.4f} | RMSE {m['ac_rmse']:.4f} | Med {m['ac_median']:.4f} | Bias {m['ac_bias']:+.4f} | AC RelErr {m['ac_rel_err']:.4f} | >10mm {m['over10_pct']:.2f}%")
 
     print("\n=== Single Models Paired Bootstrap ===")
     for label, b in [
@@ -144,12 +146,12 @@ def main():
         ("Blend b (50/50 4seed+hrnet)", m_blend_b, boot_b_vs_4seed),
         ("Blend c (6-model 1/6)", m_blend_c, boot_c_vs_4seed),
     ]:
-        print(f"{name:<28} | MAE {m['ac_mae']:.4f} | Med {m['ac_median']:.4f} | >10mm {m['over10_pct']:.2f}% | NME {m['nme']:.4f} | delta {b['delta_mae']:+.4f} [{b['ci95_delta_mae'][0]:+.4f}, {b['ci95_delta_mae'][1]:+.4f}] | p={b['p_val_mae']:.4f} | excl0={b['ci_excludes_zero']}")
+        print(f"{name:<28} | MAE {m['ac_mae']:.4f} | Med {m['ac_median']:.4f} | >10mm {m['over10_pct']:.2f}% | AC RelErr {m['ac_rel_err']:.4f} | delta {b['delta_mae']:+.4f} [{b['ci95_delta_mae'][0]:+.4f}, {b['ci95_delta_mae'][1]:+.4f}] | p={b['p_val_mae']:.4f} | excl0={b['ci_excludes_zero']}")
 
     # Save JSONs
     conv_payload = dict(sum_conv)
     conv_payload["oof_summary"] = dict(sum_conv)
-    conv_payload["ac_nme"] = m_conv["nme"]
+    conv_payload["ac_rel_err"] = m_conv["ac_rel_err"]
     conv_payload["paired_bootstrap_vs_baseline_s42"] = boot_conv_vs_s42
     conv_payload["paired_bootstrap_vs_4seed_avg"] = boot_conv_vs_4seed
     with open(OUT_DIR / "ac_convnext_s42.json", "w", encoding="utf-8", newline="\n") as f:
@@ -157,7 +159,7 @@ def main():
 
     hrnet_payload = dict(sum_hrnet)
     hrnet_payload["oof_summary"] = dict(sum_hrnet)
-    hrnet_payload["ac_nme"] = m_hrnet["nme"]
+    hrnet_payload["ac_rel_err"] = m_hrnet["ac_rel_err"]
     hrnet_payload["paired_bootstrap_vs_baseline_s42"] = boot_hrnet_vs_s42
     hrnet_payload["paired_bootstrap_vs_4seed_avg"] = boot_hrnet_vs_4seed
     with open(OUT_DIR / "ac_hrnet_s42.json", "w", encoding="utf-8", newline="\n") as f:

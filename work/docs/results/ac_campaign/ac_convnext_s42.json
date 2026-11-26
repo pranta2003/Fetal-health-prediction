@@ -21,7 +21,7 @@
     "nme": 0.09446916296480456,
     "over10": 0.1806853582554517
   },
-  "ac_nme": 0.03061295635606754,
+  "ac_rel_err": 0.03061295635606754,
   "paired_bootstrap_vs_baseline_s42": {
     "delta_mae": 1.2913,
     "ci95_delta_mae": [

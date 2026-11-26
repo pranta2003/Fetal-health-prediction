@@ -58,12 +58,14 @@ def load_oof(oof_csv_path: Path, folds_path: Path) -> pd.DataFrame:
 def compute_metrics(pred: pd.Series, true: pd.Series) -> dict:
     err = np.abs(pred - true)
     signed = pred - true
+    # Note: oof_predictions_pooled.csv lacks 2D landmark coordinates, so Landmark NME
+    # cannot be computed for averaged predictions; this is scalar AC relative error.
     return {
         "ac_mae": float(np.mean(err)),
         "ac_rmse": float(np.sqrt(np.mean((pred - true) ** 2))),
         "ac_median": float(np.median(err)),
         "ac_bias": float(np.mean(signed)),
-        "nme": float(np.mean(err / np.maximum(true, 1e-6))),
+        "ac_rel_err": float(np.mean(err / np.maximum(true, 1e-6))),
         "over10": float(np.mean(err > 10.0)),
         "over10_pct": float(np.mean(err > 10.0) * 100.0),
     }
