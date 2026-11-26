@@ -10,11 +10,11 @@ from fetal import config
 _DEFAULT = object()
 
 
-def build_model(encoder_weights=_DEFAULT):
+def build_model(encoder_weights=_DEFAULT, encoder_name="efficientnet-b4"):
     if encoder_weights is _DEFAULT:
         encoder_weights = None if config.SMOKE else "imagenet"
     return smp.Unet(
-        encoder_name="efficientnet-b4",
+        encoder_name=encoder_name,
         encoder_weights=encoder_weights,
         in_channels=3,
         classes=4,

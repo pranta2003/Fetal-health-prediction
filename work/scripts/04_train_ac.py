@@ -154,6 +154,12 @@ def parse_args():
         help="Path to pretrained U-Net effb4 checkpoint (e.g. FASSD Gray best_model.pt)",
     )
     parser.add_argument(
+        "--encoder",
+        type=str,
+        default="efficientnet-b4",
+        help="SMP encoder backbone (e.g. efficientnet-b4, tu-convnext_tiny, tu-hrnet_w32)",
+    )
+    parser.add_argument(
         "--recipe",
         type=str,
         default="v3_full",
@@ -193,6 +199,8 @@ def main():
                 cfg["ema"] = True
             if args.init_encoder:
                 cfg["init_encoder"] = args.init_encoder
+            if args.encoder:
+                cfg["encoder_name"] = args.encoder
             if args.seed is not None:
                 cfg["seed"] = args.seed
 
@@ -221,6 +229,7 @@ def main():
         "ema": args.ema,
         "loss_type": args.loss,
         "init_encoder": args.init_encoder,
+        "encoder_name": args.encoder,
         "seed": seed,
         "smoke": args.smoke,
     }

@@ -70,6 +70,7 @@ def generate_kernel(
     slug: str,
     title: str,
     extra_train_args: str = "",
+    encoder_name: str = "efficientnet-b4",
     extra_datasets: list[str] | None = None,
     extra_kernels: list[str] | None = None,
 ) -> Path:
@@ -87,17 +88,44 @@ Kernel slug: `{slug}`
 Part of the AC 5-Fold Cross-Validation Campaign on Kaggle T4 GPU.
 """))
 
-    # Cell 2: GPU and Environment check
-    cells.append(make_code_cell("""# Check GPU and environment
+    # Cell 2: First-Cell Pre-flight Sanity Check (GPU, Dependencies, and Pretrained Encoder)
+    cells.append(make_code_cell(f"""# First-Cell Pre-flight Sanity Check
 import os
 import sys
+import subprocess
 import torch
 
+print("=== Pre-flight Sanity Check ===")
 print("PyTorch version:", torch.__version__)
 print("CUDA available:", torch.cuda.is_available())
-if torch.cuda.is_available():
-    print("GPU:", torch.cuda.get_device_name(0))
-    !nvidia-smi
+if not torch.cuda.is_available():
+    raise RuntimeError("PRE-FLIGHT CHECK FAILED: CUDA GPU is not available! Please enable GPU accelerator in Kaggle settings.")
+print("GPU device:", torch.cuda.get_device_name(0))
+
+# Ensure required libraries are installed
+try:
+    import segmentation_models_pytorch as smp
+    import timm
+except ImportError:
+    print("Installing segmentation-models-pytorch and timm...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "--quiet", "segmentation-models-pytorch", "timm"])
+    import segmentation_models_pytorch as smp
+    import timm
+
+print(f"SMP version: {{smp.__version__}} | timm version: {{timm.__version__}}")
+
+# Verify encoder initialization and pretrained weights loading
+encoder_name = "{encoder_name}"
+try:
+    print(f"Testing initialization of smp.Unet with encoder '{{encoder_name}}' (ImageNet weights)...")
+    _m = smp.Unet(encoder_name=encoder_name, encoder_weights="imagenet", in_channels=3, classes=4)
+    _dummy_x = torch.randn(1, 3, 256, 256)
+    _dummy_out = _m(_dummy_x)
+    assert _dummy_out.shape == (1, 4, 256, 256), f"Unexpected output shape: {{_dummy_out.shape}}"
+    del _m, _dummy_x, _dummy_out
+    print(f"PRE-FLIGHT CHECK PASSED: '{{encoder_name}}' initialized and verified successfully.")
+except Exception as exc:
+    raise RuntimeError(f"PRE-FLIGHT CHECK FAILED: Failed to initialize encoder '{{encoder_name}}': {{exc}}")
 """))
 
     # Cell 3: Unpack code snapshot
@@ -376,8 +404,25 @@ def main() -> None:
             "slug": "ac-fassd-s42",
             "title": "Recipe (e) FASSD Pretrained U-Net Encoder (Seed 42)",
             "extra_train_args": "--seed 42 --recipe v3_full --init-encoder $FASSD_CKPT_PATH",
+            "encoder_name": "efficientnet-b4",
             "extra_datasets": None,
             "extra_kernels": ["prantakumerpandit390/fassd-train-seed42"],
+        },
+        {
+            "slug": "ac-convnext-s42",
+            "title": "Recipe (a) v3_full Baseline with tu-convnext_tiny Encoder (Seed 42)",
+            "extra_train_args": "--seed 42 --recipe v3_full --encoder tu-convnext_tiny",
+            "encoder_name": "tu-convnext_tiny",
+            "extra_datasets": None,
+            "extra_kernels": None,
+        },
+        {
+            "slug": "ac-hrnet-s42",
+            "title": "Recipe (a) v3_full Baseline with tu-hrnet_w32 Encoder (Seed 42)",
+            "extra_train_args": "--seed 42 --recipe v3_full --encoder tu-hrnet_w32",
+            "encoder_name": "tu-hrnet_w32",
+            "extra_datasets": None,
+            "extra_kernels": None,
         },
     ]
 
@@ -387,6 +432,7 @@ def main() -> None:
             slug=c["slug"],
             title=c["title"],
             extra_train_args=c["extra_train_args"],
+            encoder_name=c.get("encoder_name", "efficientnet-b4"),
             extra_datasets=c["extra_datasets"],
             extra_kernels=c["extra_kernels"],
         )
