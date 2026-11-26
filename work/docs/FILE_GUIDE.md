@@ -324,3 +324,15 @@ This guide provides an exhaustive inventory of every script, source module, unit
   - `src/fetal/clinical/eval.py`: Calculates ROC-AUC, 95% bootstrap confidence intervals, Brier score, and calibration curves.
   - `src/fetal/clinical/audit.py`, `scripts/07_audit_clinical.py`: 14-row clinical audit explaining historical data leakage vs honest models.
   - `notebooks/S3_clinical_audit.ipynb`, `notebooks/benchmarks/stream3_bench.ipynb`: Executed audit and benchmark notebooks.
+
+---
+
+## Storage Layout & NTFS Directory Junctions
+
+Large project data, checkpoints, results, and caches have been relocated to secondary volume `E:\fetal_moved\` and `E:\fetal_cache\`, linked back transparently to `C:\` via NTFS directory junctions (`mklink /J`). All code and scripts continue referencing default `C:\...` paths with zero configuration changes:
+- `C:\fetal-data` &harr; `E:\fetal_moved\fetal-data` (23.54 GB)
+- `C:\fetal-models` &harr; `E:\fetal_moved\fetal-models` (2.67 GB)
+- `C:\fetal-results` &harr; `E:\fetal_moved\fetal-results` (1.95 GB)
+- `C:\fetal-health-multimodal` &harr; `E:\fetal_moved\fetal-health-multimodal` (1.27 GB)
+- `C:\fetal-stage` &harr; `E:\fetal_moved\fetal-stage` (0.64 GB)
+- Full audit and verification ledger is documented in [MOVED.md](file:///E:/fetal_moved/MOVED.md).
