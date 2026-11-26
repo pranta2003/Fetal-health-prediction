@@ -41,6 +41,7 @@ def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None, patience=None):
     loss_type = cfg.get("loss_type", "default")
     init_encoder_path = cfg.get("init_encoder", None)
     encoder_name = cfg.get("encoder_name", "efficientnet-b4")
+    lr = cfg.get("lr", LR)
 
     d = os.path.join(out_dir, cfg["name"])
     os.makedirs(d, exist_ok=True)
@@ -60,7 +61,7 @@ def run_one(cfg, tr, dv, te, out_dir=None, max_epochs=None, patience=None):
 
     ema = ModelEMA(model, decay=0.99, warmup=True).to(config.DEVICE) if use_ema else None
 
-    opt = torch.optim.AdamW(model.parameters(), lr=LR, weight_decay=0.01)
+    opt = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01)
     sched = torch.optim.lr_scheduler.ReduceLROnPlateau(opt, mode="min", factor=0.5, patience=4)
     scaler = torch.amp.GradScaler(config.DEVICE, enabled=(config.DEVICE == "cuda"))
     start, best, bad = 0, float("inf"), 0

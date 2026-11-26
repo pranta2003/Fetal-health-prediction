@@ -120,9 +120,9 @@ _weights = True if encoder_name.startswith("tu-") else "imagenet"
 try:
     print(f"Testing initialization of smp.Unet with encoder '{{encoder_name}}' (encoder_weights={{_weights}})...")
     _m = smp.Unet(encoder_name=encoder_name, encoder_weights=_weights, in_channels=3, classes=4)
-    _dummy_x = torch.randn(1, 3, 256, 256)
+    _dummy_x = torch.randn(1, 3, 384, 384)
     _dummy_out = _m(_dummy_x)
-    assert _dummy_out.shape == (1, 4, 256, 256), f"Unexpected output shape: {{_dummy_out.shape}}"
+    assert _dummy_out.shape == (1, 4, 384, 384), f"Unexpected output shape: {{_dummy_out.shape}}"
     del _m, _dummy_x, _dummy_out
     print(f"PRE-FLIGHT CHECK PASSED: '{{encoder_name}}' initialized and verified successfully.")
 except Exception as exc:
@@ -422,6 +422,62 @@ def main() -> None:
             "title": "Recipe (a) v3_full Baseline with tu-hrnet_w32 Encoder (Seed 42)",
             "extra_train_args": "--seed 42 --recipe v3_full --encoder tu-hrnet_w32",
             "encoder_name": "tu-hrnet_w32",
+            "extra_datasets": None,
+            "extra_kernels": None,
+        },
+        {
+            "slug": "ac-convnext-lr1e4-s42",
+            "title": "Modern Queue 1: v3_full with tu-convnext_tiny (lr=1e-4, Seed 42)",
+            "extra_train_args": "--seed 42 --recipe v3_full --encoder tu-convnext_tiny --lr 1e-4",
+            "encoder_name": "tu-convnext_tiny",
+            "extra_datasets": None,
+            "extra_kernels": None,
+        },
+        {
+            "slug": "ac-convnextv2-s42",
+            "title": "Modern Queue 2: v3_full with tu-convnextv2_tiny (lr=1e-4, Seed 42)",
+            "extra_train_args": "--seed 42 --recipe v3_full --encoder tu-convnextv2_tiny --lr 1e-4",
+            "encoder_name": "tu-convnextv2_tiny",
+            "extra_datasets": None,
+            "extra_kernels": None,
+        },
+        {
+            "slug": "ac-tf-efficientnetv2-s-s42",
+            "title": "Modern Queue 3: v3_full with tu-tf_efficientnetv2_s (lr=2e-4, Seed 42)",
+            "extra_train_args": "--seed 42 --recipe v3_full --encoder tu-tf_efficientnetv2_s --lr 2e-4",
+            "encoder_name": "tu-tf_efficientnetv2_s",
+            "extra_datasets": None,
+            "extra_kernels": None,
+        },
+        {
+            "slug": "ac-repvit-s42",
+            "title": "Modern Queue 4: v3_full with tu-repvit_m1_1 (lr=1e-4, Seed 42)",
+            "extra_train_args": "--seed 42 --recipe v3_full --encoder tu-repvit_m1_1 --lr 1e-4",
+            "encoder_name": "tu-repvit_m1_1",
+            "extra_datasets": None,
+            "extra_kernels": None,
+        },
+        {
+            "slug": "ac-fastvit-s42",
+            "title": "Modern Queue 5: v3_full with tu-fastvit_sa12 (lr=1e-4, Seed 42)",
+            "extra_train_args": "--seed 42 --recipe v3_full --encoder tu-fastvit_sa12 --lr 1e-4",
+            "encoder_name": "tu-fastvit_sa12",
+            "extra_datasets": None,
+            "extra_kernels": None,
+        },
+        {
+            "slug": "ac-mambaout-s42",
+            "title": "Modern Queue 6: v3_full with tu-mambaout_tiny (lr=1e-4, Seed 42)",
+            "extra_train_args": "--seed 42 --recipe v3_full --encoder tu-mambaout_tiny --lr 1e-4",
+            "encoder_name": "tu-mambaout_tiny",
+            "extra_datasets": None,
+            "extra_kernels": None,
+        },
+        {
+            "slug": "ac-mit-b2-s42",
+            "title": "Modern Queue 8: v3_full with mit_b2 (lr=1e-4, Seed 42)",
+            "extra_train_args": "--seed 42 --recipe v3_full --encoder mit_b2 --lr 1e-4",
+            "encoder_name": "mit_b2",
             "extra_datasets": None,
             "extra_kernels": None,
         },
