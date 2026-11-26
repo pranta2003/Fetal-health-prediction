@@ -116,9 +116,10 @@ print(f"SMP version: {{smp.__version__}} | timm version: {{timm.__version__}}")
 
 # Verify encoder initialization and pretrained weights loading
 encoder_name = "{encoder_name}"
+_weights = True if encoder_name.startswith("tu-") else "imagenet"
 try:
-    print(f"Testing initialization of smp.Unet with encoder '{{encoder_name}}' (ImageNet weights)...")
-    _m = smp.Unet(encoder_name=encoder_name, encoder_weights="imagenet", in_channels=3, classes=4)
+    print(f"Testing initialization of smp.Unet with encoder '{{encoder_name}}' (encoder_weights={{_weights}})...")
+    _m = smp.Unet(encoder_name=encoder_name, encoder_weights=_weights, in_channels=3, classes=4)
     _dummy_x = torch.randn(1, 3, 256, 256)
     _dummy_out = _m(_dummy_x)
     assert _dummy_out.shape == (1, 4, 256, 256), f"Unexpected output shape: {{_dummy_out.shape}}"
