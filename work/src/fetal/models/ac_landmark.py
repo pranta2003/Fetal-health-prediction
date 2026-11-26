@@ -12,13 +12,18 @@ _DEFAULT = object()
 
 def build_model(encoder_weights=_DEFAULT, encoder_name="efficientnet-b4"):
     if encoder_weights is _DEFAULT:
-        encoder_weights = None if config.SMOKE else "imagenet"
-    return smp.Unet(
+        encoder_weights = None if config.SMOKE else (True if encoder_name.startswith("tu-") else "imagenet")
+    elif encoder_name.startswith("tu-") and encoder_weights == "imagenet":
+        encoder_weights = True
+    model = smp.Unet(
         encoder_name=encoder_name,
         encoder_weights=encoder_weights,
         in_channels=3,
         classes=4,
     )
+    if encoder_weights:
+        print(f"pretrained weights loaded (encoder={encoder_name}, encoder_weights={encoder_weights})")
+    return model
 
 
 def load_pretrained_encoder(model, checkpoint_path, verbose=True):
