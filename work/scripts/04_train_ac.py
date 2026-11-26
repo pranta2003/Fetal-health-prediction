@@ -160,6 +160,12 @@ def parse_args():
         help="SMP encoder backbone (e.g. efficientnet-b4, tu-convnext_tiny, tu-hrnet_w32)",
     )
     parser.add_argument(
+        "--lr",
+        type=float,
+        default=None,
+        help="Learning rate override (default: fetal.train.constants.LR)",
+    )
+    parser.add_argument(
         "--recipe",
         type=str,
         default="v3_full",
@@ -201,6 +207,8 @@ def main():
                 cfg["init_encoder"] = args.init_encoder
             if args.encoder:
                 cfg["encoder_name"] = args.encoder
+            if args.lr is not None:
+                cfg["lr"] = args.lr
             if args.seed is not None:
                 cfg["seed"] = args.seed
 
@@ -237,6 +245,8 @@ def main():
         base_cfg["max_epochs"] = args.epochs
     if args.patience is not None:
         base_cfg["patience"] = args.patience
+    if args.lr is not None:
+        base_cfg["lr"] = args.lr
 
     for fold_k in folds_to_run:
         print(f"\n" + "=" * 60)

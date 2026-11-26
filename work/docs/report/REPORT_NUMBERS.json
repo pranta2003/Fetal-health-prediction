@@ -3861,7 +3861,7 @@
     "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-convnext-s42/ac-convnext-s42.ipynb",
     "pr_commit": "master",
-    "source_sha256": "be65fc78de4c4fbe0e93aefffcab812d6ab763c2f6f36afef62f97d789ca2d7a"
+    "source_sha256": "84313794f35e802666b1b165261f9e399c230e8641893a977ced9f6ef03b2e44"
   },
   {
     "id": "ac_convnext_s42_vs_4seed_delta_mae",
@@ -3879,7 +3879,7 @@
     "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-convnext-s42/ac-convnext-s42.ipynb",
     "pr_commit": "master",
-    "source_sha256": "be65fc78de4c4fbe0e93aefffcab812d6ab763c2f6f36afef62f97d789ca2d7a"
+    "source_sha256": "84313794f35e802666b1b165261f9e399c230e8641893a977ced9f6ef03b2e44"
   },
   {
     "id": "ac_hrnet_s42_ac_mae",
@@ -3894,7 +3894,7 @@
     "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-hrnet-s42/ac-hrnet-s42.ipynb",
     "pr_commit": "master",
-    "source_sha256": "53530122cb1fba4623170bc4a5976424921ad9ad6eb9a50bcf5b28ff83262872"
+    "source_sha256": "179c8e88dd857d4ee182b4a9c7f046c3cbfa0b699d264bc90f5b6ca15245698a"
   },
   {
     "id": "ac_hrnet_s42_vs_4seed_delta_mae",
@@ -3912,7 +3912,7 @@
     "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
     "notebook": "notebooks/kaggle/ac_campaign/ac-hrnet-s42/ac-hrnet-s42.ipynb",
     "pr_commit": "master",
-    "source_sha256": "53530122cb1fba4623170bc4a5976424921ad9ad6eb9a50bcf5b28ff83262872"
+    "source_sha256": "179c8e88dd857d4ee182b4a9c7f046c3cbfa0b699d264bc90f5b6ca15245698a"
   },
   {
     "id": "ac_blend_a_5model_ac_mae",
@@ -3927,7 +3927,7 @@
     "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
     "notebook": null,
     "pr_commit": "master",
-    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
+    "source_sha256": "7d521a22a37d4a33a664c517ff5cf2243ec1bd2a40fdc0a711cb9552f468de10"
   },
   {
     "id": "ac_blend_a_5model_vs_4seed_delta_mae",
@@ -3945,7 +3945,7 @@
     "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
     "notebook": null,
     "pr_commit": "master",
-    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
+    "source_sha256": "7d521a22a37d4a33a664c517ff5cf2243ec1bd2a40fdc0a711cb9552f468de10"
   },
   {
     "id": "ac_blend_b_50_50_ac_mae",
@@ -3960,7 +3960,7 @@
     "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
     "notebook": null,
     "pr_commit": "master",
-    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
+    "source_sha256": "7d521a22a37d4a33a664c517ff5cf2243ec1bd2a40fdc0a711cb9552f468de10"
   },
   {
     "id": "ac_blend_b_50_50_vs_4seed_delta_mae",
@@ -3978,7 +3978,7 @@
     "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
     "notebook": null,
     "pr_commit": "master",
-    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
+    "source_sha256": "7d521a22a37d4a33a664c517ff5cf2243ec1bd2a40fdc0a711cb9552f468de10"
   },
   {
     "id": "ac_blend_c_6model_ac_mae",
@@ -3993,7 +3993,7 @@
     "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
     "notebook": null,
     "pr_commit": "master",
-    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
+    "source_sha256": "7d521a22a37d4a33a664c517ff5cf2243ec1bd2a40fdc0a711cb9552f468de10"
   },
   {
     "id": "ac_blend_c_6model_vs_4seed_delta_mae",
@@ -4011,6 +4011,6 @@
     "script": "scripts/87_eval_ac_convnext_hrnet_and_blends.py",
     "notebook": null,
     "pr_commit": "master",
-    "source_sha256": "db75760b162278b952474ca8899f3c0fcf585e9a712243c54a8eb7af70fe97a2"
+    "source_sha256": "7d521a22a37d4a33a664c517ff5cf2243ec1bd2a40fdc0a711cb9552f468de10"
   }
 ]
