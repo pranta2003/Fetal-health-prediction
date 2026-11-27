@@ -499,6 +499,15 @@ def build_model_selection_tables():
         f"{get_full_path('docs/results/ac_campaign/ac_convnext_lr1e4_s42.json')} |\n"
     )
 
+    repvit = json.loads((work / "docs/results/ac_campaign/ac_repvit_s42.json").read_text(encoding="utf-8"))
+    repvit_b = repvit["paired_bootstrap_vs_4seed_avg"]
+    content.append(
+        f"| ac-repvit-s42 (NEGATIVE RESULT) | Landmark Regression (U-Net RepViT-M1.1, lr=1e-4) | v3_full recipe, tu-repvit_m1_1 encoder, lr=1e-4, seed 42, 5-fold CV | "
+        f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
+        f"AC MAE {repvit['ac_mae']:.4f} mm, AC RMSE {repvit['ac_rmse']:.4f} mm, Median {repvit['ac_median']:.4f} mm, Signed Bias {repvit['ac_bias']:.4f} mm, TAD MAE {repvit['tad_mae']:.4f} mm, APAD MAE {repvit['apad_mae']:.4f} mm, NME {repvit['nme']:.4f}, >10mm {repvit['over10']*100:.2f}%, vs 4-seed {repvit_b['delta_mae']:+.4f} mm CI [{repvit_b['ci95_delta_mae'][0]:+.4f}, {repvit_b['ci95_delta_mae'][1]:+.4f}] p={repvit_b['p_val_mae']:.4f} | "
+        f"{get_full_path('docs/results/ac_campaign/ac_repvit_s42.json')} |\n"
+    )
+
     hrnet = json.loads((work / "docs/results/ac_campaign/ac_hrnet_s42.json").read_text(encoding="utf-8"))
     hrnet_b = hrnet["paired_bootstrap_vs_4seed_avg"]
     content.append(
