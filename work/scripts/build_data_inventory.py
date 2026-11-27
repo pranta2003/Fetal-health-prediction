@@ -115,7 +115,8 @@ def audit_cdc_tabular() -> dict:
             for yr in sorted(raw["YEAR"].unique())
         },
         "rows_after_20wk_filter": {
-            "raw_file_d20": {
+            "raw_uncleaned_including_sentinel_99": {
+                "filter": "raw[raw['COMBGEST'] >= 20] BEFORE sentinel 99->NaN & deduplication (includes 12,188 COMBGEST==99 unknown-GA rows + 340 duplicates; NOT used for modelling)",
                 "total": len(raw_d20),
                 "live_births": int((raw_d20["OUTCOME"] == 0).sum()),
                 "stillbirths": int((raw_d20["OUTCOME"] == 1).sum()),
@@ -130,7 +131,8 @@ def audit_cdc_tabular() -> dict:
                     "live_births": int((raw_d20_test["OUTCOME"] == 0).sum()),
                 },
             },
-            "deduplicated_d20": {
+            "modelling_cohort_load_clean_d20": {
+                "filter": "fetal.clinical.data.load_clean() (COMBGEST 99->NaN, UNKNOWN_CODES->NaN, drop_duplicates()) then df[df['COMBGEST'] >= 20] (used by stream3_bench & stream3_modern)",
                 "total": len(dedup_d20),
                 "live_births": int((dedup_d20["OUTCOME"] == 0).sum()),
                 "stillbirths": int((dedup_d20["OUTCOME"] == 1).sum()),
@@ -409,8 +411,8 @@ def audit_fassd() -> dict:
         "total_images": aud["total_images"],
         "total_patients": aud["patient_id_parsing"]["unique_patients"],
         "structures": ["artery", "liver", "stomach", "vein"],
-        "split_v1": s1_splits,
-        "split_v2": s2_splits,
+        "split_v1_deprecated": {"status": "deprecated (initial patient-ID split; pre-Union-Find)", "splits": s1_splits},
+        "split_v2_current": {"status": "current leak-free split (Union-Find duplicate+patient grouped; used by all reported FASSD results in 35/36/37)", "splits": s2_splits},
     }
 
 

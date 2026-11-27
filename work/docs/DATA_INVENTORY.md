@@ -30,12 +30,12 @@ Accompanying machine-readable audit: [`docs/results/data_inventory.json`](file:/
 | **Year 2021** | Unfiltered | 44,993 | 42,428 | 87,421 | `C:\fetal-data\cdc\clinical_training_data.csv` |
 | **Year 2022** | Unfiltered | 44,995 | 40,113 | 85,108 | `C:\fetal-data\cdc\clinical_training_data.csv` |
 | **Year 2023** | Unfiltered | 44,991 | 39,574 | 84,565 | `C:\fetal-data\cdc\clinical_training_data.csv` |
-| **$\ge$ 20 Weeks Viability Filter** | `COMBGEST >= 20` | 359,843 (66.04%) | 185,077 (33.96%) | **544,920** | `C:\fetal-data\cdc\clinical_training_data.csv` |
-| **Train Set ($\le$ 2021)** | `COMBGEST >= 20` | 269,888 (65.51%) | 142,105 (34.49%) | **411,993** | `C:\fetal-data\cdc\clinical_training_data.csv` |
-| **Test Set ($\ge$ 2022)** | `COMBGEST >= 20` | 89,955 (67.67%) | 42,972 (32.33%) | **132,927** | `C:\fetal-data\cdc\clinical_training_data.csv` |
-| **Deduplicated Filtered Cohort** | `load_clean` ($\ge 20$ wk) | 359,567 (67.54%) | 172,825 (32.46%) | **532,392** | `C:\fetal-data\cdc\clinical_training_data.csv` |
-| **Deduplicated Train ($\le$ 2021)** | `load_clean` ($\ge 20$ wk) | 269,678 (67.04%) | 132,604 (32.96%) | **402,282** | `C:\fetal-data\cdc\clinical_training_data.csv` |
-| **Deduplicated Test ($\ge$ 2022)** | `load_clean` ($\ge 20$ wk) | 89,889 (69.09%) | 40,221 (30.91%) | **130,110** | `C:\fetal-data\cdc\clinical_training_data.csv` |
+| **Uncleaned `raw[COMBGEST >= 20]` (incl. `99`)** | Before `99 -> NaN` & dedup (includes 12,188 unknown-GA `99` + 340 dupes; **NOT used**) | 359,843 (66.04%) | 185,077 (33.96%) | 544,920 | `C:\fetal-data\cdc\clinical_training_data.csv` |
+| **Uncleaned Train ($\le$ 2021, incl. `99`)** | Before `99 -> NaN` & dedup (**NOT used**) | 269,888 (65.51%) | 142,105 (34.49%) | 411,993 | `C:\fetal-data\cdc\clinical_training_data.csv` |
+| **Uncleaned Test ($\ge$ 2022, incl. `99`)** | Before `99 -> NaN` & dedup (**NOT used**) | 89,955 (67.67%) | 42,972 (32.33%) | 132,927 | `C:\fetal-data\cdc\clinical_training_data.csv` |
+| **Benchmark Cohort (`load_clean`, $\ge$ 20 wk)** | `load_clean()` (`99 -> NaN`, `drop_duplicates()`) + `COMBGEST >= 20` (**used by `stream3_bench` & `stream3_modern`**) | 359,567 (67.54%) | 172,825 (32.46%) | **532,392** | `C:\fetal-data\cdc\clinical_training_data.csv` |
+| **Benchmark Train ($\le$ 2021)** | `load_clean()` + `COMBGEST >= 20` (**used by `18_bench_stream3.py` & `62_train_stream3_modern.py`**) | 269,678 (67.04%) | 132,604 (32.96%) | **402,282** | `C:\fetal-data\cdc\clinical_training_data.csv` |
+| **Benchmark Test ($\ge$ 2022)** | `load_clean()` + `COMBGEST >= 20` (**used by `18_bench_stream3.py` & `62_train_stream3_modern.py`**) | 89,889 (69.09%) | 40,221 (30.91%) | **130,110** | `C:\fetal-data\cdc\clinical_training_data.csv` |
 
 ### Feature Space & Column Removal Rationale (80 Total Columns)
 From the 80 columns present in `clinical_training_data.csv`, exactly **15 feature columns** are selected for the primary clinical risk model (E1), and **65 columns are removed**.
@@ -177,12 +177,12 @@ From the 80 columns present in `clinical_training_data.csv`, exactly **15 featur
 
 | Split Partition | Images / Masks | Unique Patients | Target Segmentations | Full File Path |
 | :--- | :---: | :---: | :--- | :--- |
-| **Split v1 - Train** | 1,100 | 118 | Artery, Liver, Stomach, Vein | `C:\fetal-github-clone\work\docs\results\fassd\split_v1.csv` |
-| **Split v1 - Validation** | 236 | 25 | Artery, Liver, Stomach, Vein | `C:\fetal-github-clone\work\docs\results\fassd\split_v1.csv` |
-| **Split v1 - Test** | 252 | 26 | Artery, Liver, Stomach, Vein | `C:\fetal-github-clone\work\docs\results\fassd\split_v1.csv` |
-| **Split v2 - Train** | 1,063 | 118 | Artery, Liver, Stomach, Vein | `C:\fetal-github-clone\work\docs\results\fassd\split_v2.csv` |
-| **Split v2 - Validation** | 254 | 26 | Artery, Liver, Stomach, Vein | `C:\fetal-github-clone\work\docs\results\fassd\split_v2.csv` |
-| **Split v2 - Test** | 271 | 25 | Artery, Liver, Stomach, Vein | `C:\fetal-github-clone\work\docs\results\fassd\split_v2.csv` |
+| **Split v1 - Train (Deprecated)** | 1,100 | 118 | Pre-Union-Find initial split (not used in final FASSD runs) | `C:\fetal-github-clone\work\docs\results\fassd\split_v1.csv` |
+| **Split v1 - Validation (Deprecated)** | 236 | 25 | Pre-Union-Find initial split (not used in final FASSD runs) | `C:\fetal-github-clone\work\docs\results\fassd\split_v1.csv` |
+| **Split v1 - Test (Deprecated)** | 252 | 26 | Pre-Union-Find initial split (not used in final FASSD runs) | `C:\fetal-github-clone\work\docs\results\fassd\split_v1.csv` |
+| **Split v2 - Train (Current)** | 1,063 | 118 | Leak-free Union-Find split (used by `35_fassd_train.py`) | `C:\fetal-github-clone\work\docs\results\fassd\split_v2.csv` |
+| **Split v2 - Validation (Current)** | 254 | 26 | Leak-free Union-Find split (used by `35`/`36`/`37`) | `C:\fetal-github-clone\work\docs\results\fassd\split_v2.csv` |
+| **Split v2 - Test (Current)** | 271 | 25 | Leak-free Union-Find split (used by all reported FASSD results) | `C:\fetal-github-clone\work\docs\results\fassd\split_v2.csv` |
 | **Total FASSD** | **1,588** | **169** | Complete 4-organ anatomical masks | `C:\fetal-github-clone\work\docs\results\fassd\fassd_audit.json` |
 
 ---

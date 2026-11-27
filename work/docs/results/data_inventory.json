@@ -59,7 +59,8 @@
         }
       },
       "rows_after_20wk_filter": {
-        "raw_file_d20": {
+        "raw_uncleaned_including_sentinel_99": {
+          "filter": "raw[raw['COMBGEST'] >= 20] BEFORE sentinel 99->NaN & deduplication (includes 12,188 COMBGEST==99 unknown-GA rows + 340 duplicates; NOT used for modelling)",
           "total": 544920,
           "live_births": 359843,
           "stillbirths": 185077,
@@ -74,7 +75,8 @@
             "live_births": 89955
           }
         },
-        "deduplicated_d20": {
+        "modelling_cohort_load_clean_d20": {
+          "filter": "fetal.clinical.data.load_clean() (COMBGEST 99->NaN, UNKNOWN_CODES->NaN, drop_duplicates()) then df[df['COMBGEST'] >= 20] (used by stream3_bench & stream3_modern)",
           "total": 532392,
           "live_births": 359567,
           "stillbirths": 172825,
@@ -419,32 +421,38 @@
         "stomach",
         "vein"
       ],
-      "split_v1": {
-        "test": {
-          "images": 252,
-          "patients": 26
-        },
-        "train": {
-          "images": 1100,
-          "patients": 118
-        },
-        "val": {
-          "images": 236,
-          "patients": 25
+      "split_v1_deprecated": {
+        "status": "deprecated (initial patient-ID split; pre-Union-Find)",
+        "splits": {
+          "test": {
+            "images": 252,
+            "patients": 26
+          },
+          "train": {
+            "images": 1100,
+            "patients": 118
+          },
+          "val": {
+            "images": 236,
+            "patients": 25
+          }
         }
       },
-      "split_v2": {
-        "test": {
-          "images": 271,
-          "patients": 25
-        },
-        "train": {
-          "images": 1063,
-          "patients": 118
-        },
-        "val": {
-          "images": 254,
-          "patients": 26
+      "split_v2_current": {
+        "status": "current leak-free split (Union-Find duplicate+patient grouped; used by all reported FASSD results in 35/36/37)",
+        "splits": {
+          "test": {
+            "images": 271,
+            "patients": 25
+          },
+          "train": {
+            "images": 1063,
+            "patients": 118
+          },
+          "val": {
+            "images": 254,
+            "patients": 26
+          }
         }
       }
     }
