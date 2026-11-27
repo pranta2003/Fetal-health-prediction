@@ -490,6 +490,15 @@ def build_model_selection_tables():
         f"{get_full_path('docs/results/ac_campaign/ac_convnext_s42.json')} |\n"
     )
 
+    conv_lr = json.loads((work / "docs/results/ac_campaign/ac_convnext_lr1e4_s42.json").read_text(encoding="utf-8"))
+    conv_lr_b = conv_lr["paired_bootstrap_vs_4seed_avg"]
+    content.append(
+        f"| ac-convnext-lr1e4-s42 (NEGATIVE RESULT) | Landmark Regression (U-Net ConvNeXt-Tiny, lr=1e-4) | v3_full recipe, tu-convnext_tiny encoder, lr=1e-4, seed 42, 5-fold CV | "
+        f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
+        f"AC MAE {conv_lr['ac_mae']:.4f} mm, AC RMSE {conv_lr['ac_rmse']:.4f} mm, Median {conv_lr['ac_median']:.4f} mm, Signed Bias {conv_lr['ac_bias']:.4f} mm, TAD MAE {conv_lr['tad_mae']:.4f} mm, APAD MAE {conv_lr['apad_mae']:.4f} mm, NME {conv_lr['nme']:.4f}, >10mm {conv_lr['over10']*100:.2f}%, vs 4-seed {conv_lr_b['delta_mae']:+.4f} mm CI [{conv_lr_b['ci95_delta_mae'][0]:+.4f}, {conv_lr_b['ci95_delta_mae'][1]:+.4f}] p={conv_lr_b['p_val_mae']:.4f} | "
+        f"{get_full_path('docs/results/ac_campaign/ac_convnext_lr1e4_s42.json')} |\n"
+    )
+
     hrnet = json.loads((work / "docs/results/ac_campaign/ac_hrnet_s42.json").read_text(encoding="utf-8"))
     hrnet_b = hrnet["paired_bootstrap_vs_4seed_avg"]
     content.append(

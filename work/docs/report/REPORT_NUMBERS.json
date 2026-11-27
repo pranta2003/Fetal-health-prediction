@@ -4012,5 +4012,38 @@
     "notebook": null,
     "pr_commit": "master",
     "source_sha256": "7d521a22a37d4a33a664c517ff5cf2243ec1bd2a40fdc0a711cb9552f468de10"
+  },
+  {
+    "id": "ac_convnext_lr1e4_s42_ac_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "ac-convnext-lr1e4-s42 (tu-convnext_tiny, lr=1e-4, NEGATIVE RESULT)",
+    "protocol": "5-fold patient-grouped CV (folds_v1.csv), 642 images, 501 patients, out-of-fold",
+    "metric": "AC MAE (mm)",
+    "value": 4.8551,
+    "ci": null,
+    "source_file": "docs/results/ac_campaign/ac_convnext_lr1e4_s42.json",
+    "script": "scripts/88_eval_ac_modern_kernel.py",
+    "notebook": "notebooks/kaggle/ac_campaign/ac-convnext-lr1e4-s42/ac-convnext-lr1e4-s42.ipynb",
+    "pr_commit": "master",
+    "source_sha256": "a7fdc64756047b8ea4332b7f38ec0f08de1c64f8a3819e931350a6ed08730b67"
+  },
+  {
+    "id": "ac_convnext_lr1e4_s42_vs_4seed_delta_mae",
+    "field": "ac",
+    "system": 1,
+    "approach": "ac-convnext-lr1e4-s42 vs 4-seed avg (NEGATIVE RESULT)",
+    "protocol": "Paired patient-level bootstrap (5000 resamples, seed 42), 642 images, 501 patients",
+    "metric": "Delta MAE (mm)",
+    "value": 0.4523,
+    "ci": [
+      0.1736,
+      0.7379
+    ],
+    "source_file": "docs/results/ac_campaign/ac_convnext_lr1e4_s42.json",
+    "script": "scripts/88_eval_ac_modern_kernel.py",
+    "notebook": "notebooks/kaggle/ac_campaign/ac-convnext-lr1e4-s42/ac-convnext-lr1e4-s42.ipynb",
+    "pr_commit": "master",
+    "source_sha256": "a7fdc64756047b8ea4332b7f38ec0f08de1c64f8a3819e931350a6ed08730b67"
   }
 ]
