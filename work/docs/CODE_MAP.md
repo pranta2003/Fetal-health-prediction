@@ -134,8 +134,9 @@ Fetal Abdominal Structures Segmentation Dataset (artery, liver, stomach, vein). 
 | `tests/test_clinical_*.py`, `tests/test_stream3_*.py` | Tests, including the guard against forbidden features and row consistency |
 | Results | `docs/results/stream3_bench/` | Stream 3 benchmark comparison metrics and markdown table |
 
-## WEIGHT FORMULA (Hadlock)
+## WEIGHT FORMULA (Hadlock) & GROWTH BRIDGE
 `src/fetal/explain/hadlock.py` turns HC, AC and FL into an estimated weight and a growth percentile. Tests: `tests/test_hadlock.py`.
+`src/fetal/fusion/growth_bridge.py` (`src/fetal/fusion/__init__.py`) maps HC, AC, FL, optional BPD, and GA weeks (20..42) to Hadlock 4-parameter EFW and CDC live-birth percentile bands (`docs/results/fusion/gestational_percentiles.csv`). Tests: `tests/test_growth_bridge.py`. Status: `docs/FUSION_STATUS.md`.
 `scripts/23_three_plane_check.py` audits multi-plane subject overlap, metadata columns, and cross-plane split leakage between FP and UCL cohorts. Results: `docs/results/three_plane/three_plane_check.json`. Tests: `tests/test_three_plane.py`.
 `scripts/24_hadlock_demo_step1.py` audits usable 3-plane subjects and runs HC18 5-fold ensemble external validation on FP and UCL head ultrasound images. Results: `docs/results/hadlock_demo/hadlock_demo_step1.json`, `docs/results/hadlock_demo/head_external_table.md`, `docs/results/hadlock_demo/head_predictions.csv`. Tests: `tests/test_hadlock_demo.py`.
 `scripts/54_reconstruct_head_landmarks.py` reconstructs landmark coordinates and evaluates NME metrics for head ultrasound.
