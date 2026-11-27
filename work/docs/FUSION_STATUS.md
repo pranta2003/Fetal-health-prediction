@@ -8,7 +8,7 @@
 ## 1. What Is Built
 
 1. **Stage-1 Ultrasound Biometry Extractors**:
-   - **HC (and BPD)**: 5-fold nnU-Net ensemble on HC18 (1.7832 mm official test MAE) and Head Landmark caliper model.
+   - **HC (and BPD)**: Final HC18 5-fold nnU-Net + EfficientNet-B4 blend (1.7226 mm official test MAE; standalone 5-fold nnU-Net: 1.7832 mm) and Head Landmark caliper model.
    - **AC**: 4-seed `efficientnet-b4` Landmark U-Net ensemble (4.4028 mm 5-fold OOF MAE on 642 images).
    - **FL**: Femur diaphysis landmark model (`scripts/27_femur_round2.py`).
    - **3-Plane EFW Feasibility**: Validated on held-out 3-plane cohort (`scripts/26_hadlock_demo_step2.py`).
@@ -43,3 +43,31 @@ Because the ultrasound cohorts (HC18, FP, UCL) and the CDC NVSS vital-statistics
 - **Mechanism**: Keep the tabular maternal risk model $P_{\text{tab}}(\text{Stillbirth} \mid X_{\text{maternal}})$ strictly free of `DBWT`, and apply a calibrated external obstetric likelihood ratio (or log-odds offset $\Delta_{\text{SGA}}$ derived from published SGA stillbirth relative risk adjusted for ultrasound EFW error) when `assess_fetal_growth` flags `below_p10` / $Z_{\text{growth}} < -1.28$.
 - **Pros**: Zero post-delivery `DBWT` leakage in the tabular model; modular, transparent, and explicitly accounts for ultrasound EFW uncertainty without conflating post-mortem `DBWT` with antepartum `EFW`.
 - **Cons**: Assumes conditional independence between maternal covariates in `P_tab` and the `SGA` likelihood ratio (may double-count risk factors like hypertension/diabetes that already drive both `P_tab` and `SGA`), and lacks paired validation data to tune the exact log-odds weight.
+
+---
+
+## 4. Stream 3 Feature Leakage Audit (E1 vs E4)
+
+Audited from [src/fetal/clinical/constants.py](file:///C:/fetal-github-clone/work/src/fetal/clinical/constants.py) and [scripts/18_bench_stream3.py](file:///C:/fetal-github-clone/work/scripts/18_bench_stream3.py). Both **E1** (15 features: 5 numeric + 10 categorical) and **E4** (13 features: 4 numeric + 9 categorical) strictly exclude all explicit delivery/outcome-time variables (`OUTCOME_TIME_VARS`: `COMBGEST`, `OEGest_Comb`, `OBGEST_FLG`, `DBWT`, `BWTR4`).
+
+| Feature | In E1 | In E4 | Clinical Meaning | Timing / Leakage Status |
+|---|---|---|---|---|
+| `MAGER` | Yes | Yes | Maternal age (years) | **KNOWN DURING PREGNANCY** |
+| `BMI` | Yes | Yes | Pre-pregnancy BMI ($\text{kg/m}^2$) | **KNOWN DURING PREGNANCY** |
+| `PRIORDEAD` | Yes | Yes | Prior fetal losses / stillbirths | **KNOWN DURING PREGNANCY** |
+| `PRIORLIVE` | Yes | Yes | Prior live births | **KNOWN DURING PREGNANCY** |
+| `RF_GDIAB` | Yes | Yes | Gestational diabetes | **KNOWN DURING PREGNANCY** |
+| `RF_GHYPE` | Yes | Yes | Gestational hypertension | **KNOWN DURING PREGNANCY** |
+| `RF_EHYPE` | Yes | Yes | Pre-pregnancy / chronic hypertension | **KNOWN DURING PREGNANCY** |
+| `RF_CESAR` | Yes | Yes | Previous cesarean delivery | **KNOWN DURING PREGNANCY** |
+| `RF_ARTEC` | Yes | Yes | Assisted reproductive technology (IVF) | **KNOWN DURING PREGNANCY** |
+| `RF_INFTR` | Yes | Yes | Infertility treatment used | **KNOWN DURING PREGNANCY** |
+| `RF_FEDRG` | Yes | Yes | Fertility-enhancing drugs used | **KNOWN DURING PREGNANCY** |
+| `CIG_REC` | Yes | Yes | Maternal smoking recode | **KNOWN DURING PREGNANCY** |
+| `DPLURAL` | Yes | Yes | Plurality (singleton / twin / higher) | **KNOWN DURING PREGNANCY** |
+| `PRECARE` | Yes | No | Month prenatal care began (`0` = none) | **DOUBTFUL** (known once care starts, but `0`/missingness on fetal death certificates reflects reporting/access artifact) |
+| `SEX` | Yes | No | Infant sex (M/F) | **DOUBTFUL** (often known via ultrasound/NIPT, but recorded at delivery and missingness differs in early/macerated stillbirths) |
+
+**Verdict on Valid Antepartum Model**:
+- **E4 (`clinical_only`, 13 features, Test AUC 0.707)** is the **strictly clean, unambiguously valid antepartum prediction model**: all 13 features are pure maternal clinical history/risk factors known prior to delivery without vital-statistics certificate reporting artifacts.
+- **E1 (`primary`, 15 features, Test AUC 0.7383)** is **free of direct delivery-time variables** (`DBWT`, `COMBGEST`), **but** includes the two doubtful reporting-sensitive fields (`PRECARE`, `SEX`), which explain the E1 vs E4 AUC gap (0.738 vs 0.707) and may partially reflect certificate-recording differences rather than pure antepartum risk.
