@@ -7,8 +7,8 @@
 | Order | Kernel Slug | Encoder Name | LR | Params | 2-img 384px CPU Step | Compatibility | Status |
 |---|---|---|---|---:|---:|---|---|
 | 1 | `ac-convnext-lr1e4-s42` | `tu-convnext_tiny` | `1e-4` | 31,929,188 | 15.93s | PASS | **DONE** (4.8551 mm OOF MAE, NEGATIVE RESULT vs 4-seed +0.4523 mm) |
-| 2 | `ac-convnextv2-s42` | `tu-convnextv2_tiny` | `1e-4` | 31,975,556 | 16.29s | PASS | QUEUED (Local only) |
-| 3 | `ac-tf-efficientnetv2-s-s42` | `tu-tf_efficientnetv2_s` | `2e-4` | 22,093,908 | 8.40s | PASS | QUEUED (Local only) |
+| 2 | `ac-convnextv2-s42` | `tu-convnextv2_tiny` | `1e-4` | 31,975,556 | 16.29s | PASS | **RUNNING** |
+| 3 | `ac-tf-efficientnetv2-s-s42` | `tu-tf_efficientnetv2_s` | `2e-4` | 22,093,908 | 8.40s | PASS | **RUNNING** (pushed in parallel with #2) |
 | 4 | `ac-repvit-s42` | `tu-repvit_m1_1` | `1e-4` | 10,908,564 | 4.44s | PASS | **DONE** (5.7041 mm OOF MAE, NEGATIVE RESULT vs 4-seed +1.3013 mm; pushed out of order) |
 | 5 | `ac-fastvit-s42` | `tu-fastvit_sa12` | `1e-4` | 13,543,172 | 4.70s | PASS | QUEUED (Local only) |
 | 6 | `ac-mambaout-s42` | `tu-mambaout_tiny` | `1e-4` | 26,573,156 | 6.99s | PASS | QUEUED (Local only) |
