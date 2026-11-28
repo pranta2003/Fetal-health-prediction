@@ -508,6 +508,24 @@ def build_model_selection_tables():
         f"{get_full_path('docs/results/ac_campaign/ac_repvit_s42.json')} |\n"
     )
 
+    convnextv2 = json.loads((work / "docs/results/ac_campaign/ac_convnextv2_s42.json").read_text(encoding="utf-8"))
+    convnextv2_b = convnextv2["paired_bootstrap_vs_4seed_avg"]
+    content.append(
+        f"| ac-convnextv2-s42 (NEGATIVE RESULT) | Landmark Regression (U-Net ConvNeXtV2-Tiny, lr=1e-4) | v3_full recipe, tu-convnextv2_tiny encoder, lr=1e-4, seed 42, 5-fold CV | "
+        f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
+        f"AC MAE {convnextv2['ac_mae']:.4f} mm, AC RMSE {convnextv2['ac_rmse']:.4f} mm, Median {convnextv2['ac_median']:.4f} mm, Signed Bias {convnextv2['ac_bias']:.4f} mm, TAD MAE {convnextv2['tad_mae']:.4f} mm, APAD MAE {convnextv2['apad_mae']:.4f} mm, NME {convnextv2['nme']:.4f}, >10mm {convnextv2['over10']*100:.2f}%, vs 4-seed {convnextv2_b['delta_mae']:+.4f} mm CI [{convnextv2_b['ci95_delta_mae'][0]:+.4f}, {convnextv2_b['ci95_delta_mae'][1]:+.4f}] p={convnextv2_b['p_val_mae']:.4f} | "
+        f"{get_full_path('docs/results/ac_campaign/ac_convnextv2_s42.json')} |\n"
+    )
+
+    effnetv2 = json.loads((work / "docs/results/ac_campaign/ac_tf_efficientnetv2_s_s42.json").read_text(encoding="utf-8"))
+    effnetv2_b = effnetv2["paired_bootstrap_vs_4seed_avg"]
+    content.append(
+        f"| ac-tf-efficientnetv2-s-s42 (NEGATIVE RESULT) | Landmark Regression (U-Net EfficientNetV2-S, lr=2e-4) | v3_full recipe, tu-tf_efficientnetv2_s encoder, lr=2e-4, seed 42, 5-fold CV | "
+        f"5-fold CV (folds_v1.csv) | 642 (501 patients) | "
+        f"AC MAE {effnetv2['ac_mae']:.4f} mm, AC RMSE {effnetv2['ac_rmse']:.4f} mm, Median {effnetv2['ac_median']:.4f} mm, Signed Bias {effnetv2['ac_bias']:.4f} mm, TAD MAE {effnetv2['tad_mae']:.4f} mm, APAD MAE {effnetv2['apad_mae']:.4f} mm, NME {effnetv2['nme']:.4f}, >10mm {effnetv2['over10']*100:.2f}%, vs 4-seed {effnetv2_b['delta_mae']:+.4f} mm CI [{effnetv2_b['ci95_delta_mae'][0]:+.4f}, {effnetv2_b['ci95_delta_mae'][1]:+.4f}] p={effnetv2_b['p_val_mae']:.4f} | "
+        f"{get_full_path('docs/results/ac_campaign/ac_tf_efficientnetv2_s_s42.json')} |\n"
+    )
+
     hrnet = json.loads((work / "docs/results/ac_campaign/ac_hrnet_s42.json").read_text(encoding="utf-8"))
     hrnet_b = hrnet["paired_bootstrap_vs_4seed_avg"]
     content.append(
@@ -589,7 +607,7 @@ def build_model_selection_tables():
             technique = "Full feature set (15 clinical & pregnancy predictors), standardized/imputed as required"
             proto = "Temporal split: Train <=2021, Test >=2022 (E1 Primary, >=20 wk)"
         else:
-            technique = "Strictly clinical-only predictors (no gestational age or birth weight)"
+            technique = "Strictly clinical-only predictors (drops PRECARE and SEX vs E1)"
             proto = "Temporal split: Train <=2021, Test >=2022 (E4 Clinical-Only, >=20 wk)"
 
         content.append(
