@@ -1,0 +1,103 @@
+{
+  "n": 642,
+  "ac_mae": 12.5138183308539,
+  "ac_rmse": 20.953081190399526,
+  "ac_median": 6.803466796875,
+  "ac_bias": -1.3349624586253894,
+  "tad_mae": 4.357101755350178,
+  "apad_mae": 5.032714249560395,
+  "lm_mm": 9.002692593824454,
+  "nme": 0.1488399523632409,
+  "over10": 0.367601246105919,
+  "oof_summary": {
+    "n": 642,
+    "ac_mae": 12.5138183308539,
+    "ac_rmse": 20.953081190399526,
+    "ac_median": 6.803466796875,
+    "ac_bias": -1.3349624586253894,
+    "tad_mae": 4.357101755350178,
+    "apad_mae": 5.032714249560395,
+    "lm_mm": 9.002692593824454,
+    "nme": 0.1488399523632409,
+    "over10": 0.367601246105919
+  },
+  "paired_bootstrap_vs_baseline_s42": {
+    "delta_mae": 7.7395,
+    "ci95_delta_mae": [
+      6.3961,
+      9.1397
+    ],
+    "p_val_mae": 0.0,
+    "delta_rmse": 13.3456,
+    "ci95_delta_rmse": [
+      10.3074,
+      16.494
+    ],
+    "p_val_rmse": 0.0,
+    "ci_excludes_zero": true
+  },
+  "paired_bootstrap_vs_4seed_avg": {
+    "delta_mae": 8.111,
+    "ci95_delta_mae": [
+      6.7689,
+      9.5118
+    ],
+    "p_val_mae": 0.0,
+    "delta_rmse": 13.984,
+    "ci95_delta_rmse": [
+      10.931,
+      17.2151
+    ],
+    "p_val_rmse": 0.0,
+    "ci_excludes_zero": true
+  },
+  "per_fold_best_epochs": {
+    "fold_1": {
+      "total_epochs": 80,
+      "best_epoch": 78,
+      "best_dev_ac_mae": 10.29
+    },
+    "fold_2": {
+      "total_epochs": 38,
+      "best_epoch": 26,
+      "best_dev_ac_mae": 4.13
+    },
+    "fold_3": {
+      "total_epochs": 29,
+      "best_epoch": 17,
+      "best_dev_ac_mae": 20.28
+    },
+    "fold_4": {
+      "total_epochs": 64,
+      "best_epoch": 52,
+      "best_dev_ac_mae": 15.22
+    },
+    "fold_5": {
+      "total_epochs": 56,
+      "best_epoch": 44,
+      "best_dev_ac_mae": 9.52
+    }
+  },
+  "jumps_gt50_after_ep5": [
+    {
+      "fold": 1,
+      "epoch": 8,
+      "dev_ac_mae": 52.86
+    },
+    {
+      "fold": 1,
+      "epoch": 8,
+      "dev_ac_mae": 52.86
+    },
+    {
+      "fold": 3,
+      "epoch": 12,
+      "dev_ac_mae": 58.98
+    },
+    {
+      "fold": 3,
+      "epoch": 12,
+      "dev_ac_mae": 58.98
+    }
+  ]
+}
